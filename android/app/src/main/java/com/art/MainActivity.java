@@ -1,6 +1,8 @@
 package com.art;
 
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
+import com.cboy.rn.splashscreen.SplashScreen; // for launch screen
 
 public class MainActivity extends ReactActivity {
 
@@ -10,6 +12,12 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "art";
+      return "art";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+      SplashScreen.show(this);
+      super.onCreate(savedInstanceState);
     }
 }
