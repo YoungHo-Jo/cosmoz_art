@@ -1,5 +1,5 @@
 import React from 'react';
 import {AppRegistry, } from 'react-native';
-import LaunchScreen from './LaunchScreen';
+import MainScreen from './MainScreen';
 
-AppRegistry.registerComponent('art', () => LaunchScreen);
+AppRegistry.registerComponent('art', () => MainScreen);
