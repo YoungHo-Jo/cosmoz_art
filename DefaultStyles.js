@@ -16,28 +16,28 @@ const styles = StyleSheet.create({
   },
   pageBottomContainer: {
     flex: 7,
-
-    backgroundColor: '#b8860b'
   }
 });
 
+export const Sizes = {
+  titleBarHeight: 45,
+  bottomBarHeight: 75,
+  logoMinSize: 55
+};
 
-// sizes
-export const TitleBarHeight = 45;
-export const BottomBarHeight = 75;
-export const LogoMinSize = 55;
+export const Colors = {
+  defaultBgColor: '#d1d1d1',
+  topBarBgColor: '#ffffff',
+  bottomBarBgColor: '#ffffff',
+  defaultTextColor: '#333333',
+  titleBarColor: '#f7f7f7',
+};
 
-// paddings
-
-// margins
-
-// colors
-export const DefaultBgColor = '#dadada';
-export const TitleBarBgColor = '#eeeeee';
-export const BottomBarBgColor = '#ffffff';
-export const TextColor = '#333333';
-
-
+export const Margins = {
+  right: 5,
+  left: 5,
+  top: 8,
+  bottom: 8
+};
+// paddings margins colors
 export default styles;
-
-

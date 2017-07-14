@@ -14,7 +14,7 @@ import ViewPager from 'react-native-viewpager';
 
 // ours
 import MainPage from './Pages/MainPage';
-import DefaultStyles, { BottomBarHeight, BottomBarBgColor } from './DefaultStyles';
+import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
 
 
 function notifyMessage(msg) {
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
   },
   pageBottomContainer: {
     flex: -1,
-    height: BottomBarHeight,
-    backgroundColor: BottomBarBgColor
+    height: Sizes.bottomBarHeight,
+    backgroundColor: Colors.bottomBarBgColor
   },
   page: {
     flex: 1,

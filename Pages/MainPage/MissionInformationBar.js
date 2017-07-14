@@ -5,9 +5,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 
-import {TextColor} from '../../DefaultStyles';
+import {Colors, Margins} from '../../DefaultStyles';
 
 const ICON_CONTAINER_SIZE = 40;
+const ICON_SIZE = 25;
+const ICON_COLOR = '#111111';
 const TEXT_SIZE = 13;
 const BAR_BGCOLOR= '#ffffff';
 
@@ -22,14 +24,14 @@ class MissionInformationBar extends Component {
           <View style={styles.missionIconContainer}>
             <Icon
               name='md-bulb'
-              size={25}
-              color='#111111'
+              size={ICON_SIZE}
+              color={ICON_COLOR}
             />
           </View>
           {/* benefit text */}
           <View style={styles.benefitTextContinaer}>
             <Text style={styles.infoText}>
-              somethingsomethingsomething
+              뇌 스트레칭 해 보실래요?
             </Text>
           </View>
         </View>
@@ -40,13 +42,13 @@ class MissionInformationBar extends Component {
           <View style={styles.timeIconContainer}>
             <Icon
               name='md-time'
-              size={25}
-              color='#111111'
+              size={ICON_SIZE}
+              color={ICON_COLOR}
             />
           </View>
           {/* time */}
           <View style={styles.timeContainer}>
-            <Text style={styles.infoText}>05:00</Text>
+            <Text style={styles.infoText}>05 : 00</Text>
           </View>
         </View>
       </View>
@@ -64,12 +66,14 @@ const styles = StyleSheet.create({
   leftContainer: {
     flex: 1,
     flexDirection: 'row',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginLeft: Margins.left
   }, 
   rightContainer: {
     flex: -1,
     width: 80,
     flexDirection: 'row',
+    marginRight: Margins.right + 10
   },
   missionIconContainer: {
     flex: -1,
@@ -94,7 +98,12 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: TEXT_SIZE,
-    color: TextColor
+    color: Colors.defaultTextColor
+  },
+  timeText: {
+    fontSize: TEXT_SIZE,
+    color: Colors.defaultTextColor,
+
   }
 });
 

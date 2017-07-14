@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 
 // ours
 import Title from './Title';
-import { TitleBarBgColor } from '../DefaultStyles';
+import { Colors } from '../DefaultStyles';
 
 class TitleBar extends Component {
   state = {}
@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: 30,
     alignItems: 'center',
-
-    backgroundColor: TitleBarBgColor
+    backgroundColor: Colors.titleBarColor
   },
 
 }); 

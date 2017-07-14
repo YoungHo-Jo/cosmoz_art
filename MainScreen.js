@@ -9,7 +9,7 @@ import Viewpager from 'react-native-viewpager';
 // our module
 import TitleBar from './TitleBar';
 import MViewPager from './MViewPager';
-import DefaultStyles, { TitleBarHeight } from './DefaultStyles';
+import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
 
 class MainScreen extends Component {
   render() {
@@ -44,16 +44,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#dcdcdc',
+    backgroundColor: Colors.defaultBgColor
   },
   titleBarContainer: {
     flex: -1,
-    height: TitleBarHeight,
+    height: Sizes.titleBarHeight,
     backgroundColor: '#ed2929'
   },
   viewPagerContainer: {
     flex: 1,
-    backgroundColor: '#0ff'
+    backgroundColor: Colors.defaultBgColor
   }
 });
 
