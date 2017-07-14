@@ -8,7 +8,7 @@ import MissionInformationBar from './MissionInformationBar';
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.titleBarColor;
 const MISSION_ICON_SIZE = 30;
-const MISSION_FONT_SIZE = 20;
+const MISSION_FONT_SIZE = Sizes.missionFontSize;
 const MISSION_BLOCK_MARGIN = 50;
 const MISSION_ICON_COLOR = '#111111';
 

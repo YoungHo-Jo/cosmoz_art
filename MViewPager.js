@@ -107,7 +107,7 @@ class MViewPager extends Component {
     }
 
     return page;
-  }
+  };
 
   _onChangePage = function (page) {
     notifyMessage('current page: ' + page);

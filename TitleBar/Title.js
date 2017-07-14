@@ -10,7 +10,7 @@ class Title extends Component {
       <View style={styles.titleContainer}>
         <Image 
           style={styles.logo}
-          source={require('../Icons/logo_mini.png')}
+          source={require('../icons/logo_mini.png')}
         />
       </View>
 
