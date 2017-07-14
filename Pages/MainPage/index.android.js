@@ -3,16 +3,20 @@ import { StyleSheet, View, Text, } from 'react-native';
 
 import MainMission from './MainMission';
 import LeadText from './LeadText';
+import TimerView from './TimerPage';
+
 import {Colors} from '../../DefaultStyles';
 
 
+
 class MainPage extends Component {
-  state = {  }
+
   render() {
     return (
       <View style={styles.container}>
-        <MainMission/>
+        {/*<MainMission/>*/}
         {/*<LeadText/>*/}
+        <TimerView/>
       </View>
     );
   }
