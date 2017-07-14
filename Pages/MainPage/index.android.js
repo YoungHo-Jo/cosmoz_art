@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, } from 'react-native';
 
 import MainMission from './MainMission';
 import LeadText from './LeadText';
-import TimerView from './TimerPage';
+import TimerPage from './TimerPage';
+import CameraPage from './CameraPage'
 
 import {Colors} from '../../DefaultStyles';
 
@@ -16,7 +17,8 @@ class MainPage extends Component {
       <View style={styles.container}>
         {/*<MainMission/>*/}
         {/*<LeadText/>*/}
-        <TimerView/>
+        {/*<TimerView/>*/}
+        <CameraPage/>
       </View>
     );
   }
