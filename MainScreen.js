@@ -4,12 +4,11 @@ import {StyleSheet, Text, View} from 'react-native';
 
 // external module 
 import SplashScreen from 'react-native-splash-screen';
-import Viewpager from 'react-native-viewpager';
 
 // our module
 import TitleBar from './TitleBar';
 import MViewPager from './MViewPager';
-import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
+import { Sizes, Colors } from './DefaultStyles';
 
 class MainScreen extends Component {
   render() {
