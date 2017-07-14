@@ -14,6 +14,7 @@ import ViewPager from 'react-native-viewpager';
 
 // ours
 import MainPage from './Pages/MainPage';
+import SharePage from './Pages/SharePage';
 import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
 
 
@@ -89,6 +90,18 @@ class MViewPager extends Component {
         break;
       case '2':
         // share page
+        page = (
+          <View style={styles.pageContainer}>
+            <View style={styles.pageTopContainer}>
+              <SharePage/>
+            </View>
+
+
+            <View style={styles.pageBottomContainer}>
+
+            </View>
+          </View>
+        );
         break;
       default:
     }
