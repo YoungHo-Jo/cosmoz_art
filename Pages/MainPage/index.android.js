@@ -15,10 +15,10 @@ class MainPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/*<MainMission/>*/}
+        <MainMission/>
         {/*<LeadText/>*/}
         {/*<TimerView/>*/}
-        <CameraPage/>
+        {/*<CameraPage/>*/}
       </View>
     );
   }

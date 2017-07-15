@@ -22,7 +22,6 @@ export default class CameraPage extends Component {
         </View>
       </View>
     );
-
   }
 }
 
