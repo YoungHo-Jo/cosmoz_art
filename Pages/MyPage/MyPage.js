@@ -94,11 +94,12 @@ export default class MyPage extends Component {
     render() {
         return (
             <View style={[styles.item]}>
-
+                <View style={[styles.backgroundgray]}>
+                    <Text style={[styles.category]}>누적시간 300초</Text>
+                </View>
                 <Text style={[styles.category]}>뇌주름 스케일이 반지의 제왕급</Text>
+
                 <View style={[styles.iconlist]}>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
                     <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
                     <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
                     <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
@@ -156,6 +157,18 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         paddingTop:10,
         paddingBottom:10
-    }
+    },
+    backgroundgray:{
+        backgroundColor:'#ededed'
+    },
+    lineView: {
+        height: 5,
+        alignSelf: 'stretch',
+        borderBottomColor: '#d3d3d3',
+        borderBottomWidth: 1,
+        marginLeft:10,
+        marginRight:10
+    },
+
 
 });
