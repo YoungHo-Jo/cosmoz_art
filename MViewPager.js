@@ -6,7 +6,8 @@ import {
   Dimensions,
   Platform,
   ToastAndroid,
-  AlertIOS
+  AlertIOS,
+  Button,
 } from 'react-native';
 
 // external
@@ -16,6 +17,7 @@ import ViewPager from 'react-native-viewpager';
 import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
 import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
+import LeadText from "./Pages/MainPage/LeadText";
 
 
 function notifyMessage(msg) {
@@ -32,14 +34,16 @@ var deviceWidth = Dimensions
 var PAGES = ['myPage', 'mainPage', 'sharePage'];
 
 class MViewPager extends Component {
+
   constructor(props) {
-    super(props)
+    super(props);
+
     var ds = new ViewPager.DataSource({
       pageHasChanged: (p1, p2) => p1 !== p2
     });
     this.state = {
       dataSource: ds.cloneWithPages(PAGES)
-    }
+    };
   }
 
   render() {
@@ -47,11 +51,12 @@ class MViewPager extends Component {
       <ViewPager
         style={styles.page}
         dataSource={this.state.dataSource}
-        renderPage={this._renderPage}
+        renderPage={this._renderPage.bind(this)}
         onChangePage={this._onChangePage}
         isLoop={false}
         autoPlay={false}
-        initialPage={1}>
+        initialPage={1}
+        navigation={this.props.navigation}>
       </ViewPager>
         
     );
@@ -66,11 +71,11 @@ class MViewPager extends Component {
         </View>
       </View>
     );
-      
 
     switch (pageID) {
       case '0':
         // my page
+
         break;
 
       case '1':
@@ -78,7 +83,8 @@ class MViewPager extends Component {
         page = (
           <View style={styles.pageContainer}>
             <View style={styles.pageTopContainer}>
-               <MainPage/>
+               <MainPage
+                navigation={this.props.navigation}/>
             </View>
 
 

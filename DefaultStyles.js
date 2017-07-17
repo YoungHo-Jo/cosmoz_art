@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 export const Sizes = {
   titleBarHeight: 45,
-  bottomBarHeight: 75,
+  bottomBarHeight: 45,
   logoMinSize: 55,
   missionFontSize: 20,
   leadTextSize: 20,

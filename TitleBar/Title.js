@@ -20,13 +20,14 @@ class Title extends Component {
 
 const styles = StyleSheet.create({
   titleContainer: {
-    flex: 1,
+
     alignItems: 'center',
     justifyContent: 'center'
   },
   logo: {
     width: Sizes.logoMinSize,
-    resizeMode: 'contain'
+    height: Sizes.titleBarHeight,
+    resizeMode: 'contain',
   },
   titleText: {
     flex: 1,

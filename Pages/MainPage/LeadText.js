@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button
+} from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
 
@@ -13,9 +18,12 @@ const BOTTOM_BAR_WIDTH_MARGIN = 80;
 class LeadText extends Component {
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>
+        <Text
+          style={styles.text}
+          onPress={() => navigate('Mission')}>
           오늘 하루 어떻게 지냈나요?
         </Text>
         <View style={styles.lineView}>
@@ -23,7 +31,6 @@ class LeadText extends Component {
       </View>
     );
   }
-
 }
 
 

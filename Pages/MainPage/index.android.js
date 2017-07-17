@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, } from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, View, Text,} from 'react-native';
 
 import MainMission from './MainMission';
 import LeadText from './LeadText';
@@ -9,14 +9,15 @@ import CameraPage from './CameraPage'
 import {Colors} from '../../DefaultStyles';
 
 
-
 class MainPage extends Component {
 
   render() {
+
     return (
       <View style={styles.container}>
-        <MainMission/>
-        {/*<LeadText/>*/}
+        {/*<MainMission/>*/}
+        <LeadText
+          navigation={this.props.navigation}/>
         {/*<TimerView/>*/}
         {/*<CameraPage/>*/}
       </View>
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff'
   }
 });
-
 
 
 export default MainPage;
