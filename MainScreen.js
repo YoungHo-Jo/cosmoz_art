@@ -9,21 +9,24 @@ import {StackNavigator} from 'react-navigation';
 // our module
 import TitleBar from './TitleBar';
 import MViewPager from './MViewPager';
-import MainMission from './Pages/MainPage/MainMission';
+import MainMission from './Pages/MainPage/MainMissionPage';
 import MainPage from './Pages/MainPage';
 import CameraPage from './Pages/MainPage/CameraPage';
-import LeadText from './Pages/MainPage/LeadText'
-import {Sizes, Colors} from './DefaultStyles';
+import LeadText from './Pages/MainPage/LeadTextPage'
+import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Title from "./TitleBar/Title";
+import TimerPage from "./Pages/MainPage/TimerPage";
 
 class MainScreen extends Component {
   static navigationOptions = {
+    headerStyle: DefaultStyles.headerStyle,
     header: (<Title/>),
+
   };
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         <View style={styles.viewPagerContainer}>
           <MViewPager
             navigation={this.props.navigation}/>
@@ -41,22 +44,48 @@ class MainScreen extends Component {
 
 const App = StackNavigator({
   MainScreen: {
-    screen: MainScreen
+    screen: MainScreen,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
   },
   LeadText: {
-    screen: LeadText
+    screen: LeadText,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
   },
   Mission: {
-    screen: MainMission
+    screen: MainMission,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      title: 'MainMissionPage'
+    }
   },
   ViewPager: {
-    screen: MViewPager
+    screen: MViewPager,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
   },
   MainPage: {
-    screen: MainPage
+    screen: MainPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
+  },
+  TimerPage: {
+    screen: TimerPage,
+    navigationOptions: {
+      title: 'TimerPage',
+      headerStyle: DefaultStyles.headerStyle
+    }
   },
   CameraPage: {
-    screen: CameraPage
+    screen: CameraPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
   }
 });
 
@@ -68,7 +97,7 @@ const App = StackNavigator({
  */
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.defaultBgColor

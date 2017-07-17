@@ -72,7 +72,7 @@ class SharePageHoriListView extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    blockContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',

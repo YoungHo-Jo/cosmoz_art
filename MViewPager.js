@@ -16,8 +16,10 @@ import ViewPager from 'react-native-viewpager';
 // ours
 import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
-import DefaultStyles, { Sizes, Colors } from './DefaultStyles';
-import LeadText from "./Pages/MainPage/LeadText";
+import MyPage from './Pages/MyPage/MyPage';
+import Title from './TitleBar/Title';
+import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
+import LeadText from "./Pages/MainPage/LeadTextPage";
 
 
 function notifyMessage(msg) {
@@ -34,7 +36,6 @@ var deviceWidth = Dimensions
 var PAGES = ['myPage', 'mainPage', 'sharePage'];
 
 class MViewPager extends Component {
-
   constructor(props) {
     super(props);
 
@@ -42,9 +43,16 @@ class MViewPager extends Component {
       pageHasChanged: (p1, p2) => p1 !== p2
     });
     this.state = {
-      dataSource: ds.cloneWithPages(PAGES)
+      dataSource: ds.cloneWithPages(PAGES),
+      header: (<Title/>)
     };
   }
+
+
+  static navigationOptions = {
+
+  };
+
 
   render() {
     return (
@@ -52,13 +60,13 @@ class MViewPager extends Component {
         style={styles.page}
         dataSource={this.state.dataSource}
         renderPage={this._renderPage.bind(this)}
-        onChangePage={this._onChangePage}
+        onChangePage={this._onChangePage.bind(this)}
         isLoop={false}
         autoPlay={false}
         initialPage={1}
         navigation={this.props.navigation}>
       </ViewPager>
-        
+
     );
   }
 
@@ -75,7 +83,19 @@ class MViewPager extends Component {
     switch (pageID) {
       case '0':
         // my page
+        page = (
+          <View style={styles.pageContainer}>
+            <View style={styles.pageTopContainer}>
+              <MyPage
+                navigation={this.props.navigation}/>
+            </View>
 
+
+            <View style={styles.pageBottomContainer}>
+
+            </View>
+          </View>
+        );
         break;
 
       case '1':
@@ -83,7 +103,7 @@ class MViewPager extends Component {
         page = (
           <View style={styles.pageContainer}>
             <View style={styles.pageTopContainer}>
-               <MainPage
+              <MainPage
                 navigation={this.props.navigation}/>
             </View>
 
@@ -116,7 +136,18 @@ class MViewPager extends Component {
   };
 
   _onChangePage = function (page) {
-    // notifyMessage('current page: ' + page);
+    switch (page) {
+      case '0':
+          this.setState({
+            header: (<Text>나의 방</Text>)
+          });
+        break;
+      case '1':
+
+        break;
+      case '2':
+        break;
+    }
   }
 }
 

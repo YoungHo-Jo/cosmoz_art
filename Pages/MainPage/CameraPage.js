@@ -5,7 +5,7 @@ export default class CameraPage extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>
             혼자 보기 아깝잖아요.{'\n'}
@@ -26,7 +26,7 @@ export default class CameraPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

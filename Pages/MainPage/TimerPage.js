@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text,} from 'react-native';
 
 import Timer from './Timer';
+import UpperLinearGradient from "../UpperLinearGradient";
+import LowerLinearGradient from "../LowerLinearGradient";
 
 class TimerPage extends Component {
 
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
+        <UpperLinearGradient/>
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
           <Text style={styles.missionText}>
@@ -19,6 +22,7 @@ class TimerPage extends Component {
         <View style={styles.timerContainer}>
           <Timer/>
         </View>
+        <LowerLinearGradient/>
       </View>
     );
   }
@@ -26,7 +30,7 @@ class TimerPage extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',

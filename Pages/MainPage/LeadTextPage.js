@@ -7,6 +7,8 @@ import {
 } from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
+import UpperLinearGradient from "../UpperLinearGradient";
+import LowerLinearGradient from "../LowerLinearGradient";
 
 const LEAD_TEXT_SIZE = Sizes.leadTextSize;
 const LEAD_TEXT_COLOR = Colors.defaultTextColor;
@@ -15,20 +17,24 @@ const BOTTOM_BAR_HEIGHT = 3;
 const BOTTOM_BAR_COLOR = Colors.defaultTextColor;
 const BOTTOM_BAR_WIDTH_MARGIN = 80;
 
-class LeadText extends Component {
+class LeadTextPage extends Component {
 
   render() {
     const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <Text
-          style={styles.text}
-          onPress={() => navigate('Mission')}>
-          오늘 하루 어떻게 지냈나요?
-        </Text>
-        <View style={styles.lineView}>
+        <View style={styles.container}>
+          <UpperLinearGradient/>
+          <View style={styles.blockContainer}>
+            <Text
+              style={styles.text}
+              onPress={() => navigate('Mission')}>
+              오늘 하루 어떻게 지냈나요?
+            </Text>
+            <View style={styles.lineView}>
+            </View>
+          </View>
+          <LowerLinearGradient/>
         </View>
-      </View>
     );
   }
 }
@@ -36,6 +42,13 @@ class LeadText extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+  },
+  blockContainer: {
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
@@ -59,4 +72,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LeadText;
+export default LeadTextPage;

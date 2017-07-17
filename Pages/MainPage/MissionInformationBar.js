@@ -14,10 +14,9 @@ const TEXT_SIZE = 13;
 const BAR_BGCOLOR= '#ffffff';
 
 class MissionInformationBar extends Component {
-  state = {}
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         {/* left */}
         <View style={styles.leftContainer}>
           {/* mission icon */}
@@ -57,7 +56,7 @@ class MissionInformationBar extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',

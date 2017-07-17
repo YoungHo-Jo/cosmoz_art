@@ -4,20 +4,23 @@ import {StyleSheet, View, Text, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {Sizes, Colors} from '../../DefaultStyles';
-import MissionInformationBar from './MissionInformationBar';
+import UpperLinearGradient from "../UpperLinearGradient";
+import LowerLinearGradient from "../LowerLinearGradient";
+import MissionInformationBar from "./MissionInformationBar";
+import BottomBar from "../BottomBar";
 
-const MAIN_MISSION_PAGE_BG_COLOR = Colors.titleBarColor;
+const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
 const MISSION_FONT_SIZE = Sizes.missionFontSize;
 const MISSION_BLOCK_MARGIN = 50;
 const MISSION_ICON_COLOR = '#111111';
 
 
-class MainMission extends Component {
+class MainMissionPage extends Component {
   render() {
-    const { navigate } = this.props.navigation;
+    const {navigate} = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         {/* mission information */}
         <View style={styles.missionInfoBarContainer}>
           <MissionInformationBar/>
@@ -25,11 +28,12 @@ class MainMission extends Component {
 
         {/* mission container */}
         <View style={styles.missionContainer}>
-
+          <UpperLinearGradient/>
           <View style={styles.missionBlockContainer}>
             {/* mission text */}
             <View style={styles.missionTextContainer}>
-              <Text style={styles.missionText}>
+              <Text style={styles.missionText}
+                onPress={() => navigate('TimerPage')}>
                 내가 생각하는 우주 외계인을 그려봐요.
               </Text>
 
@@ -41,13 +45,12 @@ class MainMission extends Component {
                 size={MISSION_ICON_SIZE}
                 color={MISSION_ICON_COLOR}
               />
-              <Button
-                title={'hi'}
-                onPress={() => navigate('CameraPage')}/>
             </View>
-          </View>
 
+          </View>
+          <LowerLinearGradient/>
         </View>
+        <BottomBar/>
 
       </View>
     );
@@ -55,7 +58,7 @@ class MainMission extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1
   },
   missionInfoBarContainer: {
@@ -67,6 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: MAIN_MISSION_PAGE_BG_COLOR,
     justifyContent: 'center',
+    marginBottom: Sizes.bottomBarHeight
   },
   missionBlockContainer: {
     flexDirection: 'column',
@@ -94,4 +98,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainMission;
+export default MainMissionPage;

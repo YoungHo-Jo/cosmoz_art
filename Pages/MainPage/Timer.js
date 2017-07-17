@@ -5,7 +5,7 @@ class Timer extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         {/*timerAnimation*/}
         <View style={styles.timerContainer}>
         </View>
@@ -21,7 +21,7 @@ class Timer extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     alignItems: 'center',
 
     backgroundColor: '#888449'

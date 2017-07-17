@@ -97,11 +97,11 @@ export default class MyPage extends Component {
 
                 <Text style={[styles.category]}>뇌주름 스케일이 반지의 제왕급</Text>
                 <View style={[styles.iconlist]}>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
-                    <Image style={[styles.imag]} source={require('../icons/settings.png')}/>
+                    {/*<Image style={[styles.imag]} source={require('../icons/settings.png')}/>*/}
+                    {/*<Image style={[styles.imag]} source={require('../icons/settings.png')}/>*/}
+                    {/*<Image style={[styles.imag]} source={require('../icons/settings.png')}/>*/}
+                    {/*<Image style={[styles.imag]} source={require('../icons/settings.png')}/>*/}
+                    {/*<Image style={[styles.imag]} source={require('../icons/settings.png')}/>*/}
                 </View>
                 <ScrollView style={[styles.scrollView]} >
                     <View style={[styles.center, { marginTop: 0, marginBottom: 25, flexDirection: 'column'}]}>

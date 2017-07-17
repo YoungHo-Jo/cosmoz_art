@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 
-import {Sizes} from '../DefaultStyles';
+import {Sizes, Colors} from '../DefaultStyles';
 
 class Title extends Component {
 
@@ -20,9 +20,9 @@ class Title extends Component {
 
 const styles = StyleSheet.create({
   titleContainer: {
-
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: Colors.titleBarColor
   },
   logo: {
     width: Sizes.logoMinSize,

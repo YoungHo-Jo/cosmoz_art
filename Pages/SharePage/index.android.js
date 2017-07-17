@@ -7,7 +7,7 @@ class SharePage extends Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         <SharePageListView/>
       </View>
     );
@@ -17,7 +17,7 @@ class SharePage extends Component {
 
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1,
     backgroundColor: '#003882'
   },

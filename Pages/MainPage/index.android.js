@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text,} from 'react-native';
 
-import MainMission from './MainMission';
-import LeadText from './LeadText';
+import MainMission from './MainMissionPage';
+import LeadTextPage from './LeadTextPage';
 import TimerPage from './TimerPage';
 import CameraPage from './CameraPage'
 
@@ -14,9 +14,9 @@ class MainPage extends Component {
   render() {
 
     return (
-      <View style={styles.container}>
+      <View style={styles.blockContainer}>
         {/*<MainMission/>*/}
-        <LeadText
+        <LeadTextPage
           navigation={this.props.navigation}/>
         {/*<TimerView/>*/}
         {/*<CameraPage/>*/}
@@ -26,7 +26,7 @@ class MainPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  blockContainer: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',

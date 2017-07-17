@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 
 // ours
 import Title from './Title';
-import { Colors } from '../DefaultStyles';
+import { Colors, Sizes } from '../DefaultStyles';
 
 class TitleBar extends Component {
   state = {}
@@ -18,9 +18,8 @@ class TitleBar extends Component {
 
 const styles = StyleSheet.create({
   titleBarContainer: {
-    flex: 1,
     flexDirection: 'column',
-    height: 30,
+    height: Sizes.titleBarHeight,
     alignItems: 'center',
     backgroundColor: Colors.titleBarColor
   },
