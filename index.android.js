@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, } from 'react-native';
-import MainSceen from './MainScreen';
+import {AppRegistry,} from 'react-native';
+import MainScreen, {App} from './MainScreen';
 
-AppRegistry.registerComponent('art', () => MainSceen);
+AppRegistry.registerComponent('art', () => App);

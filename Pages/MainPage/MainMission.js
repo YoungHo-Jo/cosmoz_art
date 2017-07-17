@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -14,9 +14,8 @@ const MISSION_ICON_COLOR = '#111111';
 
 
 class MainMission extends Component {
-  state = {};
-
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         {/* mission information */}
@@ -42,6 +41,9 @@ class MainMission extends Component {
                 size={MISSION_ICON_SIZE}
                 color={MISSION_ICON_COLOR}
               />
+              <Button
+                title={'hi'}
+                onPress={() => navigate('CameraPage')}/>
             </View>
           </View>
 
