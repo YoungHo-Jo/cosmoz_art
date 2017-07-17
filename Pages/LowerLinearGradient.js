@@ -9,7 +9,7 @@ export default class LowerLinearGradient extends React.Component {
     return(
       <View style={styles.container}>
         <LinearGradient
-          colors={['#ffffff', '#b8b8b8']}
+          colors={['#ffffff', '#eef2f5']}
           style={styles.linearGradient}/>
       </View>
 

@@ -6,7 +6,6 @@ import Title from './Title';
 import { Colors } from '../DefaultStyles';
 
 class TitleBar extends Component {
-  state = {}
   render() {
     return (
       <View style={styles.titleBarContainer}>

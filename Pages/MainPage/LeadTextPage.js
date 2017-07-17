@@ -15,7 +15,7 @@ const LEAD_TEXT_COLOR = Colors.defaultTextColor;
 const SIDE_MARGIN = 50;
 const BOTTOM_BAR_HEIGHT = 3;
 const BOTTOM_BAR_COLOR = Colors.defaultTextColor;
-const BOTTOM_BAR_WIDTH_MARGIN = 80;
+const BOTTOM_BAR_WIDTH_MARGIN = 100;
 
 class LeadTextPage extends Component {
 
@@ -28,7 +28,7 @@ class LeadTextPage extends Component {
             <Text
               style={styles.text}
               onPress={() => navigate('Mission')}>
-              오늘 하루 어떻게 지냈나요?
+              오늘 하루 어떻게 지냈나요? ㅎㄹㅇㅎㄹㅇㅎㄹㅇㅎㄹㅇㅎㅇㄹㅇ
             </Text>
             <View style={styles.lineView}>
             </View>
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     fontSize: LEAD_TEXT_SIZE,
     fontWeight: '300',
     marginBottom: 20,
+    textAlign: 'center',
   }
 
 });

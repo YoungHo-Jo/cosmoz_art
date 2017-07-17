@@ -34,7 +34,7 @@ class MainMissionPage extends Component {
             <View style={styles.missionTextContainer}>
               <Text style={styles.missionText}
                 onPress={() => navigate('TimerPage')}>
-                내가 생각하는 우주 외계인을 그려봐요.
+                내가 생각하는 {'\n'}우주 외계인을 그려봐요.
               </Text>
 
             </View>

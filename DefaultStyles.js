@@ -8,12 +8,12 @@ import {StyleSheet} from 'react-native';
 
 
 export const Sizes = {
-  titleBarHeight: 45,
+  titleBarHeight: 50,
   bottomBarHeight: 45,
   logoMinSize: 55,
   missionFontSize: 20,
-  leadTextSize: 20,
-  linearGradientHeight: 5,
+  leadTextSize: 25,
+  linearGradientHeight: 20,
 };
 
 export const Colors = {
@@ -21,7 +21,7 @@ export const Colors = {
   topBarBgColor: '#ffffff',
   bottomBarBgColor: '#ffffff',
   defaultTextColor: '#333333',
-  titleBarColor: '#f7f7f7',
+  titleBarColor: '#ffffff',
   defaultPageBgColor: '#ffffff'
 };
 
