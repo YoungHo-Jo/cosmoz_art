@@ -2,7 +2,7 @@ import React, {Component,} from 'react';
 
 import {
   ListView,
-  StyleSheet,
+  StyleSheet, View,
 } from 'react-native';
 
 import SharePageListViewItem from './SharePageListViewItem';
@@ -28,8 +28,12 @@ class SharePageListView extends Component {
   }
 
   _renderRow(rowData) {
-    return <SharePageListViewItem shareImageURL={rowData.book_image}
-                                  subject={rowData.title}/>;
+    return (
+      <SharePageListViewItem
+        shareImageURL={rowData.book_image}
+        subject={rowData.title}
+        navigation={this.props.navigation}/>
+    )
   }
 
   _refreshData() {
@@ -39,13 +43,7 @@ class SharePageListView extends Component {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(rjson.results.books),
         })
-      })
-      .then(() => {
-       // for testing
-        console.log('datasource = ');
-        console.log(this.state.dataSource.getRowCount());
       });
-
   }
 
   render() {
@@ -53,7 +51,7 @@ class SharePageListView extends Component {
       <ListView
         style={styles.list}
         dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
+        renderRow={this._renderRow.bind(this)}
         enableEmptySections={true}
       />
     );
@@ -62,27 +60,9 @@ class SharePageListView extends Component {
 }
 
 const styles = StyleSheet.create({
-  blockContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    paddingTop: 24,
-  },
   list: {
     flex: 1,
     flexDirection: 'column'
-  },
-  listContent: {
-    flex: 1,
-    flexDirection: 'column',
-  },
-  row: {
-    flex: 1,
-    fontSize: 14,
-    padding: 42,
-    borderWidth: 1,
-    borderColor: '#FFFFFF',
   },
 });
 

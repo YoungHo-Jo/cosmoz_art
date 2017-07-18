@@ -17,7 +17,7 @@ export const Sizes = {
 };
 
 export const Colors = {
-  defaultBgColor: '#d1d1d1',
+  defaultBgColor: '#ffffff',
   topBarBgColor: '#ffffff',
   bottomBarBgColor: '#ffffff',
   defaultTextColor: '#333333',

@@ -18,18 +18,18 @@ class SharePageListViewItem extends Component {
   };
 
   render() {
-
-    console.log(this.props.subject);
-    console.log(this.props.shareImageURL);
     return (
-      <View style={styles.shareItem}>
+      <View style={styles.container}>
         <View style={styles.info}>
-          <Text style={styles.subject}>
+          <Text
+            style={styles.subject}
+            >
             {this.props.subject}
           </Text>
           <Image
             style={styles.shareImage}
             source={{uri: this.props.shareImageURL}}/>
+
         </View>
       </View>
     );
@@ -38,12 +38,10 @@ class SharePageListViewItem extends Component {
 
 
 const styles = StyleSheet.create({
-  shareItem: {
+  container: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: Colors.defaultBgColor,
-    borderBottomColor: '#FFFFFF',
-    borderBottomWidth: 2,
     padding: 5,
   },
   shareImage: {

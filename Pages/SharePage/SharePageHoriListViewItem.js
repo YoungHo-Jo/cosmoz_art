@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-    shareItem:{
+    container:{
         flex:1,
         flexDirection : 'column',
         backgroundColor : '#FFFFFF',
@@ -72,7 +72,7 @@ class SharePageHoriListViewItem extends Component{
         console.log(this.props.shareImageURL);
         console.log(this.props.nickname);
         return (
-            <View style={styles.shareItem}>
+            <View style={styles.container}>
                 <Image
                     style={styles.shareImage}
                     source={{uri: this.props.shareImageURL}}/>

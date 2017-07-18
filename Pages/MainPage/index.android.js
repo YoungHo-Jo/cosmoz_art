@@ -6,7 +6,7 @@ import LeadTextPage from './LeadTextPage';
 import TimerPage from './TimerPage';
 import CameraPage from './CameraPage'
 
-import {Colors} from '../../DefaultStyles';
+import {Colors, Sizes} from '../../DefaultStyles';
 
 
 class MainPage extends Component {
@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    marginBottom: Sizes.bottomBarHeight
   }
 });
 

@@ -20,6 +20,7 @@ import MyPage from './Pages/MyPage/MyPage';
 import Title from './TitleBar/Title';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import LeadText from "./Pages/MainPage/LeadTextPage";
+import BottomBar from "./Pages/BottomBar";
 
 
 function notifyMessage(msg) {
@@ -106,11 +107,7 @@ class MViewPager extends Component {
               <MainPage
                 navigation={this.props.navigation}/>
             </View>
-
-
-            <View style={styles.pageBottomContainer}>
-
-            </View>
+            <BottomBar/>
           </View>
         );
         break;
@@ -119,13 +116,10 @@ class MViewPager extends Component {
         page = (
           <View style={styles.pageContainer}>
             <View style={styles.pageTopContainer}>
-              <SharePage/>
+              <SharePage
+                navigation={this.props.navigation}/>
             </View>
-
-
-            <View style={styles.pageBottomContainer}>
-
-            </View>
+            <BottomBar/>
           </View>
         );
         break;
