@@ -7,11 +7,11 @@ import SplashScreen from 'react-native-splash-screen';
 import {StackNavigator} from 'react-navigation';
 
 // our module
-import TitleBar from './TitleBar';
 import MViewPager from './MViewPager';
 import MainMission from './Pages/MainPage/MainMissionPage';
 import MainPage from './Pages/MainPage';
 import CameraPage from './Pages/MainPage/CameraPage';
+import CameraButotnPage from './Pages/MainPage/CameraButtonPage';
 import LeadText from './Pages/MainPage/LeadTextPage'
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Title from "./TitleBar/Title";
@@ -83,6 +83,12 @@ const App = StackNavigator({
   },
   CameraPage: {
     screen: CameraPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
+  },
+  CameraButtonPage: {
+    screen: CameraButotnPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle
     }

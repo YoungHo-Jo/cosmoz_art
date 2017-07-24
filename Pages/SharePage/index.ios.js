@@ -2,13 +2,22 @@ import React, {Component} from 'react';
 import {StyleSheet, View, } from 'react-native';
 
 import SharePageListView from './SharePageListView';
+import {Colors, Sizes} from "../../DefaultStyles";
+import UpperLinearGradient from "../UpperLinearGradient";
+import LowerLinearGradient from "../LowerLinearGradient";
 
 class SharePage extends Component {
 
   render() {
     return(
-      <View style={styles.blockContainer}>
-        <SharePageListView/>
+      <View style={styles.container}>
+        <View style={styles.listViewContainer}>
+          <UpperLinearGradient/>
+          <SharePageListView
+            navigation={this.props.navigation}/>
+
+        </View>
+        <LowerLinearGradient/>
       </View>
     );
   }
@@ -17,11 +26,15 @@ class SharePage extends Component {
 
 
 const styles = StyleSheet.create({
-  blockContainer: {
+  container: {
     flex: 1,
-    backgroundColor: '#003882'
+    flexDirection: 'column',
+    backgroundColor: Colors.defaultPageBgColor,
+    marginBottom: Sizes.bottomBarHeight
   },
-
+  listViewContainer: {
+    flex: 1,
+  }
 });
 
 export default SharePage;

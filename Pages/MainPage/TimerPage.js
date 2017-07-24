@@ -14,7 +14,8 @@ class TimerPage extends Component {
         <UpperLinearGradient/>
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
-          <Text style={styles.missionText}>
+          <Text style={styles.missionText}
+            onPress={() => this.props.navigation.navigate('CameraButtonPage')}>
             내가 생각하는 우주 외계인을 그려봐요
           </Text>
         </View>

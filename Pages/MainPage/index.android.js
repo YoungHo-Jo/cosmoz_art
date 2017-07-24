@@ -4,7 +4,7 @@ import {StyleSheet, View, Text,} from 'react-native';
 import MainMission from './MainMissionPage';
 import LeadTextPage from './LeadTextPage';
 import TimerPage from './TimerPage';
-import CameraPage from './CameraPage'
+import CameraPage from './CameraButtonPage'
 
 import {Colors, Sizes} from '../../DefaultStyles';
 

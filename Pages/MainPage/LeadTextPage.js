@@ -28,7 +28,7 @@ class LeadTextPage extends Component {
             <Text
               style={styles.text}
               onPress={() => navigate('Mission')}>
-              오늘 하루 어떻게 지냈나요? ㅎㄹㅇㅎㄹㅇㅎㄹㅇㅎㄹㅇㅎㅇㄹㅇ
+              오늘 하루 어떻게 지냈나요?
             </Text>
             <View style={styles.lineView}>
             </View>
