@@ -7,9 +7,12 @@ import {
   Text,
   View,
   Image,
+  Dimensions
 } from 'react-native';
 
-import {Colors} from '../../DefaultStyles';
+import {Colors, Sizes} from '../../DefaultStyles';
+
+const CONAINTER_SIDE_MARGIN = 20;
 
 class SharePageListViewItem extends Component {
   propTypes: {
@@ -20,44 +23,83 @@ class SharePageListViewItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.info}>
-          <Text
-            style={styles.subject}
-            >
-            {this.props.subject}
-          </Text>
-          <Image
-            style={styles.shareImage}
-            source={{uri: this.props.shareImageURL}}/>
 
+        <View style={styles.textBarContainer}>
+          <View style={styles.quotationMarkImageContainer}>
+            <Image
+                style={styles.quotationMarkImage}
+                sourece={require('../../icons/logo.png')}/>
+          </View>
+          <View style={styles.textContainer}>
+            <Text style={styles.subject}>
+              {this.props.subject}
+            </Text>
+          </View>
+          <View style={styles.quotationMarkImageContainer}>
+            <Image
+                style={styles.quotationMarkImage}
+                sourece={require('../../icons/logo.png')}/>
+          </View>
+        </View>
+        <View style={styles.imageContainer}>
+
+          {/*<Image*/}
+            {/*style={styles.shareImage}*/}
+            {/*source={{uri: this.props.shareImageURL}}/>*/}
+            <Image
+              style={styles.shareImage}
+              source={require('../../icons/logo.png')}/>
         </View>
       </View>
     );
   }
 }
 
+var viewWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.defaultBgColor,
-    padding: 5,
+    marginTop: Sizes.linearGradientHeight,
   },
   shareImage: {
-    flex: 1,
-    height: 500,
     resizeMode: 'contain',
-    paddingTop: 10
+    width: viewWidth * 0.8
   },
-  info: {
-    flex: 3,
-    flexDirection: 'column',
+  quotationMarkImage: {
+    resizeMode: 'contain',
+
+  },
+  quotationMarkImageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textBarContainer: {
+    flex: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    marginBottom: CONAINTER_SIDE_MARGIN,
+  },
+  textContainer: {
+    flex: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageContainer: {
+    flex: 90,
     alignSelf: 'center',
-    padding: 20
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#728392',
   },
   subject: {
-    fontSize: 18,
+    fontSize: 25,
     alignSelf: 'center',
     color: Colors.defaultTextColor,
   }

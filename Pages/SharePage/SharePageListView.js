@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 
 import SharePageListViewItem from './SharePageListViewItem';
+import {Sizes} from "../../DefaultStyles";
 
 const API_KEY = '73b19491b83909c7e07016f4bb4644f9:2:60667290';
 const QUERY_TYPE = 'hardcover-fiction';
@@ -19,7 +20,17 @@ class SharePageListView extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
-      dataSource: ds.cloneWithRows([]),
+      dataSource: ds.cloneWithRows([
+        {
+          title: 'hi'
+        },
+        {
+          title: 'hi1'
+        },
+        {
+          title: 'hi2'
+        }
+      ]),
     }
   }
 
@@ -62,7 +73,7 @@ class SharePageListView extends Component {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
 });
 
