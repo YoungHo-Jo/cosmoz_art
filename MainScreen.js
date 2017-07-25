@@ -17,6 +17,7 @@ import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Title from "./TitleBar/Title";
 import TimerPage from "./Pages/MainPage/TimerPage";
 import ScanPage from "./Pages/MainPage/ScanPage";
+import DetailSharePage from "./Pages/SharePage/DetailSharePage";
 
 class MainScreen extends Component {
   static navigationOptions = {
@@ -96,6 +97,12 @@ const App = StackNavigator({
   },
   ScanPage: {
     screen: ScanPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
+  },
+  DetailSharePage: {
+    screen: DetailSharePage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle
     }

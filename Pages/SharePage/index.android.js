@@ -5,6 +5,7 @@ import SharePageListView from './SharePageListView';
 import {Colors, Sizes} from "../../DefaultStyles";
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
+import Sharepage_mission from "./Sharepage_mission";
 
 class SharePage extends Component {
 

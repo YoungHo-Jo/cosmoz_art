@@ -31,7 +31,10 @@ class SharePageListViewItem extends Component {
                 sourece={require('../../icons/logo.png')}/>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.subject}>
+            <Text
+                style={styles.subject}
+              onPress={() => this.props.navigation.navigate('DetailSharePage')}>
+              {/*testClick*/}
               {this.props.subject}
             </Text>
           </View>
