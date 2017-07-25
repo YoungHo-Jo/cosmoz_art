@@ -7,7 +7,9 @@ export default class BottomBar extends React.Component {
   render() {
     return(
       <View style={styles.container}>
-        <View style={styles.block}></View>
+        <View style={[styles.block, this.props.style]}>
+          {this.props.children}
+        </View>
       </View>
     );
   }

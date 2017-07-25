@@ -4,13 +4,14 @@ import {StyleSheet, View, Text,} from 'react-native';
 import Timer from './Timer';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
+import {Colors} from "../../DefaultStyles";
 
 class TimerPage extends Component {
 
 
   render() {
     return (
-      <View style={styles.blockContainer}>
+      <View style={styles.container}>
         <UpperLinearGradient/>
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
@@ -31,12 +32,12 @@ class TimerPage extends Component {
 
 
 const styles = StyleSheet.create({
-  blockContainer: {
+  container: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#004992',
+    backgroundColor: Colors.defaultPageBgColor
   },
   missionTextContainer: {
     alignSelf: 'center',

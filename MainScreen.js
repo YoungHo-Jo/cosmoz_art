@@ -16,6 +16,7 @@ import LeadText from './Pages/MainPage/LeadTextPage'
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Title from "./TitleBar/Title";
 import TimerPage from "./Pages/MainPage/TimerPage";
+import ScanPage from "./Pages/MainPage/ScanPage";
 
 class MainScreen extends Component {
   static navigationOptions = {
@@ -89,6 +90,12 @@ const App = StackNavigator({
   },
   CameraButtonPage: {
     screen: CameraButotnPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle
+    }
+  },
+  ScanPage: {
+    screen: ScanPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle
     }
