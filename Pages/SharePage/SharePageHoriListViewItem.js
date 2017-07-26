@@ -1,94 +1,66 @@
-/**
- * Created by LG on 2017-07-15.
- */
-import React,{
-    Component,
-}from 'react';
+/** * Created by LG on 2017-07-26. */
+import React, {Component,} from 'react';
+import {AppRegistry, ListView, Text, StyleSheet, View, Image} from 'react-native';
+import SharePageHoriListViewItem from './SharePageHoriListViewItem'
 
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    ListView,
-} from 'react-native';
+const API_KEY = '73b19491b83909c7e07016f4bb4644f9:2:60667290';
+const QUERY_TYPE = 'hardcover-fiction';
+const API_STEM = 'http://api.nytimes.com/svc/books/v3/lists';
+const ENDPOINT = `${API_STEM}/${QUERY_TYPE}?response-format=json&api-key=${API_KEY}`;
 
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        flexDirection : 'column',
-        backgroundColor : '#FFFFFF',
-        borderBottomColor : '#FFFFFF',
-        borderBottomWidth : 2,
-        padding : 10,
-        paddingTop:180
-    },
-    shareImage:{
-        flex:1,
-        height:500,
-        width:150,
-        resizeMode : 'stretch',
-        paddingTop : 100,
-        paddingBottom:10,
-        alignSelf:'center'
-    },
-    info:{
-        flex : 3,
-        flexDirection : 'column',
-        alignSelf : 'center',
-        paddingTop:10
-    },
-    person:{
-        flex :1,
-        flexDirection: 'row',
+class SharePageHoriListView extends Component {
+  constructor(props) {
+    super(props);
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,});
+    this.state = {dataSource: ds.cloneWithRows([]),}
+  }
 
-    },
-    subject:{
-        fontSize : 18,
-        alignSelf: 'center'
-    },
-    nickname:{
-        fontSize: 13,
-        paddingLeft:10
+  componentDidMount() {
+    this._refreshData();
+  }
 
-    },
-    profile:{
-        height:20,
-        width:20,
-        paddingRight:10
-    }
-});
+  _renderRow(rowData) {
+    return <SharePageHoriListViewItem shareImageURL={rowData.book_image} subject={rowData.title}
+                                      nickname={rowData.author}/>;
+  }
 
-class SharePageHoriListViewItem extends Component{
-    propTypes: {
-        shareImageURL: React.PropTypes.string.isRequired,
-        subject: React.PropTypes.string.isRequired,
-        nickname: React.PropTypes.string.isRequired,
-    };
+  _refreshData() {
+    fetch(ENDPOINT).then((response) => response.json()).then((rjson) => {
+      this.setState(
+          {
+            dataSource: this.state.dataSource.cloneWithRows(rjson.results.books),
+          }
+      )
+    })
+  }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Image
-                    style={styles.shareImage}
-                    source={{uri: this.props.shareImageURL}}/>
-                <View style={styles.info}>
-                    <Text style={styles.subject}>
-                        {this.props.subject}
-                    </Text>
-                    <View style={styles.person}>
-                        <Image style={styles.profile} source={require('../../icons/user.png')}/>
-                        <Text style={styles.nickname}>
-                            {this.props.nickname}
-                        </Text>
-                    </View>
-                </View>
-
-            </View>
-
-
-        );
-    }
+  render() {
+    return (
+        <View style={styles.container}>
+          <Text style={styles.headingText}>나의 우주외계인</Text>
+          <ListView horizontal={true}
+                    styles={styles.list}
+                    dataSource={this.state.dataSource}
+                    renderRow={this._renderRow}
+                    enableEmptySections={true}/>
+        </View>
+    );
+  }
 }
 
-export default SharePageHoriListViewItem;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    paddingTop: 24,
+  },
+  list: {
+    flexDirection: 'row',
+  },
+  headingText: {
+    fontSize: 25, alignSelf: 'center', marginTop: 50,
+  }
+});
+export default SharePageHoriListView;
