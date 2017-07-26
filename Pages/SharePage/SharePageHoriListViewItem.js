@@ -81,7 +81,7 @@ class SharePageHoriListViewItem extends Component{
                         {this.props.subject}
                     </Text>
                     <View style={styles.person}>
-                        <Image style={styles.profile} source={require('./icons/user.png')}/>
+                        <Image style={styles.profile} source={require('../../icons/user.png')}/>
                         <Text style={styles.nickname}>
                             {this.props.nickname}
                         </Text>
