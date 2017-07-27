@@ -44,11 +44,12 @@ class MainMissionPage extends Component {
             </View>
             {/* mission image */}
             <View style={styles.missionIconContainer}>
-              <Icon
+              <Icon.Button
                 name='md-create'
                 size={MISSION_ICON_SIZE}
                 color={MISSION_ICON_COLOR}
-              />
+                backgroundColor={Colors.defaultPageBgColor}
+                onPress={() => navigate('TimerPage', {...params})}/>
             </View>
 
           </View>
@@ -89,15 +90,15 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   missionIconContainer: {
-    flex: -1,
-    width: MISSION_ICON_SIZE + 5,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 25
   },
   missionText: {
     fontSize: MISSION_FONT_SIZE,
-    fontWeight: 'bold',
+    color: Colors.defaultTextColor,
+    fontWeight:  Sizes.middleFontWeight,
     textAlign: 'center',
   }
 });

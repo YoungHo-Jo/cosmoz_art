@@ -11,7 +11,7 @@ const ICON_CONTAINER_SIZE = 40;
 const ICON_SIZE = 25;
 const ICON_COLOR = '#111111';
 const TEXT_SIZE = 13;
-const BAR_BGCOLOR= '#ffffff';
+const BAR_BGCOLOR= '#f7f7f7';
 
 class MissionInformationBar extends Component {
   static propTypes = {

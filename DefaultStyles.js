@@ -11,9 +11,11 @@ export const Sizes = {
   titleBarHeight: 50,
   bottomBarHeight: 45,
   logoMinSize: 55,
-  missionFontSize: 20,
+  missionFontSize: 25,
   leadTextSize: 25,
   linearGradientHeight: 20,
+  fontWeight: '300',
+  middleFontWeight: '500'
 };
 
 export const Colors = {
@@ -22,7 +24,8 @@ export const Colors = {
   bottomBarBgColor: '#ffffff',
   defaultTextColor: '#333333',
   titleBarColor: '#ffffff',
-  defaultPageBgColor: '#ffffff'
+  defaultPageBgColor: '#ffffff',
+
 };
 
 export const Margins = {

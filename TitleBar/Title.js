@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, Platform} from 'react-native';
 
 import {Sizes, Colors} from '../DefaultStyles';
 
 class Title extends Component {
+  constructor(props) {
+    super(props)
+
+    var isiOS = (Platform.OS === 'ios')
+    this.state = {
+      isIOS: isiOS
+    }
+  }
 
   render() {
     return (
-      <View style={styles.titleContainer}>
+      <View style={[styles.titleContainer, this.state.isIOS && {marginTop: 15}]}>
         <Image 
           style={styles.logo}
           source={require('../icons/logo_mini.png')}
@@ -17,6 +25,8 @@ class Title extends Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   titleContainer: {

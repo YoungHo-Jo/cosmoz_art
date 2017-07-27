@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View,} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
-import {Colors} from "../../DefaultStyles";
+import {Colors, Sizes} from "../../DefaultStyles";
+import Icon from 'react-native-vector-icons/Entypo'
+import BottomBar from "../BottomBar";
+
 
 export default class CameraButtonPage extends Component {
 
@@ -12,19 +15,25 @@ export default class CameraButtonPage extends Component {
           <UpperLinearGradient/>
           <View style={styles.blockContainer}>
             <View style={styles.cameraIconContainer}>
-
+              <Icon.Button
+                  name='camera'
+                  size={180}
+                  color={Colors.defaultTextColor}
+                  backgroundColor={Colors.defaultPageBgColor}
+                  onPress={() => this.props.navigation.navigate('CameraPage', {...this.props.navigation.state.params})}/>
             </View>
 
             <View style={styles.textContainer}>
-              <Text style={styles.text}
-                    onPress={() => this.props.navigation.navigate('CameraPage', {...this.props.navigation.state.params})}>
+              <Text style={styles.text}>
                 카메라 아이콘을 누르면{'\n'}
                 사진찍기로 넘어갑니다.
               </Text>
             </View>
 
           </View>
-          <LowerLinearGradient/>
+          <LowerLinearGradient
+            marginBottom={Sizes.bottomBarHeight}/>
+          <BottomBar/>
         </View>
     );
   }
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: Colors.defaultPageBgColor
+    backgroundColor: Colors.defaultPageBgColor,
   },
   blockContainer: {
     flexDirection: 'column',
@@ -42,16 +51,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textContainer: {
-    backgroundColor: '#889482'
+
   },
   cameraIconContainer: {
-    height: 200,
-    width: 200,
-    backgroundColor: '#881920'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   text: {
-    fontSize: 15,
-    fontWeight: '300',
+    fontSize: Sizes.missionFontSize,
+    fontWeight: Sizes.middleFontWeight,
+    color: Colors.defaultTextColor,
     textAlign: 'center'
   }
 });

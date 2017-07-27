@@ -54,14 +54,15 @@ const App = StackNavigator({
   LeadText: {
     screen: LeadText,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
     }
   },
   Mission: {
     screen: MainMission,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      title: 'MainMissionPage'
+      title: 'MainMissionPage',
+      header: (<Title/>)
     }
   },
   ViewPager: {
@@ -73,38 +74,43 @@ const App = StackNavigator({
   MainPage: {
     screen: MainPage,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
+      header: (<Title/>)
     }
   },
   TimerPage: {
     screen: TimerPage,
     navigationOptions: {
       title: 'TimerPage',
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
+      header: (<Title/>)
     }
   },
   CameraPage: {
     screen: CameraPage,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      header: null
     }
   },
   CameraButtonPage: {
     screen: CameraButotnPage,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
+      header: (<Title/>)
     }
   },
   ScanPage: {
     screen: ScanPage,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
+      header: (<Title/>)
     }
   },
   DetailSharePage: {
     screen: DetailSharePage,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
+      header: (<Title/>)
     }
   }
 });

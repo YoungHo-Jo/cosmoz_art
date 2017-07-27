@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   missionText: {
-    fontWeight: '300',
-    fontSize: 25,
+    fontWeight: Sizes.middleFontWeight,
+    fontSize: Sizes.missionFontSize,
     textAlign: 'center',
-    color: '#333333',
+    color: Colors.defaultTextColor,
   },
   toggleContainer: {
     position: 'absolute',
