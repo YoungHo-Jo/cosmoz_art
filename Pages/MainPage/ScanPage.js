@@ -1,10 +1,11 @@
 import React from 'react';
-import {Button, StyleSheet, Text, TouchableHighlight, View,} from 'react-native';
+import {Button, Image, StyleSheet, Text, TouchableHighlight, View,} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
 import BottomBar from "../BottomBar";
 import {NavigationActions} from "react-navigation";
 import {Colors} from "../../DefaultStyles";
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 const IMAGE_SIDE_MARGIN = 30;
 
@@ -17,9 +18,11 @@ export default class ScanPage extends React.Component {
           <UpperLinearGradient/>
           {/*Image Container*/}
           <View style={styles.imageContainer}>
-
+            <Image
+                resizeMode='contain'
+                source={{uri: this.props.navigation.state.params.data.mediaUri}}
+                style={[eStyles.image]}/>
           </View>
-
           <LowerLinearGradient/>
           <BottomBar
               style={styles.bottomBar}>
@@ -27,7 +30,6 @@ export default class ScanPage extends React.Component {
             <TouchableHighlight
                 onPress={() => this.retakePicture()}
                 style={styles.leftButton}>
-
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
                   재촬영
@@ -43,8 +45,6 @@ export default class ScanPage extends React.Component {
                   완료
                 </Text>
               </View>
-
-
             </TouchableHighlight>
           </BottomBar>
         </View>
@@ -66,9 +66,9 @@ export default class ScanPage extends React.Component {
       this.props.navigation.dispatch(resetAction);
     }
   }
-
-
 }
+
+
 
 
 const styles = StyleSheet.create({
@@ -86,6 +86,11 @@ const styles = StyleSheet.create({
     marginBottom: 3 * IMAGE_SIDE_MARGIN,
     alignSelf: 'stretch',
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -94,9 +99,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: IMAGE_SIDE_MARGIN,
     marginRight: IMAGE_SIDE_MARGIN,
-
-    backgroundColor: '#892030'
-
   },
   bottomBar: {
     flexDirection: 'row',
@@ -121,6 +123,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 2.5 * IMAGE_SIDE_MARGIN
   }
-
-
 });
+
+EStyleSheet.build()
+const eStyles = EStyleSheet.create({
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  }
+})

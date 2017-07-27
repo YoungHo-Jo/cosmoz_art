@@ -16,8 +16,8 @@ class TimerPage extends Component {
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
           <Text style={styles.missionText}
-            onPress={() => this.props.navigation.navigate('CameraButtonPage')}>
-            내가 생각하는 우주 외계인을 그려봐요
+            onPress={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}>
+            {this.props.navigation.state.params.missionText}
           </Text>
         </View>
         {/*Timer*/}

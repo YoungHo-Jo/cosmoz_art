@@ -19,11 +19,15 @@ const MISSION_ICON_COLOR = '#111111';
 class MainMissionPage extends Component {
   render() {
     const {navigate} = this.props.navigation;
+    const {params} = this.props.navigation.state
+
     return (
       <View style={styles.blockContainer}>
         {/* mission information */}
         <View style={styles.missionInfoBarContainer}>
-          <MissionInformationBar/>
+          <MissionInformationBar
+            benefitText={params.benefitText}
+            time={params.time}/>
         </View>
 
         {/* mission container */}
@@ -33,8 +37,8 @@ class MainMissionPage extends Component {
             {/* mission text */}
             <View style={styles.missionTextContainer}>
               <Text style={styles.missionText}
-                onPress={() => navigate('TimerPage')}>
-                내가 생각하는 {'\n'}우주 외계인을 그려봐요.
+                onPress={() => navigate('TimerPage', {...params})}>
+                {params.missionText}
               </Text>
 
             </View>

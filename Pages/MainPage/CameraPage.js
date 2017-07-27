@@ -29,7 +29,10 @@ export default class CameraPage extends Component {
     this.camera.capture({metadata: options})
         .then((data) => {
           console.log(data);
-          this.props.navigation.navigate('ScanPage');
+          this.props.navigation.navigate('ScanPage', {
+            data: data,
+            ...this.props.navigation.state.params
+          });
         })
         .catch(err => console.error(err));
   }

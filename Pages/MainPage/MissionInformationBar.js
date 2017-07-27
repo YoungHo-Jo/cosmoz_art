@@ -14,6 +14,11 @@ const TEXT_SIZE = 13;
 const BAR_BGCOLOR= '#ffffff';
 
 class MissionInformationBar extends Component {
+  static propTypes = {
+    benefitText: React.PropTypes.string.isRequired,
+    time: React.PropTypes.string.isRequired
+  }
+
   render() {
     return (
       <View style={styles.blockContainer}>
@@ -30,7 +35,7 @@ class MissionInformationBar extends Component {
           {/* benefit text */}
           <View style={styles.benefitTextContinaer}>
             <Text style={styles.infoText}>
-              뇌 스트레칭 해 보실래요?
+              {this.props.benefitText}
             </Text>
           </View>
         </View>
@@ -47,12 +52,16 @@ class MissionInformationBar extends Component {
           </View>
           {/* time */}
           <View style={styles.timeContainer}>
-            <Text style={styles.infoText}>05 : 00</Text>
+            <Text style={styles.infoText}>
+              {this.props.time}
+            </Text>
           </View>
         </View>
       </View>
     );
   }
+
+
 }
 
 const styles = StyleSheet.create({

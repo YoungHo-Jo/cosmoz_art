@@ -11,14 +11,13 @@ export default class CameraButtonPage extends Component {
         <View style={styles.container}>
           <UpperLinearGradient/>
           <View style={styles.blockContainer}>
-
             <View style={styles.cameraIconContainer}>
 
             </View>
 
             <View style={styles.textContainer}>
               <Text style={styles.text}
-                    onPress={() => this.props.navigation.navigate('CameraPage')}>
+                    onPress={() => this.props.navigation.navigate('CameraPage', {...this.props.navigation.state.params})}>
                 카메라 아이콘을 누르면{'\n'}
                 사진찍기로 넘어갑니다.
               </Text>
