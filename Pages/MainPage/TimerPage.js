@@ -4,7 +4,10 @@ import {StyleSheet, View, Text,} from 'react-native';
 import Timer from './Timer';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
-import {Colors} from "../../DefaultStyles";
+import {Colors, Sizes} from "../../DefaultStyles";
+import BottomBar from "../BottomBar";
+import {MKSwitch, MKColor} from "react-native-material-kit";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 class TimerPage extends Component {
 
@@ -13,18 +16,40 @@ class TimerPage extends Component {
     return (
       <View style={styles.container}>
         <UpperLinearGradient/>
-        {/*Mission*/}
-        <View style={styles.missionTextContainer}>
-          <Text style={styles.missionText}
-            onPress={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}>
-            {this.props.navigation.state.params.missionText}
-          </Text>
-        </View>
         {/*Timer*/}
         <View style={styles.timerContainer}>
           <Timer/>
         </View>
-        <LowerLinearGradient/>
+
+        {/*Mission*/}
+        <View style={styles.missionTextContainer}>
+          <Text style={styles.missionText}
+                onPress={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}>
+            {this.props.navigation.state.params.missionText}
+          </Text>
+        </View>
+
+        {/*alarm toggle switch*/}
+        <View style={styles.toggleContainer}>
+          <Icon
+              name='bell'
+              size={28}
+              color={'#777777'}/>
+          <MKSwitch
+              style={styles.appleSwitch}
+              onColor="rgba(255,152,0,.3)"
+              thumbOnColor={MKColor.Orange}
+              rippleColor="rgba(255,152,0,.2)"
+              onPress={() => console.log('orange switch pressed')}
+              onCheckedChange={(e) => console.log('orange switch checked', e)}/>
+          <Icon
+              name='bell-off'
+              size={28}
+              color={'#777777'}/>
+        </View>
+        <LowerLinearGradient
+          marginBottom={Sizes.bottomBarHeight}/>
+        <BottomBar/>
       </View>
     );
   }
@@ -40,20 +65,36 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultPageBgColor
   },
   missionTextContainer: {
+    marginTop: 20,
+
     alignSelf: 'center',
     justifyContent: 'center',
-    backgroundColor: '#884400'
   },
   timerContainer: {
-    backgroundColor: '#884499',
     alignItems: 'center',
     justifyContent: 'center'
   },
   missionText: {
     fontWeight: '300',
-    fontSize: 18,
-    textAlign: 'center'
-  }
+    fontSize: 25,
+    textAlign: 'center',
+    color: '#333333',
+  },
+  toggleContainer: {
+    position: 'absolute',
+    bottom: Sizes.bottomBarHeight + 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  switch: {
+    marginTop: 2,
+    // marginBottom: 5,
+  },
+  appleSwitch: {
+    marginTop: 7,
+    marginBottom: 7,
+  },
 
 });
 

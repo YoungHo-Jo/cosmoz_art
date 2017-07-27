@@ -1,20 +1,28 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text,} from 'react-native';
+import {StyleSheet, View, Text, Image,} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet'
+
 
 class Timer extends Component {
 
   render() {
-    return(
-      <View style={styles.blockContainer}>
-        {/*timerAnimation*/}
-        <View style={styles.timerContainer}>
-        </View>
+    return (
+        <View style={styles.blockContainer}>
+          {/*timerAnimation*/}
+          <View style={styles.timerContainer}>
+            <Image
+                source={require('./timer.png')}
+                resizeMode='contain'
+                style={eStyles.timer}/>
+          </View>
 
-        {/*timeAnimation*/}
-        <View style={styles.timeContainer}>
+          {/*timeAnimation*/}
+          <View style={styles.timeContainer}>
+            <Text style={styles.timeText}>
+              05 : 00
+            </Text>
+          </View>
         </View>
-
-      </View>
     );
   }
 }
@@ -23,22 +31,31 @@ class Timer extends Component {
 const styles = StyleSheet.create({
   blockContainer: {
     alignItems: 'center',
-
-    backgroundColor: '#888449'
+  },
+  timer: {
+    resizeMode: 'contain',
   },
   timerContainer: {
-    height: 100,
-    width: 100,
-
-    backgroundColor: '#999999'
+    height: 130,
+    width: 130,
+    marginBottom: 10,
   },
   timeContainer: {
-    width: 50,
-    height: 20,
-
-    backgroundColor: '#111111'
   },
-
+  timeText: {
+    fontSize: 25,
+    fontWeight: '700',
+    color: '#000000'
+  }
 });
+
+
+EStyleSheet.build()
+const eStyles = EStyleSheet.create({
+  timer: {
+    width: '100%',
+    height: '100%'
+  },
+})
 
 export default Timer;
