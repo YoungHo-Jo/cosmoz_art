@@ -14,6 +14,7 @@ export const Sizes = {
   missionFontSize: 25,
   leadTextSize: 25,
   linearGradientHeight: 20,
+  fontSize: 20,
   fontWeight: '300',
   middleFontWeight: '500'
 };
