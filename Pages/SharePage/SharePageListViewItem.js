@@ -11,6 +11,7 @@ import{
     View,
     Image,
     ListView,
+    TouchableHighlight
 } from 'react-native';
 
 const styles= StyleSheet.create({
@@ -44,6 +45,12 @@ const styles= StyleSheet.create({
         width:50,
         resizeMode:'contain',
         alignSelf:'center'
+    },
+    button_showother:{
+        height:100,
+        width:200,
+        resizeMode:'contain',
+        alignSelf:'center',
     }
 });
 
@@ -66,8 +73,15 @@ class SharePageHoriListViewItem extends Component{
                     source={{uri: this.props.shareImageURL}}/>
                 <View style={styles.info}>
                   <Image style={styles.profile} source={require('./logo.png')}/>
-
                 </View>
+                <TouchableHighlight //onPress={}>
+                    >
+                     <Image
+                         style={styles.button_showother}
+                         source={require('../../icons/share_anotheritem.png')}
+                     />
+                 </TouchableHighlight>
+
 
               </View>
             </View>
