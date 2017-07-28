@@ -40,8 +40,7 @@ class MainScreen extends Component {
           <View style={styles.viewPagerContainer}>
             <MViewPager
                 navigation={this.props.navigation}
-                initialPage={INITIAL_PAGE_NUM}
-                onChangePage={this._onChangeViewPager.bind(this)}/>
+                initialPage={INITIAL_PAGE_NUM}/>
           </View>
         </View>
     );
@@ -52,19 +51,13 @@ class MainScreen extends Component {
     // After having done stuff (suac as async tasks) hide the splash screen
     SplashScreen.hide();
   }
-
-  _onChangeViewPager() {
-
-    console.log('hi')
-
-  }
 }
 
 const App = StackNavigator({
   MainScreen: {
     screen: MainScreen,
     navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle
+      headerStyle: DefaultStyles.headerStyle,
     },
 
   },

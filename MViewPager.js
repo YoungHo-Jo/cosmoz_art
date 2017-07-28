@@ -134,7 +134,6 @@ class MViewPager extends Component {
         this.props.navigation.setParams({
           currentViewPager: 2
         })
-          this.props.onChangePage();
         break;
     }
   }
