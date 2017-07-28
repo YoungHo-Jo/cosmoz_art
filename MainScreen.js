@@ -18,6 +18,8 @@ import Title from "./TitleBar/Title";
 import TimerPage from "./Pages/MainPage/TimerPage";
 import ScanPage from "./Pages/MainPage/ScanPage";
 import DetailSharePage from "./Pages/SharePage/DetailSharePage";
+import LoginPage from './Pages/LoginPage'
+
 
 const INITIAL_PAGE_NUM = 1
 
@@ -120,6 +122,14 @@ const App = StackNavigator({
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (<Title/>)
     }
+  },
+  LoginPage: {
+    screen: LoginPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+
   }
 }, {
   initialRouteParams: {

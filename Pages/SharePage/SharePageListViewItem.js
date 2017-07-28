@@ -7,10 +7,52 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableHighlight
 } from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
+
+
+const styles= StyleSheet.create({
+    container:{
+        flex:1,
+    },
+    shareItem:{
+        flex:1,
+        flexDirection:'column',
+        borderBottomColor:'#FFFFFF',
+        borderBottomWidth:2,
+        paddingTop:50,
+    },
+    shareImage:{
+        flex:4,
+        height:1500,
+        width:300,
+        resizeMode : 'contain',
+        paddingBottom:10,
+        alignSelf:'center',
+    },
+    info:{
+        flex : 1,
+        flexDirection : 'column',
+        alignSelf : 'center',
+        paddingTop:10,
+        height:20
+    },
+    profile:{
+        height:50,
+        width:50,
+        resizeMode:'contain',
+        alignSelf:'center'
+    },
+    button_showother:{
+        height:100,
+        width:200,
+        resizeMode:'contain',
+        alignSelf:'center',
+    }
+});
 
 const CONAINTER_SIDE_MARGIN = 20;
 
@@ -18,95 +60,34 @@ class SharePageListViewItem extends Component {
   propTypes: {
     shareImageURL: React.PropTypes.string.isRequired,
     subject: React.PropTypes.string.isRequired,
+    nickname:React.PropTypes.string.isRequired,
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
+    render(){
+        console.log(this.props.subject);
+        console.log(this.props.shareImageURL);
+        console.log(this.props.nickname);
+        return(
+            <View style={styles.container}>
+              <View style={styles.shareItem}>
+                <Image
+                    style={styles.shareImage}
+                    source={{uri: this.props.shareImageURL}}/>
+                <View style={styles.info}>
+                  <Image style={styles.profile} source={require('../../icons/logo.png')}/>
+                </View>
+                <TouchableHighlight //onPress={}>
+                    >
+                     <Image
+                         style={styles.button_showother}
+                         source={require('../../icons/share_anotheritem.png')}/>
+                 </TouchableHighlight>
 
-        <View style={styles.textBarContainer}>
-          <View style={styles.quotationMarkImageContainer}>
-            <Image
-                style={styles.quotationMarkImage}
-                sourece={require('../../icons/logo.png')}/>
-          </View>
-          <View style={styles.textContainer}>
-            <Text
-                style={styles.subject}
-              onPress={() => this.props.navigation.navigate('DetailSharePage')}>
-              {/*testClick*/}
-              {this.props.subject}
-            </Text>
-          </View>
-          <View style={styles.quotationMarkImageContainer}>
-            <Image
-                style={styles.quotationMarkImage}
-                sourece={require('../../icons/logo.png')}/>
-          </View>
-        </View>
-        <View style={styles.imageContainer}>
 
-          {/*<Image*/}
-            {/*style={styles.shareImage}*/}
-            {/*source={{uri: this.props.shareImageURL}}/>*/}
-            <Image
-              style={styles.shareImage}
-              source={require('../../icons/logo.png')}/>
-        </View>
-      </View>
-    );
-  }
+              </View>
+            </View>
+        );
+    }
 }
-
-var viewWidth = Dimensions.get('window').width;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: Colors.defaultBgColor,
-    marginTop: Sizes.linearGradientHeight,
-  },
-  shareImage: {
-    resizeMode: 'contain',
-    width: viewWidth * 0.8
-  },
-  quotationMarkImage: {
-    resizeMode: 'contain',
-
-  },
-  quotationMarkImageContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textBarContainer: {
-    flex: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    marginBottom: CONAINTER_SIDE_MARGIN,
-  },
-  textContainer: {
-    flex: 6,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageContainer: {
-    flex: 90,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#728392',
-  },
-  subject: {
-    fontSize: 25,
-    alignSelf: 'center',
-    color: Colors.defaultTextColor,
-  }
-});
-
 
 export default SharePageListViewItem;
