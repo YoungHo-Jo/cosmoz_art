@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 
 // const fontSize = ; const titleSize = ; const titlebarSize = ; const topMargin
 // = ; const bottomMargin = ; const leftMargin = ; const rightMargin = ; const
@@ -26,8 +26,8 @@ export const Colors = {
   defaultTextColor: '#333333',
   titleBarColor: '#ffffff',
   defaultPageBgColor: '#ffffff',
-
 };
+
 
 export const Margins = {
   right: 5,
@@ -36,8 +36,11 @@ export const Margins = {
   bottom: 8
 };
 
+var isiOS = false;
 // paddings margins colors
-
+if (Platform.OS === 'ios') {
+  isiOS = true
+}
 const defaultStyles = StyleSheet.create({
   pageContainer: {
     flex: 1,
@@ -50,7 +53,7 @@ const defaultStyles = StyleSheet.create({
     flex: 7,
   },
   headerStyle: {
-    height: Sizes.titleBarHeight,
+    height: Sizes.titleBarHeight + ((isiOS) ? 20 : 0),
     backgroundColor: Colors.titleBarColor
   },
   headerTextStyle: {

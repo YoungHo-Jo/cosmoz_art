@@ -6,7 +6,6 @@ import {Sizes, Colors} from '../DefaultStyles';
 class Title extends Component {
   constructor(props) {
     super(props)
-
     var isiOS = (Platform.OS === 'ios')
     this.state = {
       isIOS: isiOS
@@ -14,25 +13,24 @@ class Title extends Component {
   }
 
   render() {
-    return (
-      <View style={[styles.titleContainer, this.state.isIOS && {marginTop: 15}]}>
-        <Image 
-          style={styles.logo}
-          source={require('../icons/logo_mini.png')}
-        />
-      </View>
+    console.log('title says')
+    console.log(this.props.currentViewPager)
 
+    return (
+      <View style={[styles.titleContainer, false && this.state.isIOS && {marginTop: 15}]}>
+        <Image 
+          style={[styles.logo, (this.props.currentViewPager===2) && {backgroundColor: '#848192'}]}
+          source={require('../icons/logo_mini.png')}/>
+      </View>
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.titleBarColor
+    alignSelf: 'center'
   },
   logo: {
     width: Sizes.logoMinSize,

@@ -11,7 +11,7 @@ import MViewPager from './MViewPager';
 import MainMission from './Pages/MainPage/MainMissionPage';
 import MainPage from './Pages/MainPage';
 import CameraPage from './Pages/MainPage/CameraPage';
-import CameraButotnPage from './Pages/MainPage/CameraButtonPage';
+import CameraButtonPage from './Pages/MainPage/CameraButtonPage';
 import LeadText from './Pages/MainPage/LeadTextPage'
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Title from "./TitleBar/Title";
@@ -19,21 +19,31 @@ import TimerPage from "./Pages/MainPage/TimerPage";
 import ScanPage from "./Pages/MainPage/ScanPage";
 import DetailSharePage from "./Pages/SharePage/DetailSharePage";
 
-class MainScreen extends Component {
-  static navigationOptions = {
-    headerStyle: DefaultStyles.headerStyle,
-    header: (<Title/>),
+const INITIAL_PAGE_NUM = 1
 
-  };
+class MainScreen extends Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (
+          <Title currentViewPager={navigation.state.params.currentViewPager}/>
+      )
+    }
+  }
+  static params = {
+    currentViewPager: INITIAL_PAGE_NUM
+  }
 
   render() {
     return (
-      <View style={styles.blockContainer}>
-        <View style={styles.viewPagerContainer}>
-          <MViewPager
-            navigation={this.props.navigation}/>
+        <View style={styles.blockContainer}>
+          <View style={styles.viewPagerContainer}>
+            <MViewPager
+                navigation={this.props.navigation}
+                initialPage={INITIAL_PAGE_NUM}
+                onChangePage={this._onChangeViewPager.bind(this)}/>
+          </View>
         </View>
-      </View>
     );
   }
 
@@ -42,6 +52,12 @@ class MainScreen extends Component {
     // After having done stuff (suac as async tasks) hide the splash screen
     SplashScreen.hide();
   }
+
+  _onChangeViewPager() {
+
+    console.log('hi')
+
+  }
 }
 
 const App = StackNavigator({
@@ -49,7 +65,8 @@ const App = StackNavigator({
     screen: MainScreen,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle
-    }
+    },
+
   },
   LeadText: {
     screen: LeadText,
@@ -61,8 +78,7 @@ const App = StackNavigator({
     screen: MainMission,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      title: 'MainMissionPage',
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   },
   ViewPager: {
@@ -75,15 +91,14 @@ const App = StackNavigator({
     screen: MainPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   },
   TimerPage: {
     screen: TimerPage,
     navigationOptions: {
-      title: 'TimerPage',
       headerStyle: DefaultStyles.headerStyle,
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   },
   CameraPage: {
@@ -93,34 +108,31 @@ const App = StackNavigator({
     }
   },
   CameraButtonPage: {
-    screen: CameraButotnPage,
+    screen: CameraButtonPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   },
   ScanPage: {
     screen: ScanPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   },
   DetailSharePage: {
     screen: DetailSharePage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      header: (<Title/>)
+      headerTitle: (<Title/>)
     }
   }
+}, {
+  initialRouteParams: {
+    currentViewPager: INITIAL_PAGE_NUM
+  }
 });
-
-/**
- * MainScreen에 customize된 ViewPager를 끼워넣는다.
- * 콜백 함수를 가지고 있으며 MainScreen에서 콜백 함수를 등록한다.
- * 등록된 콜백 함수는 page가 변경될때마다 titleBar의 내용을 바꾸는 일을 담당한다.
- *
- */
 
 const styles = StyleSheet.create({
   blockContainer: {

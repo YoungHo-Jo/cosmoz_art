@@ -32,8 +32,8 @@ function notifyMessage(msg) {
 }
 
 var deviceWidth = Dimensions
-  .get('window')
-  .width;
+    .get('window')
+    .width;
 var PAGES = ['myPage', 'mainPage', 'sharePage'];
 
 class MViewPager extends Component {
@@ -45,101 +45,96 @@ class MViewPager extends Component {
     });
     this.state = {
       dataSource: ds.cloneWithPages(PAGES),
-      header: (<Title/>)
     };
   }
 
-
-  static navigationOptions = {
-
-  };
-
-
   render() {
     return (
-      <ViewPager
-        style={styles.page}
-        dataSource={this.state.dataSource}
-        renderPage={this._renderPage.bind(this)}
-        onChangePage={this._onChangePage.bind(this)}
-        isLoop={false}
-        autoPlay={false}
-        initialPage={1}
-        navigation={this.props.navigation}>
-      </ViewPager>
+        <ViewPager
+            style={styles.page}
+            dataSource={this.state.dataSource}
+            renderPage={this._renderPage.bind(this)}
+            onChangePage={this._onChangePage.bind(this)}
+            isLoop={false}
+            autoPlay={false}
+            initialPage={this.props.initialPage}
+            navigation={this.props.navigation}>
+        </ViewPager>
 
     );
   }
 
   _renderPage = function (data, pageID) {
     var page = (
-      <View style={styles.pageContainer}>
-        <View style={styles.page}>
-          <Text style={styles.text}>{data}</Text>
-          <Text style={styles.text}>{pageID}</Text>
+        <View style={styles.pageContainer}>
+          <View style={styles.page}>
+            <Text style={styles.text}>{data}</Text>
+            <Text style={styles.text}>{pageID}</Text>
+          </View>
         </View>
-      </View>
     );
 
     switch (pageID) {
       case '0':
         // my page
         page = (
-          <View style={styles.pageContainer}>
-            <View style={styles.pageTopContainer}>
-              <MyPage
-                navigation={this.props.navigation}/>
+            <View style={styles.pageContainer}>
+              <View style={styles.pageTopContainer}>
+                <MyPage
+                    navigation={this.props.navigation}/>
+              </View>
+              <View style={styles.pageBottomContainer}>
+
+              </View>
             </View>
-
-
-            <View style={styles.pageBottomContainer}>
-
-            </View>
-          </View>
         );
         break;
-
       case '1':
         // main page
         page = (
-          <View style={styles.pageContainer}>
-            <View style={styles.pageTopContainer}>
-              <MainPage
-                navigation={this.props.navigation}/>
+            <View style={styles.pageContainer}>
+              <View style={styles.pageTopContainer}>
+                <MainPage
+                    navigation={this.props.navigation}/>
+              </View>
+              <BottomBar/>
             </View>
-            <BottomBar/>
-          </View>
         );
         break;
       case '2':
         // share page
         page = (
-          <View style={styles.pageContainer}>
-            <View style={styles.pageTopContainer}>
-              <SharePage
-                navigation={this.props.navigation}/>
+            <View style={styles.pageContainer}>
+              <View style={styles.pageTopContainer}>
+                <SharePage
+                    navigation={this.props.navigation}/>
+              </View>
+              <BottomBar/>
             </View>
-            <BottomBar/>
-          </View>
         );
         break;
       default:
     }
-
     return page;
   };
 
-  _onChangePage = function (page) {
+  _onChangePage(page) {
     switch (page) {
-      case '0':
-          this.setState({
-            header: (<Text>나의 방</Text>)
-          });
+      case 0:
+        this.props.navigation.setParams({
+          currentViewPager: 0
+        })
         break;
-      case '1':
-
+      case 1:
+        this.props.navigation.setParams({
+          currentViewPager: 1
+        })
         break;
-      case '2':
+      case 2:
+        this.props.navigation.setParams({
+          currentViewPager: 2
+        })
+          this.props.onChangePage();
         break;
     }
   }
@@ -168,7 +163,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: 'center'
-  }
+  },
 });
 
 export default MViewPager;
