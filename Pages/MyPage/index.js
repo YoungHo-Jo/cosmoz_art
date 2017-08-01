@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     color: Colors.defaultTextColor,
     fontWeight: Sizes.fontWeight,
     alignSelf: 'center',
-    textDecorationLine: 'underline'
+    // textDecorationLine: 'underline'
   },
   iconContainer: {
     flex: 1,

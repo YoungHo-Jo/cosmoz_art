@@ -64,9 +64,7 @@ class SharePageListViewItem extends Component {
   };
 
     render(){
-        console.log(this.props.subject);
-        console.log(this.props.shareImageURL);
-        console.log(this.props.nickname);
+
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>

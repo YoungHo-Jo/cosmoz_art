@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
 });
 
-class Settingspage extends Component {
+class SettingsPage extends Component {
     constructor() {
         super();
         this.onValueChange = this.onValueChange.bind(this);
@@ -40,7 +40,7 @@ class Settingspage extends Component {
     render() {
         return (
             <View style={{backgroundColor: '#f1f1f1', flex: 1}}>
-                <View style={{flex: 1,marginTop:50}}>
+                <View style={{flex: 1}}>
                     <SettingsList borderColor={'#eaeaea'}>
                         <SettingsList.Header headerText='계정'
                                              headerStyle={styles.header}/>
@@ -94,6 +94,4 @@ class Settingspage extends Component {
         this.setState({switchValue: value});
     }
 }
-export default Settingspage;
-
-AppRegistry.registerComponent('Settingspage', () => Settingspage);
+export default SettingsPage;

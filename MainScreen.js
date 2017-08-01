@@ -20,6 +20,11 @@ import ScanPage from "./Pages/MainPage/ScanPage";
 import DetailSharePage from "./Pages/SharePage/DetailSharePage";
 import LoginPage from './Pages/LoginPage'
 
+import Icon from 'react-native-vector-icons/Ionicons'
+import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
+import SettingsPage from './Pages/SettingsPage'
+import Timer from "./Pages/MainPage/Timer";
+import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
 
 const INITIAL_PAGE_NUM = 1
 
@@ -29,12 +34,33 @@ class MainScreen extends Component {
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (
           <Title currentViewPager={navigation.state.params.currentViewPager}/>
+      ),
+      headerRight: (
+          <View style={styles.headerRight}>
+            {
+              navigation.state.params.currentViewPager === 0 &&
+              <Icon.Button
+                  name='md-settings'
+                  size={24}
+                  color={Colors.defaultTextColor}
+                  backgroundColor={Colors.titleBarColor}
+                  onPress={() => navigation.navigate('SettingsPage', {...navigation.state.params})}/>
+            }
+            {
+              navigation.state.params.currentViewPager === 2 &&
+              <SimpleLineIcon.Button
+                  name='options-vertical'
+                  size={24}
+                  color={Colors.defaultTextColor}
+                  backgroundColor={Colors.titleBarColor}
+                  onPress={() => navigation.navigate('MissionListPage', {...navigation.state.params})}/>
+
+            }
+          </View>
       )
     }
   }
-  static params = {
-    currentViewPager: INITIAL_PAGE_NUM
-  }
+
 
   render() {
     return (
@@ -129,7 +155,20 @@ const App = StackNavigator({
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (<Title/>)
     }
-
+  },
+  SettingsPage: {
+    screen: SettingsPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
+  MissionListPage: {
+    screen: Sharepage_mission,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
   }
 }, {
   initialRouteParams: {
@@ -150,7 +189,15 @@ const styles = StyleSheet.create({
   viewPagerContainer: {
     flex: 1,
     backgroundColor: Colors.defaultBgColor
+  },
+  headerRight: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 0,
+    flexDirection: 'row',
   }
+
+
 });
 
 

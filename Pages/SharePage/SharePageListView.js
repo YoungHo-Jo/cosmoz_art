@@ -34,6 +34,7 @@ class SharePageListView extends Component {
     }
   }
 
+
   componentDidMount() {
     this._refreshData();
   }

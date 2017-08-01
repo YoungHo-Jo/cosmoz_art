@@ -54,7 +54,8 @@ const defaultStyles = StyleSheet.create({
   },
   headerStyle: {
     height: Sizes.titleBarHeight + ((isiOS) ? 20 : 0),
-    backgroundColor: Colors.titleBarColor
+    backgroundColor: Colors.titleBarColor,
+    justifyContent: 'center'
   },
   headerTextStyle: {
 

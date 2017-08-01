@@ -35,7 +35,6 @@ export default class ScanPage extends React.Component {
                   재촬영
                 </Text>
               </View>
-
             </TouchableHighlight>
             <TouchableHighlight
                 onPress={this.done().bind(this)}
@@ -59,7 +58,7 @@ export default class ScanPage extends React.Component {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({routeName: 'MainScreen', params: this.props.navigation.state.params.currentViewPager})
+        NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params.currentViewPager}})
       ]
     });
     return () => {
