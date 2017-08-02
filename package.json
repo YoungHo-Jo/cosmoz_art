@@ -16,6 +16,8 @@
 		"react-native-linear-gradient": "^2.1.0",
 		"react-native-masonry": "^0.2.1",
 		"react-native-material-kit": "^0.4.1",
+		"react-native-popup-dialog": "^0.9.32",
+		"react-native-popup-menu": "^0.8.0",
 		"react-native-router-flux": "^4.0.0-beta.12",
 		"react-native-settings-list": "^1.6.1",
 		"react-native-splash-screen": "^2.1.0",

@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
-import { Actions } from 'react-native-router-flux';
 
 
 const styles = StyleSheet.create({
@@ -49,6 +48,7 @@ class SettingsPage extends Component {
                             titleInfo='nickname'
                             itemWidth={40}
                             titleStyle={styles.item}
+                            onPress={() => this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})}
                         />
                         <SettingsList.Item
                             title='연결된 계정'

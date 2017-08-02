@@ -110,7 +110,7 @@ export default class MyPage extends Component {
 
           <View style={[styles.filteringButtonContainer]}>
             <TouchableHighlight style={styles.iconContainer}
-                                onPress={() => this.props.navigation.navigate('LoginPage')}>
+                                onPress={() => console.log('pencil clicked')}>
               <Icon
                   name='pencil'
                   size={ICON_SIZE}
