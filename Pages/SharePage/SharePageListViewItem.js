@@ -71,8 +71,7 @@ class SharePageListViewItem extends Component {
                 <Image
                     style={styles.shareImage}
                     source={{uri: this.props.shareImageURL}}/>
-                <TouchableHighlight //onPress={}>
-                    >
+                <TouchableHighlight onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}>
                      <Image
                          style={styles.button_showother}
                          source={require('../../icons/share_anotheritem.png')}/>

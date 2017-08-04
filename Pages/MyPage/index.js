@@ -94,6 +94,7 @@ export default class MyPage extends Component {
     };
   }
 
+
   render() {
     return (
         <View style={styles.container}>
