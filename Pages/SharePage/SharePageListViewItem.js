@@ -26,8 +26,8 @@ const styles= StyleSheet.create({
         paddingTop:50,
     },
     shareImage:{
-        flex:4,
-        height:1500,
+        flex:1,
+        height:500,
         width:300,
         resizeMode : 'contain',
         paddingBottom:10,
@@ -71,17 +71,12 @@ class SharePageListViewItem extends Component {
                 <Image
                     style={styles.shareImage}
                     source={{uri: this.props.shareImageURL}}/>
-                <View style={styles.info}>
-                  <Image style={styles.profile} source={require('../../icons/logo.png')}/>
-                </View>
                 <TouchableHighlight //onPress={}>
                     >
                      <Image
                          style={styles.button_showother}
                          source={require('../../icons/share_anotheritem.png')}/>
                  </TouchableHighlight>
-
-
               </View>
             </View>
         );
