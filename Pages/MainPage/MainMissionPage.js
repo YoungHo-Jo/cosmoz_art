@@ -26,8 +26,8 @@ class MainMissionPage extends Component {
         {/* mission information */}
         <View style={styles.missionInfoBarContainer}>
           <MissionInformationBar
-            benefitText={params.benefitText}
-            time={params.time}/>
+            benefitText={params.mission.benefitText}
+            time={params.mission.time}/>
         </View>
 
         {/* mission container */}
@@ -38,7 +38,7 @@ class MainMissionPage extends Component {
             <View style={styles.missionTextContainer}>
               <Text style={styles.missionText}
                 onPress={() => navigate('TimerPage', {...params})}>
-                {params.missionText}
+                {params.mission.missionText}
               </Text>
 
             </View>

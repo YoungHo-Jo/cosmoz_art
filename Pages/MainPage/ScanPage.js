@@ -58,7 +58,7 @@ export default class ScanPage extends React.Component {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [
-        NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params.currentViewPager}})
+        NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
       ]
     });
     return () => {

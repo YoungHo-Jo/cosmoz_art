@@ -48,6 +48,29 @@ class MViewPager extends Component {
     };
   }
 
+  componentDidMount() {
+    fetch('http://52.78.33.177:10424/missions/mission/random')
+        .then((response) => response.json())
+        .then((responseJson) => {
+          this.props.navigation.setParams({
+            mission: {
+              missionText: responseJson[0].mission_text,
+              leadText: responseJson[0].lead_text,
+              benefitText: responseJson[0].benefit_text,
+              type: responseJson[0].type,
+              time: responseJson[0].time,
+            }
+          })
+
+
+
+          return responseJson;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+
   render() {
     return (
         <ViewPager

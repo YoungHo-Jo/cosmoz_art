@@ -21,15 +21,6 @@ class LeadTextPage extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      missionData: {
-        leadText: '오늘 하루 어떻게 지냈나요?',
-        missionText: '내가 생각하는 \n우주 외계인을 그려봐요.',
-        benefitText: '뇌 스트레칭 해 보실래요?',
-        time: '5:00',
-      }
-    }
   }
   render() {
     const {navigate} = this.props.navigation;
@@ -39,8 +30,8 @@ class LeadTextPage extends Component {
           <View style={styles.blockContainer}>
             <Text
               style={styles.text}
-              onPress={() => navigate('Mission', {...this.state.missionData})}>
-              {this.state.missionData.leadText}
+              onPress={() => navigate('Mission', {...this.props.navigation.state.params})}>
+              {this.props.navigation.state.params.mission.leadText}
             </Text>
             <View style={styles.lineView}>
             </View>

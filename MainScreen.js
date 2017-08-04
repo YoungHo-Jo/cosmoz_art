@@ -172,7 +172,14 @@ const App = StackNavigator({
   }
 }, {
   initialRouteParams: {
-    currentViewPager: INITIAL_PAGE_NUM
+    currentViewPager: INITIAL_PAGE_NUM,
+    mission: {
+      leadText: 'leadText loading...',
+      time: 'time loading...',
+      missionText: 'missionText loading...',
+      benefitText: 'benefitText loading...',
+      type: 'type loading...'
+    }
   }
 });
 
