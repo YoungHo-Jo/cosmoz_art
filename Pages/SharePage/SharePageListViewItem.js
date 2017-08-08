@@ -58,19 +58,21 @@ const CONAINTER_SIDE_MARGIN = 20;
 
 class SharePageListViewItem extends Component {
   propTypes: {
-    shareImageURL: React.PropTypes.string.isRequired,
-    subject: React.PropTypes.string.isRequired,
-    nickname:React.PropTypes.string.isRequired,
+    imageURL: React.PropTypes.string.isRequired,
+    keyword: React.PropTypes.string.isRequired,
+    missionPK:React.PropTypes.string.isRequired,
   };
 
     render(){
+
+      console.log(this.props)
 
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>
                 <Image
                     style={styles.shareImage}
-                    source={{uri: this.props.shareImageURL}}/>
+                    source={{uri: this.props.imageURL}}/>
                 <TouchableHighlight onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}>
                      <Image
                          style={styles.button_showother}

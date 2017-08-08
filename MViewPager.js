@@ -59,11 +59,9 @@ class MViewPager extends Component {
               benefitText: responseJson[0].benefit_text,
               type: responseJson[0].type,
               time: responseJson[0].time,
+              missionPK: responseJson[0].pk
             }
           })
-
-
-
           return responseJson;
         })
         .catch((error) => {

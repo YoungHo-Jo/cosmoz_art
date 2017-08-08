@@ -9,12 +9,15 @@ import {
   Text,
   ScrollView,
   View, TouchableHighlight,
+  Dimensions
 } from 'react-native';
 import Masonry from 'react-native-masonry';
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
+import ModalDropdown from "react-native-modal-dropdown/components/ModalDropdown";
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 // list of images
 const data = [
@@ -90,10 +93,46 @@ export default class MyPage extends Component {
       columns: 2,
       paddingLeft: 20,
       paddingRight: 20,
-      paddingTop: 0
+      paddingTop: 0,
+
+      isFirstBtnSelected: false,
+      isSecondBtnSelected: false,
+      isThirdBtnSelected: false,
+      isModalDropDownShowing: false,
+      touchableHighlightWidth: Dimensions.get('window').width / 3,
     };
   }
 
+  componentDidMount() {
+
+  }
+
+  findTouchableHighlightDimensions(layout) {
+    const {x, y, width, height} = layout
+    console.log(x + ' ' + y + ' ' + width + ' ' + height)
+
+    this.setState({
+      touchableHighlightWidth: width
+    })
+  }
+
+  _renderModalDropDownRow(rowData) {
+    console.log('touchableHighlight width: ' + this.state.touchableHighlightWidth)
+    return (
+        <View style={[eStyles.modalDropDown, {width: this.state.touchableHighlightWidth}]}>
+          <Text style={styles.dropDownText}>
+            {rowData}
+          </Text>
+        </View>
+    )
+  }
+
+  _renderModalDropDownSeperator() {
+    return (
+        <View>
+        </View>
+    )
+  }
 
   render() {
     return (
@@ -110,26 +149,68 @@ export default class MyPage extends Component {
           </View>
 
           <View style={[styles.filteringButtonContainer]}>
-            <TouchableHighlight style={styles.iconContainer}
-                                onPress={() => console.log('pencil clicked')}>
+            <TouchableHighlight style={[styles.iconContainer, this.state.isFirstBtnSelected && styles.selectedButton]}
+                                onPress={this._onFirBtnClick}
+                                underlayColor={Colors.titleBarColor}>
               <Icon
                   name='pencil'
                   size={ICON_SIZE}
                   color={Colors.defaultTextColor}/>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.iconContainer}
-                                onPress={() => console.log('pencil clicked')}>
-              <Icon
-                  name='pencil'
-                  size={ICON_SIZE}
-                  color={Colors.defaultTextColor}/>
+            <TouchableHighlight style={[styles.iconContainer, this.state.isSecondBtnSelected && styles.selectedButton]}
+                                onPress={() => {
+                                  this.refs.secondModalDropDown.show()
+                                  this._onSecBtnClick()
+                                }}
+                                underlayColor={Colors.titleBarColor}
+                                ref='parentTouchableHighlight'
+              onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
+              <View style={eStyles.modalDropDownContainer}>
+                <ModalDropdown options={['내가 좋아한 작품', '남이 좋아한 작품']}
+                               dropdownStyle={styles.dropDown}
+                               dropdownTextStyle={styles.dropDownText}
+                               renderSeparator={() => this._renderModalDropDownRow}
+                               ref='secondModalDropDown'
+                               style={eStyles.modalDropDownContainer}
+                               disabled={true}
+                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
+                  <View style={eStyles.modalDropDownIcon}>
+                    <Icon
+                        name='pencil'
+                        size={ICON_SIZE}
+                        color={Colors.defaultTextColor}/>
+                  </View>
+
+                </ModalDropdown>
+              </View>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.iconContainer}
-                                onPress={() => console.log('pencil clicked')}>
-              <Icon
-                  name='pencil'
-                  size={ICON_SIZE}
-                  color={Colors.defaultTextColor}/>
+
+            <TouchableHighlight style={[styles.iconContainer, this.state.isThirdBtnSelected && styles.selectedButton]}
+                                onPress={() => {
+                                  this.refs.thirdModalDropDown.show()
+                                  this._onThrBtnClick()
+                                }}
+                                underlayColor={Colors.titleBarColor}
+                                ref='parentTouchableHighlight'
+                                onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
+              <View style={eStyles.modalDropDownContainer}>
+                <ModalDropdown options={['시간별', '행위별']}
+                               dropdownStyle={styles.dropDown}
+                               dropdownTextStyle={styles.dropDownText}
+                               renderSeparator={() => this._renderModalDropDownRow}
+                               ref='thirdModalDropDown'
+                               // style={eStyles.modalDropDownContainer}
+                               disabled={true}
+                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
+                  <View style={eStyles.modalDropDownIcon}>
+                    <Icon
+                        name='pencil'
+                        size={ICON_SIZE}
+                        color={Colors.defaultTextColor}/>
+                  </View>
+
+                </ModalDropdown>
+              </View>
             </TouchableHighlight>
           </View>
 
@@ -151,13 +232,56 @@ export default class MyPage extends Component {
             </ScrollView>
             <LowerLinearGradient/>
           </View>
-
         </View>
-
     );
   }
+
+
+
+  _onFirBtnClick = () => {
+    this.setState({
+      isFirstBtnSelected: true,
+      isSecondBtnSelected: false,
+      isThirdBtnSelected: false,
+    })
+  }
+
+  _onSecBtnClick = () => {
+    this.setState({
+      isFirstBtnSelected: false,
+      isSecondBtnSelected: true,
+      isThirdBtnSelected: false,
+    })
+  }
+
+  _onThrBtnClick = () => {
+    this.setState({
+      isFirstBtnSelected: false,
+      isSecondBtnSelected: false,
+      isThirdBtnSelected: true
+    })
+  }
+
 }
 
+EStyleSheet.build()
+const eStyles = EStyleSheet.create({
+  modalDropDownContainer: {
+    width: '100%',
+    height: '100%',
+  },
+  modalDropDownIcon: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalDropDown: {
+    height: Sizes.titleBarHeight,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+})
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -185,6 +309,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -226,6 +351,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
+  },
+  selectedButton: {
+    backgroundColor: Colors.titleBarColor
+  },
+  modalDropDownContainer: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#849201'
+  },
+  dropDown: {
+    height: Sizes.titleBarHeight * 2 + 4,
+    borderColor: '#ffffff'
+  },
+  dropDownText: {
+    fontSize: Sizes.fontSize - 5,
+    color: Colors.defaultTextColor
   }
 
 

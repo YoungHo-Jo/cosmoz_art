@@ -8,10 +8,7 @@ import {
 import SharePageListViewItem from './SharePageListViewItem';
 import {Sizes} from "../../DefaultStyles";
 
-const API_KEY = '73b19491b83909c7e07016f4bb4644f9:2:60667290';
-const QUERY_TYPE = 'hardcover-fiction';
-const API_STEM = 'http://api.nytimes.com/svc/books/v3/lists';
-const ENDPOINT = `${API_STEM}/${QUERY_TYPE}?response-format=json&api-key=${API_KEY}`;
+const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 
 class SharePageListView extends Component {
   constructor(props) {
@@ -20,17 +17,7 @@ class SharePageListView extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          title: 'hi'
-        },
-        {
-          title: 'hi1'
-        },
-        {
-          title: 'hi2'
-        }
-      ]),
+      dataSource: ds.cloneWithRows([]),
     }
   }
 
@@ -42,18 +29,19 @@ class SharePageListView extends Component {
   _renderRow(rowData) {
     return (
       <SharePageListViewItem
-        shareImageURL={rowData.book_image}
-        subject={rowData.title}
+        imageURL={rowData.image_url}
+        keyword={rowData.keyword}
+        missionPK={rowData.mission_pk}
         navigation={this.props.navigation}/>
     )
   }
 
   _refreshData() {
-    fetch(ENDPOINT)
+    fetch(ENDPOINT + '/mission/1')
       .then((response) => response.json())
-      .then((rjson) => {
+      .then((responseJSON) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(rjson.results.books),
+          dataSource: this.state.dataSource.cloneWithRows(responseJSON),
         })
       });
   }

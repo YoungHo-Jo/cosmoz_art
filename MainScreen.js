@@ -26,7 +26,7 @@ import SettingsPage from './Pages/SettingsPage'
 import Timer from "./Pages/MainPage/Timer";
 import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
 
-const INITIAL_PAGE_NUM = 1
+const INITIAL_PAGE_NUM = 0
 
 class MainScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -178,8 +178,10 @@ const App = StackNavigator({
       time: 'time loading...',
       missionText: 'missionText loading...',
       benefitText: 'benefitText loading...',
-      type: 'type loading...'
-    }
+      type: 'type loading...',
+      missionPK: null
+    },
+    userInfo: null,
   }
 });
 

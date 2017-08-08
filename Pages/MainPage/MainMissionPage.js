@@ -26,7 +26,7 @@ class MainMissionPage extends Component {
         {/* mission information */}
         <View style={styles.missionInfoBarContainer}>
           <MissionInformationBar
-            benefitText={params.mission.benefitText}
+            benefitText={params.mission.benefitText || '뇌 상상력 키우기'}
             time={params.mission.time}/>
         </View>
 

@@ -16,7 +16,9 @@ import Button from 'apsl-react-native-button';
 
 class Login extends Component {
   state = {
-    switchValue: false
+    switchValue: false,
+    id: null,
+    pw: null
   }
   toggleSwitch1 = (value) => this.setState({switchValue1: value})
   toggleSwitch2 = (value) => this.setState({switchValue2: value})
@@ -31,14 +33,16 @@ class Login extends Component {
                 style={styles.text_input}
                 placeholder="아이디를 입력하세요"
                 underlineColorAndroid={'#3a3a3a'}
-                onChangeText={(text) => this.setState({text})}/>
+                onChangeText={(text) => this.setState({id: text})}/>
             <Text style={styles.text}>비밀번호</Text>
             <TextInput
                 style={styles.text_input}
                 placeholder="비밀번호를 입력하세요"
                 underlineColorAndroid={'#3a3a3a'}
-                onChangeText={(text) => this.setState({text})}/>
-            <Button style={styles.button_login} textStyle={{fontSize: 18}}>
+                onChangeText={(text) => this.setState({pw: text})}/>
+            <Button style={styles.button_login}
+                    textStyle={{fontSize: 18}}
+                    onPress={this._login.bind(this)}>
               로그인
             </Button>
             <View style={styles.info_setting}>
@@ -55,6 +59,47 @@ class Login extends Component {
           </View>
         </View>
     )
+  }
+
+
+  _login() {
+    console.log(this.state.id)
+    console.log(this.state.pw)
+    if (this.state.id && this.state.pw) {
+      fetch('http://52.78.33.177:10424/users/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: this.state.id,
+          pw: this.state.pw
+        })
+      })
+          .then(response => {
+            if (response.status === 201) {
+              console.log('login succeed');
+
+              const responseJSON = response.json()
+                  .then(() => {
+                    return this.props.navigation.setParams({
+                      userInfo: {
+                        user_id: responseJSON.user_pk,
+                        token: responseJSON.id_token
+                      }
+                    })
+                  })
+                  .then(() => {
+                    this.props.navigation.goBack()
+                  })
+            } else {
+              console.log('login failed');
+            }
+          })
+          .catch((err) => console.log(err))
+
+    }
+
   }
 }
 
