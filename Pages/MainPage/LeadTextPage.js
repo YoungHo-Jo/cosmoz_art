@@ -40,6 +40,10 @@ class LeadTextPage extends Component {
         </View>
     );
   }
+
+  componentDidMount() {
+    this.props.navigation.navigate('TimerPage', {...this.props.navigation.state.params})
+  }
 }
 
 

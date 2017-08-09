@@ -18,7 +18,8 @@ class TimerPage extends Component {
         <UpperLinearGradient/>
         {/*Timer*/}
         <View style={styles.timerContainer}>
-          <Timer/>
+          <Timer
+            onTimerFinished={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}/>
         </View>
 
         {/*Mission*/}
@@ -65,12 +66,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultPageBgColor
   },
   missionTextContainer: {
-    marginTop: 20,
+    marginTop: 60,
 
     alignSelf: 'center',
     justifyContent: 'center',
   },
   timerContainer: {
+    position: 'absolute',
+    top: 100,
     alignItems: 'center',
     justifyContent: 'center'
   },

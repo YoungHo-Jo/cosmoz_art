@@ -23,10 +23,9 @@ import LoginPage from './Pages/LoginPage'
 import Icon from 'react-native-vector-icons/Ionicons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import SettingsPage from './Pages/SettingsPage'
-import Timer from "./Pages/MainPage/Timer";
 import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
 
-const INITIAL_PAGE_NUM = 0
+const INITIAL_PAGE_NUM = 1
 
 class MainScreen extends Component {
   static navigationOptions = ({navigation}) => {

@@ -109,7 +109,6 @@ export default class MyPage extends Component {
 
   findTouchableHighlightDimensions(layout) {
     const {x, y, width, height} = layout
-    console.log(x + ' ' + y + ' ' + width + ' ' + height)
 
     this.setState({
       touchableHighlightWidth: width
@@ -117,7 +116,6 @@ export default class MyPage extends Component {
   }
 
   _renderModalDropDownRow(rowData) {
-    console.log('touchableHighlight width: ' + this.state.touchableHighlightWidth)
     return (
         <View style={[eStyles.modalDropDown, {width: this.state.touchableHighlightWidth}]}>
           <Text style={styles.dropDownText}>
@@ -127,7 +125,7 @@ export default class MyPage extends Component {
     )
   }
 
-  _renderModalDropDownSeperator() {
+  _renderModalDropDownSeparator() {
     return (
         <View>
         </View>
@@ -169,7 +167,7 @@ export default class MyPage extends Component {
                 <ModalDropdown options={['내가 좋아한 작품', '남이 좋아한 작품']}
                                dropdownStyle={styles.dropDown}
                                dropdownTextStyle={styles.dropDownText}
-                               renderSeparator={() => this._renderModalDropDownRow}
+                               renderSeparator={() => this._renderModalDropDownSeparator()}
                                ref='secondModalDropDown'
                                style={eStyles.modalDropDownContainer}
                                disabled={true}
@@ -197,9 +195,8 @@ export default class MyPage extends Component {
                 <ModalDropdown options={['시간별', '행위별']}
                                dropdownStyle={styles.dropDown}
                                dropdownTextStyle={styles.dropDownText}
-                               renderSeparator={() => this._renderModalDropDownRow}
+                               renderSeparator={() => this._renderModalDropDownSeparator()}
                                ref='thirdModalDropDown'
-                               // style={eStyles.modalDropDownContainer}
                                disabled={true}
                                renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
                   <View style={eStyles.modalDropDownIcon}>

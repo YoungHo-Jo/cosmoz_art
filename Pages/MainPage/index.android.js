@@ -12,14 +12,10 @@ import {Colors, Sizes} from '../../DefaultStyles';
 class MainPage extends Component {
 
   render() {
-
     return (
       <View style={styles.blockContainer}>
-        {/*<MainMission/>*/}
         <LeadTextPage
           navigation={this.props.navigation}/>
-        {/*<TimerView/>*/}
-        {/*<CameraPage/>*/}
       </View>
     );
   }
