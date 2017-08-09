@@ -1,7 +1,7 @@
 
 
 
-export const basicURL = 'http://52.78.33.177'
+export const basicURL = 'http://52.78.33.177:10424'
 
 
 export default APIConfig = {

@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
+import {connect} from "react-redux";
+import {fetchLogin} from "../../actions/userActions";
 
 class Login extends Component {
   state = {
@@ -42,7 +44,10 @@ class Login extends Component {
                 onChangeText={(text) => this.setState({pw: text})}/>
             <Button style={styles.button_login}
                     textStyle={{fontSize: 18}}
-                    onPress={this._login.bind(this)}>
+                    onPress={() => this.props.fetchLogin({
+                      id: this.state.id,
+                      pw: this.state.pw
+                    })}>
               로그인
             </Button>
             <View style={styles.info_setting}>
@@ -172,4 +177,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+
+function mapStateToProps(state) {
+  return {
+    userData: state.userData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
