@@ -8,6 +8,8 @@ import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
 import MissionInformationBar from "./MissionInformationBar";
 import BottomBar from "../BottomBar";
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "./PopupMsgBox";
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
@@ -22,43 +24,61 @@ class MainMissionPage extends Component {
     const {params} = this.props.navigation.state
 
     return (
-      <View style={styles.blockContainer}>
-        {/* mission information */}
-        <View style={styles.missionInfoBarContainer}>
-          <MissionInformationBar
-            benefitText={params.mission.benefitText || '뇌 상상력 키우기'}
-            time={params.mission.time}/>
-        </View>
-
-        {/* mission container */}
-        <View style={styles.missionContainer}>
-          <UpperLinearGradient/>
-          <View style={styles.missionBlockContainer}>
-            {/* mission text */}
-            <View style={styles.missionTextContainer}>
-              <Text style={styles.missionText}
-                onPress={() => navigate('TimerPage', {...params})}>
-                {params.mission.missionText}
-              </Text>
-
-            </View>
-            {/* mission image */}
-            <View style={styles.missionIconContainer}>
-              <Icon.Button
-                name='md-create'
-                size={MISSION_ICON_SIZE}
-                color={MISSION_ICON_COLOR}
-                backgroundColor={Colors.defaultPageBgColor}
-                onPress={() => navigate('TimerPage', {...params})}/>
-            </View>
-
+        <View style={styles.blockContainer}>
+          {/* mission information */}
+          <View style={styles.missionInfoBarContainer}>
+            <MissionInformationBar
+                benefitText={params.mission.benefitText || '뇌 상상력 키우기'}
+                time={params.mission.time}/>
           </View>
-          <LowerLinearGradient/>
-        </View>
-        <BottomBar/>
 
-      </View>
+          {/* mission container */}
+          <View style={styles.missionContainer}>
+            <UpperLinearGradient/>
+            <View style={styles.missionBlockContainer}>
+              {/* mission text */}
+              <View style={styles.missionTextContainer}>
+                <Text style={styles.missionText}
+                      onPress={this._onMissionPress.bind(this)}>
+                  {params.mission.missionText}
+                </Text>
+
+              </View>
+              {/* mission image */}
+              <View style={styles.missionIconContainer}>
+                <Icon.Button
+                    name='md-create'
+                    size={MISSION_ICON_SIZE}
+                    color={MISSION_ICON_COLOR}
+                    backgroundColor={Colors.defaultPageBgColor}
+                    onPress={this._onMissionPress.bind(this)}/>
+              </View>
+
+            </View>
+            <LowerLinearGradient/>
+          </View>
+          <BottomBar/>
+
+
+          <PopupDialog
+              ref={(popupDialog) => this.popupDialog = popupDialog}
+              dialogAnimation={new ScaleAnimation()}
+              height={'30%'}>
+            <PopupMsgBox
+                onLeftButtonClicked={() => {
+                  navigate('TimerPage', {...this.props.navigation.state.params})
+                  this.popupDialog.dismiss()
+                }}
+                onRightButtonClicked={() => this.popupDialog.dismiss()}
+                dialogText="시작할래요?"/>
+          </PopupDialog>
+
+        </View>
     );
+  }
+
+  _onMissionPress() {
+    this.popupDialog.show()
   }
 }
 
@@ -98,7 +118,7 @@ const styles = StyleSheet.create({
   missionText: {
     fontSize: MISSION_FONT_SIZE,
     color: Colors.defaultTextColor,
-    fontWeight:  Sizes.middleFontWeight,
+    fontWeight: Sizes.middleFontWeight,
     textAlign: 'center',
   }
 });

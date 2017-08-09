@@ -6,7 +6,8 @@ import {Colors} from "../../DefaultStyles";
 export default class Timer extends Component {
 
   static propTypes = {
-    onTimerFinished: React.PropTypes.func.isRequired
+    onTimerFinished: React.PropTypes.func.isRequired,
+    onPressCountDown: React.PropTypes.func,
   }
 
   static defaultProps = {
@@ -32,7 +33,8 @@ export default class Timer extends Component {
                    reset={() => console.log('rest')}
                    options={countDownOptions}
                    handleFinish={this._onCountDownFinished.bind(this)}
-                   getTime={(time) => console.log('current: ' + time)} />
+                   getTime={(time) => console.log('current: ' + time)}
+            onPress={() => this.props.onPressCountDown()}/>
           </View>
         </View>
     );
@@ -203,7 +205,10 @@ class CountDown extends Component {
 
     return(
         <View style={styles.container}>
-          <Text style={styles.text}>{this.formatTime()}</Text>
+          <Text style={styles.text}
+            onPress={() => this.props.onPress()}>
+            {this.formatTime()}
+            </Text>
         </View>
     );
   }

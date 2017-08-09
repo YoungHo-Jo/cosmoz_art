@@ -8,6 +8,8 @@ import {Colors, Sizes} from "../../DefaultStyles";
 import BottomBar from "../BottomBar";
 import {MKSwitch, MKColor} from "react-native-material-kit";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "./PopupMsgBox";
 
 class TimerPage extends Component {
 
@@ -19,7 +21,8 @@ class TimerPage extends Component {
         {/*Timer*/}
         <View style={styles.timerContainer}>
           <Timer
-            onTimerFinished={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}/>
+            onTimerFinished={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}
+            onPressCountDown={() => this.popupDialog.show()}/>
         </View>
 
         {/*Mission*/}
@@ -51,6 +54,19 @@ class TimerPage extends Component {
         <LowerLinearGradient
           marginBottom={Sizes.bottomBarHeight}/>
         <BottomBar/>
+
+        <PopupDialog
+            ref={(popupDialog) => this.popupDialog = popupDialog}
+            dialogAnimation={new ScaleAnimation()}
+            height={'30%'}>
+          <PopupMsgBox
+              onLeftButtonClicked={() => {
+                this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})
+                this.popupDialog.dismiss()
+              }}
+              onRightButtonClicked={() => this.popupDialog.dismiss()}
+              dialogText="벌써 다 했나요?"/>
+        </PopupDialog>
       </View>
     );
   }

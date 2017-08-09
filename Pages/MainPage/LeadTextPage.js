@@ -9,6 +9,8 @@ import {
 import {Colors, Sizes} from '../../DefaultStyles';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
+import PopupDialog, {ScaleAnimation, SlideAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "./PopupMsgBox";
 
 const LEAD_TEXT_SIZE = Sizes.leadTextSize;
 const LEAD_TEXT_COLOR = Colors.defaultTextColor;
@@ -22,15 +24,19 @@ class LeadTextPage extends Component {
   constructor(props) {
     super(props)
   }
+
   render() {
     const {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
+
           <UpperLinearGradient/>
           <View style={styles.blockContainer}>
             <Text
-              style={styles.text}
-              onPress={() => navigate('Mission', {...this.props.navigation.state.params})}>
+                style={styles.text}
+                onPress={() => {
+                  navigate('Mission', {...this.props.navigation.state.params})
+                }}>
               {this.props.navigation.state.params.mission.leadText}
             </Text>
             <View style={styles.lineView}>
@@ -42,7 +48,6 @@ class LeadTextPage extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.navigate('TimerPage', {...this.props.navigation.state.params})
   }
 }
 
