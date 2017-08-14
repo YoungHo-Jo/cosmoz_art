@@ -29,7 +29,7 @@ export default class Timer extends Component {
 
           {/*timeAnimation*/}
           <View style={styles.timeContainer}>
-            <CountDown totalDuration={10000} start={true}
+            <CountDown totalDuration={10000} start={this.props.start}
                    reset={() => console.log('rest')}
                    options={countDownOptions}
                    handleFinish={this._onCountDownFinished.bind(this)}

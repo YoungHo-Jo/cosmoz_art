@@ -10,9 +10,13 @@ import {MKSwitch, MKColor} from "react-native-material-kit";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./PopupMsgBox";
+import {NavigationActions} from 'react-navigation'
 
 class TimerPage extends Component {
 
+  state = {
+    timerStart: true
+  }
 
   render() {
     return (
@@ -21,14 +25,14 @@ class TimerPage extends Component {
         {/*Timer*/}
         <View style={styles.timerContainer}>
           <Timer
-            onTimerFinished={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}
+              start={this.state.timerStart}
+            onTimerFinished={() => this._moveToNextPage()}
             onPressCountDown={() => this.popupDialog.show()}/>
         </View>
 
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
-          <Text style={styles.missionText}
-                onPress={() => this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})}>
+          <Text style={styles.missionText}>
             {this.props.navigation.state.params.mission.missionText}
           </Text>
         </View>
@@ -61,14 +65,31 @@ class TimerPage extends Component {
             height={'30%'}>
           <PopupMsgBox
               onLeftButtonClicked={() => {
-                this.props.navigation.navigate('CameraButtonPage', {...this.props.navigation.state.params})
                 this.popupDialog.dismiss()
+
+                this._moveToNextPage()
+
               }}
               onRightButtonClicked={() => this.popupDialog.dismiss()}
               dialogText="벌써 다 했나요?"/>
         </PopupDialog>
       </View>
     );
+  }
+
+
+  _moveToNextPage() {
+    this.setState({
+      timerStart: false
+    })
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({routeName: 'CameraButtonPage', params: {...this.props.navigation.state.params}})
+      ]
+    });
+
+    this.props.navigation.dispatch(resetAction)
   }
 }
 

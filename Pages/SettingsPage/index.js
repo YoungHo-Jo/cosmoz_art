@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
+import {fetchLogin} from "../../actions/userActions";
+import {connect} from "react-redux";
 
 
 const styles = StyleSheet.create({
@@ -45,17 +47,16 @@ class SettingsPage extends Component {
                                              headerStyle={styles.header}/>
                         <SettingsList.Item
                             title='별명'
-                            titleInfo='nickname'
+                            titleInfo={this.props.userData.isLogin ? '로그인 했어요' : '로그인 해주세요'}
                             itemWidth={40}
                             titleStyle={styles.item}
-                            onPress={() => this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})}
-                        />
-                        <SettingsList.Item
-                            title='연결된 계정'
-                            titleInfo='abc1234@gmail.com'
-                            itemWidth={40}
-                            titleStyle={styles.item}
-                        />
+                            onPress={() => this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})}/>
+                        {/*<SettingsList.Item*/}
+                            {/*title='연결된 계정'*/}
+                            {/*titleInfo='abc1234@gmail.com'*/}
+                            {/*itemWidth={40}*/}
+                            {/*titleStyle={styles.item}*/}
+                        {/*/>*/}
                         <SettingsList.Header headerText='우편함'
                                              headerStyle={styles.header}/>
                         <SettingsList.Item title='받을편지'
@@ -94,4 +95,18 @@ class SettingsPage extends Component {
         this.setState({switchValue: value});
     }
 }
-export default SettingsPage;
+
+function mapStateToProps(state) {
+  return {
+    userData: state.userData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

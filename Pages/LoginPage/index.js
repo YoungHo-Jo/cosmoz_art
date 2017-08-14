@@ -1,7 +1,7 @@
 /**
  * Created by LG on 2017-07-25.
  */
-import React, {Component,} from 'react';
+import React, {Component,} from 'react'
 
 import {
   View,
@@ -44,10 +44,19 @@ class Login extends Component {
                 onChangeText={(text) => this.setState({pw: text})}/>
             <Button style={styles.button_login}
                     textStyle={{fontSize: 18}}
-                    onPress={() => this.props.fetchLogin({
-                      id: this.state.id,
-                      pw: this.state.pw
-                    })}>
+                    onPress={() => {
+                      this.props.fetchLogin({
+                        id: this.state.id,
+                        pw: this.state.pw
+                      })
+                      setTimeout(() => {
+                        console.log(this.props.userData)
+                        if(this.props.userData.isLogin) {
+                          this.props.navigation.goBack()
+                        }
+                      }, 1000)
+
+                    }}>
               로그인
             </Button>
             <View style={styles.info_setting}>
@@ -64,47 +73,6 @@ class Login extends Component {
           </View>
         </View>
     )
-  }
-
-
-  _login() {
-    console.log(this.state.id)
-    console.log(this.state.pw)
-    if (this.state.id && this.state.pw) {
-      fetch('http://52.78.33.177:10424/users/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: this.state.id,
-          pw: this.state.pw
-        })
-      })
-          .then(response => {
-            if (response.status === 201) {
-              console.log('login succeed');
-
-              const responseJSON = response.json()
-                  .then(() => {
-                    return this.props.navigation.setParams({
-                      userInfo: {
-                        user_id: responseJSON.user_pk,
-                        token: responseJSON.id_token
-                      }
-                    })
-                  })
-                  .then(() => {
-                    this.props.navigation.goBack()
-                  })
-            } else {
-              console.log('login failed');
-            }
-          })
-          .catch((err) => console.log(err))
-
-    }
-
   }
 }
 

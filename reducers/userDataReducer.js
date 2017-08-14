@@ -15,16 +15,14 @@ export default function userDataReducer(state = initialState, action) {
     case LOGIN:
 
       console.log('login in userDataReducer')
-        console.log(state)
       return {
           ...state,
         token: '',
-        userPk: null,
+        userPK: null,
         isLogging: true,
       }
     case LOGIN_SUCCESS:
       console.log('loginSuccess in userDataReducer')
-      console.log(state)
       return {
           ...state,
         token: action.token,
@@ -34,7 +32,6 @@ export default function userDataReducer(state = initialState, action) {
       }
     case LOGIN_FAILURE:
       console.log('loginFailure in userDataReducer')
-      console.log(state)
       return {
           ...state,
         token: '',
@@ -44,7 +41,6 @@ export default function userDataReducer(state = initialState, action) {
       }
     default:
       console.log('default in userDataReducer')
-      console.log(state)
       return state
   }
 }

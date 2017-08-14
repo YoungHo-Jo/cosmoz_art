@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Image, StyleSheet, Text, TouchableHighlight, View,} from 'react-native';
+import {Button, Image, StyleSheet, Text, TouchableHighlight, View, Platform} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
 import BottomBar from "../BottomBar";
@@ -20,7 +20,7 @@ export default class ScanPage extends React.Component {
           <View style={styles.imageContainer}>
             <Image
                 resizeMode='contain'
-                source={{uri: this.props.navigation.state.params.data.mediaUri}}
+                source={(Platform.OS === 'android') && {uri: this.props.navigation.state.params.data.mediaUri}}
                 style={[eStyles.image]}/>
           </View>
           <LowerLinearGradient/>
@@ -104,9 +104,6 @@ export default class ScanPage extends React.Component {
     return () => {
       this.props.navigation.dispatch(resetAction);
     }
-
-
-
   }
 }
 

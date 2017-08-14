@@ -5,6 +5,7 @@ import LowerLinearGradient from "../LowerLinearGradient";
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
 import BottomBar from "../BottomBar";
+import {NavigationActions} from 'react-navigation'
 
 
 export default class CameraButtonPage extends Component {
@@ -20,7 +21,16 @@ export default class CameraButtonPage extends Component {
                   size={180}
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.defaultPageBgColor}
-                  onPress={() => this.props.navigation.navigate('CameraPage', {...this.props.navigation.state.params})}/>
+                  onPress={() => {
+                    const resetAction = NavigationActions.reset({
+                      index: 0,
+                      actions: [
+                        NavigationActions.navigate({routeName: 'CameraPage', params: {...this.props.navigation.state.params}})
+                      ]
+                    });
+
+                    this.props.navigation.dispatch(resetAction)
+                  }}/>
             </View>
 
             <View style={styles.textContainer}>

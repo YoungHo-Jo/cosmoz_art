@@ -10,6 +10,7 @@ import MissionInformationBar from "./MissionInformationBar";
 import BottomBar from "../BottomBar";
 import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./PopupMsgBox";
+import {NavigationActions} from "react-navigation";
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
@@ -42,7 +43,6 @@ class MainMissionPage extends Component {
                       onPress={this._onMissionPress.bind(this)}>
                   {params.mission.missionText}
                 </Text>
-
               </View>
               {/* mission image */}
               <View style={styles.missionIconContainer}>
@@ -66,8 +66,14 @@ class MainMissionPage extends Component {
               height={'30%'}>
             <PopupMsgBox
                 onLeftButtonClicked={() => {
-                  navigate('TimerPage', {...this.props.navigation.state.params})
+                  const resetAction = NavigationActions.reset({
+                    index: 0,
+                    actions: [
+                      NavigationActions.navigate({routeName: 'TimerPage', params: {...this.props.navigation.state.params}})
+                    ]
+                  });
                   this.popupDialog.dismiss()
+                  this.props.navigation.dispatch(resetAction)
                 }}
                 onRightButtonClicked={() => this.popupDialog.dismiss()}
                 dialogText="시작할래요?"/>
