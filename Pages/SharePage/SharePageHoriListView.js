@@ -1,19 +1,17 @@
 /** * Created by LG on 2017-07-26. */
 import React, {Component,} from 'react';
-import {AppRegistry, ListView, Text, StyleSheet, View, Image} from 'react-native';
+import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions} from 'react-native';
 import SharePageHoriListViewItem from './SharePageHoriListViewItem'
-import {Colors} from "../../DefaultStyles";
+import {Colors, Sizes} from "../../DefaultStyles";
 
-const API_KEY = '73b19491b83909c7e07016f4bb4644f9:2:60667290';
-const QUERY_TYPE = 'hardcover-fiction';
-const API_STEM = 'http://api.nytimes.com/svc/books/v3/lists';
-const ENDPOINT = `${API_STEM}/${QUERY_TYPE}?response-format=json&api-key=${API_KEY}`;
+const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 
 class SharePageHoriListView extends Component {
   constructor(props) {
     super(props);
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,});
-    this.state = {dataSource: ds.cloneWithRows([]),}
+    this.state = {dataSource: ds.cloneWithRows([]),
+    }
   }
 
   componentDidMount() {
@@ -21,18 +19,20 @@ class SharePageHoriListView extends Component {
   }
 
   _renderRow(rowData) {
-    return <SharePageHoriListViewItem shareImageURL={rowData.book_image} subject={rowData.title}
-                                      nickname={rowData.author}/>;
+    return <SharePageHoriListViewItem
+              shareImageURL={rowData.image_url}
+              subject={rowData.keyword}
+              nickname={rowData.mission_pk/*For test; Change it when attaching server code*/}/>;
   }
 
   _refreshData() {
-    fetch(ENDPOINT).then((response) => response.json()).then((rjson) => {
-      this.setState(
-          {
-            dataSource: this.state.dataSource.cloneWithRows(rjson.results.books),
-          }
-      )
-    })
+    fetch(ENDPOINT + '/mission/1')
+      .then((response) => response.json())
+      .then((responseJSON) => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(responseJSON),
+        })
+      });
   }
 
   render() {
@@ -42,7 +42,7 @@ class SharePageHoriListView extends Component {
           <ListView horizontal={true}
                     styles={styles.list}
                     dataSource={this.state.dataSource}
-                    renderRow={this._renderRow}
+                    renderRow={this._renderRow.bind(this)}
                     enableEmptySections={true}/>
         </View>
     );
@@ -54,16 +54,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: Colors.defaultPageBgColor,
-
-    backgroundColor: '#849102'
+    backgroundColor: Colors.defaultPageBgColor,
   },
   list: {
     flexDirection: 'row',
   },
   headingText: {
-    fontSize: 25,
-    alignSelf: 'center'
+    fontSize: 18,
+    alignSelf: 'center',
+    textAlignVertical: 'center',
+    height: (Dimensions.get('window').height-95) * (18/100),
   }
 });
 export default SharePageHoriListView;

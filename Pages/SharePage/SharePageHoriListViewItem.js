@@ -12,7 +12,9 @@ import{
   View,
   Image,
   ListView,
+  Dimensions,
 } from 'react-native';
+import {Sizes} from "../../DefaultStyles";
 
 const styles= StyleSheet.create({
   container:{
@@ -21,39 +23,49 @@ const styles= StyleSheet.create({
   shareItem:{
     flex:1,
     flexDirection:'column',
-    borderBottomColor:'#FFFFFF',
-    borderBottomWidth:2,
-    paddingTop:50,
+    marginHorizontal: 15,
   },
   shareImage:{
-    flex:4,
-    height:1500,
-    width:300,
     resizeMode : 'contain',
-    paddingBottom:10,
     alignSelf:'center',
   },
   info:{
-    flex : 1,
-    flexDirection : 'column',
+    flexDirection : 'row',
     alignSelf : 'center',
-    paddingTop:10,
-    height:20
+    height: (Dimensions.get('window').height-95) * (18/100),
+    paddingBottom: 30,
   },
   profile:{
-    height:50,
-    width:50,
+    height: 48,
+    width: 48,
     resizeMode:'contain',
-    alignSelf:'center'
+    alignSelf:'center',
   }
 });
 
 class SharePageHoriListViewItem extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {source: {uri: this.props.shareImageURL}};
+  }
+
   propTypes:{
     shareImageURL: React.PropTypes.string.isRequired,
     subject:React.PropTypes.string.isRequired,
     nickname:React.PropTypes.string.isRequired,
   };
+
+  componentWillMount() {
+    Image.getSize(this.props.shareImageURL, (width, height) => {
+      if (this.props.width && !this.props.height) {
+        this.setState({width: this.props.width, height: height * (this.props.width / width)});
+      } else if (!this.props.width && this.props.height) {
+        this.setState({width: width * (this.props.height / height), height: this.props.height});
+      } else {
+        this.setState({width: width, height: height});
+      }
+    });
+  }
 
   render(){
     console.log(this.props.subject);
@@ -63,13 +75,13 @@ class SharePageHoriListViewItem extends Component{
         <View style={styles.container}>
           <View style={styles.shareItem}>
             <Image
-                style={styles.shareImage}
-                source={{uri: this.props.shareImageURL}}/>
+                style={[styles.shareImage, {
+                  width: (Dimensions.get('window').height-95) * (64/100) * (this.state.width/this.state.height),
+                  height: (Dimensions.get('window').height - 95) * (64/100)}]}
+                source={this.state.source}/>
             <View style={styles.info}>
               <Image style={styles.profile} source={require('../../icons/logo.png')}/>
-
             </View>
-
           </View>
         </View>
     );

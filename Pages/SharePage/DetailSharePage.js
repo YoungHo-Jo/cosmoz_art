@@ -3,6 +3,7 @@ import {StyleSheet, View,} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";
 import SharePageHoriListView from "./SharePageHoriListView";
 import LowerLinearGradient from "../LowerLinearGradient";
+import BottomBar from "../BottomBar"
 import {Colors, Sizes} from "../../DefaultStyles";
 
 export default class DetailSharePage extends React.Component {
@@ -10,18 +11,14 @@ export default class DetailSharePage extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-
-          <View style={styles.missionTextContainer}>
-          </View>
+          <UpperLinearGradient/>
           <View style={styles.listViewContainer}>
-            <UpperLinearGradient/>
             <SharePageHoriListView
                 navigation={this.props.navigation}/>
-
           </View>
-          <View style={styles.likeButtonContainer}>
-          </View>
-          <LowerLinearGradient/>
+          <LowerLinearGradient
+              marginBottom={Sizes.bottomBarHeight}/>
+          <BottomBar/>
         </View>
     );
   }
@@ -33,16 +30,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.defaultPageBgColor,
-    marginBottom: Sizes.bottomBarHeight
-  },
-  missionTextContainer: {
-    flex: 1,
   },
   listViewContainer: {
-    flex: 8,
-  },
-  likeButtonContainer: {
     flex: 1,
   },
-
 });
