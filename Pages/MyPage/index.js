@@ -134,7 +134,8 @@ class MyPage extends Component {
 
   _renderModalDropDownRow(rowData) {
     return (
-        <View style={[eStyles.modalDropDown, this.state.filterMethod === rowData && {backgroundColor: FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR},{width: this.state.touchableHighlightWidth}]}>
+        <View
+            style={[eStyles.modalDropDown, this.state.filterMethod === rowData && {backgroundColor: FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR}, {width: this.state.touchableHighlightWidth}]}>
           <Text style={styles.dropDownText}>
             {rowData}
           </Text>
@@ -176,10 +177,11 @@ class MyPage extends Component {
                                 onPress={() => {
                                   this.refs.secondModalDropDown.show()
                                   this._onSecBtnClick()
+                                  this.props.fetchDropDownState(true)
                                 }}
                                 underlayColor={Colors.titleBarColor}
                                 ref='parentTouchableHighlight'
-              onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
+                                onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
               <View style={eStyles.modalDropDownContainer}>
                 <ModalDropdown options={[filterMethod.likeArts.byMe, filterMethod.likeArts.byOthers]}
                                dropdownStyle={styles.dropDown}
@@ -189,8 +191,9 @@ class MyPage extends Component {
                                ref='secondModalDropDown'
                                style={eStyles.modalDropDownContainer}
                                disabled={true}
-                               onSelect={(index,value) => this._onDropDownSelect(index, value)}
-                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
+                               onSelect={(index, value) => this._onDropDownSelect(index, value)}
+                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
+                               onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
                   <View style={eStyles.modalDropDownIcon}>
                     <Image
                         style={styles.logo}
@@ -205,6 +208,7 @@ class MyPage extends Component {
                                 onPress={() => {
                                   this.refs.thirdModalDropDown.show()
                                   this._onThrBtnClick()
+                                  this.props.fetchDropDownState(true)
                                 }}
                                 underlayColor={Colors.titleBarColor}
                                 ref='parentTouchableHighlight'
@@ -218,7 +222,8 @@ class MyPage extends Component {
                                ref='thirdModalDropDown'
                                disabled={true}
                                onSelect={(index, value) => this._onDropDownSelect(index, value)}
-                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
+                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
+                               onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
                   <View style={eStyles.modalDropDownIcon}>
                     <MaterialCommunityIcons
                         name='format-list-bulleted'
@@ -277,31 +282,32 @@ class MyPage extends Component {
     })
   }
 
+
   _onDropDownSelect(index, value) {
-    switch(value) {
+    switch (value) {
       case filterMethod.myArts.byTime:
         console.log('시간별로 해라')
-          this.setState({
-            filterMethod: filterMethod.myArts.byTime
-          })
+        this.setState({
+          filterMethod: filterMethod.myArts.byTime
+        })
         return
       case filterMethod.myArts.byBehavior:
         console.log('행위별로 해라')
-          this.setState({
-            filterMethod: filterMethod.myArts.byBehavior
-          })
+        this.setState({
+          filterMethod: filterMethod.myArts.byBehavior
+        })
         return
       case filterMethod.likeArts.byMe:
         console.log('내가 좋아한 거로 해라')
-          this.setState({
-            filterMethod: filterMethod.likeArts.byMe
-          })
+        this.setState({
+          filterMethod: filterMethod.likeArts.byMe
+        })
         return
       case filterMethod.likeArts.byOthers:
         console.log('내꺼 중에 남이 좋아한 거로 해라')
-          this.setState({
-            filterMethod: filterMethod.likeArts.byOthers
-          })
+        this.setState({
+          filterMethod: filterMethod.likeArts.byOthers
+        })
         return
       default:
         this.setState({
@@ -437,11 +443,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchDropDownState: (isShown) => fetchDropDownListState(isShown)
+    fetchDropDownState: (isShown) => dispatch(fetchDropDownListState(isShown))
   }
 }
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
