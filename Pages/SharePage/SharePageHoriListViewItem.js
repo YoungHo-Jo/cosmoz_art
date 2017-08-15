@@ -32,12 +32,12 @@ const styles= StyleSheet.create({
   info:{
     flexDirection : 'row',
     alignSelf : 'center',
-    height: (Dimensions.get('window').height-95) * (18/100),
+    height: (Dimensions.get('window').height-95) * (20/100),
     paddingBottom: 30,
   },
   profile:{
-    height: 48,
-    width: 48,
+    height: 50,
+    width: 50,
     resizeMode:'contain',
     alignSelf:'center',
   }
@@ -76,8 +76,8 @@ class SharePageHoriListViewItem extends Component{
           <View style={styles.shareItem}>
             <Image
                 style={[styles.shareImage, {
-                  width: (Dimensions.get('window').height-95) * (64/100) * (this.state.width/this.state.height),
-                  height: (Dimensions.get('window').height - 95) * (64/100)}]}
+                  width: (Dimensions.get('window').height-95) * (66/100) * (this.state.width/this.state.height),
+                  height: (Dimensions.get('window').height - 95) * (66/100)}]}
                 source={this.state.source}/>
             <View style={styles.info}>
               <Image style={styles.profile} source={require('../../icons/logo.png')}/>

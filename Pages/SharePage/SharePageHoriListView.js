@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'center',
     textAlignVertical: 'center',
-    height: (Dimensions.get('window').height-95) * (18/100),
+    height: (Dimensions.get('window').height-95) * (14/100),
   }
 });
 export default SharePageHoriListView;
