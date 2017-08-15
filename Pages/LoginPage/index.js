@@ -2,6 +2,8 @@
  * Created by LG on 2017-07-25.
  */
 import React, {Component,} from 'react'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 import {
   View,
@@ -15,6 +17,7 @@ import {
 import Button from 'apsl-react-native-button';
 import {connect} from "react-redux";
 import {fetchLogin} from "../../actions/userActions";
+import {Colors} from "../../DefaultStyles";
 
 class Login extends Component {
   state = {
@@ -27,51 +30,58 @@ class Login extends Component {
 
   render() {
     return (
-        <View style={styles.container}>
-          <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
-          <View style={styles.info}>
-            <Text style={styles.text}>아이디</Text>
-            <TextInput
-                style={styles.text_input}
-                placeholder="아이디를 입력하세요"
-                underlineColorAndroid={'#3a3a3a'}
-                onChangeText={(text) => this.setState({id: text})}/>
-            <Text style={styles.text}>비밀번호</Text>
-            <TextInput
-                style={styles.text_input}
-                placeholder="비밀번호를 입력하세요"
-                underlineColorAndroid={'#3a3a3a'}
-                onChangeText={(text) => this.setState({pw: text})}/>
-            <Button style={styles.button_login}
-                    textStyle={{fontSize: 18}}
-                    onPress={() => {
-                      this.props.fetchLogin({
-                        id: this.state.id,
-                        pw: this.state.pw
-                      })
-                      setTimeout(() => {
-                        console.log(this.props.userData)
-                        if(this.props.userData.isLogin) {
-                          this.props.navigation.goBack()
-                        }
-                      }, 1000)
+        <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultPageBgColor}}>
+          <View style={styles.container}>
+            <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
+            <View style={styles.info}>
+              <Text style={styles.text}>아이디</Text>
+              <TextInput
+                  style={styles.text_input}
+                  placeholder="아이디를 입력하세요"
+                  underlineColorAndroid={'#3a3a3a'}
+                  onChangeText={(text) => this.setState({id: text})}
+                  keyboardType='default'
+                  returnKeyType='next'/>
 
-                    }}>
-              로그인
-            </Button>
-            <View style={styles.info_setting}>
-              <Text style={styles.text_setting}>자동로그인</Text>
-              <Switch style={styles.style_switch} onValueChange={this.toggleSwitch1} value={this.state.switchValue1}/>
+              <Text style={styles.text}>비밀번호</Text>
+              <TextInput
+                  style={styles.text_input}
+                  placeholder="비밀번호를 입력하세요"
+                  underlineColorAndroid={'#3a3a3a'}
+                  secureTextEntry={true}
+                  returnKeyType='done'
+                  onChangeText={(text) => this.setState({pw: text})}/>
+              <Button style={styles.button_login}
+                      textStyle={{fontSize: 18}}
+                      onPress={() => {
+                        this.props.fetchLogin({
+                          id: this.state.id,
+                          pw: this.state.pw
+                        })
+                        setTimeout(() => {
+                          console.log(this.props.userData)
+                          if(this.props.userData.isLogin) {
+                            this.props.navigation.goBack()
+                          }
+                        }, 1000)
+                      }}>
+                로그인
+              </Button>
+              <View style={styles.info_setting}>
+                <Text style={styles.text_setting}>자동로그인</Text>
+                <Switch style={styles.style_switch} onValueChange={this.toggleSwitch1} value={this.state.switchValue1}/>
+              </View>
+              <View style={styles.info_setting}>
+                <Text style={styles.text_setting}>아이디저장</Text>
+                <Switch style={styles.style_switch} onValueChange={this.toggleSwitch2} value={this.state.switchValue2}/>
+              </View>
+              <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
+                회원가입
+              </Button>
             </View>
-            <View style={styles.info_setting}>
-              <Text style={styles.text_setting}>아이디저장</Text>
-              <Switch style={styles.style_switch} onValueChange={this.toggleSwitch2} value={this.state.switchValue2}/>
-            </View>
-            <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
-              회원가입
-            </Button>
           </View>
-        </View>
+        </KeyboardAwareScrollView>
+
     )
   }
 }
