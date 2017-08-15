@@ -1,7 +1,6 @@
 import React, {
   Component,
 }from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -27,11 +26,9 @@ const styles= StyleSheet.create({
     },
     shareImage:{
         flex:1,
-        height:500,
-        width:300,
-        resizeMode : 'contain',
         paddingBottom:10,
         alignSelf:'center',
+        resizeMode: 'contain',
     },
     info:{
         flex : 1,
@@ -47,37 +44,58 @@ const styles= StyleSheet.create({
         alignSelf:'center'
     },
     button_showother:{
-        height:100,
+        flex: 1,
+        height:50,
         width:200,
         resizeMode:'contain',
         alignSelf:'center',
+        marginTop:25,
+        marginBottom:18,
     }
 });
 
 const CONAINTER_SIDE_MARGIN = 20;
 
 class SharePageListViewItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {source: {uri: this.props.imageURL}};
+  }
   propTypes: {
     imageURL: React.PropTypes.string.isRequired,
     keyword: React.PropTypes.string.isRequired,
     missionPK:React.PropTypes.string.isRequired,
   };
 
+    componentWillMount() {
+      Image.getSize(this.props.imageURL, (width, height) => {
+        if (this.props.width && !this.props.height) {
+          this.setState({width: this.props.width, height: height * (this.props.width / width)});
+        } else if (!this.props.width && this.props.height) {
+          this.setState({width: width * (this.props.height / height), height: this.props.height});
+        } else {
+          this.setState({width: width, height: height});
+        }
+      });
+    }
+
     render(){
 
-      console.log(this.props)
+      console.log(this.props);
 
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>
                 <Image
-                    style={styles.shareImage}
-                    source={{uri: this.props.imageURL}}/>
+                    style={[styles.shareImage, {
+                        width: Dimensions.get('window').width * (85/100),
+                        height: Dimensions.get('window').width * (85/100) * (this.state.height/this.state.width)}]}
+                    source={this.state.source}/>
                 <TouchableHighlight onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}>
                      <Image
                          style={styles.button_showother}
                          source={require('../../icons/share_anotheritem.png')}/>
-                 </TouchableHighlight>
+                </TouchableHighlight>
               </View>
             </View>
         );
