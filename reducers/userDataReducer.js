@@ -8,6 +8,12 @@ const initialState = {
   userPK: null,
   isLogging: false,
   error: false,
+  userInfo: {
+    accumulationTime: 'Test 300초',
+    userText: 'Test 뇌주름 스케일이 반지제왕 급',
+    doneMission: null,
+    arts: null,
+  }
 }
 
 export default function userDataReducer(state = initialState, action) {

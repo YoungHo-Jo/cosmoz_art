@@ -22,10 +22,11 @@ import LoginPage from './Pages/LoginPage'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SettingsPage from './Pages/SettingsPage'
 import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
 
-const INITIAL_PAGE_NUM = 1
+const INITIAL_PAGE_NUM = 0
 
 class MainScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -47,9 +48,9 @@ class MainScreen extends Component {
             }
             {
               navigation.state.params.currentViewPager === 2 &&
-              <SimpleLineIcon.Button
-                  name='options-vertical'
-                  size={24}
+              <MaterialCommunityIcons.Button
+                  name='format-list-bulleted'
+                  size={30}
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.titleBarColor}
                   onPress={() => navigation.navigate('MissionListPage', {...navigation.state.params})}/>

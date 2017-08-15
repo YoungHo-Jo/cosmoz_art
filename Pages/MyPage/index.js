@@ -9,7 +9,7 @@ import {
   Text,
   ScrollView,
   View, TouchableHighlight,
-  Dimensions
+  Dimensions, Image
 } from 'react-native';
 import Masonry from 'react-native-masonry';
 import {Colors, Sizes} from "../../DefaultStyles";
@@ -18,6 +18,10 @@ import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
 import ModalDropdown from "react-native-modal-dropdown/components/ModalDropdown";
 import EStyleSheet from 'react-native-extended-stylesheet'
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import {fetchDropDownListState} from "../../actions/controlFlowActions";
+import {connect} from "react-redux";
 
 // list of images
 const data = [
@@ -85,8 +89,20 @@ const data = [
 
 const FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR = '#ededed'
 const ICON_SIZE = 30
+const filterMethod = {
+  myArts: {
+    byTime: '시간별',
+    byBehavior: '행위별'
+  },
+  likeArts: {
+    byMe: '내가 좋아한 작품',
+    byOthers: '남이 좋아한 작품'
+  },
+  missions: '내가 한 미션'
+}
 
-export default class MyPage extends Component {
+
+class MyPage extends Component {
   constructor() {
     super();
     this.state = {
@@ -97,9 +113,10 @@ export default class MyPage extends Component {
 
       isFirstBtnSelected: false,
       isSecondBtnSelected: false,
-      isThirdBtnSelected: false,
+      isThirdBtnSelected: true,
       isModalDropDownShowing: false,
       touchableHighlightWidth: Dimensions.get('window').width / 3,
+      filterMethod: filterMethod.myArts.byTime
     };
   }
 
@@ -117,7 +134,7 @@ export default class MyPage extends Component {
 
   _renderModalDropDownRow(rowData) {
     return (
-        <View style={[eStyles.modalDropDown, {width: this.state.touchableHighlightWidth}]}>
+        <View style={[eStyles.modalDropDown, this.state.filterMethod === rowData && {backgroundColor: FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR},{width: this.state.touchableHighlightWidth}]}>
           <Text style={styles.dropDownText}>
             {rowData}
           </Text>
@@ -137,12 +154,12 @@ export default class MyPage extends Component {
         <View style={styles.container}>
           <View style={[styles.accumulationTextContainer]}>
             <Text style={[styles.accumulationText]}>
-              누적시간 300초
+              {this.props.userData.userInfo.accumulationTime}
             </Text>
           </View>
           <View style={styles.benefitTextContainer}>
             <Text style={styles.benefitText}>
-              뇌주름 스케일이 반지의 제왕급
+              {this.props.userData.userInfo.userText}
             </Text>
           </View>
 
@@ -150,8 +167,8 @@ export default class MyPage extends Component {
             <TouchableHighlight style={[styles.iconContainer, this.state.isFirstBtnSelected && styles.selectedButton]}
                                 onPress={this._onFirBtnClick}
                                 underlayColor={Colors.titleBarColor}>
-              <Icon
-                  name='pencil'
+              <SimpleLineIcons
+                  name='note'
                   size={ICON_SIZE}
                   color={Colors.defaultTextColor}/>
             </TouchableHighlight>
@@ -164,19 +181,20 @@ export default class MyPage extends Component {
                                 ref='parentTouchableHighlight'
               onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
               <View style={eStyles.modalDropDownContainer}>
-                <ModalDropdown options={['내가 좋아한 작품', '남이 좋아한 작품']}
+                <ModalDropdown options={[filterMethod.likeArts.byMe, filterMethod.likeArts.byOthers]}
                                dropdownStyle={styles.dropDown}
                                dropdownTextStyle={styles.dropDownText}
+                               dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
                                renderSeparator={() => this._renderModalDropDownSeparator()}
                                ref='secondModalDropDown'
                                style={eStyles.modalDropDownContainer}
                                disabled={true}
+                               onSelect={(index,value) => this._onDropDownSelect(index, value)}
                                renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
                   <View style={eStyles.modalDropDownIcon}>
-                    <Icon
-                        name='pencil'
-                        size={ICON_SIZE}
-                        color={Colors.defaultTextColor}/>
+                    <Image
+                        style={styles.logo}
+                        source={require('../../icons/logo.png')}/>
                   </View>
 
                 </ModalDropdown>
@@ -192,17 +210,19 @@ export default class MyPage extends Component {
                                 ref='parentTouchableHighlight'
                                 onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
               <View style={eStyles.modalDropDownContainer}>
-                <ModalDropdown options={['시간별', '행위별']}
+                <ModalDropdown options={[filterMethod.myArts.byTime, filterMethod.myArts.byBehavior]}
                                dropdownStyle={styles.dropDown}
                                dropdownTextStyle={styles.dropDownText}
+                               dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
                                renderSeparator={() => this._renderModalDropDownSeparator()}
                                ref='thirdModalDropDown'
                                disabled={true}
+                               onSelect={(index, value) => this._onDropDownSelect(index, value)}
                                renderRow={(rowData) => this._renderModalDropDownRow(rowData)}>
                   <View style={eStyles.modalDropDownIcon}>
-                    <Icon
-                        name='pencil'
-                        size={ICON_SIZE}
+                    <MaterialCommunityIcons
+                        name='format-list-bulleted'
+                        size={ICON_SIZE + 5}
                         color={Colors.defaultTextColor}/>
                   </View>
 
@@ -233,8 +253,6 @@ export default class MyPage extends Component {
     );
   }
 
-
-
   _onFirBtnClick = () => {
     this.setState({
       isFirstBtnSelected: true,
@@ -257,6 +275,40 @@ export default class MyPage extends Component {
       isSecondBtnSelected: false,
       isThirdBtnSelected: true
     })
+  }
+
+  _onDropDownSelect(index, value) {
+    switch(value) {
+      case filterMethod.myArts.byTime:
+        console.log('시간별로 해라')
+          this.setState({
+            filterMethod: filterMethod.myArts.byTime
+          })
+        return
+      case filterMethod.myArts.byBehavior:
+        console.log('행위별로 해라')
+          this.setState({
+            filterMethod: filterMethod.myArts.byBehavior
+          })
+        return
+      case filterMethod.likeArts.byMe:
+        console.log('내가 좋아한 거로 해라')
+          this.setState({
+            filterMethod: filterMethod.likeArts.byMe
+          })
+        return
+      case filterMethod.likeArts.byOthers:
+        console.log('내꺼 중에 남이 좋아한 거로 해라')
+          this.setState({
+            filterMethod: filterMethod.likeArts.byOthers
+          })
+        return
+      default:
+        this.setState({
+          filterMethod: filterMethod.myArts.byTime
+        })
+        console.log('기본이다')
+    }
   }
 
 }
@@ -336,7 +388,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomColor: Colors.defaultTextColor,
-    borderBottomWidth: 0.5,
+    // borderBottomWidth: 0.5,
   },
   benefitText: {
     fontSize: Sizes.fontSize,
@@ -360,13 +412,36 @@ const styles = StyleSheet.create({
     backgroundColor: '#849201'
   },
   dropDown: {
-    height: Sizes.titleBarHeight * 2 + 4,
+    height: Sizes.titleBarHeight * 2,
     borderColor: '#ffffff'
   },
   dropDownText: {
     fontSize: Sizes.fontSize - 5,
     color: Colors.defaultTextColor
+  },
+  logo: {
+    width: ICON_SIZE,
+    resizeMode: 'contain',
+  },
+  dropDownTextHighlightStyle: {
+    overlayColor: FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR
   }
-
-
 });
+
+function mapStateToProps(state) {
+  return {
+    userData: state.userData,
+    controlData: state.controlFlowReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchDropDownState: (isShown) => fetchDropDownListState(isShown)
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyPage);
