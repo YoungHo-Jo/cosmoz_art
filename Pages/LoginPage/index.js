@@ -18,6 +18,7 @@ import Button from 'apsl-react-native-button';
 import {connect} from "react-redux";
 import {fetchLogin} from "../../actions/userActions";
 import {Colors} from "../../DefaultStyles";
+import {MKSwitch, MKColor} from "react-native-material-kit";
 
 class Login extends Component {
   state = {
@@ -69,11 +70,29 @@ class Login extends Component {
               </Button>
               <View style={styles.info_setting}>
                 <Text style={styles.text_setting}>자동로그인</Text>
-                <Switch style={styles.style_switch} onValueChange={this.toggleSwitch1} value={this.state.switchValue1}/>
+                <MKSwitch
+
+                  onColor="rgba(255,152,0,.3)"
+                  thumbOnColor={MKColor.Orange}
+                  trackSize={15}
+                  trackLength={35}
+                  thumbRadius={10}
+                  rippleColor="rgba(255,152,0,.2)"
+                  onPress={() => console.log('orange switch pressed')}
+                  onCheckedChange={(e) => console.log('orange switch checked', e)}/>
               </View>
               <View style={styles.info_setting}>
                 <Text style={styles.text_setting}>아이디저장</Text>
-                <Switch style={styles.style_switch} onValueChange={this.toggleSwitch2} value={this.state.switchValue2}/>
+                <MKSwitch
+
+                  onColor="rgba(255,152,0,.3)"
+                  thumbOnColor={MKColor.Orange}
+                  trackSize={15}
+                  trackLength={35}
+                  thumbRadius={10}
+                  rippleColor="rgba(255,152,0,.2)"
+                  onPress={() => console.log('orange switch pressed')}
+                  onCheckedChange={(e) => console.log('orange switch checked', e)}/>
               </View>
               <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
                 회원가입
@@ -130,16 +149,14 @@ const styles = StyleSheet.create({
   },
   info_setting: {
     flexDirection: 'row',
-  },
-  style_switch: {
-    height: 40,
-    marginLeft: 160
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    width: 280,
   },
   text_setting: {
     fontSize: 15,
-    paddingLeft: 45,
-    paddingBottom: 10,
-    paddingTop: 10,
+    marginLeft: 10,
+    alignSelf: 'center',
   },
   button_signup: {
     marginTop: 20,
@@ -151,7 +168,6 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
     alignSelf: 'center',
     borderBottomColor: '#3a3a3a',
-
   },
 });
 
