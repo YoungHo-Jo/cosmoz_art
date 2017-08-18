@@ -3,6 +3,11 @@ package com.art;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+
 import com.sha256lib.Sha256Package;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
@@ -28,13 +33,16 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new Sha256Package(),
-            new ReactMaterialKitPackage(),
-            new RCTCameraPackage(),
-            new VectorIconsPackage(),
-            new SplashScreenReactPackage(),
-            new LinearGradientPackage()
+              new MainReactPackage(),
+              new RNFirebasePackage(),
+              new RNFirebaseAnalyticsPackage(),
+              new RNFirebaseMessagingPackage(),
+              new Sha256Package(),
+              new ReactMaterialKitPackage(),
+              new RCTCameraPackage(),
+              new VectorIconsPackage(),
+              new SplashScreenReactPackage(),
+              new LinearGradientPackage()
       );
     }
   };

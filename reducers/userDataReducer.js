@@ -13,7 +13,8 @@ const initialState = {
     userText: 'Test 뇌주름 스케일이 반지제왕 급',
     doneMission: null,
     arts: null,
-  }
+  },
+  fcmToken: null
 }
 
 export default function userDataReducer(state = initialState, action) {

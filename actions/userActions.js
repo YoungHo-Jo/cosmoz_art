@@ -1,6 +1,7 @@
 import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS} from "../reducers/constants";
 import APIConfig from "../APIConfig";
 import {sha256} from "react-native-sha256";
+import firebase from "../firebase";
 
 export function login() {
   return {
@@ -37,6 +38,8 @@ export function fetchLogin(loginInfo) {
       sha256(loginInfo.pw).then((pw) => {
         console.log('id: ' + id)
         console.log('pw: ' + pw)
+        console.log(firebase.messaging().getToken()
+            .then(token => console.log('Device FCM Token: ', token)))
         console.log('try login to server...')
         fetch(APIConfig.login, {
           method: 'POST',
