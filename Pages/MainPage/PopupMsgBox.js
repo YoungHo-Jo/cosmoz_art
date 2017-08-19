@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: Sizes.fontSize,
     color: Colors.defaultTextColor,
-    fontWeight: Sizes.fontWeight
+    fontWeight: Sizes.fontWeight,
+    lineHeight: 30,
   },
   buttonContainer: {
     flex: 1,
