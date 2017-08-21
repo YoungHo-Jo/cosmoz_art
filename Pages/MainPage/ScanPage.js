@@ -6,6 +6,8 @@ import BottomBar from "../BottomBar";
 import {NavigationActions} from "react-navigation";
 import {Colors} from "../../DefaultStyles";
 import EStyleSheet from 'react-native-extended-stylesheet'
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "./PopupMsgBox";
 
 const IMAGE_SIDE_MARGIN = 30;
 
@@ -37,7 +39,7 @@ export default class ScanPage extends React.Component {
               </View>
             </TouchableHighlight>
             <TouchableHighlight
-                onPress={this.done().bind(this)}
+                onPress={this._onCompletePress.bind(this)}
                 style={styles.rightButton}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
@@ -46,12 +48,44 @@ export default class ScanPage extends React.Component {
               </View>
             </TouchableHighlight>
           </BottomBar>
+
+          <PopupDialog
+            ref={(popupDialog) => this.popupDialog = popupDialog}
+            dialogAnimation={new ScaleAnimation()}
+            height={'30%'}>
+            <PopupMsgBox
+              onLeftButtonClicked={() => {
+                const resetAction = NavigationActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+                  ]
+                });
+                this.props.navigation.dispatch(resetAction)
+              }}
+              onRightButtonClicked={() => {
+                const resetAction = NavigationActions.reset({
+                  index: 0,
+                  actions: [
+                    NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+                  ]
+                });
+                this.props.navigation.dispatch(resetAction)
+              }}
+              dialogText={"혼자 보기 아깝잖아요\n마음껏 자랑해주세요"}
+              leftButtonText={"비공개로 저장하기"}
+              rightButtonText={"공유하기"}/>
+          </PopupDialog>
         </View>
     );
   }
 
   retakePicture() {
     this.props.navigation.goBack();
+  }
+
+  _onCompletePress() {
+    this.popupDialog.show()
   }
 
   done() {
