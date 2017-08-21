@@ -81,7 +81,8 @@ class SettingsPage extends Component {
                                            titleStyle={styles.item}/>
                         <SettingsList.Item title='버전'
                                            itemWidth={40}
-                                           titleStyle={styles.item}/>
+                                           titleStyle={styles.item}
+                                           onPress={() => this.props.navigation.navigate('IntroPage', {...this.props.navigation.state.params})}/>
                         <SettingsList.Item title='약관'
                                            itemWidth={40}
                                            titleStyle={styles.item}/>

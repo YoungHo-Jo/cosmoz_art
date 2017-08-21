@@ -58,20 +58,18 @@ export default class ScanPage extends React.Component {
                 const resetAction = NavigationActions.reset({
                   index: 0,
                   actions: [
-                    NavigationActions.navigate({routeName: 'DetailSharePage', params: {...this.props.navigation.state.params}})
+                    NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
                   ]
                 });
-                this.popupDialog.dismiss()
                 this.props.navigation.dispatch(resetAction)
               }}
               onRightButtonClicked={() => {
                 const resetAction = NavigationActions.reset({
                   index: 0,
                   actions: [
-                    NavigationActions.navigate({routeName: 'DetailSharePage', params: {...this.props.navigation.state.params}})
+                    NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
                   ]
                 });
-                this.popupDialog.dismiss()
                 this.props.navigation.dispatch(resetAction)
               }}
               dialogText={"혼자 보기 아깝잖아요\n마음껏 자랑해주세요"}

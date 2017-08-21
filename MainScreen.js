@@ -18,7 +18,12 @@ import Title from "./TitleBar/Title";
 import TimerPage from "./Pages/MainPage/TimerPage";
 import ScanPage from "./Pages/MainPage/ScanPage";
 import DetailSharePage from "./Pages/SharePage/DetailSharePage";
-import LoginPage from './Pages/LoginPage'
+import LoginPage from './Pages/LoginPage';
+import IntroPage from './Pages/IntroPage';
+import IntroPage1 from './Pages/IntroPage/IntroPage1';
+import IntroPage2 from './Pages/IntroPage/IntroPage2';
+import IntroPage3 from './Pages/IntroPage/IntroPage3';
+import IntroPage4 from './Pages/IntroPage/IntroPage4';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
@@ -169,7 +174,35 @@ const App = StackNavigator({
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (<Title/>)
     }
-  }
+  },
+  IntroPage: {
+    screen: IntroPage,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
+  IntroPage2: {
+    screen: IntroPage2,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
+  IntroPage3: {
+    screen: IntroPage3,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
+  IntroPage4: {
+    screen: IntroPage4,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
 }, {
   initialRouteParams: {
     currentViewPager: INITIAL_PAGE_NUM,
