@@ -25,8 +25,17 @@ import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SettingsPage from './Pages/SettingsPage'
 import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
+import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission} from "./actions/missionActions";
+import {connect} from "react-redux";
+import firebase from './firebase'
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "./Pages/MainPage/PopupMsgBox";
+import {missionToShowType} from "./reducers/missionDataReducer";
 
-const INITIAL_PAGE_NUM = 0
+
+
+
+const INITIAL_PAGE_NUM = 1
 
 class MainScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -61,7 +70,6 @@ class MainScreen extends Component {
     }
   }
 
-
   render() {
     return (
         <View style={styles.blockContainer}>
@@ -70,6 +78,20 @@ class MainScreen extends Component {
                 navigation={this.props.navigation}
                 initialPage={INITIAL_PAGE_NUM}/>
           </View>
+
+          <PopupDialog
+              ref={(popupDialog) => this.popupDialog = popupDialog}
+              dialogAnimation={new ScaleAnimation()}
+              height={'30%'}>
+            <PopupMsgBox
+                onLeftButtonClicked={() => {
+                  this.popupDialog.dismiss()
+
+                  this.props.fetchMissionToShow(missionToShowType.pushMission)
+                }}
+                onRightButtonClicked={() => this.popupDialog.dismiss()}
+                dialogText="미션이 도착했어요. 확인하시겠어요?"/>
+          </PopupDialog>
         </View>
     );
   }
@@ -78,12 +100,65 @@ class MainScreen extends Component {
     // do stuff while splash screen is shown
     // After having done stuff (suac as async tasks) hide the splash screen
     SplashScreen.hide();
+
+    firebase.messaging().onMessage((message) => {
+      console.log('firebase onMessage')
+      console.log('message: ')
+      console.log(message)
+      this.props.fetchNotificationMission(message)
+      this.popupDialog.show()
+    });
+  }
+
+  componentWillMount() {
+    this.props.fetchTodayMission()
   }
 }
 
+
+const styles = StyleSheet.create({
+  blockContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: Colors.defaultBgColor
+  },
+  titleBarContainer: {
+    flex: -1,
+    height: Sizes.titleBarHeight,
+  },
+  viewPagerContainer: {
+    flex: 1,
+    backgroundColor: Colors.defaultBgColor
+  },
+  headerRight: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 0,
+    flexDirection: 'row',
+  }
+
+});
+
+
+function mapStateToProps(state) {
+  return {
+    missionData: state.missionData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchNotificationMission: (notificationData) => dispatch(fetchNotificationMission(notificationData)),
+    fetchTodayMission: () => dispatch(fetchTodayMission()),
+    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type))
+  }
+}
+
+
+
 const App = StackNavigator({
   MainScreen: {
-    screen: MainScreen,
+    screen: connect(mapStateToProps, mapDispatchToProps)(MainScreen),
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
     },
@@ -185,30 +260,7 @@ const App = StackNavigator({
   }
 });
 
-const styles = StyleSheet.create({
-  blockContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: Colors.defaultBgColor
-  },
-  titleBarContainer: {
-    flex: -1,
-    height: Sizes.titleBarHeight,
-  },
-  viewPagerContainer: {
-    flex: 1,
-    backgroundColor: Colors.defaultBgColor
-  },
-  headerRight: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 0,
-    flexDirection: 'row',
-  }
 
 
-});
-
-
-export default MainScreen;
-export {App};
+export {MainScreen}
+export default App

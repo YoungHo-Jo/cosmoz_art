@@ -9,8 +9,8 @@ import {
 import {Colors, Sizes} from '../../DefaultStyles';
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
-import PopupDialog, {ScaleAnimation, SlideAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "./PopupMsgBox";
+import {connect} from "react-redux";
+import {missionToShowType} from "../../reducers/missionDataReducer";
 
 const LEAD_TEXT_SIZE = Sizes.leadTextSize;
 const LEAD_TEXT_COLOR = Colors.defaultTextColor;
@@ -26,6 +26,7 @@ class LeadTextPage extends Component {
   }
 
   render() {
+    const {missionData} = this.props
     const {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
@@ -35,9 +36,15 @@ class LeadTextPage extends Component {
             <Text
                 style={styles.text}
                 onPress={() => {
-                  navigate('Mission', {...this.props.navigation.state.params})
+                  console.log(missionData)
+                  let mission = (missionData.missionToShow === missionToShowType.todayMission) ?
+                      missionData.todayMission.mission : missionData.pushMission.mission
+                  navigate('Mission', {...mission})
                 }}>
-              {this.props.navigation.state.params.mission.leadText}
+              {
+                missionData.missionToShow === missionToShowType.todayMission ?
+                    missionData.todayMission.mission.leadText : missionData.pushMission.mission.leadText
+              }
             </Text>
             <View style={styles.lineView}>
             </View>
@@ -85,4 +92,18 @@ const styles = StyleSheet.create({
 
 });
 
-export default LeadTextPage;
+
+
+function mapStateToProps(state) {
+  return {
+    missionData: state.missionData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeadTextPage);

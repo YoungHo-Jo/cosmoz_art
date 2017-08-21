@@ -1,6 +1,6 @@
 import React from 'react';
 import {AppRegistry,} from 'react-native';
-import {App} from './MainScreen';
+import App from './MainScreen';
 import {Provider} from "react-redux";
 import configureStore from "./configureStore";
 

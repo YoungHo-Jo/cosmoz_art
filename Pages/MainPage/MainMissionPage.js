@@ -29,8 +29,8 @@ class MainMissionPage extends Component {
           {/* mission information */}
           <View style={styles.missionInfoBarContainer}>
             <MissionInformationBar
-                benefitText={params.mission.benefitText || '뇌 상상력 키우기'}
-                time={params.mission.time}/>
+                benefitText={params.benefit.text || '뇌 상상력 키우기'}
+                time={params.time}/>
           </View>
 
           {/* mission container */}
@@ -41,7 +41,7 @@ class MainMissionPage extends Component {
               <View style={styles.missionTextContainer}>
                 <Text style={styles.missionText}
                       onPress={this._onMissionPress.bind(this)}>
-                  {params.mission.missionText}
+                  {params.mission.text}
                 </Text>
               </View>
               {/* mission image */}

@@ -33,7 +33,7 @@ class TimerPage extends Component {
         {/*Mission*/}
         <View style={styles.missionTextContainer}>
           <Text style={styles.missionText}>
-            {this.props.navigation.state.params.mission.missionText}
+            {this.props.navigation.state.params.mission.text}
           </Text>
         </View>
 

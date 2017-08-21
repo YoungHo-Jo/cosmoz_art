@@ -1,9 +1,12 @@
 import userData from './userDataReducer'
+import missionData from "./missionDataReducer";
+
 import {combineReducers} from "redux";
 
 
 
 import {SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE} from "./constants";
+
 
 const initialState = {
   isMyPageDropDownListShow: false
@@ -26,7 +29,8 @@ function controlFlowReducer(state = initialState, action) {
 
 const rootReducer = combineReducers({
   userData,
-  controlFlowReducer
+  controlFlowReducer,
+  missionData,
 })
 
 export default rootReducer

@@ -17,9 +17,7 @@ import ViewPager from 'react-native-viewpager';
 import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
 import MyPage from './Pages/MyPage';
-import Title from './TitleBar/Title';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
-import LeadText from "./Pages/MainPage/LeadTextPage";
 import BottomBar from "./Pages/BottomBar";
 
 
