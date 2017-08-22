@@ -65,6 +65,7 @@ class SharePageListViewItem extends Component {
     imageURL: React.PropTypes.string.isRequired,
     keyword: React.PropTypes.string.isRequired,
     missionPK:React.PropTypes.string.isRequired,
+    onShareImagePressed: React.PropTypes.func.isRequired,
   };
 
     componentWillMount() {
@@ -86,11 +87,13 @@ class SharePageListViewItem extends Component {
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>
-                <Image
+                <TouchableHighlight onPress={() => this.props.onShareImagePressed()}>
+                  <Image
                     style={[styles.shareImage, {
-                        width: Dimensions.get('window').width * (85/100),
-                        height: Dimensions.get('window').width * (85/100) * (this.state.height/this.state.width)}]}
+                      width: Dimensions.get('window').width * (85/100),
+                      height: Dimensions.get('window').width * (85/100) * (this.state.height/this.state.width)}]}
                     source={this.state.source}/>
+                </TouchableHighlight>
                 <TouchableHighlight onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}>
                      <Image
                          style={styles.button_showother}

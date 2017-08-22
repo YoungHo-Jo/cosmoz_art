@@ -1,49 +1,50 @@
 {
-	"name": "art",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"apsl-react-native-button": "^3.1.0",
-		"eslint": "^4.3.0",
-		"i": "^0.3.5",
-		"react": "16.0.0-alpha.12",
-		"react-native": "0.46.4",
-		"react-native-animatable": "^1.2.3",
-		"react-native-camera": "^0.9.4",
-		"react-native-extended-stylesheet": "^0.6.0",
-		"react-native-firebase": "^2.1.2",
-		"react-native-keyboard-aware-scroll-view": "^0.3.0",
-		"react-native-linear-gradient": "^2.1.0",
-		"react-native-masonry": "^0.2.1",
-		"react-native-material-kit": "^0.4.1",
-		"react-native-modal-dropdown": "^0.4.4",
-		"react-native-popup-dialog": "^0.9.32",
-		"react-native-router-flux": "^4.0.0-beta.12",
-		"react-native-settings-list": "^1.6.1",
-		"react-native-sha256": "^1.0.1",
-		"react-native-splash-screen": "^2.1.0",
-		"react-native-stopwatch-timer": "0.0.19",
-		"react-native-super-grid": "^1.0.3",
-		"react-native-svg-image": "^1.1.4",
-		"react-native-svg-uri": "^1.2.0",
-		"react-native-vector-icons": "^4.2.0",
-		"react-native-viewpager": "^0.2.13",
-		"react-navigation": "^1.0.0-beta.11",
-		"react-redux": "^5.0.5",
-		"redux": "^3.7.2",
-		"redux-thunk": "^2.2.0"
-	},
-	"devDependencies": {
-		"babel-jest": "20.0.3",
-		"babel-preset-react-native": "^2.1.0",
-		"jest": "20.0.4",
-		"react-test-renderer": "16.0.0-alpha.12"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "art",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "apsl-react-native-button": "^3.1.0",
+    "eslint": "^4.3.0",
+    "i": "^0.3.5",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.4",
+    "react-native-animatable": "^1.2.3",
+    "react-native-camera": "^0.9.4",
+    "react-native-extended-stylesheet": "^0.6.0",
+    "react-native-firebase": "^2.1.2",
+    "react-native-flip-card": "^3.5.0",
+    "react-native-keyboard-aware-scroll-view": "^0.3.0",
+    "react-native-linear-gradient": "^2.1.0",
+    "react-native-masonry": "^0.2.1",
+    "react-native-material-kit": "^0.4.1",
+    "react-native-modal-dropdown": "^0.4.4",
+    "react-native-popup-dialog": "^0.9.32",
+    "react-native-router-flux": "^4.0.0-beta.12",
+    "react-native-settings-list": "^1.6.1",
+    "react-native-sha256": "^1.0.1",
+    "react-native-splash-screen": "^2.1.0",
+    "react-native-stopwatch-timer": "0.0.19",
+    "react-native-super-grid": "^1.0.3",
+    "react-native-svg-image": "^1.1.4",
+    "react-native-svg-uri": "^1.2.0",
+    "react-native-vector-icons": "^4.2.0",
+    "react-native-viewpager": "^0.2.13",
+    "react-navigation": "^1.0.0-beta.11",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "^2.1.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
