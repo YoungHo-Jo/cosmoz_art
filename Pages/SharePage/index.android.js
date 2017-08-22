@@ -26,6 +26,7 @@ class SharePage extends Component {
         <PopupDialog
           ref={(popupDialog) => this.popupDialog = popupDialog}
           dialogAnimation={new FadeAnimation({toValue: 0})}
+          animationDuration={400}
           height={'30%'}
           width={'85%'}
           dialogStyle={{marginTop: -120}}>

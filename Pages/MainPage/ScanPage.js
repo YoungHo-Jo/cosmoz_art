@@ -31,7 +31,8 @@ export default class ScanPage extends React.Component {
             {/*button container*/}
             <TouchableHighlight
                 onPress={() => this.retakePicture()}
-                style={styles.leftButton}>
+                style={styles.leftButton}
+                underlayColor={'#ffffff'}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
                   재촬영
@@ -40,7 +41,8 @@ export default class ScanPage extends React.Component {
             </TouchableHighlight>
             <TouchableHighlight
                 onPress={this._onCompletePress.bind(this)}
-                style={styles.rightButton}>
+                style={styles.rightButton}
+                underlayColor={'#ffffff'}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
                   완료

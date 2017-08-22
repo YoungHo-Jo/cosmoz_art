@@ -35,7 +35,8 @@ export default class PopupMsgBox extends React.Component {
           <View style={styles.buttonContainer}>
             <TouchableHighlight
                 onPress={() => this.props.onLeftButtonClicked()}
-                style={styles.leftButton}>
+                style={styles.leftButton}
+                underlayColor={'#ffffff'}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
                   {this.props.leftButtonText}
@@ -44,7 +45,8 @@ export default class PopupMsgBox extends React.Component {
             </TouchableHighlight>
             <TouchableHighlight
                 onPress={() => this.props.onRightButtonClicked()}
-                style={styles.rightButton}>
+                style={styles.rightButton}
+                underlayColor={'#ffffff'}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>
                   {this.props.rightButtonText}
