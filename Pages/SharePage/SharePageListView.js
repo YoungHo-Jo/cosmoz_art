@@ -21,6 +21,10 @@ class SharePageListView extends Component {
     }
   }
 
+  propTypes: {
+    onShareImagePressed: React.PropTypes.func.isRequired,
+  };
+
 
   componentDidMount() {
     this._refreshData();
@@ -32,7 +36,8 @@ class SharePageListView extends Component {
         imageURL={rowData.image_url}
         keyword={rowData.keyword}
         missionPK={rowData.mission_pk}
-        navigation={this.props.navigation}/>
+        navigation={this.props.navigation}
+        onShareImagePressed={() => this.props.onShareImagePressed()}/>
     )
   }
 
