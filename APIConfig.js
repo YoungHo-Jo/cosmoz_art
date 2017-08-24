@@ -23,7 +23,7 @@ export default APIConfig = {
   putUserAccumTime: basicURL + '/missions/private/user/time', // post
   getMissionRandomly: basicURL + '/missions/random', // get
   getTodayMission: basicURL + '/missions/mission/today', // get
-  requestNotification: basicURL + '/missions/notification/random-mission', // get
+  requestNotification: basicURL + '/missions/private/notification/random-mission', // get
 
   // users
   login: basicURL + '/users/user/login', // post

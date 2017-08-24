@@ -15,6 +15,7 @@ import {fetchLogin, fetchLogout} from "../../actions/userActions";
 import {connect} from "react-redux";
 import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "../MainPage/PopupMsgBox";
+import APIConfig from "../../APIConfig";
 
 const styles = StyleSheet.create({
     header : {
@@ -71,7 +72,24 @@ class SettingsPage extends Component {
                                            underlayColor={'#FFFFFF'}
                                            itemWidth={40}
                                            titleStyle={styles.item}
-                        />
+                        onPress={() => {
+
+                          if (this.props.userData.isLogin) {
+                            fetch(APIConfig.requestNotification, {
+                              method: 'GET',
+                              headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + this.props.userData.token
+                              }
+                            }).then(response => {
+                              if (response.status === 201) {
+                                console.log('request notification succeed');
+                              } else {
+                                console.log('request notification failed');
+                              }
+                            })
+                          }
+                        }}/>
                         <SettingsList.Item title='보낼편지'
                                            hasNavArrow={false}
                                            itemWidth={40}

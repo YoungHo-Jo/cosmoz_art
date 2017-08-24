@@ -44,28 +44,29 @@ export function fetchLogin(loginInfo) {
             .then(token => {
               console.log('Device FCM Token: ', token)
               fcmToken = token
-            })
-        console.log('try login to server...')
-        fetch(APIConfig.login, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            id: id,
-            pw: pw
-          })
-        }).then(response => {
-          if (response.status === 201) {
-            console.log('login succeed');
-            response.json().then((responseJSON) => {
-              dispatch(getLoginSuccess(responseJSON.id_token, responseJSON.user_pk, fcmToken))
-            })
-          } else {
-            console.log('login failed');
-            dispatch(getLoginFailure())
-          }
-        }).catch((err) => console.log(err))
+              console.log('try login to server...')
+              fetch(APIConfig.login, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  id: id,
+                  pw: pw,
+                  deviceToken: fcmToken
+                })
+              }).then(response => {
+                if (response.status === 201) {
+                  console.log('login succeed');
+                  response.json().then((responseJSON) => {
+                    dispatch(getLoginSuccess(responseJSON.id_token, responseJSON.user_pk, fcmToken))
+                  })
+                } else {
+                  console.log('login failed');
+                  dispatch(getLoginFailure())
+                }
+              })
+            }).catch((err) => console.log(err))
       })
     } else {
       console.log('login failed, either id or pw is missing');
