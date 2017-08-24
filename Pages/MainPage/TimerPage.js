@@ -59,6 +59,7 @@ class TimerPage extends Component {
           marginBottom={Sizes.bottomBarHeight}/>
         <BottomBar/>
 
+
         <PopupDialog
             ref={(popupDialog) => this.popupDialog = popupDialog}
             dialogAnimation={new ScaleAnimation()}

@@ -1,6 +1,6 @@
 
 
-import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS} from "./constants";
+import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "./constants";
 
 const initialState = {
   isLogin: false,
@@ -9,6 +9,7 @@ const initialState = {
   isLogging: false,
   error: false,
   userInfo: {
+    nickName: '닉네임',
     accumulationTime: 'Test 300초',
     userText: 'Test 뇌주름 스케일이 반지제왕 급',
     doneMission: null,
@@ -36,6 +37,7 @@ export default function userDataReducer(state = initialState, action) {
         isLogging: false,
         userPK: action.userPK,
         isLogin: true,
+        fcmToken: action.fcmToken
       }
     case LOGIN_FAILURE:
       console.log('loginFailure in userDataReducer')
@@ -45,6 +47,14 @@ export default function userDataReducer(state = initialState, action) {
         isLogging: false,
         userPK: null,
         isLogin: false,
+      }
+    case LOGOUT:
+      return {
+          ...state,
+        isLogin: false,
+        userPK: null,
+        userInfo: initialState.userInfo,
+        fcmToken: null,
       }
     default:
       console.log('default in userDataReducer')

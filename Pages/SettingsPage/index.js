@@ -11,9 +11,10 @@ import {
 } from 'react-native';
 
 import SettingsList from 'react-native-settings-list';
-import {fetchLogin} from "../../actions/userActions";
+import {fetchLogin, fetchLogout} from "../../actions/userActions";
 import {connect} from "react-redux";
-
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "../MainPage/PopupMsgBox";
 
 const styles = StyleSheet.create({
     header : {
@@ -46,11 +47,17 @@ class SettingsPage extends Component {
                         <SettingsList.Header headerText='계정'
                                              headerStyle={styles.header}/>
                         <SettingsList.Item
-                            title='별명'
+                            title={this.props.userData.isLogin ? this.props.userData.userInfo.nickName : '별명'}
                             titleInfo={this.props.userData.isLogin ? '로그인 했어요' : '로그인 해주세요'}
                             itemWidth={40}
                             titleStyle={styles.item}
-                            onPress={() => this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})}/>
+                            onPress={() => {
+                              if(!this.props.userData.isLogin) {
+                                this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})
+                              } else {
+                                this.popupDialog.show()
+                              }
+                            }}/>
                         {/*<SettingsList.Item*/}
                             {/*title='연결된 계정'*/}
                             {/*titleInfo='abc1234@gmail.com'*/}
@@ -88,6 +95,21 @@ class SettingsPage extends Component {
                                            titleStyle={styles.item}/>
                     </SettingsList>
                 </View>
+
+
+
+              <PopupDialog
+                  ref={(popupDialog) => this.popupDialog = popupDialog}
+                  dialogAnimation={new ScaleAnimation()}
+                  height={'30%'}>
+                <PopupMsgBox
+                    onLeftButtonClicked={() => {
+                      this.props.fetchLogout()
+                      this.popupDialog.dismiss()
+                    }}
+                    onRightButtonClicked={() => this.popupDialog.dismiss()}
+                    dialogText="로그아웃 하시겠어요?"/>
+              </PopupDialog>
             </View>
         );
     }
@@ -105,7 +127,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo))
+    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo)),
+    fetchLogout: () => dispatch(fetchLogout())
   }
 }
 

@@ -1,4 +1,4 @@
-import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS} from "../reducers/constants";
+import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../reducers/constants";
 import APIConfig from "../APIConfig";
 import {sha256} from "react-native-sha256";
 import firebase from "../firebase";
@@ -9,11 +9,12 @@ export function login() {
   }
 }
 
-export function getLoginSuccess(token, userPK) {
+export function getLoginSuccess(token, userPK, fcmToken) {
   return {
     type: LOGIN_SUCCESS,
     token,
-    userPK
+    userPK,
+    fcmToken
   }
 }
 
@@ -36,10 +37,14 @@ export function fetchLogin(loginInfo) {
       const id = loginInfo.id
 
       sha256(loginInfo.pw).then((pw) => {
+        var fcmToken = null
         console.log('id: ' + id)
         console.log('pw: ' + pw)
-        console.log(firebase.messaging().getToken()
-            .then(token => console.log('Device FCM Token: ', token)))
+        firebase.messaging().getToken()
+            .then(token => {
+              console.log('Device FCM Token: ', token)
+              fcmToken = token
+            })
         console.log('try login to server...')
         fetch(APIConfig.login, {
           method: 'POST',
@@ -54,7 +59,7 @@ export function fetchLogin(loginInfo) {
           if (response.status === 201) {
             console.log('login succeed');
             response.json().then((responseJSON) => {
-              dispatch(getLoginSuccess(responseJSON.id_token, responseJSON.user_pk))
+              dispatch(getLoginSuccess(responseJSON.id_token, responseJSON.user_pk, fcmToken))
             })
           } else {
             console.log('login failed');
@@ -66,5 +71,21 @@ export function fetchLogin(loginInfo) {
       console.log('login failed, either id or pw is missing');
       dispatch(getLoginFailure())
     }
+  }
+}
+
+
+//=============================================
+
+export function getLogout() {
+  return {
+    type: LOGOUT,
+  }
+}
+
+export function fetchLogout() {
+  return (dispatch) => {
+    dispatch(getLogout())
+    console.log('logout succeed')
   }
 }
