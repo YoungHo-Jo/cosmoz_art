@@ -11,7 +11,6 @@ import {
   View, TouchableHighlight,
   Dimensions, Image
 } from 'react-native';
-import Masonry from 'react-native-masonry';
 import GridView from 'react-native-super-grid';
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
@@ -24,6 +23,8 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {fetchDropDownListState} from "../../actions/controlFlowActions";
 import {connect} from "react-redux";
+import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupMsgBox from "../MainPage/PopupMsgBox";
 
 // list of images
 const data = [
@@ -48,7 +49,6 @@ const data = [
   {uri: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-11/30/10/enhanced/webdr15/enhanced-18265-1448896942-17.jpg'},
   {uri: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-12/30/16/enhanced/webdr04/enhanced-15965-1451509932-6.jpg'}
 ];
-
 
 
 const FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR = '#ededed';
@@ -80,10 +80,6 @@ class MyPage extends Component {
     };
   }
 
-  componentDidMount() {
-
-  }
-
   findTouchableHighlightDimensions(layout) {
     const {x, y, width, height} = layout
 
@@ -113,6 +109,17 @@ class MyPage extends Component {
   render() {
     return (
         <View style={styles.container}>
+
+          {this.props.userData.isLogin ?
+              this.renderRealMyPage() : this.renderLoginGuidance()}
+
+        </View>
+    );
+  }
+
+  renderRealMyPage() {
+    return (
+        <View style={styles.realMyPage}>
           <View style={[styles.accumulationTextContainer]}>
             <Text style={[styles.accumulationText]}>
               {this.props.userData.userInfo.accumulationTime}
@@ -195,22 +202,48 @@ class MyPage extends Component {
               </View>
             </TouchableHighlight>
           </View>
+
+
           <View style={styles.listViewContainer}>
             <UpperLinearGradient/>
             <View style={{paddingBottom: 20,}}>
               <GridView
-                style={{height: '100%'}}
-                items={data}
-                itemWidth={Dimensions.get('window').width * (42/100)}
-                renderItem={this.renderItem.bind(this)}
-                spacing={20}
-                fixed={true}
+                  style={{height: '100%'}}
+                  items={data}
+                  itemWidth={Dimensions.get('window').width * (42 / 100)}
+                  renderItem={this.renderItem.bind(this)}
+                  spacing={20}
+                  fixed={true}
               />
             </View>
             <LowerLinearGradient/>
           </View>
         </View>
-    );
+    )
+  }
+
+  renderLoginGuidance() {
+    return (
+        <View style={styles.loginGuidanceContainer}>
+          <UpperLinearGradient/>
+
+          {/*<Text style={styles.loginGuidanceText}>*/}
+          {/*가족이 되시면 볼 수 있어요*/}
+          {/*</Text>*/}
+
+
+          <TouchableHighlight style={styles.loginButton}
+                              onPress={() => {
+                                this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})
+                              }}
+                              underlayColor={Colors.titleBarColor}>
+            <Text style={styles.loginText}>
+              로그인
+            </Text>
+          </TouchableHighlight>
+          <LowerLinearGradient/>
+        </View>
+    )
   }
 
   _onFirBtnClick = () => {
@@ -274,11 +307,11 @@ class MyPage extends Component {
 
   renderItem(itemData) {
     return (
-      <MyPageGridViewItem
-          imageURL = {itemData.uri}
-          //keyword = {itemData.keyword}
-          //missionPK = {itemData.mission_pk}
-      />
+        <MyPageGridViewItem
+            imageURL={itemData.uri}
+            //keyword = {itemData.keyword}
+            //missionPK = {itemData.mission_pk}
+        />
     );
   }
 }
@@ -395,7 +428,38 @@ const styles = StyleSheet.create({
   },
   dropDownTextHighlightStyle: {
     overlayColor: FILTERING_BUTTON_CONTAINER_BAR_BG_COLOR
+  },
+  realMyPage: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  loginGuidanceContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loginGuidanceText: {
+    fontSize: 25,
+    color: Colors.defaultTextColor,
+    fontWeight: Sizes.fontWeight,
+
+    marginTop: 100,
+  },
+  loginText: {
+    fontSize: 30,
+    fontWeight: Sizes.middleFontWeight,
+    color: Colors.defaultTextColor
+  },
+  loginButton: {
+    width: 100,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    borderColor: '#000000',
+    borderWidth: 3,
   }
+
 });
 
 function mapStateToProps(state) {
