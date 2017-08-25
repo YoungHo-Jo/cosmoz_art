@@ -61,7 +61,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headingText: {
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333333',
     alignSelf: 'center',
     textAlignVertical: 'center',
     height: (Dimensions.get('window').height-95) * (14/100),

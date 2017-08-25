@@ -72,27 +72,27 @@ class Login extends Component {
                 <Text style={styles.text_setting}>자동로그인</Text>
                 <MKSwitch
 
-                  onColor="rgba(255,152,0,.3)"
-                  thumbOnColor={MKColor.Orange}
+                  onColor='rgba(0, 160, 235, 0.3)'
+                  thumbOnColor='rgba(0, 160, 235, 1)'
                   trackSize={15}
                   trackLength={35}
                   thumbRadius={10}
-                  rippleColor="rgba(255,152,0,.2)"
-                  onPress={() => console.log('orange switch pressed')}
-                  onCheckedChange={(e) => console.log('orange switch checked', e)}/>
-              </View>
+                  rippleColor='rgba(0, 160, 235, 0.2)'
+                  onPress={() => console.log('auto login switch pressed')}
+                  onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
+            </View>
               <View style={styles.info_setting}>
                 <Text style={styles.text_setting}>아이디저장</Text>
                 <MKSwitch
 
-                  onColor="rgba(255,152,0,.3)"
-                  thumbOnColor={MKColor.Orange}
+                  onColor='rgba(0, 160, 235, 0.3)'
+                  thumbOnColor='rgba(0, 160, 235, 1)'
                   trackSize={15}
                   trackLength={35}
                   thumbRadius={10}
-                  rippleColor="rgba(255,152,0,.2)"
-                  onPress={() => console.log('orange switch pressed')}
-                  onCheckedChange={(e) => console.log('orange switch checked', e)}/>
+                  rippleColor='rgba(0, 160, 235, 0.2)'
+                  onPress={() => console.log('id save switch pressed')}
+                  onCheckedChange={(e) => console.log('id save switch checked', e)}/>
               </View>
               <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
                 회원가입

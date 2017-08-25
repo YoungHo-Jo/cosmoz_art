@@ -45,11 +45,11 @@ class TimerPage extends Component {
               color={'#777777'}/>
           <MKSwitch
               style={styles.appleSwitch}
-              onColor="rgba(255,152,0,.3)"
-              thumbOnColor={MKColor.Orange}
-              rippleColor="rgba(255,152,0,.2)"
-              onPress={() => console.log('orange switch pressed')}
-              onCheckedChange={(e) => console.log('orange switch checked', e)}/>
+              onColor='rgba(0, 160, 235, 0.3)'
+              thumbOnColor='rgba(0, 160, 235, 1)'
+              rippleColor='rgba(0, 160, 235, 0.2)'
+              onPress={() => console.log('vibration switch pressed')}
+              onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
           <Icon
               name='bell-off'
               size={28}
