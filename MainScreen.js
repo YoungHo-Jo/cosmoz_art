@@ -24,6 +24,7 @@ import IntroPage1 from './Pages/IntroPage/IntroPage1';
 import IntroPage2 from './Pages/IntroPage/IntroPage2';
 import IntroPage3 from './Pages/IntroPage/IntroPage3';
 import IntroPage4 from './Pages/IntroPage/IntroPage4';
+import SignUpPage from './Pages/SignUpPage';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
@@ -273,6 +274,13 @@ const App = StackNavigator({
   },
   IntroPage4: {
     screen: IntroPage4,
+    navigationOptions: {
+      headerStyle: DefaultStyles.headerStyle,
+      headerTitle: (<Title/>)
+    }
+  },
+  SignUpPage: {
+    screen: SignUpPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (<Title/>)

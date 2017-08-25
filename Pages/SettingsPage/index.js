@@ -78,7 +78,8 @@ class SettingsPage extends Component {
                                              headerStyle={styles.header}/>
                         <SettingsList.Item title='공지사항'
                                            itemWidth={40}
-                                           titleStyle={styles.item}/>
+                                           titleStyle={styles.item}
+                                           onPress={() => this.props.navigation.navigate('SignUpPage', {...this.props.navigation.state.params})}/>
                         <SettingsList.Item title='버전'
                                            itemWidth={40}
                                            titleStyle={styles.item}
