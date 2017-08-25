@@ -107,6 +107,9 @@ class MainScreen extends Component {
     // After having done stuff (suac as async tasks) hide the splash screen
     SplashScreen.hide();
 
+
+
+    // push notification 받을시 작동
     firebase.messaging().onMessage((message) => {
       console.log('firebase onMessage')
       console.log('message: ')
@@ -148,7 +151,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    missionData: state.missionData
+    missionData: state.missionData,
+    controlData: state.controlFlowReducer
   }
 }
 

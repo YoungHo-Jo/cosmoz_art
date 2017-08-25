@@ -26,3 +26,5 @@ export function getWindowSize() {
     height: Dimensions.get('window').height
   }
 }
+
+

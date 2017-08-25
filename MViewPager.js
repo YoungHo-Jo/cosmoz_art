@@ -13,8 +13,8 @@ import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
 import MyPage from './Pages/MyPage';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
-import BottomBar from "./Pages/BottomBar";
-import {getOS, notifyMessage} from "./Utilis";
+import {fetchCurrentViewPage} from "./actions/controlFlowActions";
+import {connect} from "react-redux";
 
 
 var width = Dimensions.get('window').width
@@ -35,18 +35,42 @@ class MViewPager extends Component {
                     bottom: Sizes.bottomBarHeight / 2 - 5
                   }}
                   loop={false}
-                  index={0}
-                  height={height - Sizes.titleBarHeight - 20}>
+                  index={this.props.controlData.initialViewPage}
+                  height={height - Sizes.titleBarHeight - 20}
+                  onIndexChanged={index => this._onIndexChanged(index)}>
 
             <MyPage navigation={this.props.navigation}/>
             <MainPage navigation={this.props.navigation}/>
             <SharePage navigation={this.props.navigation}/>
           </Swiper>
         </View>
-
     )
   }
 
+  _onIndexChanged(index) {
+    switch (index) {
+      case 0:
+        this.props.navigation.setParams({
+          currentViewPager: 0
+        })
+        return this.props.fetchCurrentViewPage(0)
+      case 1:
+        this.props.navigation.setParams({
+          currentViewPager: 1
+        })
+        return this.props.fetchCurrentViewPage(1)
+      case 2:
+        this.props.navigation.setParams({
+          currentViewPager: 2
+        })
+        return this.props.fetchCurrentViewPage(2)
+      default:
+        this.props.navigation.setParams({
+          currentViewPager: 1
+        })
+        this.props.fetchCurrentViewPage(1)
+    }
+  }
 }
 
 const styles = StyleSheet.create({
@@ -86,4 +110,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MViewPager;
+
+function mapStateToProps(state) {
+  return {
+    controlData: state.controlFlowReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCurrentViewPage: page => dispatch(fetchCurrentViewPage(page))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MViewPager);
