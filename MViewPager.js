@@ -2,16 +2,11 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   View,
-  Text,
-  Dimensions,
-  Platform,
-  ToastAndroid,
-  AlertIOS,
-  Button,
+  Dimensions
 } from 'react-native';
 
 // external
-import ViewPager from 'react-native-viewpager';
+import Swiper from 'react-native-swiper'
 
 // ours
 import MainPage from './Pages/MainPage';
@@ -19,143 +14,39 @@ import SharePage from './Pages/SharePage';
 import MyPage from './Pages/MyPage';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import BottomBar from "./Pages/BottomBar";
+import {getOS, notifyMessage} from "./Utilis";
 
 
-function notifyMessage(msg) {
-  if (Platform.OS === 'android') {
-    ToastAndroid.show(msg, ToastAndroid.SHORT)
-  } else {
-    AlertIOS.alert(msg);
-  }
-}
-
-var deviceWidth = Dimensions
-    .get('window')
-    .width;
-var PAGES = ['myPage', 'mainPage', 'sharePage'];
+var width = Dimensions.get('window').width
+var height = Dimensions.get('window').height
 
 class MViewPager extends Component {
   constructor(props) {
     super(props);
-
-    var ds = new ViewPager.DataSource({
-      pageHasChanged: (p1, p2) => p1 !== p2
-    });
-    this.state = {
-      dataSource: ds.cloneWithPages(PAGES),
-    };
-  }
-
-  componentDidMount() {
-    fetch('http://52.78.33.177:10424/missions/mission/random')
-        .then((response) => response.json())
-        .then((responseJson) => {
-          this.props.navigation.setParams({
-            mission: {
-              missionText: responseJson[0].mission_text,
-              leadText: responseJson[0].lead_text,
-              benefitText: responseJson[0].benefit_text,
-              type: responseJson[0].type,
-              time: responseJson[0].time,
-              missionPK: responseJson[0].pk
-            }
-          })
-          return responseJson;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
   }
 
   render() {
+
     return (
-        <ViewPager
-            style={styles.page}
-            dataSource={this.state.dataSource}
-            renderPage={this._renderPage.bind(this)}
-            onChangePage={this._onChangePage.bind(this)}
-            isLoop={false}
-            autoPlay={false}
-            initialPage={this.props.initialPage}
-            navigation={this.props.navigation}>
-        </ViewPager>
+        <View style={styles.container}>
+          <Swiper dot={(<View style={styles.dot}/>)}
+                  activeDot={(<View style={[styles.dot, {backgroundColor: Colors.defaultTextColor}]}/>)}
+                  paginationStyle={{
+                    bottom: Sizes.bottomBarHeight / 2 - 5
+                  }}
+                  loop={false}
+                  index={0}
+                  height={height - Sizes.titleBarHeight - 20}>
 
-    );
-  }
-
-  _renderPage = function (data, pageID) {
-    var page = (
-        <View style={styles.pageContainer}>
-          <View style={styles.page}>
-            <Text style={styles.text}>{data}</Text>
-            <Text style={styles.text}>{pageID}</Text>
-          </View>
+            <MyPage navigation={this.props.navigation}/>
+            <MainPage navigation={this.props.navigation}/>
+            <SharePage navigation={this.props.navigation}/>
+          </Swiper>
         </View>
-    );
 
-    switch (pageID) {
-      case '0':
-        // my page
-        page = (
-            <View style={styles.pageContainer}>
-              <View style={styles.pageTopContainer}>
-                <MyPage
-                    navigation={this.props.navigation}/>
-              </View>
-              <View style={styles.pageBottomContainer}>
-
-              </View>
-            </View>
-        );
-        break;
-      case '1':
-        // main page
-        page = (
-            <View style={styles.pageContainer}>
-              <View style={styles.pageTopContainer}>
-                <MainPage
-                    navigation={this.props.navigation}/>
-              </View>
-              <BottomBar/>
-            </View>
-        );
-        break;
-      case '2':
-        // share page
-        page = (
-            <View style={styles.pageContainer}>
-              <View style={styles.pageTopContainer}>
-                <SharePage
-                    navigation={this.props.navigation}/>
-              </View>
-              <BottomBar/>
-            </View>
-        );
-        break;
-      default:
-    }
-    return page;
-  };
-
-  _onChangePage(page) {
-    switch (page) {
-      case 0:
-        this.props.navigation.setParams({
-          currentViewPager: 0
-        })
-        break;
-      case 1:
-        this.props.navigation.setParams({
-          currentViewPager: 1
-        })
-        break;
-      case 2:
-        this.props.navigation.setParams({
-          currentViewPager: 2
-        })
-        break;
-    }
+    )
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -182,6 +73,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center'
   },
+  dot: {
+    backgroundColor: '#e7e7e7',
+    width: 9,
+    height: 9,
+    borderRadius: 7,
+    marginLeft: 7,
+    marginRight: 7
+  },
+  container: {
+    flex: 1,
+  }
 });
 
 export default MViewPager;

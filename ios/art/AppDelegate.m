@@ -13,7 +13,7 @@
 #import <React/RCTRootView.h>
 #import <Firebase.h>
 #import "RNFirebaseMessaging.h"
-#inport "SplashScreen.h"
+#import "SplashScreen.h"
 
 
 

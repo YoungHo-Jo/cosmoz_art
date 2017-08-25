@@ -71,7 +71,7 @@ class MainScreen extends Component {
 
             }
           </View>
-      )
+      ),
     }
   }
 

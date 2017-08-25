@@ -25,6 +25,7 @@ import {fetchDropDownListState} from "../../actions/controlFlowActions";
 import {connect} from "react-redux";
 import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "../MainPage/PopupMsgBox";
+import BottomBar from "../BottomBar";
 
 // list of images
 const data = [
@@ -111,7 +112,7 @@ class MyPage extends Component {
         <View style={styles.container}>
 
           {this.props.userData.isLogin ?
-              this.renderRealMyPage() : this.renderLoginGuidance()}
+          this.renderRealMyPage() : this.renderLoginGuidance()}
 
         </View>
     );
@@ -338,6 +339,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    marginBottom: Sizes.bottomBarHeight,
     backgroundColor: Colors.defaultPageBgColor
   },
   center: {
