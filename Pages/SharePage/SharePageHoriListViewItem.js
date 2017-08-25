@@ -13,6 +13,7 @@ import{
   Image,
   ListView,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import {Sizes} from "../../DefaultStyles";
 
@@ -50,6 +51,7 @@ class SharePageHoriListViewItem extends Component{
   }
 
   propTypes:{
+    onClickImage: React.PropTypes.func.isRequired,
     shareImageURL: React.PropTypes.string.isRequired,
     subject:React.PropTypes.string.isRequired,
     nickname:React.PropTypes.string.isRequired,
@@ -74,11 +76,15 @@ class SharePageHoriListViewItem extends Component{
     return(
         <View style={styles.container}>
           <View style={styles.shareItem}>
-            <Image
-                style={[styles.shareImage, {
-                  width: (Dimensions.get('window').height-95) * (66/100) * (this.state.width/this.state.height),
-                  height: (Dimensions.get('window').height - 95) * (66/100)}]}
-                source={this.state.source}/>
+            <TouchableHighlight
+              underlayColor={'#ffffff'}
+              onPress={() => this.props.onClickImage()}>
+              <Image
+                  style={[styles.shareImage, {
+                    width: (Dimensions.get('window').height-95) * (66/100) * (this.state.width/this.state.height),
+                    height: (Dimensions.get('window').height - 95) * (66/100)}]}
+                  source={this.state.source}/>
+            </TouchableHighlight>
             <View style={styles.info}>
               <Image style={styles.profile} source={require('../../icons/logo.png')}/>
             </View>
