@@ -22,7 +22,7 @@ const styles= StyleSheet.create({
         flexDirection:'column',
         borderBottomColor:'#FFFFFF',
         borderBottomWidth:2,
-        paddingTop:50,
+        paddingTop:20,
     },
     shareImage:{
         flex:1,
@@ -30,12 +30,18 @@ const styles= StyleSheet.create({
         alignSelf:'center',
         resizeMode: 'contain',
     },
-    info:{
-        flex : 1,
-        flexDirection : 'column',
-        alignSelf : 'center',
-        paddingTop:10,
-        height:20
+    shareKeyword: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: Colors.defaultTextColor,
+        alignSelf: 'center',
+        textAlign: 'center',
+        paddingVertical: 20,
+    },
+    shareKeywordContainer: {
+        width: Dimensions.get('window').width * (85/100),
+        backgroundColor: '#ffffff',
+        alignSelf: 'center',
     },
     profile:{
         height:50,
@@ -50,7 +56,7 @@ const styles= StyleSheet.create({
         resizeMode:'contain',
         alignSelf:'center',
         marginTop:25,
-        marginBottom:18,
+        marginBottom:20,
     }
 });
 
@@ -87,6 +93,11 @@ class SharePageListViewItem extends Component {
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>
+                <View style={styles.shareKeywordContainer}>
+                  <Text style={styles.shareKeyword}>
+                    {"우주외계인"}
+                  </Text>
+                </View>
                 <TouchableHighlight
                   underlayColor={'#ffffff'}
                   onPress={() => this.props.onShareImagePressed()}>

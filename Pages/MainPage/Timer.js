@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image,} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
+import * as Progress from 'react-native-progress';
 import {Colors} from "../../DefaultStyles";
 
 export default class Timer extends Component {
@@ -21,10 +22,13 @@ export default class Timer extends Component {
         <View style={styles.blockContainer}>
           {/*timerAnimation*/}
           <View style={styles.timerContainer}>
-            <Image
-                source={require('./timer.png')}
-                resizeMode='contain'
-                style={eStyles.timer}/>
+            <Progress.Circle
+              size={160}
+              thickness={15}
+              color={'rgba(255, 255, 255, 0)'}
+              unfilledColor={'rgba(0, 160, 235, 1)'}
+              borderWidth={0}
+              progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
           </View>
 
           {/*timeAnimation*/}
@@ -68,8 +72,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   timerContainer: {
-    height: 130,
-    width: 130,
+    height: 160,
+    width: 160,
     marginBottom: 10,
   },
   timeContainer: {
