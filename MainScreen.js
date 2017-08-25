@@ -291,7 +291,11 @@ const App = StackNavigator({
   ImageViewerPage: {
     screen: ImageViewerPage,
     navigationOptions: {
-      header: null,
+      headerTitle: null,
+      headerStyle: {
+        backgroundColor: '#000000',
+      },
+      headerTintColor: '#ffffff'
     }
   }
 }, {
