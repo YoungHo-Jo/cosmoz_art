@@ -41,13 +41,18 @@ const styles= StyleSheet.create({
     width: 50,
     resizeMode:'contain',
     alignSelf:'center',
+  },
+  likeButtonContainer: {
+    justifyContent: 'center',
   }
 });
 
 class SharePageHoriListViewItem extends Component{
   constructor(props) {
     super(props);
-    this.state = {source: {uri: this.props.shareImageURL}};
+    this.state = {
+      source: {uri: this.props.shareImageURL},
+      isLiked: false};
   }
 
   propTypes:{
@@ -86,7 +91,12 @@ class SharePageHoriListViewItem extends Component{
                   source={this.state.source}/>
             </TouchableHighlight>
             <View style={styles.info}>
-              <Image style={styles.profile} source={require('../../icons/logo.png')}/>
+              <TouchableHighlight
+                style={styles.likeButtonContainer}
+                underlayColor={'#ffffff'}
+                onPress={() => this.setState({isLiked: !this.state.isLiked})}>
+                <Image style={styles.profile} source={this.state.isLiked ? require('../../icons/logo.png') : require('../../icons/settings.png')}/>
+              </TouchableHighlight>
             </View>
           </View>
         </View>

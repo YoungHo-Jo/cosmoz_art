@@ -404,6 +404,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
+    marginBottom: Sizes.bottomBarHeight,
   },
   selectedButton: {
     backgroundColor: Colors.titleBarColor
