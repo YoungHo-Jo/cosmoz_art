@@ -276,6 +276,7 @@ class MyPage extends Component {
     return (
       <MyPageGridViewItem
           imageURL = {itemData.uri}
+          onClickImage = {() => this.props.navigation.navigate('ImageViewerPage', {...this.props.navigation.state.params, imageURL: itemData.uri})}
           //keyword = {itemData.keyword}
           //missionPK = {itemData.mission_pk}
       />

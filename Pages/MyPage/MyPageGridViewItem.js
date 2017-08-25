@@ -4,20 +4,24 @@ import {
   View,
   Image,
   Dimensions,
+  TouchableHighlight
 } from 'react-native';
 
 class MyPageGridViewItem extends Component {
-  /*propTypes: {
+  propTypes: {
     imageURL: React.PropTypes.string.isRequired,
-    keyword: React.PropTypes.string.isRequired,
-    missionPK:React.PropTypes.string.isRequired,
-  }*/
+    onClickImage: React.PropTypes.func.isRequired,
+  }
 
   render(){
     return(
-      <Image
-        style={styles.myImage}
-        source={{uri: this.props.imageURL}}/>
+      <TouchableHighlight
+        underlayColor={'#ffffff'}
+        onPress={() => this.props.onClickImage()}>
+        <Image
+          style={styles.myImage}
+          source={{uri: this.props.imageURL}}/>
+      </TouchableHighlight>
     );
   }
 }

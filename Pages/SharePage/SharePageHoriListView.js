@@ -20,6 +20,7 @@ class SharePageHoriListView extends Component {
 
   _renderRow(rowData) {
     return <SharePageHoriListViewItem
+              onClickImage = {() => this.props.navigation.navigate('ImageViewerPage', {...this.props.navigation.state.params, imageURL: rowData.image_url})}
               shareImageURL={rowData.image_url}
               subject={rowData.keyword}
               nickname={rowData.mission_pk/*For test; Change it when attaching server code*/}/>;
