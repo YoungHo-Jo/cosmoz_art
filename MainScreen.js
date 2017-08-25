@@ -27,7 +27,6 @@ import IntroPage4 from './Pages/IntroPage/IntroPage4';
 import SignUpPage from './Pages/SignUpPage';
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import SettingsPage from './Pages/SettingsPage'
 import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
@@ -37,11 +36,8 @@ import firebase from './firebase'
 import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./Pages/MainPage/PopupMsgBox";
 import {missionToShowType} from "./reducers/missionDataReducer";
+import {INITIAL_VIEW_PAGE} from "./reducers/index";
 
-
-
-
-const INITIAL_PAGE_NUM = 1
 
 class MainScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -82,7 +78,7 @@ class MainScreen extends Component {
           <View style={styles.viewPagerContainer}>
             <MViewPager
                 navigation={this.props.navigation}
-                initialPage={INITIAL_PAGE_NUM}/>
+                initialPage={INITIAL_VIEW_PAGE}/>
           </View>
 
           <PopupDialog
@@ -145,7 +141,6 @@ const styles = StyleSheet.create({
     marginRight: 0,
     flexDirection: 'row',
   }
-
 });
 
 
@@ -184,7 +179,8 @@ const App = StackNavigator({
     screen: MainMission,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: (<Title/>),
+      headerBackTitleStyle: {color: Colors.defaultTextColor}
     }
   },
   ViewPager: {
@@ -204,7 +200,8 @@ const App = StackNavigator({
     screen: TimerPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      // headerTitle: (<Title/>)
+      headerTitle: '미션 중...'
     }
   },
   CameraPage: {
@@ -292,7 +289,7 @@ const App = StackNavigator({
   },
 }, {
   initialRouteParams: {
-    currentViewPager: INITIAL_PAGE_NUM,
+    currentViewPager: INITIAL_VIEW_PAGE,
     mission: {
       leadText: 'leadText loading...',
       time: 'time loading...',

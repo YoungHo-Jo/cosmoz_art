@@ -8,7 +8,7 @@ import {combineReducers} from "redux";
 import {SET_CURRENT_VIEWPAGE, SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE} from "./constants";
 
 
-const INITIAL_VIEW_PAGE = 1
+export const INITIAL_VIEW_PAGE = 1
 const initialState = {
   isMyPageDropDownListShow: false,
   currentViewPage: INITIAL_VIEW_PAGE,
