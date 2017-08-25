@@ -13,7 +13,7 @@
 #import <React/RCTRootView.h>
 #import <Firebase.h>
 #import "RNFirebaseMessaging.h"
-
+#inport "SplashScreen.h"
 
 
 
@@ -38,6 +38,7 @@
   [self.window makeKeyAndVisible];
   [FIRApp configure];
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+  [SplashScreen show];
   
   return YES;
 }
