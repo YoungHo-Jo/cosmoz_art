@@ -25,7 +25,7 @@ class TimerPage extends Component {
         {/*Timer*/}
         <View style={styles.timerContainer}>
           <Timer
-              start={this.state.timerStart}
+            start={this.state.timerStart}
             onTimerFinished={() => this._moveToNextPage()}
             onPressCountDown={() => this.popupDialog.show()}/>
         </View>
@@ -119,7 +119,9 @@ const styles = StyleSheet.create({
     fontWeight: Sizes.middleFontWeight,
     fontSize: Sizes.missionFontSize,
     textAlign: 'center',
+    lineHeight: 40,
     color: Colors.defaultTextColor,
+    marginHorizontal: 50,
   },
   toggleContainer: {
     position: 'absolute',

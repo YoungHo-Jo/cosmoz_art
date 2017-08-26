@@ -5,6 +5,13 @@ import * as Progress from 'react-native-progress';
 import {Colors} from "../../DefaultStyles";
 
 export default class Timer extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      remainTime: null,
+      totalTime: null,
+    }
+  }
 
   static propTypes = {
     onTimerFinished: React.PropTypes.func.isRequired,
@@ -28,17 +35,20 @@ export default class Timer extends Component {
               color={'rgba(255, 255, 255, 0)'}
               unfilledColor={'rgba(0, 160, 235, 1)'}
               borderWidth={0}
+              indeterminate={true}
               progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
           </View>
 
           {/*timeAnimation*/}
           <View style={styles.timeContainer}>
-            <CountDown totalDuration={10000} start={this.props.start}
-                   reset={() => console.log('rest')}
+            <CountDown
+                   totalDuration={40000}
+                   start={this.props.start}
+                   reset={() => console.log('reset')}
                    options={countDownOptions}
                    handleFinish={this._onCountDownFinished.bind(this)}
                    getTime={(time) => console.log('current: ' + time)}
-            onPress={() => this.props.onPressCountDown()}/>
+                   onPress={() => this.props.onPressCountDown()}/>
           </View>
         </View>
     );

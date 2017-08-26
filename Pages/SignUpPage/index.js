@@ -41,7 +41,8 @@ class SignUpPage extends Component {
                 onClickPrev={() => this.onClickPrev()}/>
               <LifeSubmitPage
                 onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
+                onClickPrev={() => this.onClickPrev()}
+                navigation={this.props.navigation}/>
             </Swiper>
             <BottomBar style={styles.progressContainer}>
               <Progress.Bar
