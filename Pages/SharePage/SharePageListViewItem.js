@@ -22,7 +22,7 @@ const styles= StyleSheet.create({
         flexDirection:'column',
         borderBottomColor:'#FFFFFF',
         borderBottomWidth:2,
-        paddingTop:20,
+        paddingTop:10,
     },
     shareImage:{
         flex:1,
@@ -45,8 +45,8 @@ const styles= StyleSheet.create({
         paddingVertical: 20,
     },
     shareKeywordContainer: {
-        width: Dimensions.get('window').width * (85/100),
-        height: 60,
+        width: Dimensions.get('window').width * (85/100) - 20,
+        height: 80,
         alignSelf: 'center',
         flexDirection: 'row',
     },
@@ -103,13 +103,13 @@ class SharePageListViewItem extends Component {
                 <View style={styles.shareKeywordContainer}>
                   <Image
                     style={styles.quotemark}
-                    source={require('../../icons/user.png')}/>
+                    source={require('../../icons/double_quotation_marks_left.png')}/>
                   <Text style={styles.shareKeyword}>
                     {"우주외계인"}
                   </Text>
                   <Image
                     style={styles.quotemark}
-                    source={require('../../icons/user.png')}/>
+                    source={require('../../icons/double_quotation_marks_right.png')}/>
                 </View>
                 <TouchableHighlight
                   underlayColor={'#ffffff'}

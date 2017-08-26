@@ -25,6 +25,7 @@ import IntroPage2 from './Pages/IntroPage/IntroPage2';
 import IntroPage3 from './Pages/IntroPage/IntroPage3';
 import IntroPage4 from './Pages/IntroPage/IntroPage4';
 import SignUpPage from './Pages/SignUpPage';
+import LifeSubmitPage from './Pages/SignUpPage/LifeSubmitPage'
 import ImageViewerPage from './Pages/ImageViewerPage';
 
 import Icon from 'react-native-vector-icons/Ionicons'

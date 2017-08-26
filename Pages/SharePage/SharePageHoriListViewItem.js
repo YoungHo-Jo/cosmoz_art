@@ -95,7 +95,7 @@ class SharePageHoriListViewItem extends Component{
                 style={styles.likeButtonContainer}
                 underlayColor={'#ffffff'}
                 onPress={() => this.setState({isLiked: !this.state.isLiked})}>
-                <Image style={styles.profile} source={this.state.isLiked ? require('../../icons/logo.png') : require('../../icons/settings.png')}/>
+                <Image style={styles.profile} source={this.state.isLiked ? require('../../icons/logo.png') : require('../../icons/logo_uncolor.png')}/>
               </TouchableHighlight>
             </View>
           </View>

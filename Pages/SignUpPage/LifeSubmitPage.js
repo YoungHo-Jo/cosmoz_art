@@ -4,6 +4,8 @@ import {StyleSheet, Text, TextInput, View, TouchableHighlight, Dimensions} from 
 import LowerLinearGradient from '../LowerLinearGradient';
 import { Sizes, Colors, } from "../../DefaultStyles";
 
+import {NavigationActions} from "react-navigation";
+
 class LifeSubmitPage extends Component {
   constructor(props) {
     super(props);
@@ -117,7 +119,15 @@ class LifeSubmitPage extends Component {
           </TouchableHighlight>
           <TouchableHighlight
             style={styles.rightDirectionButton}
-            underlayColor={'#ffffff'}>
+            underlayColor={'#ffffff'}
+            onPress={() => {
+              const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                  NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+                ]
+              });
+              this.props.navigation.dispatch(resetAction)}}>
             <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#3d3d3d',}]}>
               <Text style={[styles.directButtonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
                 {"완료"}
