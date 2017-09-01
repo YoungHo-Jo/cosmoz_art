@@ -12,6 +12,10 @@ const MISSION_ICON_SIZE = 120;
 const MISSION_ICON_COLOR = '#111111';
 
 class IntroPage2 extends Component {
+  propTypes: {
+    onClickNext: React.PropTypes.func.isRequired,
+  }
+
   render() {
     return (
       <View style={styles.blockContainer}>
@@ -20,24 +24,17 @@ class IntroPage2 extends Component {
           <Text style={styles.introImageText}>
             {"알림"}
           </Text>
-          <Icon
-            name='md-notifications'
-            style={styles.notiIcon}
-            size={MISSION_ICON_SIZE}
-            color={MISSION_ICON_COLOR}
-            backgroundColor={Colors.defaultPageBgColor}/>
+          <Image
+            source={require('../../icons/intro_noti.png')}
+            style={styles.notiIcon}/>
         </View>
         <View style={styles.introInfoContainer}>
           <Text
             style={styles.introText}
-            onPress={() => this.props.navigation.navigate('IntroPage3', {...this.props.navigation.state.params})}>
+            onPress={() => this.props.onClickNext()}>
             {"그런데, 질문 있어요."}
           </Text>
-          <Text style={styles.introProgressText}>
-            {"2 / 4"}
-          </Text>
         </View>
-        <LowerLinearGradient/>
       </View>
     );
   }
@@ -55,11 +52,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   introImageText: {
-    fontSize: 20,
+    fontSize: 25,
+    fontWeight: 'bold',
     alignSelf: 'center',
-    marginTop: 70,
-    marginBottom: 20,
-    color: '#333333'
+    marginTop: 50,
+    marginBottom: 30,
+    color: '#333333',
   },
   introInfoContainer: {
     flex: 1,
@@ -70,12 +68,16 @@ const styles = StyleSheet.create({
   },
   introText: {
     textAlign: 'center',
-    fontSize: 22,
-    lineHeight: 32,
+    fontSize: 20,
+    lineHeight: 30,
     color: '#333333',
   },
   notiIcon: {
+    width: 150,
+    height: 120,
+    resizeMode: 'contain',
     alignSelf: 'center',
+    marginRight: 20,
   },
   introProgressText: {
     fontSize: 16,

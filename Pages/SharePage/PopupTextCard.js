@@ -22,7 +22,7 @@ export default class PopupTextCard extends React.Component {
       <View style={styles.container}>
         <TouchableHighlight
           style={styles.textContainer}
-          underlayColor={'#ffffff'}
+          underlayColor={'transparent'}
           onPress={() => this.props.onTextPressed()}>
           <Text style={styles.text}>
             {this.props.dialogText}

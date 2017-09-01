@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons'
-import {NavigationActions} from "react-navigation";
 
 import {Sizes, Colors} from '../../DefaultStyles';
 import LowerLinearGradient from "../LowerLinearGradient";
@@ -12,10 +11,11 @@ const MISSION_ICON_SIZE = 60;
 const MISSION_ICON_COLOR = '#111111';
 
 class IntroPage1 extends Component {
-  render() {
-    const {navigate} = this.props.navigation;
-    const {params} = this.props.navigation.state
+  propTypes: {
+    onClickNext: React.PropTypes.func.isRequired,
+  }
 
+  render() {
     return (
       <View style={styles.blockContainer}>
         {/* intro information; icon */}
@@ -36,18 +36,10 @@ class IntroPage1 extends Component {
             size={MISSION_ICON_SIZE}
             color={MISSION_ICON_COLOR}
             backgroundColor={Colors.defaultPageBgColor}
-            onPress={() => this.props.navigation.navigate('IntroPage2', {...this.props.navigation.state.params})}/>
-          <Text style={styles.introProgressText}>
-            {"1 / 4"}
-          </Text>
+            onPress={() => this.props.onClickNext()}/>
         </View>
-        <LowerLinearGradient/>
       </View>
     );
-  }
-
-  _onIntroPress() {
-    this.popupDialog.show()
   }
 }
 
@@ -62,7 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: 70,
+    width: 100,
     resizeMode: 'contain',
     alignSelf: 'center',
   },
@@ -75,12 +67,13 @@ const styles = StyleSheet.create({
   },
   introText: {
     textAlign: 'center',
-    fontSize: 22,
-    lineHeight: 32,
+    fontSize: 20,
+    lineHeight: 30,
     color: '#333333',
   },
   clickIcon: {
     alignSelf: 'center',
+    marginBottom: 80,
   },
   introProgressText: {
     fontSize: 16,

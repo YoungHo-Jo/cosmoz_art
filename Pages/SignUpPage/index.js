@@ -24,6 +24,7 @@ class SignUpPage extends Component {
   render() {
     return(
         <View style={styles.container}>
+          <KeyboardAwareScrollView>
             <Swiper
               ref={(Swiper) => {this.swiper = Swiper;}}
               style={styles.wrapper}
@@ -55,6 +56,7 @@ class SignUpPage extends Component {
                 borderWidth={0}
                 progress={this.state.progress}/>
             </BottomBar>
+          </KeyboardAwareScrollView>
         </View>
     );
   }
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF'
   },
   wrapper: {
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height - 75,
   },
   progressContainer: {
     justifyContent: 'center',

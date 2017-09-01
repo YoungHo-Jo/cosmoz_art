@@ -32,21 +32,25 @@ class AccountSubmitPage extends Component {
             underlineColorAndroid={'#3a3a3a'}
             keyboardType={'email-address'}
             returnKeyType='next'
-            onChange={() => this.checkidTypingFinish()}/>
+            onChange={() => this.checkidTypingFinish()}
+            onSubmitEditing={()=>this.pwinput.focus()}/>
         </View>
         <View style={styles.pwInputContainer}>
           <Text style={styles.text}>{"비밀번호"}</Text>
           <TextInput
+            ref={(ref)=>this.pwinput=ref}
             style={styles.text_input}
             placeholder="비밀번호를 입력하세요"
             underlineColorAndroid={'#3a3a3a'}
             secureTextEntry={true}
             returnKeyType='next'
-            onChange={() => this.checkpwTypingFinish()}/>
+            onChange={() => this.checkpwTypingFinish()}
+            onSubmitEditing={()=>this.pwconfirm.focus()}/>
         </View>
         <View style={styles.pwConfirmContainer}>
           <Text style={styles.text}>{"비밀번호 확인"}</Text>
           <TextInput
+            ref={(ref)=>this.pwconfirm=ref}
             style={styles.text_input}
             placeholder="한 번 더 비밀번호를 입력하세요"
             underlineColorAndroid={'#3a3a3a'}

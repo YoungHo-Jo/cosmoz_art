@@ -27,6 +27,7 @@ class AgeSubmitPage extends Component {
             style={styles.text_input}
             underlineColorAndroid={'#3a3a3a'}
             returnKeyType='done'
+            keyboardType={'numeric'}
             onChange={() => this.checkAgeTypingFinish()}/>
         </View>
         <View style={styles.buttonContainer}>
