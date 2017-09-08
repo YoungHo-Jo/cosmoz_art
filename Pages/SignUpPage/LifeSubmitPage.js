@@ -28,82 +28,84 @@ class LifeSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.selectInputContainer1}>
-          <Text style={styles.text}>{"무엇을 위해서 살아가나요?"}</Text>
-          <View style={styles.selectContainer1}>
-            <TouchableHighlight
-              style={styles.button1}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkTimeButtons1Clicked()}>
-              <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                <Text style={[styles.buttonText, {color: this.state.timeIndex === 1 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                  {"과거"}
-                </Text>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button1}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkTimeButtons2Clicked()}>
-              <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                <Text style={[styles.buttonText, {color: this.state.timeIndex === 2 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                  {"현재"}
-                </Text>
-              </View>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button1}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkTimeButtons3Clicked()}>
-              <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                <Text style={[styles.buttonText, {color: this.state.timeIndex === 3 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                  {"미래"}
-                </Text>
-              </View>
-            </TouchableHighlight>
+        <View style={{justifyContent: 'space-between', height: 330}}>
+          <View style={styles.selectInputContainer1}>
+            <Text style={styles.text}>{"무엇을 위해서 살아가나요?"}</Text>
+            <View style={styles.selectContainer1}>
+              <TouchableHighlight
+                style={styles.button1}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkTimeButtons1Clicked()}>
+                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
+                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 1 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
+                    {"과거"}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button1}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkTimeButtons2Clicked()}>
+                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
+                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 2 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
+                    {"현재"}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button1}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkTimeButtons3Clicked()}>
+                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
+                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 3 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
+                    {"미래"}
+                  </Text>
+                </View>
+              </TouchableHighlight>
+            </View>
           </View>
-        </View>
-        <View style={styles.selectInputContainer2}>
-          <Text style={styles.text}>{"평소에 힐링을 하세요?"}</Text>
-          <View style={styles.standardTextContainer}>
-            <Text style={styles.standardText}>
-              {"아니다"}
-            </Text>
-            <Text style={styles.standardText}>
-              {"그렇다"}
-            </Text>
-          </View>
-          <View style={styles.selectContainer2}>
-            <TouchableHighlight
-              style={styles.button2}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkHealingButtons1Clicked()}>
-              <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button2}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkHealingButtons2Clicked()}>
-              <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button2}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkHealingButtons3Clicked()}>
-              <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button2}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkHealingButtons4Clicked()}>
-              <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 4 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.button2}
-              underlayColor={'#ffffff'}
-              onPress={() => this.checkHealingButtons5Clicked()}>
-              <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 5 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
-            </TouchableHighlight>
+          <View style={styles.selectInputContainer2}>
+            <Text style={styles.text}>{"평소에 힐링을 하세요?"}</Text>
+            <View style={styles.standardTextContainer}>
+              <Text style={styles.standardText}>
+                {"아니다"}
+              </Text>
+              <Text style={styles.standardText}>
+                {"그렇다"}
+              </Text>
+            </View>
+            <View style={styles.selectContainer2}>
+              <TouchableHighlight
+                style={styles.button2}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkHealingButtons1Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button2}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkHealingButtons2Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button2}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkHealingButtons3Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button2}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkHealingButtons4Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 4 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button2}
+                underlayColor={'#ffffff'}
+                onPress={() => this.checkHealingButtons5Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 5 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
         <View style={styles.buttonContainer}>
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     //backgroundColor: '#aaaaaa',
     flex: 1,
     marginBottom: 45,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   selectInputContainer1: {
     backgroundColor: '#ffffff',
@@ -231,8 +233,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    height: (Dimensions.get('window').height - 360) / 2,
     width: Dimensions.get('window').width -0,
-    marginBottom: 90,
+    marginBottom: 20,
   },
   button1: {
     height: 35,
@@ -242,10 +245,12 @@ const styles = StyleSheet.create({
   },
   leftDirectionButton: {
     height: 35,
+    alignSelf: 'center',
   },
   rightDirectionButton: {
     height: 35,
-    marginLeft: -150
+    marginLeft: -150,
+    alignSelf: 'center',
   },
   timeButton: {
     width: 70,

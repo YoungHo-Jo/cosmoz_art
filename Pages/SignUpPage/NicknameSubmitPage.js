@@ -22,12 +22,15 @@ class NicknameSubmitPage extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.textInputContainer}>
-          <Text style={styles.text}>{"어렸을 적, 듣기 좋았던 아니면\n듣고 싶었던 별명을 알려주세요."}</Text>
-          <TextInput
-            style={styles.text_input}
-            underlineColorAndroid={'#3a3a3a'}
-            returnKeyType='done'
-            onChange={() => this.checkNicknameTypingFinish()}/>
+          <View style={{alignSelf: 'center'}}>
+            <Text style={styles.text}>{"어렸을 적, 듣기 좋았던 아니면\n듣고 싶었던 별명을 알려주세요."}</Text>
+            <TextInput
+              style={styles.text_input}
+              underlineColorAndroid={'#3a3a3a'}
+              selectionColor={'#00a0eb'}
+              returnKeyType='done'
+              onChange={() => this.checkNicknameTypingFinish()}/>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableHighlight
@@ -45,7 +48,7 @@ class NicknameSubmitPage extends Component {
             underlayColor={'#ffffff'}
             onPress={() => this.props.onClickNext()}
             disabled={this.state.buttonDisabled}>
-            <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#3d3d3d',}]}>
+            <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
               <Text style={[styles.buttonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
                 {"다음"}
               </Text>
@@ -73,12 +76,12 @@ const styles = StyleSheet.create({
     //backgroundColor: '#aaaaaa',
     flex: 1,
     marginBottom: 45,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   textInputContainer: {
-    backgroundColor: '#ffffff',
+    justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 160,
+    height: 240,
   },
   text: {
     fontSize: 20,
@@ -89,25 +92,26 @@ const styles = StyleSheet.create({
   text_input: {
     fontSize: 20,
     textAlign: 'center',
-    height: 40,
-    width: 280,
+    height: 50,
+    width: Dimensions.get('window').width * (60/100),
     alignSelf: 'center',
-    marginTop: 60,
+    marginTop: 30,
   },
   buttonContainer: {
-    backgroundColor: '#ffffff',
-    alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    height: (Dimensions.get('window').height - 360) / 2,
     width: Dimensions.get('window').width,
-    marginBottom: 90,
+    marginBottom: 20,
   },
   leftButton: {
     height: 35,
+    alignSelf: 'center'
   },
   rightButton: {
     height: 35,
     marginLeft: -150,
+    alignSelf: 'center',
   },
   button: {
     width: 80,

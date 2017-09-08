@@ -11,7 +11,8 @@ import {
   TextInput,
   StyleSheet,
   Switch,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -40,15 +41,16 @@ class Login extends Component {
                   style={styles.text_input}
                   placeholder="아이디를 입력하세요"
                   underlineColorAndroid={'#3a3a3a'}
+                  selectionColor={'#00a0eb'}
                   onChangeText={(text) => this.setState({id: text})}
                   keyboardType='default'
                   returnKeyType='next'/>
-
               <Text style={styles.text}>비밀번호</Text>
               <TextInput
                   style={styles.text_input}
                   placeholder="비밀번호를 입력하세요"
                   underlineColorAndroid={'#3a3a3a'}
+                  selectionColor={'#00a0eb'}
                   secureTextEntry={true}
                   returnKeyType='done'
                   onChangeText={(text) => this.setState({pw: text})}/>
@@ -71,7 +73,6 @@ class Login extends Component {
               <View style={styles.info_setting}>
                 <Text style={styles.text_setting}>자동로그인</Text>
                 <MKSwitch
-
                   onColor='rgba(0, 160, 235, 0.3)'
                   thumbOnColor='rgba(0, 160, 235, 1)'
                   trackSize={15}
@@ -84,7 +85,6 @@ class Login extends Component {
               <View style={styles.info_setting}>
                 <Text style={styles.text_setting}>아이디저장</Text>
                 <MKSwitch
-
                   onColor='rgba(0, 160, 235, 0.3)'
                   thumbOnColor='rgba(0, 160, 235, 1)'
                   trackSize={15}
@@ -100,7 +100,6 @@ class Login extends Component {
             </View>
           </View>
         </KeyboardAwareScrollView>
-
     )
   }
 }
@@ -110,7 +109,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 80,
     flexDirection: 'column',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
+    height: Dimensions.get('window').height - 75,
   },
   image_logo: {
     height: 70,
