@@ -10,14 +10,19 @@ import AccountSubmitPage from './AccountSubmitPage';
 import NicknameSubmitPage from './NicknameSubmitPage';
 import AgeSubmitPage from './AgeSubmitPage';
 import LifeSubmitPage from './LifeSubmitPage';
+import ParentsAgeSubmitPage from './ParentsAgeSubmitPage';
+import FriendAmountSubmitPage from './FriendAmountSubmitPage';
+import OftenRelationSubmitPage from './OftenRelationSubmitPage';
+import ReadySubmitPage from './ReadySubmitPage';
 import BottomBar from "../BottomBar";
+
 
 class SignUpPage extends Component {
   constructor(props) {
     super(props);
     this.state={
       currentIndex: 0,
-      progress: 0.25,
+      progress: (1/8),
     };
   }
 
@@ -30,7 +35,7 @@ class SignUpPage extends Component {
               style={styles.wrapper}
               showsPagination={false}
               loop={false}
-              onIndexChanged={(index) => this.setState({progress: (index +1) * 0.25})}
+              onIndexChanged={(index) => this.setState({progress: (index +1) * (1/8)})}
               scrollEnabled={true}>
               <AccountSubmitPage
                 onClickNext={() => this.onClickNext()}/>
@@ -41,6 +46,18 @@ class SignUpPage extends Component {
                 onClickNext={() => this.onClickNext()}
                 onClickPrev={() => this.onClickPrev()}/>
               <LifeSubmitPage
+                onClickNext={() => this.onClickNext()}
+                onClickPrev={() => this.onClickPrev()}/>
+              <ParentsAgeSubmitPage
+                onClickNext={() => this.onClickNext()}
+                onClickPrev={() => this.onClickPrev()}/>
+              <FriendAmountSubmitPage
+                onClickNext={() => this.onClickNext()}
+                onClickPrev={() => this.onClickPrev()}/>
+              <OftenRelationSubmitPage
+                onClickNext={() => this.onClickNext()}
+                onClickPrev={() => this.onClickPrev()}/>
+              <ReadySubmitPage
                 onClickNext={() => this.onClickNext()}
                 onClickPrev={() => this.onClickPrev()}
                 navigation={this.props.navigation}/>

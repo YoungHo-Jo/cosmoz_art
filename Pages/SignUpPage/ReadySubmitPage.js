@@ -6,12 +6,11 @@ import { Sizes, Colors, } from "../../DefaultStyles";
 
 import {NavigationActions} from "react-navigation";
 
-class LifeSubmitPage extends Component {
+class ReadySubmitPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeIndex: null,
-      healingIndex: null,
+      readyIndex: null,
       unselectedButtonColor: '#d0d0d0',
       selectedButtonColor: '#00a0eb',
       unselectedButtonTextColor: Colors.defaultTextColor,
@@ -28,44 +27,9 @@ class LifeSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'space-between', height: 360}}>
-          <View style={styles.selectInputContainer1}>
-            <Text style={styles.text}>{"무엇을 위해서 살아가나요?"}</Text>
-            <View style={styles.selectContainer1}>
-              <TouchableHighlight
-                style={styles.button1}
-                underlayColor={'#ffffff'}
-                onPress={() => this.checkTimeButtons1Clicked()}>
-                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 1 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                    {"과거"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button1}
-                underlayColor={'#ffffff'}
-                onPress={() => this.checkTimeButtons2Clicked()}>
-                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 2 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                    {"현재"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button1}
-                underlayColor={'#ffffff'}
-                onPress={() => this.checkTimeButtons3Clicked()}>
-                <View style={[styles.timeButton, {backgroundColor: this.state.timeIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}>
-                  <Text style={[styles.buttonText, {color: this.state.timeIndex === 3 ? this.state.selectedButtonTextColor : this.state.unselectedButtonTextColor}]}>
-                    {"미래"}
-                  </Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-          </View>
+        <View style={{justifyContent: 'center', height: 300}}>
           <View style={styles.selectInputContainer2}>
-            <Text style={styles.text}>{"평소에 힐링을 하세요?"}</Text>
+            <Text style={styles.text}>{"행복할 준비가 되었습니까?"}</Text>
             <View style={styles.standardTextContainer}>
               <Text style={styles.standardText}>
                 {"아니다"}
@@ -78,32 +42,32 @@ class LifeSubmitPage extends Component {
               <TouchableHighlight
                 style={styles.button2}
                 underlayColor={'#ffffff'}
-                onPress={() => this.checkHealingButtons1Clicked()}>
-                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+                onPress={() => this.checkReadyButtons1Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.readyIndex === 1 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button2}
                 underlayColor={'#ffffff'}
-                onPress={() => this.checkHealingButtons2Clicked()}>
-                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+                onPress={() => this.checkReadyButtons2Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.readyIndex === 2 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button2}
                 underlayColor={'#ffffff'}
-                onPress={() => this.checkHealingButtons3Clicked()}>
-                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+                onPress={() => this.checkReadyButtons3Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.readyIndex === 3 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button2}
                 underlayColor={'#ffffff'}
-                onPress={() => this.checkHealingButtons4Clicked()}>
-                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 4 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+                onPress={() => this.checkReadyButtons4Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.readyIndex === 4 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button2}
                 underlayColor={'#ffffff'}
-                onPress={() => this.checkHealingButtons5Clicked()}>
-                <View style={[styles.healingButton, {backgroundColor: this.state.healingIndex === 5 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
+                onPress={() => this.checkReadyButtons5Clicked()}>
+                <View style={[styles.healingButton, {backgroundColor: this.state.readyIndex === 5 ? this.state.selectedButtonColor : this.state.unselectedButtonColor}]}/>
               </TouchableHighlight>
             </View>
           </View>
@@ -122,10 +86,17 @@ class LifeSubmitPage extends Component {
           <TouchableHighlight
             style={styles.rightDirectionButton}
             underlayColor={'#ffffff'}
-            onPress={() => this.props.onClickNext()}>
+            onPress={() => {
+              const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [
+                  NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+                ]
+              });
+              this.props.navigation.dispatch(resetAction)}}>
             <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#3d3d3d',}]}>
               <Text style={[styles.directButtonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
-                {"다음"}
+                {"완료"}
               </Text>
             </View>
           </TouchableHighlight>
@@ -135,40 +106,28 @@ class LifeSubmitPage extends Component {
     )
   }
 
-  checkTimeButtons1Clicked() {
-    this.setState({timeIndex: 1}, () => this.activateButton())
+  checkReadyButtons1Clicked() {
+    this.setState({readyIndex: 1}, () => this.activateButton())
   }
 
-  checkTimeButtons2Clicked() {
-    this.setState({timeIndex: 2}, () => this.activateButton())
+  checkReadyButtons2Clicked() {
+    this.setState({readyIndex: 2}, () => this.activateButton())
   }
 
-  checkTimeButtons3Clicked() {
-    this.setState({timeIndex: 3}, () => this.activateButton())
+  checkReadyButtons3Clicked() {
+    this.setState({readyIndex: 3}, () => this.activateButton())
   }
 
-  checkHealingButtons1Clicked() {
-    this.setState({healingIndex: 1}, () => this.activateButton())
+  checkReadyButtons4Clicked() {
+    this.setState({readyIndex: 4}, () => this.activateButton())
   }
 
-  checkHealingButtons2Clicked() {
-    this.setState({healingIndex: 2}, () => this.activateButton())
-  }
-
-  checkHealingButtons3Clicked() {
-    this.setState({healingIndex: 3}, () => this.activateButton())
-  }
-
-  checkHealingButtons4Clicked() {
-    this.setState({healingIndex: 4}, () => this.activateButton())
-  }
-
-  checkHealingButtons5Clicked() {
-    this.setState({healingIndex: 5}, () => this.activateButton())
+  checkReadyButtons5Clicked() {
+    this.setState({readyIndex: 5}, () => this.activateButton())
   }
 
   activateButton() {
-    if (this.state.timeIndex && this.state.healingIndex) {
+    if (this.state.readyIndex) {
       this.setState({buttonDisabled: false})
     }
   }
@@ -284,4 +243,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LifeSubmitPage;
+export default ReadySubmitPage;

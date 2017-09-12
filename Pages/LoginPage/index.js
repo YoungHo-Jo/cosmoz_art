@@ -32,7 +32,7 @@ class Login extends Component {
 
   render() {
     return (
-        <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultPageBgColor}}>
+        <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultPageBgColor, height: Dimensions.get('window').height}}>
           <View style={styles.container}>
             <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
             <View style={styles.info}>
@@ -110,7 +110,6 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    height: Dimensions.get('window').height - 75,
   },
   image_logo: {
     height: 70,
