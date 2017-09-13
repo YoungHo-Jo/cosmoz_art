@@ -32,125 +32,134 @@ class Login extends Component {
 
   render() {
     return (
-        <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultPageBgColor, height: Dimensions.get('window').height}}>
-          <View style={styles.container}>
-            <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
-            <View style={styles.info}>
-              <Text style={styles.text}>아이디</Text>
-              <TextInput
-                  style={styles.text_input}
-                  placeholder="아이디를 입력하세요"
-                  underlineColorAndroid={'#3a3a3a'}
-                  selectionColor={'#00a0eb'}
-                  onChangeText={(text) => this.setState({id: text})}
-                  keyboardType='default'
-                  returnKeyType='next'/>
-              <Text style={styles.text}>비밀번호</Text>
-              <TextInput
-                  style={styles.text_input}
-                  placeholder="비밀번호를 입력하세요"
-                  underlineColorAndroid={'#3a3a3a'}
-                  selectionColor={'#00a0eb'}
-                  secureTextEntry={true}
-                  returnKeyType='done'
-                  onChangeText={(text) => this.setState({pw: text})}/>
-              <Button style={styles.button_login}
-                      textStyle={{fontSize: 18}}
-                      onPress={() => {
-                        this.props.fetchLogin({
-                          id: this.state.id,
-                          pw: this.state.pw
-                        })
-                        setTimeout(() => {
-                          console.log(this.props.userData)
-                          if(this.props.userData.isLogin) {
-                            this.props.navigation.goBack()
-                          }
-                        }, 1000)
-                      }}>
-                로그인
-              </Button>
-              <View style={styles.info_setting}>
-                <Text style={styles.text_setting}>자동로그인</Text>
-                <MKSwitch
-                  onColor='rgba(0, 160, 235, 0.3)'
-                  thumbOnColor='rgba(0, 160, 235, 1)'
-                  trackSize={15}
-                  trackLength={35}
-                  thumbRadius={10}
-                  rippleColor='rgba(0, 160, 235, 0.2)'
-                  onPress={() => console.log('auto login switch pressed')}
-                  onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
-            </View>
-              <View style={styles.info_setting}>
-                <Text style={styles.text_setting}>아이디저장</Text>
-                <MKSwitch
-                  onColor='rgba(0, 160, 235, 0.3)'
-                  thumbOnColor='rgba(0, 160, 235, 1)'
-                  trackSize={15}
-                  trackLength={35}
-                  thumbRadius={10}
-                  rippleColor='rgba(0, 160, 235, 0.2)'
-                  onPress={() => console.log('id save switch pressed')}
-                  onCheckedChange={(e) => console.log('id save switch checked', e)}/>
+            <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultBgColor}}>
+              <View style={styles.container}>
+                <View style={{flex: 1, justifyContent: 'center'}}>
+                  <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
+                </View>
+                <View style={styles.info}>
+                  <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
+                    <Text style={styles.text}>아이디</Text>
+                    <TextInput
+                        style={styles.text_input}
+                        placeholder="아이디를 입력하세요"
+                        underlineColorAndroid={'#3a3a3a'}
+                        selectionColor={'#00a0eb'}
+                        keyboardType='default'
+                        returnKeyType='next'
+                        onSubmitEditing={() => this.pw.focus()}
+                        onChangeText={(text) => this.setState({id: text})}/>
+                  </View>
+                  <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
+                    <Text style={styles.text}>비밀번호</Text>
+                    <TextInput
+                        ref={(ref) => this.pw = ref}
+                        style={styles.text_input}
+                        placeholder="비밀번호를 입력하세요"
+                        underlineColorAndroid={'#3a3a3a'}
+                        selectionColor={'#00a0eb'}
+                        secureTextEntry={true}
+                        returnKeyType='done'
+                        onChangeText={(text) => this.setState({pw: text})}/>
+                  </View>
+                  <View>
+                    <Button style={styles.button_login}
+                            textStyle={{fontSize: 18}}
+                            onPress={() => {
+                              this.props.fetchLogin({
+                                id: this.state.id,
+                                pw: this.state.pw
+                              })
+                              setTimeout(() => {
+                                console.log(this.props.userData)
+                                if(this.props.userData.isLogin) {
+                                  this.props.navigation.goBack()
+                                }
+                              }, 1000)
+                            }}>
+                      로그인
+                    </Button>
+                    <View style={styles.info_setting}>
+                      <Text style={styles.text_setting}>자동로그인</Text>
+                      <MKSwitch
+                        style={{alignSelf: 'center'}}
+                        onColor='rgba(0, 160, 235, 0.3)'
+                        thumbOnColor='rgba(0, 160, 235, 1)'
+                        trackSize={15}
+                        trackLength={35}
+                        thumbRadius={10}
+                        rippleColor='rgba(0, 160, 235, 0.2)'
+                        onPress={() => console.log('auto login switch pressed')}
+                        onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
+                    </View>
+                    <View style={styles.info_setting}>
+                      <Text style={styles.text_setting}>아이디저장</Text>
+                      <MKSwitch
+                        style={{alignSelf: 'center'}}
+                        onColor='rgba(0, 160, 235, 0.3)'
+                        thumbOnColor='rgba(0, 160, 235, 1)'
+                        trackSize={15}
+                        trackLength={35}
+                        thumbRadius={10}
+                        rippleColor='rgba(0, 160, 235, 0.2)'
+                        onPress={() => console.log('id save switch pressed')}
+                        onCheckedChange={(e) => console.log('id save switch checked', e)}/>
+                    </View>
+                  </View>
+                  <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
+                    회원가입
+                  </Button>
+                </View>
               </View>
-              <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
-                회원가입
-              </Button>
-            </View>
-          </View>
-        </KeyboardAwareScrollView>
+            </KeyboardAwareScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 80,
+    height: Dimensions.get('window').height -90,
     flexDirection: 'column',
+    justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
   },
   image_logo: {
     height: 70,
     width: 70,
     alignSelf: 'center',
-    paddingTop: 30,
-    paddingBottom: 15,
     resizeMode: 'contain'
   },
   info: {
+    flex: 2,
     flexDirection: 'column',
-    paddingTop: 30,
+    justifyContent: 'space-around',
   },
   text: {
     fontSize: 15,
-    paddingLeft: 45,
-    paddingBottom: 10,
-    paddingTop: 20,
+    marginLeft: 4,
   },
   text_input: {
     height: 40,
     fontSize: 13,
-    width: 280,
+    width: Dimensions.get('window').width * (75/100),
     alignSelf: 'center',
     paddingBottom: 10,
   },
   button_login: {
-    marginTop: 20,
     backgroundColor: 'white',
     borderRadius: 0,
     borderWidth: 1,
-    width: 280,
+    width: Dimensions.get('window').width * (75/100),
     height: 40,
     borderColor: '#3a3a3a',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   info_setting: {
     flexDirection: 'row',
     alignSelf: 'center',
     justifyContent: 'space-between',
-    width: 280,
+    width: Dimensions.get('window').width * (75/100),
+    height: 35
   },
   text_setting: {
     fontSize: 15,
@@ -158,7 +167,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   button_signup: {
-    marginTop: 20,
     backgroundColor: 'white',
     borderRadius: 0,
     borderWidth: 1,
@@ -167,6 +175,7 @@ const styles = StyleSheet.create({
     borderColor: '#FFFFFF',
     alignSelf: 'center',
     borderBottomColor: '#3a3a3a',
+    marginBottom: 20
   },
 });
 

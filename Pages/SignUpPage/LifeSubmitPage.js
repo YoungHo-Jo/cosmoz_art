@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   selectInputContainer1: {
     backgroundColor: '#ffffff',
     alignSelf: 'center',
-    marginTop: 60,
+    marginTop: 80,
   },
   selectInputContainer2: {
     backgroundColor: '#ffffff',

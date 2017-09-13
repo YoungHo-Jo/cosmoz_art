@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-
   },
   logo: {
     width: Sizes.logoMinSize,
