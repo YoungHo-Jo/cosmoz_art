@@ -18,17 +18,18 @@ const styles= StyleSheet.create({
         flex:1,
     },
     shareItem:{
-        flex:1,
-        flexDirection:'column',
-        borderBottomColor:'#FFFFFF',
-        borderBottomWidth:2,
-        paddingTop:10,
+      flex:1,
+      flexDirection:'column',
+      borderBottomColor:'#FFFFFF',
+      borderBottomWidth:2,
+      paddingTop:10,
     },
     shareImage:{
         flex:1,
         paddingBottom:10,
         alignSelf:'center',
-        resizeMode: 'contain',
+        resizeMode: 'cover',
+        borderRadius: 15,
     },
     quotemark: {
         flex: 1,
@@ -112,7 +113,7 @@ class SharePageListViewItem extends Component {
                     source={require('../../icons/double_quotation_marks_right.png')}/>
                 </View>
                 <TouchableHighlight
-                  underlayColor={'#ffffff'}
+                  underlayColor={'transparent'}
                   onPress={() => this.props.onShareImagePressed()}>
                   <Image
                     style={[styles.shareImage, {

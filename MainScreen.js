@@ -25,7 +25,7 @@ import IntroPage2 from './Pages/IntroPage/IntroPage2';
 import IntroPage3 from './Pages/IntroPage/IntroPage3';
 import IntroPage4 from './Pages/IntroPage/IntroPage4';
 import SignUpPage from './Pages/SignUpPage';
-import LifeSubmitPage from './Pages/SignUpPage/LifeSubmitPage'
+import LifeSubmitPage   from './Pages/SignUpPage/LifeSubmitPage'
 import ImageViewerPage from './Pages/ImageViewerPage';
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -256,20 +256,6 @@ const App = StackNavigator({
   },
   IntroPage: {
     screen: IntroPage,
-    navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
-    }
-  },
-  IntroPage2: {
-    screen: IntroPage2,
-    navigationOptions: {
-      headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
-    }
-  },
-  IntroPage3: {
-    screen: IntroPage3,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
       headerTitle: (<Title/>)

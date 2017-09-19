@@ -27,8 +27,9 @@ const styles= StyleSheet.create({
     marginHorizontal: 15,
   },
   shareImage:{
-    resizeMode : 'contain',
+    resizeMode : 'cover',
     alignSelf:'center',
+    borderRadius: 15,
   },
   info:{
     flexDirection : 'row',
