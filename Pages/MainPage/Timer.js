@@ -1,27 +1,18 @@
+/* @flow */
+
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Image,} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import * as Progress from 'react-native-progress';
-import {Colors} from "../../DefaultStyles";
 
 export default class Timer extends Component {
-  constructor(props) {
-    super(props);
-    this.state={
-      remainTime: null,
-      totalTime: null,
-    }
-  }
+
 
   static propTypes = {
     onTimerFinished: React.PropTypes.func.isRequired,
     onPressCountDown: React.PropTypes.func,
+    secs: React.PropTypes.number
   }
-
-  static defaultProps = {
-
-  }
-
 
 
   render() {
@@ -42,7 +33,7 @@ export default class Timer extends Component {
           {/*timeAnimation*/}
           <View style={styles.timeContainer}>
             <CountDown
-                   totalDuration={40000}
+                   totalDuration={this.secsToMillis(this.props.secs) || 10000}
                    start={this.props.start}
                    reset={() => console.log('reset')}
                    options={countDownOptions}
@@ -59,6 +50,9 @@ export default class Timer extends Component {
     this.props.onTimerFinished()
   }
 
+  secsToMillis(secs) {
+    return secs * 100
+  }
 }
 
 const countDownOptions = {
@@ -227,6 +221,3 @@ class CountDown extends Component {
     );
   }
 }
-
-
-

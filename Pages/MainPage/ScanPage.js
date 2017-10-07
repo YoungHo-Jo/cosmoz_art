@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import {Button, Image, StyleSheet, Text, TouchableHighlight, View, Platform} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";

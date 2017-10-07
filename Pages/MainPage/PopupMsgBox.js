@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react'
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
 import {Colors, Sizes} from "../../DefaultStyles";

@@ -1,3 +1,5 @@
+/* @flow */
+
 import userData from './userDataReducer'
 import missionData from "./missionDataReducer";
 

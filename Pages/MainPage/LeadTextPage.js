@@ -1,3 +1,5 @@
+/* @flow */
+ 
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -20,7 +22,6 @@ const BOTTOM_BAR_COLOR = Colors.defaultTextColor;
 const BOTTOM_BAR_WIDTH_MARGIN = 100;
 
 class LeadTextPage extends Component {
-
   constructor(props) {
     super(props)
   }

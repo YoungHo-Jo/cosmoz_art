@@ -1,4 +1,5 @@
-/** * Created by LG on 2017-07-26. */
+/* @flow */
+
 import React, {Component,} from 'react';
 import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions} from 'react-native';
 import SharePageHoriListViewItem from './SharePageHoriListViewItem'
@@ -70,5 +71,3 @@ const styles = StyleSheet.create({
   }
 });
 export default SharePageHoriListView;
-
-

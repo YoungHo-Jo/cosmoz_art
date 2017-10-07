@@ -1,7 +1,5 @@
+/* @flow */
 
-/**
- * Created by LG on 2017-07-26.
- */
 import React,{
   Component,
 } from 'react';

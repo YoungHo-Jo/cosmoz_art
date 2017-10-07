@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 import LinearGradient from "react-native-linear-gradient/index.ios";

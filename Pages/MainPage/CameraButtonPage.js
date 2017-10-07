@@ -1,3 +1,6 @@
+/* @flow */
+
+
 import React, {Component} from 'react';
 import {StyleSheet, Text, View,} from 'react-native';
 import UpperLinearGradient from "../UpperLinearGradient";
@@ -13,7 +16,14 @@ export default class CameraButtonPage extends Component {
   render() {
     return (
         <View style={styles.container}>
+
+          {/* deprecated */}
           <UpperLinearGradient/>
+
+
+
+
+
           <View style={styles.blockContainer}>
             <View style={styles.cameraIconContainer}>
               <Icon.Button
@@ -22,6 +32,8 @@ export default class CameraButtonPage extends Component {
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.defaultPageBgColor}
                   onPress={() => {
+
+                    // deprecated
                     const resetAction = NavigationActions.reset({
                       index: 0,
                       actions: [
@@ -41,6 +53,9 @@ export default class CameraButtonPage extends Component {
             </View>
 
           </View>
+
+
+          {/* deprecated */}
           <LowerLinearGradient
             marginBottom={Sizes.bottomBarHeight}/>
           <BottomBar/>

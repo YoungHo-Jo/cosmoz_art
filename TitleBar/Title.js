@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, Platform, Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
@@ -23,7 +25,7 @@ class Title extends Component {
   render() {
     return (
       <View style={[!this.state.isiOS && eStyles.container, this.state.isiOS && styles.container]}>
-        <Image 
+        <Image
           style={styles.logo}
           source={require('../icons/logo_mini.png')}/>
       </View>

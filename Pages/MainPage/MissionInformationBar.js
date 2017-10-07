@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
@@ -16,8 +18,10 @@ const BAR_BGCOLOR= '#f7f7f7';
 class MissionInformationBar extends Component {
   static propTypes = {
     benefitText: React.PropTypes.string.isRequired,
-    time: React.PropTypes.string.isRequired
+    time: React.PropTypes.string.isRequired,
+    secs: React.PropTypes.number
   }
+
 
   render() {
     return (
@@ -33,7 +37,7 @@ class MissionInformationBar extends Component {
             />
           </View>
           {/* benefit text */}
-          <View style={styles.benefitTextContinaer}>
+          <View style={styles.benefitTextContainer}>
             <Text style={styles.infoText}>
               {this.props.benefitText}
             </Text>
@@ -53,13 +57,23 @@ class MissionInformationBar extends Component {
           {/* time */}
           <View style={styles.timeContainer}>
             <Text style={styles.infoText}>
-              {this.props.time}
+              {/*{this.props.time}*/}
+              {this.secsToStr(this.props.secs)}
             </Text>
           </View>
         </View>
       </View>
     );
   }
+
+  secsToStr(secs) {
+    var sec = secs % 60
+    var min = parseInt(secs / 60)
+    var secStr = (sec < 10) ? '0' + sec : sec;
+    var minStr = (min < 10) ? '0' + min : min;
+    return minStr + ':' + secStr
+  }
+
 
 
 }
@@ -76,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
     marginLeft: Margins.left
-  }, 
+  },
   rightContainer: {
     flex: -1,
     width: 80,
@@ -89,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  benefitTextContinaer: {
+  benefitTextContainer: {
     flex: 1,
     justifyContent: 'center'
   },

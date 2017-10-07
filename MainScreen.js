@@ -1,8 +1,10 @@
+/* @flow */
+
 // internal module
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 
-// external module 
+// external module
 import SplashScreen from 'react-native-splash-screen';
 import {StackNavigator} from 'react-navigation';
 
@@ -20,12 +22,8 @@ import ScanPage from "./Pages/MainPage/ScanPage";
 import DetailSharePage from "./Pages/SharePage/DetailSharePage";
 import LoginPage from './Pages/LoginPage';
 import IntroPage from './Pages/IntroPage';
-import IntroPage1 from './Pages/IntroPage/IntroPage1';
-import IntroPage2 from './Pages/IntroPage/IntroPage2';
-import IntroPage3 from './Pages/IntroPage/IntroPage3';
 import IntroPage4 from './Pages/IntroPage/IntroPage4';
 import SignUpPage from './Pages/SignUpPage';
-import LifeSubmitPage   from './Pages/SignUpPage/LifeSubmitPage'
 import ImageViewerPage from './Pages/ImageViewerPage';
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -169,7 +167,6 @@ const App = StackNavigator({
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
     },
-
   },
   LeadText: {
     screen: LeadText,
@@ -181,7 +178,7 @@ const App = StackNavigator({
     screen: MainMission,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>),
+      headerTitle: '미션 하기',
       headerBackTitleStyle: {color: Colors.defaultTextColor}
     }
   },
@@ -203,7 +200,7 @@ const App = StackNavigator({
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
       // headerTitle: (<Title/>)
-      headerTitle: '미션 중...'
+      headerTitle: ''
     }
   },
   CameraPage: {
@@ -230,28 +227,28 @@ const App = StackNavigator({
     screen: DetailSharePage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: '다른 작품 보기'
     }
   },
   LoginPage: {
     screen: LoginPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: '로그인'
     }
   },
   SettingsPage: {
     screen: SettingsPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: '설정'
     }
   },
   MissionListPage: {
     screen: Sharepage_mission,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: '내가 한 미션들'
     }
   },
   IntroPage: {
@@ -272,7 +269,7 @@ const App = StackNavigator({
     screen: SignUpPage,
     navigationOptions: {
       headerStyle: DefaultStyles.headerStyle,
-      headerTitle: (<Title/>)
+      headerTitle: '회원가입'
     }
   },
   ImageViewerPage: {

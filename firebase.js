@@ -1,3 +1,6 @@
+
+/* @flow */
+
 import RNFirebase from 'react-native-firebase'
 import {fetchNotificationMission} from "./actions/missionActions";
 

@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {Component} from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
@@ -20,22 +22,37 @@ const MISSION_ICON_COLOR = '#111111';
 
 
 class MainMissionPage extends Component {
+
+  static propTypes = {
+    secs: React.PropTypes.number,
+    benefitText: React.PropTypes.string,
+    benefitIcon: React.PropTypes.string,
+    missionText: React.PropTypes.string,
+    missionIconType: React.PropTypes,
+  }
+
   render() {
-    const {navigate} = this.props.navigation;
-    const {params} = this.props.navigation.state
+    const {navigate} = this.props.navigation; // deprecated
+    const {params} = this.props.navigation.state // deprecated
 
     return (
         <View style={styles.blockContainer}>
           {/* mission information */}
           <View style={styles.missionInfoBarContainer}>
             <MissionInformationBar
-                benefitText={params.benefit.text || '뇌 상상력 키우기'}
-                time={params.time}/>
+                benefitText={this.props.benefitText || params.benefit.text || '뇌 상상력 키우기'} // deprecated
+                icon={this.props.benefitIcon}
+                time={params.time} // deprecated
+                secs={this.props.secs || 100}/>
           </View>
 
           {/* mission container */}
           <View style={styles.missionContainer}>
+            {/* deprecated */}
             <UpperLinearGradient/>
+
+
+
             <View style={styles.missionBlockContainer}>
               {/* mission text */}
               <View style={styles.missionTextContainer}>
@@ -53,13 +70,22 @@ class MainMissionPage extends Component {
                     backgroundColor={Colors.defaultPageBgColor}
                     onPress={this._onMissionPress.bind(this)}/>
               </View>
-
             </View>
+
+
+            {/* deprecated */}
             <LowerLinearGradient/>
+
+
+
           </View>
+
+          {/* deprecated */}
           <BottomBar/>
 
 
+
+          {/* deprecated */}
           <PopupDialog
               ref={(popupDialog) => this.popupDialog = popupDialog}
               dialogAnimation={new ScaleAnimation()}

@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {Component} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.titleBarColor
   },
 
-}); 
+});
 
 
 export default TitleBar;

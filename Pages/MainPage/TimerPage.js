@@ -1,3 +1,5 @@
+/* @flow */
+
 import React, {Component} from 'react';
 import {StyleSheet, View, Text,} from 'react-native';
 
@@ -14,6 +16,11 @@ import {NavigationActions} from 'react-navigation'
 
 class TimerPage extends Component {
 
+  static propTypes = {
+    secs: React.PropTypes.number,
+    missionText: React.PropTypes.string
+  }
+
   state = {
     timerStart: true
   }
@@ -21,11 +28,17 @@ class TimerPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+
+        {/* deprecated */}
         <UpperLinearGradient/>
+
+
+
         {/*Timer*/}
         <View style={styles.timerContainer}>
           <Timer
             start={this.state.timerStart}
+            secs={this.props.secs}
             onTimerFinished={() => this._moveToNextPage()}
             onPressCountDown={() => this.popupDialog.show()}/>
         </View>
@@ -55,11 +68,16 @@ class TimerPage extends Component {
               size={28}
               color={'#777777'}/>
         </View>
+
+
+        {/* deprecated */}
         <LowerLinearGradient
           marginBottom={Sizes.bottomBarHeight}/>
         <BottomBar/>
 
 
+
+        {/* deprecated */}
         <PopupDialog
             ref={(popupDialog) => this.popupDialog = popupDialog}
             dialogAnimation={new ScaleAnimation()}
@@ -79,6 +97,8 @@ class TimerPage extends Component {
   }
 
 
+
+  // deprecated
   _moveToNextPage() {
     this.setState({
       timerStart: false

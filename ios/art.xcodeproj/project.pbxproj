@@ -51,7 +51,7 @@
 		A1F6F652DAD1413DA335A424 /* libreact-native-sha256.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F460FD8FE4DDA8FCE803C /* libreact-native-sha256.a */; };
 		A4CEAFEFCF6051C3E29A2AC5 /* libPods-art-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E6F78B31D1CAA2235D8134C /* libPods-art-tvOS.a */; };
 		B2045B66783D445989C3C801 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 05A29C168A534929B31A401C /* FontAwesome.ttf */; };
-		B6C60D301F46A73D00D76008 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6C60D2F1F46A73D00D76008 /* GoogleService-Info.plist */; };
+		B675C59F1F7109F100B0CCDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B675C59E1F7109F100B0CCDD /* GoogleService-Info.plist */; };
 		CF2A6A2BEC1B46358910BE6B /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 71BE11C718F24319A7A1408F /* EvilIcons.ttf */; };
 		D0751718AA9B4164BAE8547C /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92F2F02789374EC2BF62B962 /* MaterialCommunityIcons.ttf */; };
 		DBB2390C1522495C9A989FF7 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F74FF6C2589A4C898D00F866 /* Entypo.ttf */; };
@@ -382,7 +382,7 @@
 		96B35EFE4F2D48ED937BD153 /* RCTMaterialKit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTMaterialKit.xcodeproj; path = "../node_modules/react-native-material-kit/iOS/RCTMaterialKit.xcodeproj"; sourceTree = "<group>"; };
 		AA02945B20AE48E4205F6DEA /* Pods-art-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-art-tvOS/Pods-art-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AAF12ABEEB6741C2B23A6921 /* Pods-art.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art.debug.xcconfig"; path = "Pods/Target Support Files/Pods-art/Pods-art.debug.xcconfig"; sourceTree = "<group>"; };
-		B6C60D2F1F46A73D00D76008 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B675C59E1F7109F100B0CCDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "art/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C29AF2010EF0AC5D6E9A5C15 /* libPods-artTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-artTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4253775E3C95CDC16BD9A69 /* Pods-art-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-art-tvOSTests/Pods-art-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		DAFB6F2140DC4F09B50828E6 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
@@ -543,7 +543,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				B6C60D2F1F46A73D00D76008 /* GoogleService-Info.plist */,
+				B675C59E1F7109F100B0CCDD /* GoogleService-Info.plist */,
 			);
 			name = art;
 			sourceTree = "<group>";
@@ -1224,7 +1224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6C60D301F46A73D00D76008 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				DBB2390C1522495C9A989FF7 /* Entypo.ttf in Resources */,
@@ -1237,6 +1236,7 @@
 				4DDD24D43B0D43F5AEB3B8AF /* Octicons.ttf in Resources */,
 				85E5B1FCFE4E4B3390732AF9 /* SimpleLineIcons.ttf in Resources */,
 				043D8EDF3A504F3E8B9C2F09 /* Zocial.ttf in Resources */,
+				B675C59F1F7109F100B0CCDD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

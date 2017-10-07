@@ -1,3 +1,4 @@
+/* @flow */
 
 
 import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "./constants";
