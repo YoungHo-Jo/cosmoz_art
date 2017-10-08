@@ -10,7 +10,6 @@ import {getWindowSize} from "../Utilis";
 var windowSize = getWindowSize()
 
 class Title extends Component {
-
   constructor(props) {
     super(props)
 
@@ -23,11 +22,28 @@ class Title extends Component {
   }
 
   render() {
+
+    const {currentViewPager} = this.props
+
+    console.log('Title: ')
+    console.log(this.props)
     return (
       <View style={[!this.state.isiOS && eStyles.container, this.state.isiOS && styles.container]}>
-        <Image
-          style={styles.logo}
-          source={require('../icons/logo_mini.png')}/>
+        {
+          currentViewPager == 0 &&
+          <Text style={styles.titleText}>나의 방</Text>
+        }
+        {
+          currentViewPager == 1 &&
+          <Image
+            style={styles.logo}
+            source={require('../icons/logo_mini.png')}/>
+        }
+        {
+          currentViewPager == 2 &&
+          <Text style={styles.titleText}>공유 방</Text>
+        }
+
       </View>
     );
   }
@@ -45,12 +61,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   titleText: {
-    flex: 1,
     color: '#333333',
     fontSize: 18,
     fontWeight: '500',
-    textAlign: 'center',
-    textAlignVertical: 'center'
   }
 });
 
