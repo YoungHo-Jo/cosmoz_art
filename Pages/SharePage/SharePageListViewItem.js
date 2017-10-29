@@ -97,37 +97,55 @@ class SharePageListViewItem extends Component {
       });
     }
 
+    renderTitleOfItem() {
+      return (
+        <View style={styles.shareKeywordContainer}>
+          <Image
+            style={styles.quotemark}
+            source={require('../../icons/double_quotation_marks_left.png')}/>
+          <Text style={styles.shareKeyword}>
+            {"우주외계인"}
+          </Text>
+          <Image
+            style={styles.quotemark}
+            source={require('../../icons/double_quotation_marks_right.png')}/>
+        </View>
+      )
+    }
+
+    renderClickableImage() {
+      return (
+        <TouchableHighlight
+          underlayColor={'transparent'}
+          onPress={() => this.props.onShareImagePressed()}>
+          <Image
+            style={[styles.shareImage, {
+              width: Dimensions.get('window').width * (85/100),
+              height: Dimensions.get('window').width * (85/100) * (this.state.height/this.state.width)}]}
+            source={this.state.source}/>
+        </TouchableHighlight>
+      )
+    }
+
+    renderShowDetailBtn() {
+      return (
+        <TouchableHighlight
+          onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}
+          underlayColor={'#ffffff'}>
+             <Image
+                 style={styles.button_showother}
+                 source={require('../../icons/share_anotheritem.png')}/>
+        </TouchableHighlight>
+      )
+    }
+
     render(){
         return(
             <View style={styles.container}>
               <View style={styles.shareItem}>
-                <View style={styles.shareKeywordContainer}>
-                  <Image
-                    style={styles.quotemark}
-                    source={require('../../icons/double_quotation_marks_left.png')}/>
-                  <Text style={styles.shareKeyword}>
-                    {"우주외계인"}
-                  </Text>
-                  <Image
-                    style={styles.quotemark}
-                    source={require('../../icons/double_quotation_marks_right.png')}/>
-                </View>
-                <TouchableHighlight
-                  underlayColor={'transparent'}
-                  onPress={() => this.props.onShareImagePressed()}>
-                  <Image
-                    style={[styles.shareImage, {
-                      width: Dimensions.get('window').width * (85/100),
-                      height: Dimensions.get('window').width * (85/100) * (this.state.height/this.state.width)}]}
-                    source={this.state.source}/>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}
-                  underlayColor={'#ffffff'}>
-                     <Image
-                         style={styles.button_showother}
-                         source={require('../../icons/share_anotheritem.png')}/>
-                </TouchableHighlight>
+                {this.renderTitleOfItem()}
+                {this.renderClickableImage()}
+                {this.renderShowDetailBtn()}
               </View>
             </View>
         );

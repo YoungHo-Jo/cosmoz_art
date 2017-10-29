@@ -10,7 +10,7 @@ import {Colors, Sizes} from "../../DefaultStyles";
 import BottomBar from "../BottomBar";
 import {MKSwitch, MKColor} from "react-native-material-kit";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupDialog, {ScaleAnimation, FadeAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./PopupMsgBox";
 import {NavigationActions} from 'react-navigation'
 
@@ -73,7 +73,7 @@ class TimerPage extends Component {
     return(
       <PopupDialog
           ref={(popupDialog) => this.popupDialog = popupDialog}
-          dialogAnimation={new ScaleAnimation()}
+          dialogAnimation={new FadeAnimation({toValue: 0})}
           height={'30%'}>
         <PopupMsgBox
             onLeftButtonClicked={() => {

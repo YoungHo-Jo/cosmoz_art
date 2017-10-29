@@ -1,5 +1,5 @@
 /* @flow */
- 
+
 import React, {Component} from 'react';
 import {
   StyleSheet,
@@ -55,8 +55,7 @@ class LeadTextPage extends Component {
     );
   }
 
-  componentDidMount() {
-  }
+
 }
 
 

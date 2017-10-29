@@ -10,7 +10,7 @@ import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
 import MissionInformationBar from "./MissionInformationBar";
 import BottomBar from "../BottomBar";
-import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupDialog, {ScaleAnimation, FadeAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./PopupMsgBox";
 import {NavigationActions} from "react-navigation";
 
@@ -19,7 +19,6 @@ const MISSION_ICON_SIZE = 30;
 const MISSION_FONT_SIZE = Sizes.missionFontSize;
 const MISSION_BLOCK_MARGIN = 50;
 const MISSION_ICON_COLOR = '#111111';
-
 
 class MainMissionPage extends Component {
 
@@ -81,7 +80,7 @@ class MainMissionPage extends Component {
     return (
       <PopupDialog
           ref={(popupDialog) => this.popupDialog = popupDialog}
-          dialogAnimation={new ScaleAnimation()}
+          dialogAnimation={new FadeAnimation({toValue: 0})}
           height={'30%'}>
         <PopupMsgBox
             onLeftButtonClicked={() => {

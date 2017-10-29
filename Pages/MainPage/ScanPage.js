@@ -51,12 +51,7 @@ export default class ScanPage extends React.Component {
   renderCompleteBtn() {
     return (
       <TouchableHighlight
-        // onPress = {this._onCompletePress.bind(this)}
-        onPress={() => {
-          this.setState({
-            modalVisible: true
-          })
-        }}
+        onPress = {this._onCompletePress.bind(this)}
         style = {styles.rightButton}
         underlayColor = {'#ffffff'}>
          <View style={styles.button}>
@@ -72,7 +67,7 @@ export default class ScanPage extends React.Component {
     return (
       <PopupDialog
         ref={(popupDialog) => this.popupDialog = popupDialog}
-        dialogAnimation={new ScaleAnimation()}
+        dialogAnimation={new FadeAnimation({toValue: 0})}
         height={'30%'}>
         <PopupMsgBox
           onLeftButtonClicked={() => {
@@ -100,34 +95,6 @@ export default class ScanPage extends React.Component {
       </PopupDialog>)
   }
 
-  renderTestModal() {
-    return (
-      <View style={{marginTop: 25}}>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {alert("Modal has been closed.")}}
-          >
-         <View style={{marginTop: 22}}>
-          <View>
-            <Text>Hello World!</Text>
-
-            <TouchableHighlight onPress={() => {
-              this.setState({
-                modalVisible: false
-              })
-            }}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight>
-
-          </View>
-         </View>
-        </Modal>
-      </View>
-    )
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -140,10 +107,6 @@ export default class ScanPage extends React.Component {
         </BottomBar>
 
         {this.renderPopUpDialog()}
-
-
-
-        {this.renderTestModal()}
       </View>
     );
   }
