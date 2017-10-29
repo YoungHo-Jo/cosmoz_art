@@ -306,6 +306,20 @@
 			remoteGlobalIDString = 3D7682761D8E76B80014119E;
 			remoteInfo = SplashScreen;
 		};
+		B683F7951F932B2300F2FDC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B683F7901F932B2200F2FDC2 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = ART;
+		};
+		B683F7971F932B2300F2FDC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B683F7901F932B2200F2FDC2 /* ART.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 323A12871E5F266B004975B8;
+			remoteInfo = "ART-tvOS";
+		};
 		B6C60D171F46A71A00D76008 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 839996F47F3545B6B1E5ECD5 /* react-native-sha256.xcodeproj */;
@@ -383,6 +397,7 @@
 		AA02945B20AE48E4205F6DEA /* Pods-art-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-art-tvOS/Pods-art-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AAF12ABEEB6741C2B23A6921 /* Pods-art.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art.debug.xcconfig"; path = "Pods/Target Support Files/Pods-art/Pods-art.debug.xcconfig"; sourceTree = "<group>"; };
 		B675C59E1F7109F100B0CCDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "art/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B683F7901F932B2200F2FDC2 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		C29AF2010EF0AC5D6E9A5C15 /* libPods-artTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-artTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4253775E3C95CDC16BD9A69 /* Pods-art-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-art-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-art-tvOSTests/Pods-art-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		DAFB6F2140DC4F09B50828E6 /* libRCTMaterialKit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTMaterialKit.a; sourceTree = "<group>"; };
@@ -603,6 +618,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				B683F7901F932B2200F2FDC2 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -644,6 +660,7 @@
 				9CA5F782632E4D39BD2CFFEF /* Resources */,
 				60774838F0E8904B67E54072 /* Pods */,
 				DB96CB44718ECB1C6DA86A06 /* Frameworks */,
+				B683F7621F932ABE00F2FDC2 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -705,6 +722,29 @@
 			isa = PBXGroup;
 			children = (
 				B628054E1F25FC4400AD1ABD /* libRCTCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B683F7621F932ABE00F2FDC2 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				316D6F7A598B414DAC10098A /* libBVLinearGradient.a */,
+				2AD86E5A80CD410693B6CB9A /* libSplashScreen.a */,
+				537BA585C0A347A7BDE91580 /* libRNVectorIcons.a */,
+				19C0CA4AA3674E04A438B63B /* libRCTCamera.a */,
+				DAFB6F2140DC4F09B50828E6 /* libRCTMaterialKit.a */,
+				752F460FD8FE4DDA8FCE803C /* libreact-native-sha256.a */,
+				775980D6FBBD40C8B3362776 /* libRNFirebase.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B683F7911F932B2200F2FDC2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B683F7961F932B2300F2FDC2 /* libART.a */,
+				B683F7981F932B2300F2FDC2 /* libART-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -874,6 +914,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = B683F7911F932B2200F2FDC2 /* Products */;
+					ProjectRef = B683F7901F932B2200F2FDC2 /* ART.xcodeproj */;
+				},
 				{
 					ProductGroup = B628053E1F25FC4400AD1ABD /* Products */;
 					ProjectRef = E272B7BEE57443E084D560EE /* BVLinearGradient.xcodeproj */;
@@ -1187,6 +1231,20 @@
 			fileType = archive.ar;
 			path = libSplashScreen.a;
 			remoteRef = B62805751F25FC4400AD1ABD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B683F7961F932B2300F2FDC2 /* libART.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libART.a;
+			remoteRef = B683F7951F932B2300F2FDC2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B683F7981F932B2300F2FDC2 /* libART-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libART-tvOS.a";
+			remoteRef = B683F7971F932B2300F2FDC2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B6C60D181F46A71A00D76008 /* libreact-native-sha256.a */ = {

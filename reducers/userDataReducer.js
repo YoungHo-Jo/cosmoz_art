@@ -58,7 +58,7 @@ export default function userDataReducer(state = initialState, action) {
         fcmToken: null,
       }
     default:
-      console.log('default in userDataReducer')
+      // console.log('default in userDataReducer')
       return state
   }
 }

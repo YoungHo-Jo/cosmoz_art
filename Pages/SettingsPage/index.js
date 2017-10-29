@@ -41,6 +41,23 @@ class SettingsPage extends Component {
         this.state = {switchValue: false};
     }
 
+    renderPopUpDialog() {
+      return (
+        <PopupDialog
+            ref={(popupDialog) => this.popupDialog = popupDialog}
+            dialogAnimation={new ScaleAnimation()}
+            height={'30%'}>
+          <PopupMsgBox
+              onLeftButtonClicked={() => {
+                this.props.fetchLogout()
+                this.popupDialog.dismiss()
+              }}
+              onRightButtonClicked={() => this.popupDialog.dismiss()}
+              dialogText="로그아웃 하시겠어요?"/>
+        </PopupDialog>
+      )
+    }
+
     render() {
         return (
             <View style={{backgroundColor: '#f1f1f1', flex: 1}}>
@@ -60,12 +77,6 @@ class SettingsPage extends Component {
                                 this.popupDialog.show()
                               }
                             }}/>
-                        {/*<SettingsList.Item*/}
-                            {/*title='연결된 계정'*/}
-                            {/*titleInfo='abc1234@gmail.com'*/}
-                            {/*itemWidth={40}*/}
-                            {/*titleStyle={styles.item}*/}
-                        {/*/>*/}
                         <SettingsList.Header headerText='우편함'
                                              headerStyle={styles.header}/>
                         <SettingsList.Item title='받을편지'
@@ -74,7 +85,6 @@ class SettingsPage extends Component {
                                            itemWidth={40}
                                            titleStyle={styles.item}
                         onPress={() => {
-
                           if (this.props.userData.isLogin) {
                             fetch(APIConfig.requestNotification, {
                               method: 'GET',
@@ -116,20 +126,6 @@ class SettingsPage extends Component {
                     </SettingsList>
                 </View>
 
-
-
-              <PopupDialog
-                  ref={(popupDialog) => this.popupDialog = popupDialog}
-                  dialogAnimation={new ScaleAnimation()}
-                  height={'30%'}>
-                <PopupMsgBox
-                    onLeftButtonClicked={() => {
-                      this.props.fetchLogout()
-                      this.popupDialog.dismiss()
-                    }}
-                    onRightButtonClicked={() => this.popupDialog.dismiss()}
-                    dialogText="로그아웃 하시겠어요?"/>
-              </PopupDialog>
             </View>
         );
     }

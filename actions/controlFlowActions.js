@@ -26,7 +26,6 @@ export function setCurrentViewPage(currentViewPage) {
 
 export function fetchCurrentViewPage(currentViewPage) {
   return (dispatch) => {
-    console.log('hi')
     dispatch(setCurrentViewPage(currentViewPage))
   }
 }

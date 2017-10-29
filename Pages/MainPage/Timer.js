@@ -7,40 +7,48 @@ import * as Progress from 'react-native-progress';
 
 export default class Timer extends Component {
 
-
   static propTypes = {
     onTimerFinished: React.PropTypes.func.isRequired,
     onPressCountDown: React.PropTypes.func,
     secs: React.PropTypes.number
   }
 
+  renderTimerAnimation() {
+    return (
+      <View style={styles.timerContainer}>
+        <Progress.Circle
+          size={160}
+          thickness={15}
+          color={'rgba(255, 255, 255, 0)'}
+          unfilledColor={'rgba(0, 160, 235, 1)'}
+          borderWidth={0}
+          indeterminate={true}
+          progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
+      </View>
+    )
+  }
+
+  renderTimeAnimation() {
+      return (
+        <View style={styles.timeContainer}>
+          <CountDown
+                 totalDuration={this.secsToMillis(this.props.secs) || 10000}
+                 start={this.props.start}
+                 reset={() => console.log('reset')}
+                 options={countDownOptions}
+                 handleFinish={this._onCountDownFinished.bind(this)}
+                 getTime={(time) => console.log('current: ' + time)}
+                 onPress={() => this.props.onPressCountDown()}/>
+        </View>
+      )
+  }
+
 
   render() {
     return (
         <View style={styles.blockContainer}>
-          {/*timerAnimation*/}
-          <View style={styles.timerContainer}>
-            <Progress.Circle
-              size={160}
-              thickness={15}
-              color={'rgba(255, 255, 255, 0)'}
-              unfilledColor={'rgba(0, 160, 235, 1)'}
-              borderWidth={0}
-              indeterminate={true}
-              progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
-          </View>
-
-          {/*timeAnimation*/}
-          <View style={styles.timeContainer}>
-            <CountDown
-                   totalDuration={this.secsToMillis(this.props.secs) || 10000}
-                   start={this.props.start}
-                   reset={() => console.log('reset')}
-                   options={countDownOptions}
-                   handleFinish={this._onCountDownFinished.bind(this)}
-                   getTime={(time) => console.log('current: ' + time)}
-                   onPress={() => this.props.onPressCountDown()}/>
-          </View>
+          {this.renderTimerAnimation()}
+          {this.renderTimeAnimation()}
         </View>
     );
   }

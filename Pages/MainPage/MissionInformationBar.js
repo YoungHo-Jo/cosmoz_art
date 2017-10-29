@@ -5,15 +5,13 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-
 import {Colors, Margins} from '../../DefaultStyles';
 
 const ICON_CONTAINER_SIZE = 40;
 const ICON_SIZE = 25;
 const ICON_COLOR = '#111111';
 const TEXT_SIZE = 13;
-const BAR_BGCOLOR= '#f7f7f7';
+const BAR_BGCOLOR = '#f7f7f7';
 
 class MissionInformationBar extends Component {
   static propTypes = {
@@ -22,7 +20,6 @@ class MissionInformationBar extends Component {
     secs: React.PropTypes.number
   }
 
-
   render() {
     return (
       <View style={styles.blockContainer}>
@@ -30,11 +27,7 @@ class MissionInformationBar extends Component {
         <View style={styles.leftContainer}>
           {/* mission icon */}
           <View style={styles.missionIconContainer}>
-            <Icon
-              name='md-bulb'
-              size={ICON_SIZE}
-              color={ICON_COLOR}
-            />
+            <Icon name='md-bulb' size={ICON_SIZE} color={ICON_COLOR}/>
           </View>
           {/* benefit text */}
           <View style={styles.benefitTextContainer}>
@@ -48,11 +41,7 @@ class MissionInformationBar extends Component {
         <View style={styles.rightContainer}>
           {/* time icon */}
           <View style={styles.timeIconContainer}>
-            <Icon
-              name='md-time'
-              size={ICON_SIZE}
-              color={ICON_COLOR}
-            />
+            <Icon name='md-time' size={ICON_SIZE} color={ICON_COLOR}/>
           </View>
           {/* time */}
           <View style={styles.timeContainer}>
@@ -69,12 +58,14 @@ class MissionInformationBar extends Component {
   secsToStr(secs) {
     var sec = secs % 60
     var min = parseInt(secs / 60)
-    var secStr = (sec < 10) ? '0' + sec : sec;
-    var minStr = (min < 10) ? '0' + min : min;
+    var secStr = (sec < 10)
+      ? '0' + sec
+      : sec;
+    var minStr = (min < 10)
+      ? '0' + min
+      : min;
     return minStr + ':' + secStr
   }
-
-
 
 }
 
@@ -124,8 +115,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: TEXT_SIZE,
-    color: Colors.defaultTextColor,
-
+    color: Colors.defaultTextColor
   }
 });
 

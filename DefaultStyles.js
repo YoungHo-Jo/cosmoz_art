@@ -29,6 +29,7 @@ export const Colors = {
   defaultTextColor: '#333333',
   titleBarColor: '#ffffff',
   defaultPageBgColor: '#ffffff',
+  grayTextColor: '#8e8e8e'
 };
 
 

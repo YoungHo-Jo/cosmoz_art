@@ -133,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-firebase')
 
 // RNFirebase required dependencies
     compile(project(':react-native-firebase')) {

@@ -35,7 +35,7 @@ export function getTodayMissionFailure() {
 
 export function fetchTodayMission() {
   return dispatch => {
-    console.log('fetchTodayMission...')
+    // console.log('fetchTodayMission...')
     dispatch(getTodayMission())
 
     fetch(APIConfig.getTodayMission, {
@@ -172,5 +172,3 @@ export function fetchMissionToShow(type) {
     dispatch(setMissionToShow(type))
   }
 }
-
-

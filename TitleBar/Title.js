@@ -24,9 +24,6 @@ class Title extends Component {
   render() {
 
     const {currentViewPager} = this.props
-
-    console.log('Title: ')
-    console.log(this.props)
     return (
       <View style={[!this.state.isiOS && eStyles.container, this.state.isiOS && styles.container]}>
         {

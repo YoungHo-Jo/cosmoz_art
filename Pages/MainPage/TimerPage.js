@@ -25,6 +25,69 @@ class TimerPage extends Component {
     timerStart: true
   }
 
+  renderTimer() {
+    return (
+      <View style={styles.timerContainer}>
+        <Timer
+          start={this.state.timerStart}
+          secs={this.props.secs}
+          onTimerFinished={() => this._moveToNextPage()}
+          onPressCountDown={() => this.popupDialog.show()}/>
+      </View>
+    )
+  }
+
+  renderMission() {
+    return (
+      <View style={styles.missionTextContainer}>
+        <Text style={styles.missionText}>
+          {this.props.navigation.state.params.mission.text}
+        </Text>
+      </View>
+    )
+  }
+
+  renderToggle() {
+    return(
+      <View style={styles.toggleContainer}>
+        <Icon
+            name='bell'
+            size={28}
+            color={'#777777'}/>
+        <MKSwitch
+            style={styles.appleSwitch}
+            onColor='rgba(0, 160, 235, 0.3)'
+            thumbOnColor='rgba(0, 160, 235, 1)'
+            rippleColor='rgba(0, 160, 235, 0.2)'
+            onPress={() => console.log('vibration switch pressed')}
+            onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
+        <Icon
+            name='bell-off'
+            size={28}
+            color={'#777777'}/>
+      </View>
+    )
+  }
+
+  renderPopUpDialog() {
+    return(
+      <PopupDialog
+          ref={(popupDialog) => this.popupDialog = popupDialog}
+          dialogAnimation={new ScaleAnimation()}
+          height={'30%'}>
+        <PopupMsgBox
+            onLeftButtonClicked={() => {
+              this.popupDialog.dismiss()
+
+              this._moveToNextPage()
+
+            }}
+            onRightButtonClicked={() => this.popupDialog.dismiss()}
+            dialogText="벌써 다 했나요?"/>
+      </PopupDialog>
+    )
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,39 +98,13 @@ class TimerPage extends Component {
 
 
         {/*Timer*/}
-        <View style={styles.timerContainer}>
-          <Timer
-            start={this.state.timerStart}
-            secs={this.props.secs}
-            onTimerFinished={() => this._moveToNextPage()}
-            onPressCountDown={() => this.popupDialog.show()}/>
-        </View>
+        {this.renderTimer()}
 
         {/*Mission*/}
-        <View style={styles.missionTextContainer}>
-          <Text style={styles.missionText}>
-            {this.props.navigation.state.params.mission.text}
-          </Text>
-        </View>
+        {this.renderMission()}
 
         {/*alarm toggle switch*/}
-        <View style={styles.toggleContainer}>
-          <Icon
-              name='bell'
-              size={28}
-              color={'#777777'}/>
-          <MKSwitch
-              style={styles.appleSwitch}
-              onColor='rgba(0, 160, 235, 0.3)'
-              thumbOnColor='rgba(0, 160, 235, 1)'
-              rippleColor='rgba(0, 160, 235, 0.2)'
-              onPress={() => console.log('vibration switch pressed')}
-              onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
-          <Icon
-              name='bell-off'
-              size={28}
-              color={'#777777'}/>
-        </View>
+        {this.renderToggle()}
 
 
         {/* deprecated */}
@@ -78,20 +115,8 @@ class TimerPage extends Component {
 
 
         {/* deprecated */}
-        <PopupDialog
-            ref={(popupDialog) => this.popupDialog = popupDialog}
-            dialogAnimation={new ScaleAnimation()}
-            height={'30%'}>
-          <PopupMsgBox
-              onLeftButtonClicked={() => {
-                this.popupDialog.dismiss()
+        {this.renderPopUpDialog()}
 
-                this._moveToNextPage()
-
-              }}
-              onRightButtonClicked={() => this.popupDialog.dismiss()}
-              dialogText="벌써 다 했나요?"/>
-        </PopupDialog>
       </View>
     );
   }

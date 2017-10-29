@@ -224,9 +224,9 @@ class MyPage extends Component {
         <View style={styles.loginGuidanceContainer}>
           <UpperLinearGradient/>
 
-          {/*<Text style={styles.loginGuidanceText}>*/}
-          {/*가족이 되시면 볼 수 있어요*/}
-          {/*</Text>*/}
+          {/* <Text style={styles.loginGuidanceText}>
+          예술이네 가족이 되어주세요!
+          </Text> */}
 
 
           <TouchableHighlight style={styles.loginButton}
@@ -439,8 +439,8 @@ const styles = StyleSheet.create({
     marginBottom: Sizes.bottomBarHeight
   },
   loginGuidanceText: {
-    fontSize: 25,
-    color: Colors.defaultTextColor,
+    fontSize: 15,
+    color: Colors.grayTextColor,
     fontWeight: Sizes.fontWeight,
 
     marginTop: 100,
