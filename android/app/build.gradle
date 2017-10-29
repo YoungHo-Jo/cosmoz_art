@@ -102,6 +102,7 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        multiDexEnabled true
     }
     
     splits {
@@ -134,9 +135,10 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-firebase')
+    // for multidex enable
+    compile 'com.android.support:multidex:1.0.1'
 
-// RNFirebase required dependencies
+    // RNFirebase required dependencies
     compile(project(':react-native-firebase')) {
         transitive = false
     }
