@@ -95,7 +95,8 @@ class ReadySubmitPage extends Component {
                   NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
                 ]
               });
-              this.props.navigation.dispatch(resetAction)}}>
+              this.props.navigation.dispatch(resetAction)}}
+            disabled={this.state.buttonDisabled}>
             <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#3d3d3d',}]}>
               <Text style={[styles.directButtonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
                 {"완료"}

@@ -12,7 +12,8 @@ import {
   StyleSheet,
   Switch,
   Image,
-  Dimensions
+  Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 
 import Button from 'apsl-react-native-button';
@@ -111,6 +112,13 @@ class Login extends Component {
                   </Button>
                 </View>
               </View>
+              {this.props.userData.isLogin &&
+                <View style={styles.loadingOverlay}>
+                  <ActivityIndicator
+                    size='large'
+                    color='#00a0eb'/>
+                </View>
+              }
             </KeyboardAwareScrollView>
     )
   }
@@ -118,7 +126,7 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height -90,
+    height: Dimensions.get('window').height - 74,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
@@ -177,6 +185,16 @@ const styles = StyleSheet.create({
     borderBottomColor: '#3a3a3a',
     marginBottom: 20
   },
+  loadingOverlay: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#33333399'
+  }
 });
 
 
