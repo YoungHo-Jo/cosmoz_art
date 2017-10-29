@@ -47,7 +47,8 @@ class FriendAmountSubmitPage extends Component {
           <TouchableHighlight
             style={styles.nextButton}
             underlayColor={'#ffffff'}
-            onPress={() => this.props.onClickNext()}>
+            onPress={() => this.props.onClickNext()}
+            disabled={this.state.buttonDisabled}>
             <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
               <Text style={[styles.buttonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
                 {"다음"}

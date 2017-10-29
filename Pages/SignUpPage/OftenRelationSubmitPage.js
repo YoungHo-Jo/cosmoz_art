@@ -130,7 +130,8 @@ class OftenRelationSubmitPage extends Component {
           <TouchableHighlight
             style={styles.rightDirectionButton}
             underlayColor={'#ffffff'}
-            onPress={() => this.props.onClickNext()}>
+            onPress={() => this.props.onClickNext()}
+            disabled={this.state.buttonDisabled}>
             <View style={[styles.button, {borderColor: this.state.buttonDisabled ? '#aaaaaa' : '#3d3d3d',}]}>
               <Text style={[styles.directButtonText, {color: this.state.buttonDisabled ? '#aaaaaa' : '#333333',}]}>
                 {"다음"}

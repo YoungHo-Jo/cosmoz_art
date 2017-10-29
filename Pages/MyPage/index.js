@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
-  ScrollView,
+  SectionList,
   View, TouchableHighlight,
   Dimensions, Image
 } from 'react-native';
@@ -117,107 +117,134 @@ class MyPage extends Component {
     );
   }
 
+  renderUserInfo() {
+    return (
+      <View>
+        <View style={[styles.accumulationTextContainer]}>
+          <Text style={[styles.accumulationText]}>
+            {this.props.userData.userInfo.accumulationTime}
+          </Text>
+        </View>
+        <View style={styles.benefitTextContainer}>
+          <Text style={styles.benefitText}>
+            {this.props.userData.userInfo.userText}
+          </Text>
+        </View>
+      </View>
+    );
+  }
+
+  renderFilterButtons() {
+    return (
+      <View>
+        <View style={[styles.filteringButtonContainer]}>
+        <TouchableHighlight style={[styles.iconContainer, this.state.isFirstBtnSelected && styles.selectedButton]}
+                            onPress={this._onFirBtnClick}
+                            underlayColor={Colors.titleBarColor}>
+          <SimpleLineIcons
+            name='note'
+            size={ICON_SIZE}
+            color={Colors.defaultTextColor}/>
+        </TouchableHighlight>
+        <TouchableHighlight style={[styles.iconContainer, this.state.isSecondBtnSelected && styles.selectedButton]}
+                            onPress={() => {
+                              this.refs.secondModalDropDown.show()
+                              this._onSecBtnClick()
+                              this.props.fetchDropDownState(true)
+                            }}
+                            underlayColor={Colors.titleBarColor}
+                            ref='parentTouchableHighlight'
+                            onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
+          <View style={eStyles.modalDropDownContainer}>
+            <ModalDropdown options={[filterMethod.likeArts.byMe, filterMethod.likeArts.byOthers]}
+                           dropdownStyle={styles.dropDown}
+                           dropdownTextStyle={styles.dropDownText}
+                           dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
+                           renderSeparator={() => this._renderModalDropDownSeparator()}
+                           ref='secondModalDropDown'
+                           style={eStyles.modalDropDownContainer}
+                           disabled={true}
+                           onSelect={(index, value) => this._onDropDownSelect(index, value)}
+                           renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
+                           onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
+              <View style={eStyles.modalDropDownIcon}>
+                <Image
+                  style={styles.logo}
+                  source={require('../../icons/logo.png')}/>
+              </View>
+
+            </ModalDropdown>
+          </View>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={[styles.iconContainer, this.state.isThirdBtnSelected && styles.selectedButton]}
+                            onPress={() => {
+                              this.refs.thirdModalDropDown.show()
+                              this._onThrBtnClick()
+                              this.props.fetchDropDownState(true)
+                            }}
+                            underlayColor={Colors.titleBarColor}
+                            ref='parentTouchableHighlight'
+                            onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
+          <View style={eStyles.modalDropDownContainer}>
+            <ModalDropdown options={[filterMethod.myArts.byTime, filterMethod.myArts.byBehavior]}
+                           dropdownStyle={styles.dropDown}
+                           dropdownTextStyle={styles.dropDownText}
+                           dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
+                           renderSeparator={() => this._renderModalDropDownSeparator()}
+                           ref='thirdModalDropDown'
+                           disabled={true}
+                           onSelect={(index, value) => this._onDropDownSelect(index, value)}
+                           renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
+                           onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
+              <View style={eStyles.modalDropDownIcon}>
+                <MaterialCommunityIcons
+                  name='format-list-bulleted'
+                  size={ICON_SIZE + 5}
+                  color={Colors.defaultTextColor}/>
+              </View>
+
+            </ModalDropdown>
+          </View>
+        </TouchableHighlight>
+      </View>
+      </View>
+    );
+  }
+
+  renderList() {
+    return (
+      <View>
+        <View style={styles.listViewContainer}>
+          <View>
+            <GridView
+              style={{height: '100%'}}
+              items={data}
+              itemWidth={Dimensions.get('window').width * (40 / 100)}
+              renderItem={this.renderItem.bind(this)}
+              spacing={20}
+              fixed={true}
+            />
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   renderRealMyPage() {
     return (
         <View style={styles.realMyPage}>
-          <View style={[styles.accumulationTextContainer]}>
-            <Text style={[styles.accumulationText]}>
-              {this.props.userData.userInfo.accumulationTime}
-            </Text>
-          </View>
-          <View style={styles.benefitTextContainer}>
-            <Text style={styles.benefitText}>
-              {this.props.userData.userInfo.userText}
-            </Text>
-          </View>
-
-          <View style={[styles.filteringButtonContainer]}>
-            <TouchableHighlight style={[styles.iconContainer, this.state.isFirstBtnSelected && styles.selectedButton]}
-                                onPress={this._onFirBtnClick}
-                                underlayColor={Colors.titleBarColor}>
-              <SimpleLineIcons
-                  name='note'
-                  size={ICON_SIZE}
-                  color={Colors.defaultTextColor}/>
-            </TouchableHighlight>
-            <TouchableHighlight style={[styles.iconContainer, this.state.isSecondBtnSelected && styles.selectedButton]}
-                                onPress={() => {
-                                  this.refs.secondModalDropDown.show()
-                                  this._onSecBtnClick()
-                                  this.props.fetchDropDownState(true)
-                                }}
-                                underlayColor={Colors.titleBarColor}
-                                ref='parentTouchableHighlight'
-                                onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
-              <View style={eStyles.modalDropDownContainer}>
-                <ModalDropdown options={[filterMethod.likeArts.byMe, filterMethod.likeArts.byOthers]}
-                               dropdownStyle={styles.dropDown}
-                               dropdownTextStyle={styles.dropDownText}
-                               dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
-                               renderSeparator={() => this._renderModalDropDownSeparator()}
-                               ref='secondModalDropDown'
-                               style={eStyles.modalDropDownContainer}
-                               disabled={true}
-                               onSelect={(index, value) => this._onDropDownSelect(index, value)}
-                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
-                               onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
-                  <View style={eStyles.modalDropDownIcon}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../../icons/logo.png')}/>
-                  </View>
-
-                </ModalDropdown>
-              </View>
-            </TouchableHighlight>
-
-            <TouchableHighlight style={[styles.iconContainer, this.state.isThirdBtnSelected && styles.selectedButton]}
-                                onPress={() => {
-                                  this.refs.thirdModalDropDown.show()
-                                  this._onThrBtnClick()
-                                  this.props.fetchDropDownState(true)
-                                }}
-                                underlayColor={Colors.titleBarColor}
-                                ref='parentTouchableHighlight'
-                                onLayout={(evt) => this.findTouchableHighlightDimensions(evt.nativeEvent.layout)}>
-              <View style={eStyles.modalDropDownContainer}>
-                <ModalDropdown options={[filterMethod.myArts.byTime, filterMethod.myArts.byBehavior]}
-                               dropdownStyle={styles.dropDown}
-                               dropdownTextStyle={styles.dropDownText}
-                               dropdownTextHighlightStyle={styles.dropDownTextHighlightStyle}
-                               renderSeparator={() => this._renderModalDropDownSeparator()}
-                               ref='thirdModalDropDown'
-                               disabled={true}
-                               onSelect={(index, value) => this._onDropDownSelect(index, value)}
-                               renderRow={(rowData) => this._renderModalDropDownRow(rowData)}
-                               onDropdownWillHide={() => this.props.fetchDropDownState(false)}>
-                  <View style={eStyles.modalDropDownIcon}>
-                    <MaterialCommunityIcons
-                        name='format-list-bulleted'
-                        size={ICON_SIZE + 5}
-                        color={Colors.defaultTextColor}/>
-                  </View>
-
-                </ModalDropdown>
-              </View>
-            </TouchableHighlight>
-          </View>
-
-
-          <View style={styles.listViewContainer}>
-            <UpperLinearGradient/>
-            <View style={{paddingBottom: 20,}}>
-              <GridView
-                  style={{height: '100%'}}
-                  items={data}
-                  itemWidth={Dimensions.get('window').width * (42 / 100)}
-                  renderItem={this.renderItem.bind(this)}
-                  spacing={20}
-                  fixed={true}
-              />
-            </View>
-            <LowerLinearGradient/>
-          </View>
+          <SectionList
+            sections={[
+              {data: [], title: this.renderUserInfo()},
+              {data: [this.renderList()], title: this.renderFilterButtons()}
+            ]}
+            renderSectionHeader={({section})=> section.title}
+            renderItem={({item})=> item}
+            keyExtractor= {(item, index) => index}
+            stickySectionHeadersEnabled={true}
+          />
+          <View style={{paddingBottom: Sizes.bottomBarHeight}}/>
         </View>
     )
   }
@@ -404,7 +431,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
-    marginBottom: Sizes.bottomBarHeight,
   },
   selectedButton: {
     backgroundColor: Colors.titleBarColor

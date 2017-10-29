@@ -29,8 +29,8 @@ class MyPageGridViewItem extends Component {
 const styles= StyleSheet.create({
   myImage: {
     flex: 1,
-    width: Dimensions.get('window').width * (42/100),
-    height: Dimensions.get('window').width * (42/100),
+    width: Dimensions.get('window').width * (40/100),
+    height: Dimensions.get('window').width * (40/100),
     resizeMode: 'cover',
     alignSelf: 'center',
     borderRadius: 10,
