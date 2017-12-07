@@ -5,6 +5,8 @@ import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions} from '
 import SharePageHoriListViewItem from './SharePageHoriListViewItem'
 import {Colors, Sizes} from "../../DefaultStyles";
 
+import {Header} from 'react-navigation';
+
 const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 
 class SharePageHoriListView extends Component {
@@ -40,7 +42,16 @@ class SharePageHoriListView extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.headingText}>나의 우주외계인</Text>
+          <View style={styles.shareKeywordContainer}>
+            <Image
+              style={styles.quotemarkImage}
+              source={require('../../icons/double_quotation_marks_left.png')}/>
+            <Text style={styles.headingText}>나의 우주외계인</Text>
+            <Image
+              style={styles.quotemarkImage}
+              source={require('../../icons/double_quotation_marks_right.png')}/>
+          </View>
+
           <ListView horizontal={true}
                     styles={styles.list}
                     dataSource={this.state.dataSource}
@@ -61,13 +72,23 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
   },
+  shareKeywordContainer: {
+    height: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (20/100),
+    alignSelf: 'center',
+    flexDirection: 'row',
+  },
   headingText: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#333333',
     alignSelf: 'center',
     textAlignVertical: 'center',
-    height: (Dimensions.get('window').height-95) * (14/100),
-  }
+  },
+  quotemarkImage: {
+    flex: 1,
+    height: 30,
+    resizeMode: 'contain',
+    alignSelf: 'center'
+  },
 });
 export default SharePageHoriListView;

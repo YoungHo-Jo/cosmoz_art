@@ -16,7 +16,7 @@ export const Sizes = {
   logoMinSize: 55,
   missionFontSize: 25,
   leadTextSize: 25,
-  linearGradientHeight: 20,
+  linearGradientHeight: 5,
   fontSize: 20,
   fontWeight: '300',
   middleFontWeight: '500'

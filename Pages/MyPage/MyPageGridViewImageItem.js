@@ -9,7 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-class MyPageGridViewItem extends Component {
+class MyPageGridViewImageItem extends Component {
   propTypes: {
     imageURL: React.PropTypes.string.isRequired,
     onClickImage: React.PropTypes.func.isRequired,
@@ -39,4 +39,4 @@ const styles= StyleSheet.create({
   }
 });
 
-export default MyPageGridViewItem;
+export default MyPageGridViewImageItem;

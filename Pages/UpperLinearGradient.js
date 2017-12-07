@@ -11,7 +11,7 @@ export default class UpperLinearGradient extends React.Component {
     return(
       <View style={styles.container}>
         <LinearGradient
-          colors={['#eef2f5', '#ffffff']}
+          colors={['#00000029', '#ffffff00']}
           style={styles.linearGradient}/>
       </View>
 
