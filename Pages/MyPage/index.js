@@ -16,7 +16,6 @@ import LowerLinearGradient from "../LowerLinearGradient";
 import MyPageGridViewImageItem from "./MyPageGridViewImageItem"
 import MyPageGridViewTextItem from "./MyPageGridViewTextItem"
 import ModalDropdown from "react-native-modal-dropdown/components/ModalDropdown";
-import {BoxShadow} from "react-native-shadow";
 
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
@@ -132,26 +131,12 @@ class MyPage extends Component {
   }
 
   renderToTheTopButton() {
-    const shadowOpt = {
-      width:60,
-      height:60,
-      color:"#000000",
-      border:2,
-      radius:30,
-      opacity:0.2,
-      x:0,
-      y:3,
-      //style:{marginVertical:5}
-    }
-
     return (
-      <BoxShadow setting={shadowOpt}>
         <TouchableHighlight
           style={styles.toTheTopButton}
           underlayColor={'#333333'}>
           <Text style={styles.topButtonText}>^</Text>
         </TouchableHighlight>
-      </BoxShadow>
     )
   }
 
