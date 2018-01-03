@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 import com.facebook.react.ReactApplication;
+import com.BV.LinearGradient.LinearGradientPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
@@ -13,7 +14,6 @@ import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -34,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
               new MainReactPackage(),
+              new LinearGradientPackage(),
               new RNFirebasePackage(),
               new RNFirebaseAnalyticsPackage(),
               new RNFirebaseMessagingPackage(),
@@ -41,9 +42,13 @@ public class MainApplication extends Application implements ReactApplication {
               new ReactMaterialKitPackage(),
               new RCTCameraPackage(),
               new VectorIconsPackage(),
-              new SplashScreenReactPackage(),
-              new LinearGradientPackage()
+              new SplashScreenReactPackage()
       );
+    }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
     }
   };
 
