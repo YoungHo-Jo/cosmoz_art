@@ -1,6 +1,8 @@
 /* @flow */
 
-import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import {StyleSheet, View, Text,} from 'react-native';
 
 import Timer from './Timer';
@@ -17,8 +19,8 @@ import {NavigationActions} from 'react-navigation'
 class TimerPage extends Component {
 
   static propTypes = {
-    secs: React.PropTypes.number,
-    missionText: React.PropTypes.string
+    secs: PropTypes.number,
+    missionText: PropTypes.string
   }
 
   state = {

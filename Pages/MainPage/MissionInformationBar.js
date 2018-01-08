@@ -1,6 +1,8 @@
 /* @flow */
 
-import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,9 +17,9 @@ const BAR_BGCOLOR = '#f7f7f7';
 
 class MissionInformationBar extends Component {
   static propTypes = {
-    benefitText: React.PropTypes.string.isRequired,
-    time: React.PropTypes.string.isRequired,
-    secs: React.PropTypes.number
+    benefitText: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired,
+    secs: PropTypes.number
   }
 
   render() {

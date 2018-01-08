@@ -1,6 +1,8 @@
 /* @flow */
 
-import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -23,11 +25,11 @@ const MISSION_ICON_COLOR = '#111111';
 class MainMissionPage extends Component {
 
   static propTypes = {
-    secs: React.PropTypes.number,
-    benefitText: React.PropTypes.string,
-    benefitIcon: React.PropTypes.string,
-    missionText: React.PropTypes.string,
-    missionIconType: React.PropTypes,
+    secs: PropTypes.number,
+    benefitText: PropTypes.string,
+    benefitIcon: PropTypes.string,
+    missionText: PropTypes.string,
+    missionIconType: PropTypes,
   }
 
   renderMissionInfoBar() {

@@ -1,6 +1,8 @@
 /* @flow */
 
-import React from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
 import {Colors, Sizes} from "../../DefaultStyles";
 
@@ -10,12 +12,12 @@ const IMAGE_SIDE_MARGIN = 30;
 export default class PopupMsgBox extends React.Component {
 
   static propTypes = {
-    onLeftButtonClicked: React.PropTypes.func.isRequired,
-    onRightButtonClicked: React.PropTypes.func.isRequired,
-    leftButtonText: React.PropTypes.string,
-    rightButtonText: React.PropTypes.string,
-    dialogText: React.PropTypes.string,
-    dialogTextStyle: React.PropTypes.object,
+    onLeftButtonClicked: PropTypes.func.isRequired,
+    onRightButtonClicked: PropTypes.func.isRequired,
+    leftButtonText: PropTypes.string,
+    rightButtonText: PropTypes.string,
+    dialogText: PropTypes.string,
+    dialogTextStyle: PropTypes.object,
   }
 
   static defaultProps = {

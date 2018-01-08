@@ -1,6 +1,8 @@
 /* @flow */
 
-import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import * as Progress from 'react-native-progress';
@@ -8,9 +10,9 @@ import * as Progress from 'react-native-progress';
 export default class Timer extends Component {
 
   static propTypes = {
-    onTimerFinished: React.PropTypes.func.isRequired,
-    onPressCountDown: React.PropTypes.func,
-    secs: React.PropTypes.number
+    onTimerFinished: PropTypes.func.isRequired,
+    onPressCountDown: PropTypes.func,
+    secs: PropTypes.number
   }
 
   renderTimerAnimation() {

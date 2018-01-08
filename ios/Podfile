@@ -7,38 +7,48 @@ target 'art' do
 
   # Pods for art
 
-# Required by RNFirebase
-pod 'Firebase/Core'
-pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+  # Required by RNFirebase
+  pod 'Firebase/Core'
+  #pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
-# [OPTIONAL PODS] - comment out pods for firebase products you won't be using.
-#pod 'Firebase/AdMob'
-#pod 'Firebase/Analytics'
-#pod 'Firebase/Auth'
-#pod 'Firebase/Crash'
-#pod 'Firebase/Database'
-#pod 'Firebase/DynamicLinks'
-pod 'Firebase/Messaging'
-#pod 'Firebase/RemoteConfig'
-#pod 'Firebase/Storage'
+  # [OPTIONAL PODS] - comment out pods for firebase products you won't be using.
+  #pod 'Firebase/AdMob'
+  #pod 'Firebase/Analytics'
+  #pod 'Firebase/Auth'
+  #pod 'Firebase/Crash'
+  #pod 'Firebase/Database'
+  #pod 'Firebase/DynamicLinks'
+  pod 'Firebase/Messaging'
+  #pod 'Firebase/RemoteConfig'
+  #pod 'Firebase/Storage'
 
-pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
-pod 'React', :path => '../node_modules/react-native', :subspecs => [
-  'BatchedBridge', # Required For React Native 0.45.0+
-  'Core',
-  'ART',
-  # Add any other subspecs you want to use in your project
-]
+  pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'BatchedBridge', # Required For React Native 0.45.0+
+    'Core',
+    'ART',
+    # Add any other subspecs you want to use in your project
+  ]
 
+  pod 'react-native-material-kit', :path => '../node_modules/react-native-material-kit'
+  post_install do |installer|
+    target = installer.pods_project.targets.select{|t| 'React' == t.name}.first
+    phase = target.new_shell_script_build_phase('Run Script')
+    phase.shell_script = "if nc -w 5 -z localhost 8081 ; then\n  if ! curl -s \"http://localhost:8081/status\" | grep -q \"packager-status:running\" ; then\n    echo \"Port 8081 already in use, packager is either not running or not running correctly\"\n    exit 2\n  fi\nelse\n  open $SRCROOT/../node_modules/react-native/packager/launchPackager.command || echo \"Can't start packager automatically\"\nfi"
+  end
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
   target 'artTests' do
     inherit! :search_paths
     # Pods for testing
   end
-	
-
-
 end
 
 target 'art-tvOS' do
@@ -54,4 +64,3 @@ target 'art-tvOS' do
   end
 
 end
-

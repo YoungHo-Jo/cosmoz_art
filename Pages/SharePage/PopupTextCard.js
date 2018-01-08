@@ -1,6 +1,8 @@
 /* @flow */
 
-import React from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
 import {Colors, Sizes} from "../../DefaultStyles";
 
@@ -10,8 +12,8 @@ const IMAGE_SIDE_MARGIN = 30;
 export default class PopupTextCard extends React.Component {
 
   static propTypes = {
-    dialogText: React.PropTypes.string,
-    onTextPressed: React.PropTypes.func.isRequired,
+    dialogText: PropTypes.string,
+    onTextPressed: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
