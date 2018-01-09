@@ -9,6 +9,7 @@ import com.sha256lib.Sha256Package;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -29,13 +30,14 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+            new MainReactPackage(),
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
             new Sha256Package(),
             new ReactMaterialKitPackage(),
             new LinearGradientPackage(),
             new RNFirebasePackage(),
+            new RNFirebaseMessagingPackage(),
             new RCTCameraPackage()
       );
     }
