@@ -8,11 +8,12 @@ import {
   Dimensions,
   TouchableHighlight
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 class MyPageGridViewImageItem extends Component {
   propTypes: {
-    imageURL: React.PropTypes.string.isRequired,
-    onClickImage: React.PropTypes.func.isRequired,
+    imageURL: PropTypes.string.isRequired,
+    onClickImage: PropTypes.func.isRequired,
   }
 
   render(){

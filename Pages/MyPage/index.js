@@ -6,7 +6,8 @@ import {
   Text,
   SectionList,
   View, TouchableHighlight,
-  Dimensions, Image
+  Dimensions, Image,
+  Animated, Easing
 } from 'react-native';
 import GridView from 'react-native-super-grid';
 import {Colors, Sizes} from "../../DefaultStyles";
@@ -132,11 +133,15 @@ class MyPage extends Component {
 
   renderToTheTopButton() {
     return (
+      <Animated.View>
         <TouchableHighlight
           style={styles.toTheTopButton}
-          underlayColor={'#333333'}>
-          <Text style={styles.topButtonText}>^</Text>
+          underlayColor={'#bbbbbb'}
+          onPress={() => this._sectionlist.scrollToLocation({sectionIndex: 0, itemIndex: 0, viewOffset:100})}>
+          <Text style={styles.topButtonText}>↑</Text>
         </TouchableHighlight>
+      </Animated.View>
+
     )
   }
 
@@ -243,7 +248,7 @@ class MyPage extends Component {
             <GridView
               style={{height: '100%'}}
               items={data}
-              itemWidth={Dimensions.get('window').width * (40 / 100)}
+              itemDimension={Dimensions.get('window').width * (40 / 100)}
               renderItem={this.renderItem.bind(this)}
               spacing={20}
               fixed={true}
@@ -258,6 +263,7 @@ class MyPage extends Component {
     return (
         <View style={styles.realMyPage}>
           <SectionList
+            ref={ref => this._sectionlist = ref}
             sections={[
               {data: [], title: this.renderUserInfo()},
               {data: [this.renderList()], title: this.renderFilterButtons()}
@@ -538,13 +544,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: "#ffffff",
     shadowColor: '#000000',
-    shadowRadius: 32
+    shadowRadius: 32,
+    elevation: 3,
   },
   topButtonText: {
-    fontSize: 60,
-    color: '#000000aa',
+    fontSize: 45,
+    color: '#777777',
     textAlign: 'center',
-    marginTop: 15,
+    marginBottom: 10
   }
 
 
