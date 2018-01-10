@@ -50,6 +50,7 @@
 		AC146E680FE34F62A0147A2D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7ECF6239FB04BD58B6C129F /* MaterialCommunityIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B6F3D66B20033BD10020E69E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6F3D66A20033BD00020E69E /* GoogleService-Info.plist */; };
+		B6F6A7882005D7830039177C /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F6A7352005D3FA0039177C /* libART.a */; };
 		CCF3E78048424B6AA43355A5 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 62A2340B537045CDBB32BF25 /* EvilIcons.ttf */; };
 		CDC0C15019E5412BA477B2D0 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00018DFB24BC48999C1AB283 /* Entypo.ttf */; };
 		D73041E9E585A56E9E1FE07A /* libPods-artTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E1141E4A03FE0E920E8053C /* libPods-artTests.a */; };
@@ -446,6 +447,7 @@
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
+				B6F6A7882005D7830039177C /* libART.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7C32491D76924A7191B9D0D6 /* libRNFirebase.a in Frameworks */,
