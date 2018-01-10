@@ -17,7 +17,7 @@ import BottomBar from "../BottomBar";
 import {NavigationActions} from "react-navigation";
 import {Colors} from "../../DefaultStyles";
 import EStyleSheet from 'react-native-extended-stylesheet'
-import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
+import PopupDialog, {FadeAnimation} from "react-native-popup-dialog";
 import PopupMsgBox from "./PopupMsgBox";
 
 const IMAGE_SIDE_MARGIN = 30;

@@ -21,7 +21,7 @@
     "react-native-lightbox": "^0.7.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-masonry": "^0.4.4",
-    "react-native-material-kit": "^0.5.1",
+    "react-native-material-kit": "YoungHo-Jo/react-native-material-kit",
     "react-native-modal-dropdown": "^0.5.0",
     "react-native-popup-dialog": "^0.10.45",
     "react-native-progress": "^3.4.0",
