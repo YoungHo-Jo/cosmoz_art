@@ -9,11 +9,12 @@ import {
   Dimensions,
   TouchableHighlight
 } from 'react-native';
+import PropTypes from 'prop-types'
 
 class MyPageGridViewTextItem extends Component {
   propTypes: {
-    text: React.PropTypes.string.isRequired,
-    colorNum: React.PropTypes.number.isRequired
+    text: PropTypes.string.isRequired,
+    colorNum: PropTypes.number.isRequired
     //onClickImage: React.PropTypes.func.isRequired,
   }
 
