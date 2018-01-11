@@ -131,6 +131,14 @@ class MyPage extends Component {
     );
   }
 
+  animationToTheTopButton(evt) {
+    if (evt.nativeEvent.contentOffset.y > 100) {
+      this.setState({isScrolledFar: true})
+    } else {
+      this.setState({isScrolledFar: false})
+    }
+  }
+
   renderToTheTopButton() {
     return (
       <View>
