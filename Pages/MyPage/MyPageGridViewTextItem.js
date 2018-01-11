@@ -15,7 +15,7 @@ class MyPageGridViewTextItem extends Component {
   propTypes: {
     text: PropTypes.string.isRequired,
     colorNum: PropTypes.number.isRequired
-    //onClickImage: React.PropTypes.func.isRequired,
+    //onClickImage: PropTypes.func.isRequired,
   }
 
   render(){

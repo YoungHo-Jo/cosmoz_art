@@ -21,14 +21,14 @@ export default class Timer extends Component {
         <Progress.Circle
           size={160}
           thickness={15}
-          color={'rgba(255, 255, 255, 0)'}
+          color={'rgba(255, 255, 255, 1)'}
           unfilledColor={'rgba(0, 160, 235, 1)'}
           borderWidth={0}
-          indeterminate={true}
           progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
       </View>
     )
   }
+
 
   renderTimeAnimation() {
       return (
@@ -49,7 +49,7 @@ export default class Timer extends Component {
   render() {
     return (
         <View style={styles.blockContainer}>
-          {this.renderTimerAnimation()}
+          {/*this.renderTimerAnimation()*/}
           {this.renderTimeAnimation()}
         </View>
     );
@@ -106,12 +106,12 @@ const eStyles = EStyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  timerContainer: {
-    width: '30%',
+  /*timerContainer: {
+
     position: 'absolute',
     top: 100,
     backgroundColor: '#819203'
-  }
+  }*/
 })
 
 
