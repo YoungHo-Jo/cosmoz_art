@@ -33,7 +33,7 @@ class TimerPage extends Component {
         <Timer
           start={this.state.timerStart}
           secs={this.props.secs}
-          onTimerFinished={() => this._moveToNextPage()}
+          onTimerFinished={() => console.log("Finished")/*this._moveToNextPage()*/}
           onPressCountDown={() => this.popupDialog.show()}/>
       </View>
     )

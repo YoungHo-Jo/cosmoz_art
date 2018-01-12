@@ -3,11 +3,30 @@
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet'
-import * as Progress from 'react-native-progress';
+import {StyleSheet, View, Text, Animated, Easing,} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import ProgressCircle from 'react-native-progress-circle';
+
+var CircleTimer = Animated.createAnimatedComponent(ProgressCircle);
 
 export default class Timer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      timePercent: new Animated.Value(0),
+    }
+  }
+
+  componentDidMount() {
+    Animated.timing(
+      this.state.timePercent,
+      {
+        toValue: 100,
+        duration: this.secsToMillis(this.props.secs) || 10000,
+        easing: Easing.linear,
+      }
+    ).start();
+  }
 
   static propTypes = {
     onTimerFinished: PropTypes.func.isRequired,
@@ -18,22 +37,15 @@ export default class Timer extends Component {
   renderTimerAnimation() {
     return (
       <View style={styles.timerContainer}>
-        <Progress.Circle
-          size={160}
-          thickness={15}
-          color={'rgba(255, 255, 255, 1)'}
-          unfilledColor={'rgba(0, 160, 235, 1)'}
-          borderWidth={0}
-          progress={0.4/*이부분에 1 - (this.state.남은시간/this.state.전체시간) 이런 식으로 값 넣어주세요!*/}/>
-      </View>
-    )
-  }
-
-
-  renderTimeAnimation() {
-      return (
-        <View style={styles.timeContainer}>
-          <CountDown
+        <CircleTimer
+              percent={this.state.timePercent}
+              radius={90}
+              borderWidth={8}
+              color="#eeeeee"
+              shadowColor="#3399FF"
+              bgColor="#ffffff"
+          >
+            <CountDown
                  totalDuration={this.secsToMillis(this.props.secs) || 10000}
                  start={this.props.start}
                  reset={() => console.log('reset')}
@@ -41,16 +53,16 @@ export default class Timer extends Component {
                  handleFinish={this._onCountDownFinished.bind(this)}
                  getTime={(time) => console.log('current: ' + time)}
                  onPress={() => this.props.onPressCountDown()}/>
-        </View>
-      )
+          </CircleTimer>
+      </View>
+    )
   }
 
 
   render() {
     return (
         <View style={styles.blockContainer}>
-          {/*this.renderTimerAnimation()*/}
-          {this.renderTimeAnimation()}
+          {this.renderTimerAnimation()}
         </View>
     );
   }
@@ -86,9 +98,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   timerContainer: {
-    height: 160,
-    width: 160,
-    marginBottom: 10,
+    marginBottom: 20,
   },
   timeContainer: {
   },
@@ -106,12 +116,11 @@ const eStyles = EStyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  /*timerContainer: {
-
+  timerContainer: {
     position: 'absolute',
     top: 100,
     backgroundColor: '#819203'
-  }*/
+  }
 })
 
 
