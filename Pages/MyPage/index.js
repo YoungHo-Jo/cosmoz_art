@@ -53,7 +53,6 @@ const data = [
   {uri: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-11/30/10/enhanced/webdr15/enhanced-18265-1448896942-17.jpg'},
   {uri: 'https://img.buzzfeed.com/buzzfeed-static/static/2015-12/30/16/enhanced/webdr04/enhanced-15965-1451509932-6.jpg'},
   {text: "행복해질 준비가 되었나요?"},
-
 ];
 
 

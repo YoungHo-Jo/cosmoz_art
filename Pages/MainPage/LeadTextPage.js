@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
 import {connect} from "react-redux";
 import {missionToShowType} from "../../reducers/missionDataReducer";
+import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {PAGES} from '../../reducers/constants'
 
 const LEAD_TEXT_SIZE = Sizes.leadTextSize;
 const LEAD_TEXT_COLOR = Colors.defaultTextColor;
@@ -28,11 +28,9 @@ class LeadTextPage extends Component {
 
   render() {
     const {missionData} = this.props
-    const {navigate} = this.props.navigation;
     return (
         <View style={styles.container}>
 
-          <UpperLinearGradient/>
           <View style={styles.blockContainer}>
             <Text
                 style={styles.text}
@@ -40,7 +38,7 @@ class LeadTextPage extends Component {
                   console.log(missionData)
                   let mission = (missionData.missionToShow === missionToShowType.todayMission) ?
                       missionData.todayMission.mission : missionData.pushMission.mission
-                  navigate('Mission', {...mission})
+                  this.props.fetchCurrentPage(PAGES.timer);
                 }}>
               {
                 missionData.missionToShow === missionToShowType.todayMission ?
@@ -50,7 +48,6 @@ class LeadTextPage extends Component {
             <View style={styles.lineView}>
             </View>
           </View>
-          <LowerLinearGradient/>
         </View>
     );
   }
@@ -102,6 +99,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
   }
 }
 

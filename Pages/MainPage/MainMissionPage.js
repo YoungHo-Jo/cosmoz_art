@@ -1,20 +1,12 @@
 /* @flow */
 
 import PropTypes from 'prop-types';
-
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
-
 import Icon from 'react-native-vector-icons/Ionicons';
-
 import {Sizes, Colors} from '../../DefaultStyles';
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
 import MissionInformationBar from "./MissionInformationBar";
-import BottomBar from "../BottomBar";
-import PopupDialog, {ScaleAnimation, FadeAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "./PopupMsgBox";
-import {NavigationActions} from "react-navigation";
+import {connect} from 'react-redux'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
@@ -23,15 +15,6 @@ const MISSION_BLOCK_MARGIN = 50;
 const MISSION_ICON_COLOR = '#111111';
 
 class MainMissionPage extends Component {
-
-  static propTypes = {
-    secs: PropTypes.number,
-    benefitText: PropTypes.string,
-    benefitIcon: PropTypes.string,
-    missionText: PropTypes.string,
-    missionIconType: PropTypes,
-  }
-
   renderMissionInfoBar() {
     return (
       <View style={styles.missionInfoBarContainer}>
@@ -46,10 +29,6 @@ class MainMissionPage extends Component {
   renderMission() {
     return (
       <View style={styles.missionContainer}>
-        {/* deprecated */}
-        <UpperLinearGradient/>
-
-
         <View style={styles.missionBlockContainer}>
           {/* mission text */}
           <View style={styles.missionTextContainer}>
@@ -68,36 +47,7 @@ class MainMissionPage extends Component {
                 onPress={this._onMissionPress.bind(this)}/>
           </View>
         </View>
-
-
-        {/* deprecated */}
-        <LowerLinearGradient/>
-
       </View>
-    )
-  }
-
-  renderPopUpDialog() {
-    // deprecated
-    return (
-      <PopupDialog
-          ref={(popupDialog) => this.popupDialog = popupDialog}
-          dialogAnimation={new FadeAnimation({toValue: 0})}
-          height={'30%'}>
-        <PopupMsgBox
-            onLeftButtonClicked={() => {
-              const resetAction = NavigationActions.reset({
-                index: 0,
-                actions: [
-                  NavigationActions.navigate({routeName: 'TimerPage', params: {...this.props.navigation.state.params}})
-                ]
-              });
-              this.popupDialog.dismiss()
-              this.props.navigation.dispatch(resetAction)
-            }}
-            onRightButtonClicked={() => this.popupDialog.dismiss()}
-            dialogText="시작할래요?"/>
-      </PopupDialog>
     )
   }
 
@@ -106,16 +56,13 @@ class MainMissionPage extends Component {
         <View style={styles.blockContainer}>
           {this.renderMissionInfoBar()}
           {this.renderMission()}
-          {/* deprecated */}
-          <BottomBar/>
-
-          {this.renderPopUpDialog()}
         </View>
     );
   }
 
   _onMissionPress() {
-    this.popupDialog.show()
+    //// Implement ////
+    // have to show dialog
   }
 }
 
@@ -160,4 +107,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MainMissionPage;
+function mapStateToProps(state) {
+  return (
+    missionData: state.missionData
+  )
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainMissionPage);

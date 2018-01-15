@@ -6,25 +6,29 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text,} from 'react-native';
 
 import Timer from './Timer';
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
 import {Colors, Sizes} from "../../DefaultStyles";
-import BottomBar from "../BottomBar";
 import {MKSwitch, MKColor} from "react-native-material-kit";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import PopupDialog, {ScaleAnimation, FadeAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "./PopupMsgBox";
-import {NavigationActions} from 'react-navigation'
+import {connect} from 'react-redux'
+import {PAGES} from '../../reducers/constants'
+import {fetchCurrentPage} from '../../actions/controlFlowActions'
 
 class TimerPage extends Component {
-
-  static propTypes = {
-    secs: PropTypes.number,
-    missionText: PropTypes.string
+  constructor(props) {
+    super(props)
+    this.state = {
+      timerStart: true
+    }
   }
 
-  state = {
-    timerStart: true
+  renderMission() {
+    return (
+      <View style={styles.missionTextContainer}>
+        <Text style={styles.missionText}>
+          {this.props.missionData.todayMission.mission.mission.text}
+        </Text>
+      </View>
+    )
   }
 
   renderTimer() {
@@ -32,19 +36,9 @@ class TimerPage extends Component {
       <View style={styles.timerContainer}>
         <Timer
           start={this.state.timerStart}
-          secs={this.props.secs}
+          secs={100} //// implement ////
           onTimerFinished={() => this._moveToNextPage()}
-          onPressCountDown={() => this.popupDialog.show()}/>
-      </View>
-    )
-  }
-
-  renderMission() {
-    return (
-      <View style={styles.missionTextContainer}>
-        <Text style={styles.missionText}>
-          {this.props.navigation.state.params.mission.text}
-        </Text>
+          onPressCountDown={() => console.log('show dialog 벌써 다 했나요')}/>
       </View>
     )
   }
@@ -71,34 +65,9 @@ class TimerPage extends Component {
     )
   }
 
-  renderPopUpDialog() {
-    return(
-      <PopupDialog
-          ref={(popupDialog) => this.popupDialog = popupDialog}
-          dialogAnimation={new FadeAnimation({toValue: 0})}
-          height={'30%'}>
-        <PopupMsgBox
-            onLeftButtonClicked={() => {
-              this.popupDialog.dismiss()
-
-              this._moveToNextPage()
-
-            }}
-            onRightButtonClicked={() => this.popupDialog.dismiss()}
-            dialogText="벌써 다 했나요?"/>
-      </PopupDialog>
-    )
-  }
-
   render() {
     return (
       <View style={styles.container}>
-
-        {/* deprecated */}
-        <UpperLinearGradient/>
-
-
-
         {/*Timer*/}
         {this.renderTimer()}
 
@@ -107,37 +76,18 @@ class TimerPage extends Component {
 
         {/*alarm toggle switch*/}
         {this.renderToggle()}
-
-
-        {/* deprecated */}
-        <LowerLinearGradient
-          marginBottom={Sizes.bottomBarHeight}/>
-        <BottomBar/>
-
-
-
-        {/* deprecated */}
-        {this.renderPopUpDialog()}
-
       </View>
     );
   }
 
-
-
-  // deprecated
   _moveToNextPage() {
     this.setState({
       timerStart: false
     })
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({routeName: 'CameraButtonPage', params: {...this.props.navigation.state.params}})
-      ]
-    });
 
-    this.props.navigation.dispatch(resetAction)
+    //// implement ////
+    console.log('show camera button page')
+    this.props.fetchCurrentPage(PAGES.cameraButton)
   }
 }
 
@@ -189,4 +139,16 @@ const styles = StyleSheet.create({
 });
 
 
-export default TimerPage;
+function mapStateToProps(state) {
+  return {
+    missionData: state.missionData
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimerPage);

@@ -1,6 +1,4 @@
-/**
- * Created by LG on 2017-07-25.
- */
+/* @flow */
 import React, {Component,} from 'react'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -35,91 +33,137 @@ class Login extends Component {
     return (
             <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultBgColor}}>
               <View style={styles.container}>
-                <View style={{flex: 1, justifyContent: 'center'}}>
-                  <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
-                </View>
+                  {this.renderLogo()}
                 <View style={styles.info}>
-                  <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
-                    <Text style={styles.text}>아이디</Text>
-                    <TextInput
-                        style={styles.text_input}
-                        placeholder="아이디를 입력하세요"
-                        underlineColorAndroid={'#3a3a3a'}
-                        selectionColor={'#00a0eb'}
-                        keyboardType='default'
-                        returnKeyType='next'
-                        onSubmitEditing={() => this.pw.focus()}
-                        onChangeText={(text) => this.setState({id: text})}/>
-                  </View>
-                  <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
-                    <Text style={styles.text}>비밀번호</Text>
-                    <TextInput
-                        ref={(ref) => this.pw = ref}
-                        style={styles.text_input}
-                        placeholder="비밀번호를 입력하세요"
-                        underlineColorAndroid={'#3a3a3a'}
-                        selectionColor={'#00a0eb'}
-                        secureTextEntry={true}
-                        returnKeyType='done'
-                        onChangeText={(text) => this.setState({pw: text})}/>
-                  </View>
+                    {this.renderIDInput()}
+                    {this.renderPWInput()}
                   <View>
-                    <Button style={styles.button_login}
-                            textStyle={{fontSize: 18}}
-                            onPress={() => {
-                              this.props.fetchLogin({
-                                id: this.state.id,
-                                pw: this.state.pw
-                              })
-                              setTimeout(() => {
-                                console.log(this.props.userData)
-                                if(this.props.userData.isLogin) {
-                                  this.props.navigation.goBack()
-                                }
-                              }, 1000)
-                            }}>
-                      로그인
-                    </Button>
-                    <View style={styles.info_setting}>
-                      <Text style={styles.text_setting}>자동로그인</Text>
-                      <MKSwitch
-                        style={{alignSelf: 'center'}}
-                        onColor='rgba(0, 160, 235, 0.3)'
-                        thumbOnColor='rgba(0, 160, 235, 1)'
-                        trackSize={15}
-                        trackLength={35}
-                        thumbRadius={10}
-                        rippleColor='rgba(0, 160, 235, 0.2)'
-                        onPress={() => console.log('auto login switch pressed')}
-                        onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
-                    </View>
-                    <View style={styles.info_setting}>
-                      <Text style={styles.text_setting}>아이디저장</Text>
-                      <MKSwitch
-                        style={{alignSelf: 'center'}}
-                        onColor='rgba(0, 160, 235, 0.3)'
-                        thumbOnColor='rgba(0, 160, 235, 1)'
-                        trackSize={15}
-                        trackLength={35}
-                        thumbRadius={10}
-                        rippleColor='rgba(0, 160, 235, 0.2)'
-                        onPress={() => console.log('id save switch pressed')}
-                        onCheckedChange={(e) => console.log('id save switch checked', e)}/>
-                    </View>
+                      {this.renderLoginButton()}
+                      {this.renderAutoLoginSwitch()}
+                      {this.renderSaveIdSwitch()}
                   </View>
-                  <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
-                    회원가입
-                  </Button>
+                    {this.renderSignUpButton()}
                 </View>
               </View>
-              {this.props.userData.isLogin &&
-                <View style={styles.loadingOverlay}>
-                  <ActivityIndicator
-                    size='large'
-                    color='#00a0eb'/>
-                </View>
-              }
+                {this.renderProgrssIndicator()}
             </KeyboardAwareScrollView>
+    )
+  }
+  renderLogo() {
+    return (
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <Image style={styles.image_logo} source={require('../../icons/logo.png')}/>
+      </View>
+    )
+  }
+
+  renderIDInput() {
+    return (
+      <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
+        <Text style={styles.text}>아이디</Text>
+        <TextInput
+            style={styles.text_input}
+            placeholder="아이디를 입력하세요"
+            underlineColorAndroid={'#3a3a3a'}
+            selectionColor={'#00a0eb'}
+            keyboardType='default'
+            returnKeyType='next'
+            onSubmitEditing={() => this.pw.focus()}
+            onChangeText={(text) => this.setState({id: text})}/>
+      </View>
+    )
+  }
+
+  renderPWInput() {
+    return (
+      <View style={{width: Dimensions.get('window').width * (75/100), alignSelf: 'center',}}>
+        <Text style={styles.text}>비밀번호</Text>
+        <TextInput
+            ref={(ref) => this.pw = ref}
+            style={styles.text_input}
+            placeholder="비밀번호를 입력하세요"
+            underlineColorAndroid={'#3a3a3a'}
+            selectionColor={'#00a0eb'}
+            secureTextEntry={true}
+            returnKeyType='done'
+            onChangeText={(text) => this.setState({pw: text})}/>
+      </View>
+    )
+  }
+
+  renderLoginButton() {
+    return (
+      <Button style={styles.button_login}
+              textStyle={{fontSize: 18}}
+              onPress={() => {
+                this.props.fetchLogin({
+                  id: this.state.id,
+                  pw: this.state.pw
+                })
+                setTimeout(() => {
+                  console.log(this.props.userData)
+                  if(this.props.userData.isLogin) {
+                    this.props.navigation.goBack()
+                  }
+                }, 1000)
+              }}>
+        로그인
+      </Button>
+    )
+  }
+
+  renderAutoLoginSwitch() {
+    return (
+      <View style={styles.info_setting}>
+        <Text style={styles.text_setting}>자동로그인</Text>
+        <MKSwitch
+          style={{alignSelf: 'center'}}
+          onColor='rgba(0, 160, 235, 0.3)'
+          thumbOnColor='rgba(0, 160, 235, 1)'
+          trackSize={15}
+          trackLength={35}
+          thumbRadius={10}
+          rippleColor='rgba(0, 160, 235, 0.2)'
+          onPress={() => console.log('auto login switch pressed')}
+          onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
+      </View>
+    )
+  }
+
+  renderSaveIdSwitch() {
+    return (
+      <View style={styles.info_setting}>
+        <Text style={styles.text_setting}>아이디저장</Text>
+        <MKSwitch
+          style={{alignSelf: 'center'}}
+          onColor='rgba(0, 160, 235, 0.3)'
+          thumbOnColor='rgba(0, 160, 235, 1)'
+          trackSize={15}
+          trackLength={35}
+          thumbRadius={10}
+          rippleColor='rgba(0, 160, 235, 0.2)'
+          onPress={() => console.log('id save switch pressed')}
+          onCheckedChange={(e) => console.log('id save switch checked', e)}/>
+      </View>
+    )
+  }
+
+  renderSignUpButton() {
+    return (
+      <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
+        회원가입
+      </Button>
+    )
+  }
+
+  renderProgrssIndicator() {
+    return (
+        this.props.userData.isLogin &&
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator
+            size='large'
+            color='#00a0eb'/>
+        </View>
     )
   }
 }

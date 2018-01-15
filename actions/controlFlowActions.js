@@ -1,4 +1,4 @@
-import {SET_CURRENT_VIEWPAGE, SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE} from "../reducers/constants";
+import {SET_CURRENT_VIEWPAGE, SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE, SET_CURRENT_PAGE} from "../reducers/constants";
 
 
 export function setDropDownListState(isShown) {
@@ -17,6 +17,7 @@ export function fetchDropDownListState(isShown) {
 
 /////
 
+/* Set current view page num */
 export function setCurrentViewPage(currentViewPage) {
   return {
     type: SET_CURRENT_VIEWPAGE,
@@ -28,4 +29,16 @@ export function fetchCurrentViewPage(currentViewPage) {
   return (dispatch) => {
     dispatch(setCurrentViewPage(currentViewPage))
   }
+}
+
+/* Set current view page */
+export function setCurrentPage(currentPage) {
+  return {
+    type: SET_CURRENT_PAGE,
+    currentPage
+  }
+}
+export function fetchCurrentPage(currentPage) {
+  return dispatch =>
+    dispatch(setCurrentPage(currentPage))
 }

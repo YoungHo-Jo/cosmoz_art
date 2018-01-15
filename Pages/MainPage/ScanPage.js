@@ -11,26 +11,19 @@ import {
   Platform,
   Modal
 } from 'react-native';
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
-import BottomBar from "../BottomBar";
-import {NavigationActions} from "react-navigation";
+
 import {Colors} from "../../DefaultStyles";
 import EStyleSheet from 'react-native-extended-stylesheet'
-import PopupDialog, {FadeAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "./PopupMsgBox";
+import {connect} from 'react-redux'
 
 const IMAGE_SIDE_MARGIN = 30;
 
-export default class ScanPage extends React.Component {
-  state = {
-    modalVisible: false
-  }
+class ScanPage extends React.Component {
   renderImage() {
     return (
       <View style={styles.imageContainer}>
         <Image resizeMode='contain' source={(Platform.OS === 'android') && {
-          uri: this.props.navigation.state.params.data.mediaUri
+          uri: this.props.navigation.state.params.data.mediaUri //// Implement ////
         }} style={[eStyles.image]}/>
       </View>
     )
@@ -63,6 +56,7 @@ export default class ScanPage extends React.Component {
     )
   }
 
+  //// Implement ////
   renderPopUpDialog() {
     return (
       <PopupDialog
@@ -112,7 +106,8 @@ export default class ScanPage extends React.Component {
   }
 
   retakePicture() {
-    this.props.navigation.goBack();
+    //// Implement ////
+    // go back to retake picture
   }
 
   _onCompletePress() {
@@ -120,17 +115,8 @@ export default class ScanPage extends React.Component {
   }
 
   done() {
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({
-          routeName: 'MainScreen',
-          params: {
-            ...this.props.navigation.state.params
-          }
-        })]
-    });
-
-    const {params} = this.props.navigation.state
+    //// Implement ////
+    // go to MainScreen
 
     console.log('in ScanPage done: ');
     console.log(params)
@@ -138,6 +124,7 @@ export default class ScanPage extends React.Component {
     if (true) {
       //      const imageName = params.userInfo.user_pk + '-' + params.mission.mission_pk
       const imageName = 6 + '-' + params.mission.missionPK
+      ///// 수정 /////
 
       var formData = new FormData()
       formData.append('file', params.data.mediaUri)
@@ -232,3 +219,17 @@ const eStyles = EStyleSheet.create({
     resizeMode: 'contain'
   }
 })
+
+function mapStateToProps(state) {
+  return (
+    missionData: state.missionData
+  )
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScanPage)

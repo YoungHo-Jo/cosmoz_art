@@ -42,13 +42,27 @@ export const REQUEST_NOTIFICATION = 'REQUEST_NOTIFICATION'
 export const REQUEST_NOTIFICATION_SUCCESS = 'REQUEST_NOTIFICATION_SUCCESS'
 export const REQUEST_NOTIFICATION_FAILURE = 'REQUEST_NOTIFICATION_FAILURE'
 
-
-
-
-
-
-
-
 // control flow
 export const SET_CURRENT_VIEWPAGE = 'SET_CURRENT_VIEWPAGE'
 export const SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE = 'SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+
+
+
+/* Pages */
+export const PAGES = {
+  main: 'MAIN_PAGE',
+  leadText: 'LEAD_TEXT_PAGE',
+  mainMission: 'MAIN_MISSION_PAGE',
+  timer: 'TIMER_PAGE',
+  cameraButton: 'CAMERA_BUTTON_PAGE',
+  camera: 'CAMERA_PAGE',
+  scan: 'SCAN_PAGE',
+  share: 'SHARE_PAGE',
+  detailShare: 'DETAIL_SHARE_PAGE',
+  setting: 'SETTING_PAGE',
+  login: 'LOGIN_PAGE',
+  signUp: 'SIGN_UP_PAGE',
+  intro: 'INTRO_PAGE',
+  my: 'MY_PAGE'
+}

@@ -3,27 +3,17 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View,} from 'react-native';
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
-import BottomBar from "../BottomBar";
-import {NavigationActions} from 'react-navigation'
+import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {PAGES} from '../../reducers/constants'
+import {connect} from 'react-redux'
 
-
-export default class CameraButtonPage extends Component {
+class CameraButtonPage extends Component {
 
   render() {
     return (
         <View style={styles.container}>
-
-          {/* deprecated */}
-          <UpperLinearGradient/>
-
-
-
-
-
           <View style={styles.blockContainer}>
             <View style={styles.cameraIconContainer}>
               <Icon.Button
@@ -32,16 +22,7 @@ export default class CameraButtonPage extends Component {
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.defaultPageBgColor}
                   onPress={() => {
-
-                    // deprecated
-                    const resetAction = NavigationActions.reset({
-                      index: 0,
-                      actions: [
-                        NavigationActions.navigate({routeName: 'CameraPage', params: {...this.props.navigation.state.params}})
-                      ]
-                    });
-
-                    this.props.navigation.dispatch(resetAction)
+                      this.props.fetchCurrentPage(PAGES.camera)
                   }}/>
             </View>
 
@@ -53,12 +34,6 @@ export default class CameraButtonPage extends Component {
             </View>
 
           </View>
-
-
-          {/* deprecated */}
-          <LowerLinearGradient
-            marginBottom={Sizes.bottomBarHeight}/>
-          <BottomBar/>
         </View>
     );
   }
@@ -89,3 +64,19 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
+
+
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CameraButtonPage)

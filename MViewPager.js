@@ -7,18 +7,13 @@ import {
   View,
   Dimensions
 } from 'react-native';
-
-// external
 import Swiper from 'react-native-swiper'
-
-// ours
 import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
 import MyPage from './Pages/MyPage';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import {fetchCurrentViewPage} from "./actions/controlFlowActions";
 import {connect} from "react-redux";
-
 
 var width = Dimensions.get('window').width
 var height = Dimensions.get('window').height
@@ -41,10 +36,9 @@ class MViewPager extends Component {
                   index={this.props.controlData.initialViewPage}
                   height={height - Sizes.titleBarHeight - 20}
                   onIndexChanged={index => this._onIndexChanged(index)}>
-
-            <MyPage navigation={this.props.navigation}/>
-            <MainPage navigation={this.props.navigation}/>
-            <SharePage navigation={this.props.navigation}/>
+            <MyPage/>
+            <MainPage/>
+            <SharePage/>
           </Swiper>
         </View>
     )
@@ -53,24 +47,12 @@ class MViewPager extends Component {
   _onIndexChanged(index) {
     switch (index) {
       case 0:
-        this.props.navigation.setParams({
-          currentViewPager: 0
-        })
         return this.props.fetchCurrentViewPage(0)
       case 1:
-        this.props.navigation.setParams({
-          currentViewPager: 1
-        })
         return this.props.fetchCurrentViewPage(1)
       case 2:
-        this.props.navigation.setParams({
-          currentViewPager: 2
-        })
         return this.props.fetchCurrentViewPage(2)
       default:
-        this.props.navigation.setParams({
-          currentViewPager: 1
-        })
         this.props.fetchCurrentViewPage(1)
     }
   }

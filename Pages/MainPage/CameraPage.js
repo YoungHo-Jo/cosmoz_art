@@ -8,8 +8,11 @@ import {
   View
 } from 'react-native';
 import Camera from 'react-native-camera';
+import {PAGES} from '../../reducers/constants'
+import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {connect} from 'react-redux'
 
-export default class CameraPage extends Component {
+class CameraPage extends Component {
   render() {
     return (
         <View style={styles.container}>
@@ -31,10 +34,7 @@ export default class CameraPage extends Component {
     this.camera.capture({metadata: options})
         .then((data) => {
           console.log(data);
-          this.props.navigation.navigate('ScanPage', {
-            data: data,
-            ...this.props.navigation.state.params
-          });
+          this.props.fetchCurrentPage(PAGES.scan)
         })
         .catch(err => console.error(err));
   }
@@ -59,3 +59,17 @@ const styles = StyleSheet.create({
     margin: 40
   }
 });
+
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CameraPage)
