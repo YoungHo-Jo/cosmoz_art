@@ -69,7 +69,7 @@ class SignUpPage extends Component {
                 style={styles.progressBar}
                 width={Dimensions.get('window').width * (75/100)}
                 height={16}
-                borderRadius={0}
+                borderRadius={8}
                 color={'#00a0eb'}
                 unfilledColor={'#e7e7e7'}
                 borderWidth={0}

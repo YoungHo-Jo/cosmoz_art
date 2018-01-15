@@ -36,9 +36,25 @@ class TimerPage extends Component {
       <View style={styles.timerContainer}>
         <Timer
           start={this.state.timerStart}
+<<<<<<< HEAD
           secs={100} //// implement ////
           onTimerFinished={() => this._moveToNextPage()}
           onPressCountDown={() => console.log('show dialog 벌써 다 했나요')}/>
+=======
+          secs={this.props.secs}
+          onTimerFinished={() => console.log("Finished")/*this._moveToNextPage()*/}
+          onPressCountDown={() => this.popupDialog.show()}/>
+      </View>
+    )
+  }
+
+  renderMission() {
+    return (
+      <View style={styles.missionTextContainer}>
+        <Text style={styles.missionText}>
+          {this.props.navigation.state.params.mission.text}
+        </Text>
+>>>>>>> 6129c164b33fe7ba1f92a3c94b013447d1837690
       </View>
     )
   }
@@ -139,6 +155,7 @@ const styles = StyleSheet.create({
 });
 
 
+<<<<<<< HEAD
 function mapStateToProps(state) {
   return {
     missionData: state.missionData
@@ -152,3 +169,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimerPage);
+=======
+export default TimerPage;
+>>>>>>> 6129c164b33fe7ba1f92a3c94b013447d1837690

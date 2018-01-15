@@ -81,7 +81,7 @@ class MyPage extends Component {
       isModalDropDownShowing: false,
       touchableHighlightWidth: Dimensions.get('window').width / 3,
       filterMethod: filterMethod.myArts.byTime,
-      //fliterButtonY:
+      isScrolledFar: false,
     };
   }
 
@@ -130,17 +130,29 @@ class MyPage extends Component {
     );
   }
 
+  animationToTheTopButton(evt) {
+    if (evt.nativeEvent.contentOffset.y > 100) {
+      this.setState({isScrolledFar: true})
+    } else {
+      this.setState({isScrolledFar: false})
+    }
+  }
+
   renderToTheTopButton() {
     return (
-      <Animated.View>
+      <View>
         <TouchableHighlight
           style={styles.toTheTopButton}
           underlayColor={'#bbbbbb'}
           onPress={() => this._sectionlist.scrollToLocation({sectionIndex: 0, itemIndex: 0, viewOffset:100})}>
-          <Text style={styles.topButtonText}>↑</Text>
+          <Icon
+            name="chevron-up"
+            size={45}
+            color="#555555"
+            style={{backgroundColor: '#00000000', alignSelf: 'center'}}
+            />
         </TouchableHighlight>
-      </Animated.View>
-
+      </View>
     )
   }
 
@@ -271,9 +283,10 @@ class MyPage extends Component {
             renderItem={({item})=> item}
             keyExtractor= {(item, index) => index}
             stickySectionHeadersEnabled={true}
+            onScroll={(evt) => this.animationToTheTopButton(evt)}
           />
           <View style={{paddingBottom: Sizes.bottomBarHeight}}/>
-          {this.renderToTheTopButton()}
+          {this.state.isScrolledFar && this.renderToTheTopButton()}
         </View>
     )
   }
@@ -379,7 +392,7 @@ class MyPage extends Component {
       return (
         <MyPageGridViewTextItem
           text={itemData.text}
-          colorNum={Math.floor(Math.random()*4)}
+          colorNum={1}
           //keyword = {itemData.keyword}
           //missionPK = {itemData.mission_pk}
         />
@@ -542,17 +555,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     backgroundColor: "#ffffff",
-    shadowColor: '#000000',
-    shadowRadius: 32,
+    shadowColor: '#777777',
+    shadowRadius:3,
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowOpacity: 1.0,
     elevation: 3,
   },
-  topButtonText: {
-    fontSize: 45,
-    color: '#777777',
-    textAlign: 'center',
-    marginBottom: 10
-  }
-
 
 });
 
