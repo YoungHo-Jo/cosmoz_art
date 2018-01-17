@@ -1,18 +1,30 @@
 /* @flow */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text,} from 'react-native';
+import {StyleSheet, View, Text, Animated, Easing} from 'react-native';
 
 import LeadTextPage from './LeadTextPage';
-import MainMissionPage from './MainMissionPage'
-import CameraPage from './CameraPage'
-import CameraButtonPage from './CameraButtonPage'
-import ScanPage from './ScanPage'
-import TimerPage from './TimerPage'
+import MainMissionPage from './MainMissionPage';
+import CameraPage from './CameraPage';
+import CameraButtonPage from './CameraButtonPage';
+import ScanPage from './ScanPage';
+import TimerPage from './TimerPage';
 import {Colors, Sizes} from '../../DefaultStyles';
-import {fetchCurrentPage, fetchCurrentViewPage} from '../../actions/controlFlowActions'
-import { PAGES } from '../../reducers/constants'
-import {connect} from 'react-redux'
+import {fetchCurrentPage, fetchCurrentViewPage} from '../../actions/controlFlowActions';
+import { PAGES } from '../../reducers/constants';
+import {connect} from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+
+const pageAnimation = {
+    from: {
+      opacity: 0.9,
+      translateY: 20
+    },
+    to: {
+      opacity: 1,
+      translateY: 0
+    },
+}
 
 class MainPage extends Component {
   render() {
@@ -23,21 +35,31 @@ class MainPage extends Component {
     );
   }
 
+  animatedPage(page) {
+    return(
+      <Animatable.View
+        animation= {pageAnimation}
+        duration={200}>
+        {page}
+      </Animatable.View>
+    );
+  }
+
   renderPage() {
     console.log("render: " + this.props.controlData.currentPage)
     switch (this.props.controlData.currentPage) {
       case PAGES.leadText:
-        return (<LeadTextPage/>)
+        return (<LeadTextPage/>);
       case PAGES.mainMission:
-        return (<MainMissionPage/>)
+        return (this.animatedPage(<MainMissionPage/>));
       case PAGES.timer:
-        return (<TimerPage/>)
+        return (this.animatedPage(<TimerPage/>));
       case PAGES.cameraButton:
-        return (<CameraButtonPage/>)
+        return (this.animatedPage(<CameraButtonPage/>));
       case PAGES.camera:
-        return (<CameraPage/>)
+        return (this.animatedPage(<CameraPage/>));
       case PAGES.scan:
-        return (<ScanPage/>)
+        return (this.animatedPage(<ScanPage/>));
     }
   }
 }

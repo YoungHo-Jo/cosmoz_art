@@ -22,7 +22,8 @@ export default class Timer extends Component {
       this.state.timePercent,
       {
         toValue: 100,
-        duration: this.secsToMillis(this.props.secs) || 10000,
+        delay: 200,
+        duration: (this.secsToMillis(this.props.secs) || 10000) - 1000,
         easing: Easing.linear,
       }
     ).start();
