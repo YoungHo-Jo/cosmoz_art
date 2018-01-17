@@ -18,12 +18,59 @@ import * as Animatable from 'react-native-animatable';
 const pageAnimation = {
     from: {
       opacity: 0.9,
-      translateY: 20
+      translateY: 10
     },
     to: {
       opacity: 1,
       translateY: 0
     },
+}
+
+class AnimatedPage extends Component {
+  componentWillMount() {
+    this._fadeAnim = new Animated.Value(0.9),
+    this._slideAnim = new Animated.Value(20)
+  }
+
+  componentDidMount() {
+    this._startPageAnim();
+  }
+
+  componentDidUpdate() {
+    this._startPageAnim();
+  }
+
+  _startPageAnim() {
+    this._fadeAnim.setValue(0.9);
+    this._slideAnim.setValue(20);
+    Animated.parallel([
+      Animated.timing(this._fadeAnim,
+        {
+          toValue: 1,
+          duration: 200,
+        }),
+      Animated.timing(this._slideAnim,
+      {
+        toValue: 0,
+        duration: 200,
+        isInteraction: false,
+      })
+    ]).start();
+  }
+
+  render() {
+    return (
+      <Animated.View
+        style={{
+          ...this.props.style,
+          opacity: this._fadeAnim,
+          transform: [{translateY: this._slideAnim}],
+        }}
+      >
+        {this.props.children}
+      </Animated.View>
+    );
+  }
 }
 
 class MainPage extends Component {
@@ -37,11 +84,9 @@ class MainPage extends Component {
 
   animatedPage(page) {
     return(
-      <Animatable.View
-        animation= {pageAnimation}
-        duration={200}>
+      <AnimatedPage style={{flex: 1}}>
         {page}
-      </Animatable.View>
+      </AnimatedPage>
     );
   }
 

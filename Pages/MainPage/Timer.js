@@ -23,7 +23,7 @@ export default class Timer extends Component {
       {
         toValue: 100,
         delay: 200,
-        duration: (this.secsToMillis(this.props.secs) || 10000) - 1000,
+        duration: (this.secsToMillis(this.props.secs) || 10000) - 1200,
         easing: Easing.linear,
       }
     ).start();
