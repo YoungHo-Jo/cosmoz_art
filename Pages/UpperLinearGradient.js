@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     height: Sizes.linearGradientHeight,
     alignSelf: 'stretch',
     position: 'absolute',
-    top: 0,
+    top: Sizes.titleBarHeight,
     width: width
   },
   linearGradient: {

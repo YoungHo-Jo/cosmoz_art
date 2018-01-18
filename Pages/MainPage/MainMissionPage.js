@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Sizes, Colors} from '../../DefaultStyles';
 import MissionInformationBar from "./MissionInformationBar";
 import {connect} from 'react-redux'
+import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {PAGES} from '../../reducers/constants'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
@@ -63,6 +65,8 @@ class MainMissionPage extends Component {
   _onMissionPress() {
     //// Implement ////
     // have to show dialog
+    this.props.fetchCurrentPage(PAGES.timer)
+
   }
 }
 
@@ -108,14 +112,14 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  return (
-    missionData: state.missionData
-  )
+  return {
+      missionData: state.missionData
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
   }
 }
 

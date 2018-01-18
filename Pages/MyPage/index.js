@@ -294,13 +294,9 @@ class MyPage extends Component {
   renderLoginGuidance() {
     return (
         <View style={styles.loginGuidanceContainer}>
-          <UpperLinearGradient/>
-
           {/* <Text style={styles.loginGuidanceText}>
           예술이네 가족이 되어주세요!
           </Text> */}
-
-
           <TouchableHighlight style={styles.loginButton}
                               onPress={() => {
                                 this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})
@@ -310,7 +306,6 @@ class MyPage extends Component {
               로그인
             </Text>
           </TouchableHighlight>
-          <LowerLinearGradient/>
         </View>
     )
   }

@@ -14,28 +14,37 @@ import PopupTextCard from './PopupTextCard';
 
 class SharePage extends Component {
 
+  renderListView() {
+    return (
+      <SharePageListView
+        navigation={this.props.navigation}
+        onShareImagePressed={() => this._onShareImagePress()}/>
+    )
+  }
+
+  renderPopUpDialog() {
+    return(
+      <PopupDialog
+        ref={(popupDialog) => this.popupDialog = popupDialog}
+        dialogAnimation={new FadeAnimation({toValue: 0})}
+        animationDuration={400}
+        height={'30%'}
+        width={'85%'}
+        dialogStyle={{marginTop: -120}}>
+        <PopupTextCard
+          onTextPressed={() => this.popupDialog.dismiss()}
+          dialogText={"오늘 하루 어떻게 지냈나요?\n\n내가 생각하는\n우주 외계인을 그려봐요"}/>
+      </PopupDialog>
+    )
+  }
+
   render() {
     return(
       <View style={styles.container}>
         <View style={styles.listViewContainer}>
-          <UpperLinearGradient/>
-          <SharePageListView
-            navigation={this.props.navigation}
-            onShareImagePressed={() => this._onShareImagePress()}/>
+          {this.renderListView()}
         </View>
-        <LowerLinearGradient/>
-
-        <PopupDialog
-          ref={(popupDialog) => this.popupDialog = popupDialog}
-          dialogAnimation={new FadeAnimation({toValue: 0})}
-          animationDuration={400}
-          height={'30%'}
-          width={'85%'}
-          dialogStyle={{marginTop: -120}}>
-          <PopupTextCard
-            onTextPressed={() => this.popupDialog.dismiss()}
-            dialogText={"오늘 하루 어떻게 지냈나요?\n\n내가 생각하는\n우주 외계인을 그려봐요"}/>
-        </PopupDialog>
+        {this.renderPopUpDialog()}
       </View>
     );
   }
@@ -43,7 +52,6 @@ class SharePage extends Component {
   _onShareImagePress() {
     this.popupDialog.show()
   }
-
 }
 
 

@@ -38,7 +38,7 @@ class LeadTextPage extends Component {
                   console.log(missionData)
                   let mission = (missionData.missionToShow === missionToShowType.todayMission) ?
                       missionData.todayMission.mission : missionData.pushMission.mission
-                  this.props.fetchCurrentPage(PAGES.timer);
+                  this.props.fetchCurrentPage(PAGES.mainMission);
                 }}>
               {
                 missionData.missionToShow === missionToShowType.todayMission ?

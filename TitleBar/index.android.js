@@ -6,12 +6,13 @@ import {StyleSheet, View, Text} from 'react-native';
 // ours
 import Title from './Title';
 import { Colors, Sizes } from '../DefaultStyles';
+import {connect} from 'react-redux'
 
 class TitleBar extends Component {
   render() {
     return (
       <View style={styles.titleBarContainer}>
-        <Title/>
+        <Title currentViewPager={this.props.controlData.currentViewPage}/>
       </View>
     );
   }
@@ -22,10 +23,24 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     height: Sizes.titleBarHeight,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Colors.titleBarColor
   },
 
 });
 
 
-export default TitleBar;
+function mapStateToProps(state) {
+  return {
+    controlData: state.controlFlowReducer
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(TitleBar)

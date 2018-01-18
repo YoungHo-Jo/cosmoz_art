@@ -25,7 +25,7 @@ class Title extends Component {
 
     const {currentViewPager} = this.props
     return (
-      <View style={[!this.state.isiOS && eStyles.container, this.state.isiOS && styles.container]}>
+      <View style={styles.container}>
         {
           currentViewPager == 0 &&
           <Text style={styles.titleText}>나의 방</Text>
@@ -61,6 +61,8 @@ const styles = StyleSheet.create({
     color: '#333333',
     fontSize: 18,
     fontWeight: '500',
+    alignSelf: 'center',
+    textAlign: 'center',
   }
 });
 

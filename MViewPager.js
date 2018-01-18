@@ -14,6 +14,9 @@ import MyPage from './Pages/MyPage';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import {fetchCurrentViewPage} from "./actions/controlFlowActions";
 import {connect} from "react-redux";
+import TitleBar from './TitleBar'
+import UpperLinearGradient from './Pages/UpperLinearGradient'
+import LowerLinearGradient from './Pages/LowerLinearGradient'
 
 var width = Dimensions.get('window').width
 var height = Dimensions.get('window').height
@@ -27,6 +30,8 @@ class MViewPager extends Component {
 
     return (
         <View style={styles.container}>
+          <TitleBar/>
+          <UpperLinearGradient/>
           <Swiper dot={(<View style={styles.dot}/>)}
                   activeDot={(<View style={[styles.dot, {backgroundColor: Colors.defaultTextColor}]}/>)}
                   paginationStyle={{
@@ -40,6 +45,7 @@ class MViewPager extends Component {
             <MainPage/>
             <SharePage/>
           </Swiper>
+          <LowerLinearGradient/>
         </View>
     )
   }
