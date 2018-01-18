@@ -25,6 +25,7 @@ import IntroPage from './Pages/IntroPage';
 import IntroPage4 from './Pages/IntroPage/IntroPage4';
 import SignUpPage from './Pages/SignUpPage';
 import ImageViewerPage from './Pages/ImageViewerPage';
+import PopUpView from './PopUpView';
 
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -38,6 +39,7 @@ import PopupMsgBox from "./Pages/MainPage/PopupMsgBox";
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
 
+//console.disableYellowBox = true;
 
 class App extends Component {
   render() {
@@ -47,6 +49,9 @@ class App extends Component {
             <MViewPager
                 initialPage={INITIAL_VIEW_PAGE}/>
           </View>
+          <PopUpView>
+            <Text style={{fontSize: 24, color: '#333333'}}>Hello!</Text>
+          </PopUpView>
         </View>
     );
   }
@@ -73,7 +78,9 @@ class App extends Component {
   componentWillMount() {
     this.props.fetchTodayMission()
   }
+
 }
+
 
 
 const styles = StyleSheet.create({
@@ -95,7 +102,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 0,
     flexDirection: 'row',
-  }
+  },
+
 });
 
 
