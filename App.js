@@ -8,7 +8,8 @@ import MViewPager from './MViewPager';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission} from "./actions/missionActions";
+import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission,} from "./actions/missionActions";
+import { fetchPopupVisibility } from './actions/controlFlowActions';
 import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
@@ -33,7 +34,8 @@ class App extends Component {
   renderPopUpView() {
     return (
         this.props.controlData.isPopupShown &&
-        <PopUpView>
+        <PopUpView
+          onPressOverlay={() => this.props.fetchPopupVisibility(false)}>
           <Text style={{fontSize: 24, color: '#333333'}}>Hello!</Text>
         </PopUpView>
     )
@@ -105,7 +107,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchNotificationMission: (notificationData) => dispatch(fetchNotificationMission(notificationData)),
     fetchTodayMission: () => dispatch(fetchTodayMission()),
-    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type))
+    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type)),
+    fetchPopupVisibility: (visibility) => dispatch(fetchPopupVisibility(visibility))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

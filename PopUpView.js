@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Dimensions, Animated, Easing} from 'react-native';
+import {View, TouchableHighlight, StyleSheet, Dimensions, Animated, Easing} from 'react-native';
 
 const WINDOW_W  = Dimensions.get('window').width;
 const WINDOW_H  = Dimensions.get('window').height;
+
+var AnimtedTouchableHighlight = Animated.createAnimatedComponent(TouchableHighlight);
 
 class PopUpView extends Component {
   componentWillMount() {
@@ -15,14 +17,14 @@ class PopUpView extends Component {
       Animated.timing(this._overlayFadeAnim,
         {
           toValue: 1,
-          duration: 500,
+          duration: 200,
           easing: Easing.out(Easing.quad)
         }),
       Animated.timing(this._boxFadeAnim,
         {
           toValue: 1,
-          delay: 500,
-          duration: 300,
+          delay: 200,
+          duration: 200,
           easing: Easing.quad
         }),
     ])
@@ -31,11 +33,14 @@ class PopUpView extends Component {
 
   render() {
     return(
-      <Animated.View style={[styles.overlay, {opacity: this._overlayFadeAnim}]}>
+      <AnimtedTouchableHighlight
+        style={[styles.overlay, {opacity: this._overlayFadeAnim}]}
+        underlayColor = {'#33333333'}
+        onPress={() => this.props.onPressOverlay()}>
         <Animated.View style={[styles.popUpView, {opacity: this._boxFadeAnim}]}>
           {this.props.children}
         </Animated.View>
-      </Animated.View>
+      </AnimtedTouchableHighlight>
     )
   }
 }
