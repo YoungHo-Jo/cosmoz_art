@@ -1,7 +1,7 @@
 /* @flow */
 
 
-import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "./constants";
+import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, SET_IS_MISSION_DOING, SET_MISSION_IMAGE_NAME} from "./constants";
 
 const initialState = {
   isLogin: false,
@@ -16,13 +16,16 @@ const initialState = {
     doneMission: null,
     arts: null,
   },
-  fcmToken: null
+  fcmToken: null,
+  mission: {
+    isDoing: false,
+    imageName: ''
+  }
 }
 
 export default function userDataReducer(state = initialState, action) {
   switch(action.type) {
     case LOGIN:
-
       console.log('login in userDataReducer')
       return {
           ...state,
@@ -56,6 +59,22 @@ export default function userDataReducer(state = initialState, action) {
         userPK: null,
         userInfo: initialState.userInfo,
         fcmToken: null,
+      }
+    case SET_IS_MISSION_DOING:
+      return {
+        ...state,
+        mission: {
+          ...state.mission,
+          isDoing: action.doing
+        }
+      }
+    case SET_MISSION_IMAGE_NAME:
+      return {
+        ...state,
+        mission: {
+          ...state.mission,
+          imageName: action.imageName
+        }
       }
     default:
       // console.log('default in userDataReducer')

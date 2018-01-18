@@ -2,39 +2,15 @@
 
 // internal module
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
-
-// external module
+import {StyleSheet, Text, View, Button, Platform} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import {StackNavigator} from 'react-navigation';
-
-// our module
 import MViewPager from './MViewPager';
-import MainMission from './Pages/MainPage/MainMissionPage';
-import MainPage from './Pages/MainPage';
-import CameraPage from './Pages/MainPage/CameraPage';
-import CameraButtonPage from './Pages/MainPage/CameraButtonPage';
-import LeadText from './Pages/MainPage/LeadTextPage'
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
-import Title from "./TitleBar/Title";
-import TimerPage from "./Pages/MainPage/TimerPage";
-import ScanPage from "./Pages/MainPage/ScanPage";
-import DetailSharePage from "./Pages/SharePage/DetailSharePage";
-import LoginPage from './Pages/LoginPage';
-import IntroPage from './Pages/IntroPage';
-import IntroPage4 from './Pages/IntroPage/IntroPage4';
-import SignUpPage from './Pages/SignUpPage';
-import ImageViewerPage from './Pages/ImageViewerPage';
-
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import SettingsPage from './Pages/SettingsPage'
-import Sharepage_mission from "./Pages/SharePage/Sharepage_mission";
 import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission} from "./actions/missionActions";
 import {connect} from "react-redux";
 import firebase from './firebase'
-import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "./Pages/MainPage/PopupMsgBox";
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
 
@@ -56,8 +32,6 @@ class App extends Component {
     // After having done stuff (suac as async tasks) hide the splash screen
     SplashScreen.hide();
 
-
-
     // push notification 받을시 작동
     firebase.messaging().onMessage((message) => {
       console.log('firebase onMessage')
@@ -76,11 +50,18 @@ class App extends Component {
 }
 
 
+const topMargin = Platform.select({
+  ios: 15,
+  android: 0
+})
+
 const styles = StyleSheet.create({
   blockContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: Colors.defaultBgColor
+    backgroundColor: Colors.defaultBgColor,
+    marginTop: topMargin
+
   },
   titleBarContainer: {
     flex: -1,

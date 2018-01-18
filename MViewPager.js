@@ -27,7 +27,6 @@ class MViewPager extends Component {
   }
 
   render() {
-
     return (
         <View style={styles.container}>
           <TitleBar/>
@@ -40,7 +39,8 @@ class MViewPager extends Component {
                   loop={false}
                   index={this.props.controlData.initialViewPage}
                   height={height - Sizes.titleBarHeight - 20}
-                  onIndexChanged={index => this._onIndexChanged(index)}>
+                  onIndexChanged={index => this._onIndexChanged(index)}
+                  scrollEnabled={!this.props.userData.mission.isDoing}>
             <MyPage/>
             <MainPage/>
             <SharePage/>
@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    controlData: state.controlFlowReducer
+    controlData: state.controlFlowReducer,
+    userData: state.userData
   }
 }
 

@@ -1,17 +1,17 @@
-import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT} from "../reducers/constants";
+import * as Constants from "../reducers/constants";
 import APIConfig from "../APIConfig";
 import {sha256} from "react-native-sha256";
 import firebase from "../firebase";
 
 export function login() {
   return {
-    type: LOGIN
+    type: Constants.LOGIN
   }
 }
 
 export function getLoginSuccess(token, userPK, fcmToken) {
   return {
-    type: LOGIN_SUCCESS,
+    type: Constants.LOGIN_SUCCESS,
     token,
     userPK,
     fcmToken
@@ -20,7 +20,7 @@ export function getLoginSuccess(token, userPK, fcmToken) {
 
 export function getLoginFailure() {
   return {
-    type: LOGIN_FAILURE
+    type: Constants.LOGIN_FAILURE
   }
 }
 
@@ -80,7 +80,7 @@ export function fetchLogin(loginInfo) {
 
 export function getLogout() {
   return {
-    type: LOGOUT,
+    type: Constants.LOGOUT,
   }
 }
 
@@ -88,5 +88,35 @@ export function fetchLogout() {
   return (dispatch) => {
     dispatch(getLogout())
     console.log('logout succeed')
+  }
+}
+
+
+/* For user that is doding a mission */
+// Set whether the user is doing the mission or not
+export function setIsMissionDoing(doing) {
+  return {
+    type: Constants.SET_IS_MISSION_DOING,
+    doing
+  }
+}
+
+export function fetchIsMissionDoing(doing) {
+  return dispatch => {
+    dispatch(setIsMissionDoing(doing))
+  }
+}
+
+// Save the image name for uploading for which mission done by the user
+export function setMissionImageName(imageName) {
+  return {
+    type: Constants.SET_MISSION_IMAGE_NAME,
+    imageName
+  }
+}
+
+export function fetchMissionImageName(imageName) {
+  return dispatch => {
+    dispatch(setMissionImageName(imageName))
   }
 }

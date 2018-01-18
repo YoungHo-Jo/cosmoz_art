@@ -8,6 +8,7 @@ import {StyleSheet, View, Text, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {Colors, Margins} from '../../DefaultStyles';
+import * as Utills from '../../Utills'
 
 const ICON_CONTAINER_SIZE = 40;
 const ICON_SIZE = 25;
@@ -68,15 +69,17 @@ class MissionInformationBar extends Component {
       : min;
     return minStr + ':' + secStr
   }
-
 }
 
+
+let size = Utills.getWindowSize()
 const styles = StyleSheet.create({
   blockContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: BAR_BGCOLOR
+    backgroundColor: BAR_BGCOLOR,
+    width: size.width
   },
   leftContainer: {
     flex: 1,

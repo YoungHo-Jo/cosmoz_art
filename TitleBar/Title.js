@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, Platform, Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {Sizes, Colors} from '../DefaultStyles';
-import {getWindowSize} from "../Utilis";
+import {getWindowSize} from "../Utills";
 
 
 var windowSize = getWindowSize()

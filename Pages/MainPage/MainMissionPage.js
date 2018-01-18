@@ -8,6 +8,7 @@ import {Sizes, Colors} from '../../DefaultStyles';
 import MissionInformationBar from "./MissionInformationBar";
 import {connect} from 'react-redux'
 import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {fetchIsMissionDoing} from '../../actions/userActions'
 import {PAGES} from '../../reducers/constants'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
@@ -65,8 +66,10 @@ class MainMissionPage extends Component {
   _onMissionPress() {
     //// Implement ////
     // have to show dialog
-    this.props.fetchCurrentPage(PAGES.timer)
 
+    // this.props.fetchCurrentPage(PAGES.timer)
+
+    this.props.fetchIsMissionDoing(true)
   }
 }
 
@@ -119,7 +122,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+    fetchCurrentPage: page => dispatch(fetchCurrentPage(page)),
+    fetchIsMissionDoing: doing => dispatch(fetchIsMissionDoing(doing))
+
   }
 }
 

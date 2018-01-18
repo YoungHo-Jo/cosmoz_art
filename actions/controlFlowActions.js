@@ -42,3 +42,18 @@ export function fetchCurrentPage(currentPage) {
   return dispatch =>
     dispatch(setCurrentPage(currentPage))
 }
+
+
+/* Set wheter showing popupdialog or not */
+export function setPopupVisibility(visibility) {
+  return {
+    type: SET_POPUP_VISIBILITY,
+    visibility
+  }
+}
+
+export function fetchPopupVisibility(visibility) {
+  return dispatch => {
+    dispatch(setPopupVisibility(visibility))
+  }
+}
