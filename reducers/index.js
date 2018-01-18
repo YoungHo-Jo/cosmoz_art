@@ -38,10 +38,10 @@ function controlFlowReducer(state = initialState, action) {
         currentPage: action.currentPage
       }
     case Constants.SET_POPUP_VISIBILITY:
-      console.log('Reducer: ' + Constants.SET_POPUP_VISIBILITY + ': ' + action.popupVisibility)
+      console.log('Reducer: ' + Constants.SET_POPUP_VISIBILITY + ': ' + action.visibility)
       return {
         ...state,
-        isPopupShown: action.popupVisibility
+        isPopupShown: action.visibility
       }
     default:
       return state

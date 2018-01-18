@@ -13,7 +13,9 @@ import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
+import PopUpView from './PopUpView'
 
+//console.disableYellowBox = true;
 
 class App extends Component {
   render() {
@@ -23,8 +25,18 @@ class App extends Component {
             <MViewPager
                 initialPage={INITIAL_VIEW_PAGE}/>
           </View>
+          {this.renderPopUpView()}
         </View>
     );
+  }
+
+  renderPopUpView() {
+    return (
+        this.props.controlData.isPopupShown &&
+        <PopUpView>
+          <Text style={{fontSize: 24, color: '#333333'}}>Hello!</Text>
+        </PopUpView>
+    )
   }
 
   componentDidMount() {
@@ -47,6 +59,7 @@ class App extends Component {
   componentWillMount() {
     this.props.fetchTodayMission()
   }
+
 }
 
 
@@ -76,14 +89,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: 0,
     flexDirection: 'row',
-  }
+  },
+
 });
 
 
 function mapStateToProps(state) {
   return {
     missionData: state.missionData,
-    controlData: state.controlFlowReducer
+    controlData: state.controlFlowReducer,
   }
 }
 

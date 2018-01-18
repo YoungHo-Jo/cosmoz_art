@@ -15,21 +15,11 @@ import { PAGES } from '../../reducers/constants';
 import {connect} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 
-const pageAnimation = {
-    from: {
-      opacity: 0.9,
-      translateY: 10
-    },
-    to: {
-      opacity: 1,
-      translateY: 0
-    },
-}
+const slideY = 700
 
 class AnimatedPage extends Component {
   componentWillMount() {
-    this._fadeAnim = new Animated.Value(0.9),
-    this._slideAnim = new Animated.Value(20)
+    this._slideAnim = new Animated.Value(slideY)
   }
 
   componentDidMount() {
@@ -37,25 +27,16 @@ class AnimatedPage extends Component {
   }
 
   componentDidUpdate() {
-    this._startPageAnim();
+    // this._startPageAnim();
   }
 
   _startPageAnim() {
-    this._fadeAnim.setValue(0.9);
-    this._slideAnim.setValue(20);
-    Animated.parallel([
-      Animated.timing(this._fadeAnim,
-        {
-          toValue: 1,
-          duration: 200,
-        }),
-      Animated.timing(this._slideAnim,
-      {
-        toValue: 0,
-        duration: 200,
-        isInteraction: false,
-      })
-    ]).start();
+    this._slideAnim.setValue(slideY);
+    Animated.timing(this._slideAnim,
+    {
+      toValue: 0,
+      duration: 700,
+    }).start();
   }
 
   render() {
@@ -63,7 +44,6 @@ class AnimatedPage extends Component {
       <Animated.View
         style={{
           ...this.props.style,
-          opacity: this._fadeAnim,
           transform: [{translateY: this._slideAnim}],
         }}
       >

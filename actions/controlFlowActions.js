@@ -1,9 +1,9 @@
-import {SET_CURRENT_VIEWPAGE, SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE, SET_CURRENT_PAGE} from "../reducers/constants";
+import * as Constants from "../reducers/constants";
 
 
 export function setDropDownListState(isShown) {
   return {
-    type: SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE,
+    type: Constants.SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE,
     isShown
   }
 }
@@ -20,7 +20,7 @@ export function fetchDropDownListState(isShown) {
 /* Set current view page num */
 export function setCurrentViewPage(currentViewPage) {
   return {
-    type: SET_CURRENT_VIEWPAGE,
+    type: Constants.SET_CURRENT_VIEWPAGE,
     currentViewPage
   }
 }
@@ -34,7 +34,7 @@ export function fetchCurrentViewPage(currentViewPage) {
 /* Set current view page */
 export function setCurrentPage(currentPage) {
   return {
-    type: SET_CURRENT_PAGE,
+    type: Constants.SET_CURRENT_PAGE,
     currentPage
   }
 }
@@ -47,7 +47,7 @@ export function fetchCurrentPage(currentPage) {
 /* Set wheter showing popupdialog or not */
 export function setPopupVisibility(visibility) {
   return {
-    type: SET_POPUP_VISIBILITY,
+    type: Constants.SET_POPUP_VISIBILITY,
     visibility
   }
 }

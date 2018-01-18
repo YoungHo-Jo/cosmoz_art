@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Sizes, Colors} from '../../DefaultStyles';
 import MissionInformationBar from "./MissionInformationBar";
 import {connect} from 'react-redux'
-import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import {fetchCurrentPage, fetchPopupVisibility} from '../../actions/controlFlowActions'
 import {fetchIsMissionDoing} from '../../actions/userActions'
 import {PAGES} from '../../reducers/constants'
 
@@ -70,6 +70,7 @@ class MainMissionPage extends Component {
     // this.props.fetchCurrentPage(PAGES.timer)
 
     this.props.fetchIsMissionDoing(true)
+    this.props.fetchPopupVisibility(true)
   }
 }
 
@@ -123,8 +124,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(fetchCurrentPage(page)),
-    fetchIsMissionDoing: doing => dispatch(fetchIsMissionDoing(doing))
-
+    fetchIsMissionDoing: doing => dispatch(fetchIsMissionDoing(doing)),
+    fetchPopupVisibility: visibility => dispatch(fetchPopupVisibility(visibility))
   }
 }
 
