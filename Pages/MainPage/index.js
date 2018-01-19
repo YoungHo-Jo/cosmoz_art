@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Animated, Easing} from 'react-native';
+import {StyleSheet, View, Text } from 'react-native';
 
 import LeadTextPage from './LeadTextPage';
 import MainMissionPage from './MainMissionPage';
@@ -13,44 +13,8 @@ import {Colors, Sizes} from '../../DefaultStyles';
 import {fetchCurrentPage, fetchCurrentViewPage} from '../../actions/controlFlowActions';
 import { PAGES } from '../../reducers/constants';
 import {connect} from 'react-redux';
-import * as Animatable from 'react-native-animatable';
+import AnimatedPage from './AnimatedPage';
 
-const slideY = 700
-
-class AnimatedPage extends Component {
-  componentWillMount() {
-    this._slideAnim = new Animated.Value(slideY)
-  }
-
-  componentDidMount() {
-    this._startPageAnim();
-  }
-
-  componentDidUpdate() {
-    // this._startPageAnim();
-  }
-
-  _startPageAnim() {
-    this._slideAnim.setValue(slideY);
-    Animated.timing(this._slideAnim, {
-      toValue: 0,
-      duration: 700,
-    }).start();
-  }
-
-  render() {
-    return (
-      <Animated.View
-        style={{
-          ...this.props.style,
-          transform: [{translateY: this._slideAnim}],
-        }}
-      >
-        {this.props.children}
-      </Animated.View>
-    );
-  }
-}
 
 class MainPage extends Component {
   render() {
@@ -61,9 +25,15 @@ class MainPage extends Component {
     );
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.currentPage == nextProps.currentPage;
+  }
+
   animatedPage(page) {
     return(
-      <AnimatedPage style={{flex: 1}}>
+      <AnimatedPage
+        style={{flex: 1}}
+        currentPage={this.props.currentPage}>
         {page}
       </AnimatedPage>
     );
