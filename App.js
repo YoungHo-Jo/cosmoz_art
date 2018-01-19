@@ -105,7 +105,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchNotificationMission: (notificationData) => dispatch(fetchNotificationMission(notificationData)),
     fetchTodayMission: () => dispatch(fetchTodayMission()),
-    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type))
+    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type)),
+    fetchPopupVisibility: (visibility) => dispatch(fetchPopupVisibility(visibility))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
