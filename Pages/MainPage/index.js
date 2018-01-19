@@ -32,8 +32,7 @@ class AnimatedPage extends Component {
 
   _startPageAnim() {
     this._slideAnim.setValue(slideY);
-    Animated.timing(this._slideAnim,
-    {
+    Animated.timing(this._slideAnim, {
       toValue: 0,
       duration: 700,
     }).start();

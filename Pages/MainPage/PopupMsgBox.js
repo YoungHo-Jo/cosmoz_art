@@ -29,7 +29,8 @@ export default class PopupMsgBox extends React.Component {
 
   render() {
     return (
-        <View style={styles.container}>
+        <View style={styles.container}
+              onStartShouldSetResponder={evt => true}>
           <View style={styles.textContainer}>
             <Text style={[styles.text, this.props.dialogTextStyle]}>
               {this.props.dialogText}
@@ -70,6 +71,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.defaultPageBgColor,
+    justifyContent: 'center',
+    alignSelf: 'stretch'
   },
   textContainer: {
     flex: 1,

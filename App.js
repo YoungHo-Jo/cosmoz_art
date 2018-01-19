@@ -8,12 +8,14 @@ import MViewPager from './MViewPager';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission} from "./actions/missionActions";
+import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission,} from "./actions/missionActions";
+import { fetchPopupVisibility } from './actions/controlFlowActions';
 import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
 import PopUpView from './PopUpView'
+import PopupMsgBox from './Pages/MainPage/PopupMsgBox'
 
 //console.disableYellowBox = true;
 
@@ -33,8 +35,9 @@ class App extends Component {
   renderPopUpView() {
     return (
         this.props.controlData.isPopupShown &&
-        <PopUpView>
-          <Text style={{fontSize: 24, color: '#333333'}}>Hello!</Text>
+        <PopUpView
+          onPressOverlay={() => this.props.fetchPopupVisibility(false)}>
+          <PopupMsgBox/>
         </PopUpView>
     )
   }

@@ -65,15 +65,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
-
-
-
-EStyleSheet.build()
-const eStyles = EStyleSheet.create({
-  container: {
-    position: 'absolute',
-    left: '50%',
-  }
-})
-
 export default Title;
