@@ -18,13 +18,21 @@ const MISSION_BLOCK_MARGIN = 50;
 const MISSION_ICON_COLOR = '#111111';
 
 class MainMissionPage extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      mission: this.props.missionData.todayMission.mission
+    }
+  }
+
   renderMissionInfoBar() {
     return (
       <View style={styles.missionInfoBarContainer}>
         <MissionInformationBar
-            benefitText={this.props.benefitText || 'NULL'} // deprecated
-            icon={this.props.benefitIcon}
-            secs={this.props.secs || 100}/>
+            benefitText={this.state.mission.benefit.text || 'NULL'}
+            icon={this.state.mission.benefit.type}
+            secs={this.state.mission.time || 100}/>
       </View>
     )
   }
@@ -37,7 +45,7 @@ class MainMissionPage extends Component {
           <View style={styles.missionTextContainer}>
             <Text style={styles.missionText}
                   onPress={this._onMissionPress.bind(this)}>
-              {this.props.missionText || 'NULL'}
+              {this.state.mission.mission.text || 'NULL'}
             </Text>
           </View>
           {/* mission image */}
@@ -70,7 +78,8 @@ class MainMissionPage extends Component {
     // this.props.fetchCurrentPage(PAGES.timer)
 
     this.props.fetchIsMissionDoing(true)
-    this.props.fetchPopupVisibility(true)
+    // this.props.fetchPopupVisibility(true)
+    this.props.fetchCurrentPage(PAGES.timer)
   }
 }
 
