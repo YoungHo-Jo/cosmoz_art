@@ -15,6 +15,12 @@ const initialState = {
   initialViewPage: INITIAL_VIEW_PAGE,
   currentPage: INITIAL_PAGE,
   isPopupShown: false,
+  popupContent: {
+    dialogText: '',
+    leftBtnFunc: null,
+    rightBtnFunc: null,
+  }
+
 }
 
 function controlFlowReducer(state = initialState, action) {
@@ -42,6 +48,16 @@ function controlFlowReducer(state = initialState, action) {
       return {
         ...state,
         isPopupShown: action.visibility
+      }
+    case Constants.SET_POPUP_CONTENT:
+      console.log('Reducer: ' + Constants.SET_POPUP_CONTENT)
+      return {
+        ...state,
+        popupContent: {
+          dialogText: action.dialogText,
+          leftBtnFunc: action.leftBtnFunc,
+          rightBtnFunc: action.rightBtnFunc
+        }
       }
     default:
       return state

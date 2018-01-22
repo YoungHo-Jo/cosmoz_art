@@ -1,6 +1,5 @@
 /* @flow */
 
-// internal module
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, Platform} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
@@ -37,7 +36,10 @@ class App extends Component {
         this.props.controlData.isPopupShown &&
         <PopUpView
           onPressOverlay={() => this.props.fetchPopupVisibility(false)}>
-          <PopupMsgBox/>
+          <PopupMsgBox
+            dialogText={this.props.controlData.popupContent.dialogText}
+            onLeftButtonClicked={() => this.props.controlData.popupContent.leftBtnFunc()}
+            onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
         </PopUpView>
     )
   }

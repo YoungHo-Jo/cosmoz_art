@@ -7,8 +7,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Sizes, Colors} from '../../DefaultStyles';
 import MissionInformationBar from "./MissionInformationBar";
 import {connect} from 'react-redux'
-import {fetchCurrentPage, fetchPopupVisibility} from '../../actions/controlFlowActions'
-import {fetchIsMissionDoing} from '../../actions/userActions'
+import * as ControlActions from '../../actions/controlFlowActions'
+import * as UserActions from '../../actions/userActions'
 import {PAGES} from '../../reducers/constants'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
@@ -72,14 +72,15 @@ class MainMissionPage extends Component {
   }
 
   _onMissionPress() {
-    //// Implement ////
-    // have to show dialog
-
-    // this.props.fetchCurrentPage(PAGES.timer)
-
     this.props.fetchIsMissionDoing(true)
-    // this.props.fetchPopupVisibility(true)
-    this.props.fetchCurrentPage(PAGES.timer)
+    this.props.fetchPopupVisibility(true)
+    this.props.fetchPopupContent(
+      '정말로 시작하시겠어요?',
+      () => {
+        this.props.fetchCurrentPage(PAGES.timer)
+        this.props.fetchPopupVisibility(false)
+      },
+      () => this.props.fetchPopupVisibility(false))
   }
 }
 
@@ -132,9 +133,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page)),
-    fetchIsMissionDoing: doing => dispatch(fetchIsMissionDoing(doing)),
-    fetchPopupVisibility: visibility => dispatch(fetchPopupVisibility(visibility))
+    fetchCurrentPage: page => dispatch(ControlActions.fetchCurrentPage(page)),
+    fetchIsMissionDoing: doing => dispatch(UserActions.fetchIsMissionDoing(doing)),
+    fetchPopupVisibility: visibility => dispatch(ControlActions.fetchPopupVisibility(visibility)),
+    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) => dispatch(ControlActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
   }
 }
 

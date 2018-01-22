@@ -57,3 +57,19 @@ export function fetchPopupVisibility(visibility) {
     dispatch(setPopupVisibility(visibility))
   }
 }
+
+/* Set PopupMsgBox Content including dialogText, left Button function and right button fuction */
+export function setPopupContent(dialogText, leftBtnFunc, rightBtnFunc) {
+  return {
+    type: Constants.SET_POPUP_CONTENT,
+    dialogText,
+    leftBtnFunc,
+    rightBtnFunc
+  }
+}
+
+export function fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc) {
+  return dispatch => {
+    dispatch(setPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
+  }
+}

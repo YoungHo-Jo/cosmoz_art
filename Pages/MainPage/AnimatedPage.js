@@ -11,7 +11,7 @@ class AnimatedPage extends Component {
   componentDidMount() {
     this._startPageAnim();
   }
-
+  
   shouldComponentUpdate(nextProps) {
     return !(this.props.currentPage == nextProps.currentPage);
   }
