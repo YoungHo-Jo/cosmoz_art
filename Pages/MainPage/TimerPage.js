@@ -3,15 +3,18 @@
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
-import {StyleSheet, View, Text,} from 'react-native';
+import {StyleSheet, View, Dimensions, Text,} from 'react-native';
 
 import Timer from './Timer';
 import {Colors, Sizes} from "../../DefaultStyles";
 import {MKSwitch, MKColor} from "react-native-material-kit";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import {connect} from 'react-redux'
-import {PAGES} from '../../reducers/constants'
-import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {connect} from 'react-redux';
+import {PAGES} from '../../reducers/constants';
+import {fetchCurrentPage} from '../../actions/controlFlowActions';
+
+var WINDOW_W = Dimensions.get('window').width;
+var WINDOW_H = Dimensions.get('window').height;
 
 class TimerPage extends Component {
   constructor(props) {
@@ -19,16 +22,6 @@ class TimerPage extends Component {
     this.state = {
       timerStart: true
     }
-  }
-
-  renderMission() {
-    return (
-      <View style={styles.missionTextContainer}>
-        <Text style={styles.missionText}>
-          {this.props.missionData.todayMission.mission.mission.text}
-        </Text>
-      </View>
-    )
   }
 
   renderTimer() {
@@ -43,24 +36,37 @@ class TimerPage extends Component {
     )
   }
 
+  renderMission() {
+    return (
+      <View style={styles.missionTextContainer}>
+        <Text style={styles.missionText}>
+          {this.props.missionData.todayMission.mission.mission.text}
+        </Text>
+      </View>
+    )
+  }
+
   renderToggle() {
     return(
-      <View style={styles.toggleContainer}>
-        <Icon
-            name='bell'
-            size={28}
-            color={'#777777'}/>
-        <MKSwitch
-            style={styles.appleSwitch}
-            onColor='rgba(0, 160, 235, 0.3)'
-            thumbOnColor='rgba(0, 160, 235, 1)'
-            rippleColor='rgba(0, 160, 235, 0.2)'
-            onPress={() => console.log('vibration switch pressed')}
-            onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
-        <Icon
-            name='bell-off'
-            size={28}
-            color={'#777777'}/>
+      <View style={styles.toggleFlexContainer}>
+        <View style={styles.toggleContainer}>
+          <Icon
+              name='bell'
+              size={28}
+              color={'#777777'}/>
+          <MKSwitch
+              style={styles.appleSwitch}
+              onColor='rgba(0, 160, 235, 0.3)'
+              thumbOnColor='rgba(0, 160, 235, 1)'
+              rippleColor='rgba(0, 160, 235, 0.2)'
+              onPress={() => console.log('vibration switch pressed')}
+              onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
+          <Icon
+              name='bell-off'
+              size={28}
+              color={'#777777'}/>
+        </View>
+
       </View>
     )
   }
@@ -100,41 +106,43 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: Colors.defaultPageBgColor
   },
-  missionTextContainer: {
-    marginTop: 60,
-
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
   timerContainer: {
-    position: 'absolute',
-    top: 100,
+    flex: 2,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    marginBottom: WINDOW_H*(5/100)
+    //backgroundColor: '#cdefab'
+  },
+  missionTextContainer: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+  //  backgroundColor: '#abcdef'
   },
   missionText: {
     fontWeight: Sizes.middleFontWeight,
     fontSize: Sizes.missionFontSize,
     textAlign: 'center',
-    lineHeight: 40,
+    lineHeight: Sizes.missionFontSize + 15,
     color: Colors.defaultTextColor,
-    marginHorizontal: 50,
+    marginHorizontal: WINDOW_W*(10/100),
+  },
+  toggleFlexContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    //backgroundColor:'#fedcba'
   },
   toggleContainer: {
-    position: 'absolute',
-    bottom: Sizes.bottomBarHeight + 50,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   switch: {
-    marginTop: 2,
+    //marginTop: 2,
     // marginBottom: 5,
   },
-  appleSwitch: {
-    marginTop: 7,
-    marginBottom: 7,
-  },
+
 
 });
 
