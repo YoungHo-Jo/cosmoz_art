@@ -25,15 +25,11 @@ class MainPage extends Component {
     );
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.currentPage == nextProps.currentPage;
-  }
-
   animatedPage(page) {
     return(
       <AnimatedPage
         style={{flex: 1}}
-        currentPage={this.props.currentPage}>
+        currentPage={this.props.controlData.currentPage}>
         {page}
       </AnimatedPage>
     );
