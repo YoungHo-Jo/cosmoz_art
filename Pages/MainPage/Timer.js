@@ -3,10 +3,11 @@
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, Animated, Easing,} from 'react-native';
+import {StyleSheet, View, Dimensions, Text, Animated, Easing,} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import ProgressCircle from 'react-native-progress-circle';
 
+var WINDOW_W = Dimensions.get('window').width;
 var CircleTimer = Animated.createAnimatedComponent(ProgressCircle);
 
 export default class Timer extends Component {
@@ -40,7 +41,7 @@ export default class Timer extends Component {
       <View style={styles.timerContainer}>
         <CircleTimer
               percent={this.state.timePercent}
-              radius={90}
+              radius={parseInt(WINDOW_W*(22/100))}
               borderWidth={8}
               color="#eeeeee"
               shadowColor="#3399FF"
@@ -85,7 +86,7 @@ const countDownOptions = {
   },
   text: {
     fontSize: 30,
-    color: '#000000',
+    color: '#333333',
     fontWeight: '700'
 
   }
@@ -97,9 +98,6 @@ const styles = StyleSheet.create({
   },
   timer: {
     resizeMode: 'contain',
-  },
-  timerContainer: {
-    marginBottom: 20,
   },
   timeContainer: {
   },
@@ -117,11 +115,6 @@ const eStyles = EStyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  timerContainer: {
-    position: 'absolute',
-    top: 100,
-    backgroundColor: '#819203'
-  }
 })
 
 

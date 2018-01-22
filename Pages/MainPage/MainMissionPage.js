@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
     color: Colors.defaultTextColor,
     fontWeight: Sizes.middleFontWeight,
     textAlign: 'center',
+    lineHeight: MISSION_FONT_SIZE + 15,
   }
 });
 
