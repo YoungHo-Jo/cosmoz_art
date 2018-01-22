@@ -72,13 +72,14 @@ class MainMissionPage extends Component {
   }
 
   _onMissionPress() {
-    this.props.fetchIsMissionDoing(true)
     this.props.fetchPopupVisibility(true)
     this.props.fetchPopupContent(
       '정말로 시작하시겠어요?',
       () => {
         this.props.fetchCurrentPage(PAGES.timer)
+        this.props.fetchIsMissionDoing(true)
         this.props.fetchPopupVisibility(false)
+        this.props.fetchTitleBarLeftBtn(false, null)
       },
       () => this.props.fetchPopupVisibility(false))
   }
@@ -136,7 +137,8 @@ function mapDispatchToProps(dispatch) {
     fetchCurrentPage: page => dispatch(ControlActions.fetchCurrentPage(page)),
     fetchIsMissionDoing: doing => dispatch(UserActions.fetchIsMissionDoing(doing)),
     fetchPopupVisibility: visibility => dispatch(ControlActions.fetchPopupVisibility(visibility)),
-    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) => dispatch(ControlActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
+    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) => dispatch(ControlActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc)),
+    fetchTitleBarLeftBtn: (leftBtnShow, leftBtnFunc) => dispatch(ControlActions.fetchTitleBarLeftBtn(leftBtnShow, leftBtnFunc))
   }
 }
 

@@ -19,8 +19,13 @@ const initialState = {
     dialogText: '',
     leftBtnFunc: null,
     rightBtnFunc: null,
+  },
+  titleBar: {
+    leftBtnShow: false,
+    leftBtnFunc: null,
+    rightBtnShow: false,
+    rightBtnFunc: null
   }
-
 }
 
 function controlFlowReducer(state = initialState, action) {
@@ -56,6 +61,26 @@ function controlFlowReducer(state = initialState, action) {
         popupContent: {
           dialogText: action.dialogText,
           leftBtnFunc: action.leftBtnFunc,
+          rightBtnFunc: action.rightBtnFunc
+        }
+      }
+    case Constants.SET_TITLE_BAR_LEFT_BTN:
+      console.log('Reducer: ' + Constants.SET_TITLE_BAR_LEFT_BTN)
+      return {
+        ...state,
+        titleBar: {
+          ...state.titleBar,
+          leftBtnShow: action.leftBtnShow,
+          leftBtnFunc: action.leftBtnFunc
+        }
+      }
+    case Constants.SET_TITLE_BAR_RIGHT_BTN:
+      console.log('Reducer: ' + Constants.SET_TITLE_BAR_RIGHT_BTN)
+      return {
+        ...state,
+        titleBar: {
+          ...state.titleBar,
+          rightBtnShow: action.rightBtnShow,
           rightBtnFunc: action.rightBtnFunc
         }
       }

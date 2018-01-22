@@ -73,3 +73,29 @@ export function fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc) {
     dispatch(setPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
   }
 }
+
+/* Set left button visibility and what it does */
+export function setTitleBarLeftBtn(leftBtnShow, leftBtnFunc) {
+  return {
+    type: Constants.SET_TITLE_BAR_LEFT_BTN,
+    leftBtnShow,
+    leftBtnFunc
+  }
+}
+
+export function fetchTitleBarLeftBtn(leftBtnShow, leftBtnFunc) {
+  return dispatch => dispatch(setTitleBarLeftBtn(leftBtnShow, leftBtnFunc))
+}
+
+/* Set right button visibility and whit it does */
+export function setTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
+  return {
+    type: Constants.SET_TITLE_BAR_RIGHT_BTN,
+    rightBtnShow,
+    rightBtnFunc
+  }
+}
+
+export function fetchTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
+  return dispatch => dispatch(setTitleBarRightBtn(rightBtnShow, rightBtnFunc))
+}

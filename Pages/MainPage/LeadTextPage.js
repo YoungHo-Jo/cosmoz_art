@@ -10,8 +10,10 @@ import {
 
 import {Colors, Sizes} from '../../DefaultStyles';
 import {connect} from "react-redux";
-import {missionToShowType} from "../../reducers/missionDataReducer";
-import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import * as MissionDataReducer from "../../reducers/missionDataReducer";
+import * as ControlFlowActions from '../../actions/controlFlowActions'
+import * as MissionActions from '../../actions/missionActions'
+import * as UserActions from '../../actions/userActions'
 import {PAGES} from '../../reducers/constants'
 
 const LEAD_TEXT_SIZE = Sizes.leadTextSize;
@@ -26,6 +28,10 @@ class LeadTextPage extends Component {
     super(props)
   }
 
+  componentWillMount() {
+
+  }
+
   render() {
     const {missionData} = this.props
     return (
@@ -35,13 +41,19 @@ class LeadTextPage extends Component {
             <Text
                 style={styles.text}
                 onPress={() => {
-                  console.log(missionData)
-                  let mission = (missionData.missionToShow === missionToShowType.todayMission) ?
+                  let mission = (missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission) ?
                       missionData.todayMission.mission : missionData.pushMission.mission
-                  this.props.fetchCurrentPage(PAGES.mainMission);
+                  this.props.fetchCurrentPage(PAGES.mainMission)
+                  this.props.fetchIsMissionDoing(true)
+                  this.props.fetchTitleBarLeftBtn(true, () => {
+                    this.props.fetchCurrentPage(PAGES.leadText)
+                    this.props.fetchTitleBarLeftBtn(false, null)
+                    this.props.fetchIsMissionDoing(false)
+                  })
+
                 }}>
               {
-                missionData.missionToShow === missionToShowType.todayMission ?
+                missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission ?
                     missionData.todayMission.mission.leadText : missionData.pushMission.mission.leadText
               }
             </Text>
@@ -99,7 +111,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchTitleBarLeftBtn: (show, leftBtnFunc) => dispatch(ControlFlowActions.fetchTitleBarLeftBtn(show, leftBtnFunc)),
+    fetchIsMissionDoing: isDoing => dispatch(UserActions.fetchIsMissionDoing(isDoing))
   }
 }
 
