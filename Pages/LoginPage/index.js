@@ -19,6 +19,8 @@ import {connect} from "react-redux";
 import {fetchLogin} from "../../actions/userActions";
 import {Colors} from "../../DefaultStyles";
 import {MKSwitch, MKColor} from "react-native-material-kit";
+import * as ControlFlowActions from '../../actions/controlFlowActions'
+import SignUpPage from '../SignUpPage'
 
 class Login extends Component {
   state = {
@@ -49,6 +51,7 @@ class Login extends Component {
             </KeyboardAwareScrollView>
     )
   }
+
   renderLogo() {
     return (
       <View style={{flex: 1, justifyContent: 'center'}}>
@@ -101,7 +104,6 @@ class Login extends Component {
                   pw: this.state.pw
                 })
                 setTimeout(() => {
-                  console.log(this.props.userData)
                   if(this.props.userData.isLogin) {
                     this.props.navigation.goBack()
                   }
@@ -150,7 +152,12 @@ class Login extends Component {
 
   renderSignUpButton() {
     return (
-      <Button style={styles.button_signup} textStyle={{fontSize: 12}}>
+      <Button
+        style={styles.button_signup}
+        textStyle={{fontSize: 12}}
+        onPress={() => {
+          this.props.fetchModal(true, <SignUpPage/>)
+        }}>
         회원가입
       </Button>
     )
@@ -250,7 +257,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo))
+    fetchLogin: (userInfo) => dispatch(fetchLogin(userInfo)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
   }
 }
 

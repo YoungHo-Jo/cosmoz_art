@@ -12,8 +12,6 @@ import {
 import GridView from 'react-native-super-grid';
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
-import UpperLinearGradient from "../UpperLinearGradient";
-import LowerLinearGradient from "../LowerLinearGradient";
 import MyPageGridViewImageItem from "./MyPageGridViewImageItem"
 import MyPageGridViewTextItem from "./MyPageGridViewTextItem"
 import ModalDropdown from "react-native-modal-dropdown/components/ModalDropdown";
@@ -21,11 +19,9 @@ import ModalDropdown from "react-native-modal-dropdown/components/ModalDropdown"
 import EStyleSheet from 'react-native-extended-stylesheet'
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {fetchDropDownListState} from "../../actions/controlFlowActions";
+import * as ControlFlowActions from "../../actions/controlFlowActions";
 import {connect} from "react-redux";
-import {Header} from "react-navigation";
-import PopupDialog, {ScaleAnimation} from "react-native-popup-dialog";
-import PopupMsgBox from "../MainPage/PopupMsgBox";
+import LoginPage from '../LoginPage'
 
 // list of images
 const data = [
@@ -299,7 +295,7 @@ class MyPage extends Component {
           </Text> */}
           <TouchableHighlight style={styles.loginButton}
                               onPress={() => {
-                                this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})
+                                this.props.fetchModal(true, <LoginPage/>)
                               }}
                               underlayColor={Colors.titleBarColor}>
             <Text style={styles.loginText}>
@@ -571,7 +567,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchDropDownState: (isShown) => dispatch(fetchDropDownListState(isShown))
+    fetchDropDownState: (isShown) => dispatch(ControlFlowActions.fetchDropDownListState(isShown)),
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+
+
   }
 }
 

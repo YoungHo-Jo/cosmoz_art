@@ -26,6 +26,7 @@ class SharePageListView extends Component {
 
   propTypes: {
     onShareImagePressed: React.PropTypes.func.isRequired,
+    showModal: React.PropTypes.func
   };
 
 
@@ -39,7 +40,7 @@ class SharePageListView extends Component {
         imageURL={rowData.image_url}
         keyword={rowData.keyword}
         missionPK={rowData.mission_pk}
-        navigation={this.props.navigation}
+        showModal={(show, content) => this.props.showModal(show, content)}
         onShareImagePressed={() => this.props.onShareImagePressed()}/>
     )
   }

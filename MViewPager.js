@@ -12,9 +12,11 @@ import MainPage from './Pages/MainPage';
 import SharePage from './Pages/SharePage';
 import MyPage from './Pages/MyPage';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
-import {fetchCurrentViewPage} from "./actions/controlFlowActions";
+import * as ControlFlowActions from "./actions/controlFlowActions";
+import {PAGES} from './reducers/constants'
 import {connect} from "react-redux";
 import TitleBar from './TitleBar'
+import SettingsPage from './Pages/SettingsPage'
 import UpperLinearGradient from './Pages/UpperLinearGradient'
 import LowerLinearGradient from './Pages/LowerLinearGradient'
 
@@ -53,13 +55,20 @@ class MViewPager extends Component {
   _onIndexChanged(index) {
     switch (index) {
       case 0:
+        this.props.fetchCurrentPage(PAGES.my)
+        this.props.fetchTitleBarRightBtn(true, () => {
+          this.props.fetchModal(true, <SettingsPage/>)
+        })
         return this.props.fetchCurrentViewPage(0)
       case 1:
+        this.props.fetchCurrentPage(PAGES.leadText)
         return this.props.fetchCurrentViewPage(1)
       case 2:
+        this.props.fetchCurrentPage(PAGES.share)
+        this.props.fetchTitleBarRightBtn(true, () => {
+          this.props.fetchModal(true, )
+        })
         return this.props.fetchCurrentViewPage(2)
-      default:
-        this.props.fetchCurrentViewPage(1)
     }
   }
 }
@@ -111,7 +120,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentViewPage: page => dispatch(fetchCurrentViewPage(page))
+    fetchCurrentViewPage: page => dispatch(ControlFlowActions.fetchCurrentViewPage(page)),
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchTitleBarRightBtn: (rightBtnShow, rightBtnFunc) =>
+      dispatch(ControlFlowActions.fetchTitleBarRightBtn(rightBtnShow, rightBtnFunc)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+
   }
 }
 

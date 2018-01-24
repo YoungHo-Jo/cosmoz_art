@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
+import DetailSharePage from './DetailSharePage'
 
 
 const styles= StyleSheet.create({
@@ -83,6 +84,7 @@ class SharePageListViewItem extends Component {
     keyword: React.PropTypes.string.isRequired,
     missionPK:React.PropTypes.string.isRequired,
     onShareImagePressed: React.PropTypes.func.isRequired,
+    showModal: React.PropTypes.func
   };
 
     componentWillMount() {
@@ -130,7 +132,7 @@ class SharePageListViewItem extends Component {
     renderShowDetailBtn() {
       return (
         <TouchableHighlight
-          onPress={() => this.props.navigation.navigate('DetailSharePage', {...this.props.navigation.state.params})}
+          onPress={() => this.props.showModal(true, <DetailSharePage/>)}
           underlayColor={'#ffffff'}>
              <Image
                  style={styles.button_showother}

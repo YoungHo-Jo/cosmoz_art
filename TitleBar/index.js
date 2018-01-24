@@ -12,7 +12,6 @@ import {PAGES} from '../reducers/constants'
 
 class TitleBar extends Component {
   render() {
-    console.log(this.props.controlData.titleBar)
     return (
       <View style={styles.titleBarContainer}>
         {this.props.controlData.titleBar.leftBtnShow && this.renderLeftBtn()}
@@ -35,9 +34,18 @@ class TitleBar extends Component {
     return (
       <TouchableHighlight style={styles.rightBtnContainer}
             onPress={() => this.props.controlData.titleBar.rightBtnFunc()}>
-          <Text>Back</Text>
+          {this.getRightBtn(this.props.controlData.currentPage)}
       </TouchableHighlight>
     )
+  }
+
+  getRightBtn(page) {
+    switch(page) {
+      case PAGES.my:
+        return <Text>setting</Text>
+      case PAGES.share:
+        return <Text>missionHistory</Text>
+    }
   }
 }
 

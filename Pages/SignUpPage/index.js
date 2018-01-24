@@ -17,6 +17,8 @@ import FriendAmountSubmitPage from './FriendAmountSubmitPage';
 import OftenRelationSubmitPage from './OftenRelationSubmitPage';
 import ReadySubmitPage from './ReadySubmitPage';
 import BottomBar from "../BottomBar";
+import * as ControlFlowActions from '../../actions/controlFlowActions'
+import {connect} from 'react-redux'
 
 
 class SignUpPage extends Component {
@@ -62,7 +64,7 @@ class SignUpPage extends Component {
               <ReadySubmitPage
                 onClickNext={() => this.onClickNext()}
                 onClickPrev={() => this.onClickPrev()}
-                navigation={this.props.navigation}/>
+                onDone={() => this.props.fetchModal(false, null)}/>
             </Swiper>
             <BottomBar style={styles.progressContainer}>
               <Progress.Bar
@@ -107,4 +109,16 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUpPage;
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage)

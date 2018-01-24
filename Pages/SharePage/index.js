@@ -9,15 +9,17 @@ import SharePageListView from './SharePageListView';
 import {Colors, Sizes} from "../../DefaultStyles";
 import UpperLinearGradient from "../UpperLinearGradient";
 import LowerLinearGradient from "../LowerLinearGradient";
-import Sharepage_mission from "./Sharepage_mission";
+import DoneMissionPage from "./DoneMissionPage";
 import PopupTextCard from './PopupTextCard';
+import {connect} from 'react-redux'
+import * as ControlFlowActions from '../../actions/controlFlowActions'
 
 class SharePage extends Component {
 
   renderListView() {
     return (
       <SharePageListView
-        navigation={this.props.navigation}
+        showModal={(show, content) => this.props.fetchModal(show, content)}
         onShareImagePressed={() => this._onShareImagePress()}/>
     )
   }
@@ -67,4 +69,16 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SharePage;
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SharePage)

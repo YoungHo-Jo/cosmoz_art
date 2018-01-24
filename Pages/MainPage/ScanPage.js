@@ -22,6 +22,7 @@ const IMAGE_SIDE_MARGIN = 30;
 
 class ScanPage extends React.Component {
   renderImage() {
+    Image.getSize()
     return (
       <View style={styles.imageContainer}>
         <Image resizeMode='contain' source={(Platform.OS === 'android') && {
