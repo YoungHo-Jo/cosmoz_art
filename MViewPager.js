@@ -62,6 +62,7 @@ class MViewPager extends Component {
         return this.props.fetchCurrentViewPage(0)
       case 1:
         this.props.fetchCurrentPage(PAGES.leadText)
+        this.props.fetchTitleBarRightBtn(false, null)
         return this.props.fetchCurrentViewPage(1)
       case 2:
         this.props.fetchCurrentPage(PAGES.share)
