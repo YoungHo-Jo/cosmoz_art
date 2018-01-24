@@ -14,7 +14,7 @@ export default class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timePercent: new Animated.Value(0),
+      timePercent: new Animated.Value(0)
     }
   }
 
@@ -45,16 +45,14 @@ export default class Timer extends Component {
               borderWidth={8}
               color="#eeeeee"
               shadowColor="#3399FF"
-              bgColor="#ffffff"
-          >
+              bgColor="#ffffff">
             <CountDown
-                 totalDuration={this.secsToMillis(this.props.secs) || 10000}
-                 start={this.props.start}
-                 reset={() => console.log('reset')}
-                 options={countDownOptions}
-                 handleFinish={this._onCountDownFinished.bind(this)}
-                 getTime={(time) => console.log('current: ' + time)}
-                 onPress={() => this.props.onPressCountDown()}/>
+              ref='countDown'
+               totalDuration={this.secsToMillis(this.props.secs) || 10000}
+               start={this.props.start}
+               options={countDownOptions}
+               handleFinish={() => this.props.onTimerFinished()}
+               onPress={() => this.props.onPressCountDown()}/>
           </CircleTimer>
       </View>
     )
@@ -69,13 +67,26 @@ export default class Timer extends Component {
     );
   }
 
-  _onCountDownFinished = () => {
-    console.log('times up!')
-    this.props.onTimerFinished()
-  }
-
   secsToMillis(secs) {
     return secs * 100
+  }
+
+  stop() {
+    console.log('Timer Stop')
+    if(this.refs.countDown) {
+        this.refs.countDown.stop()
+    } else {
+      console.log('CountDown ref not exist while stop()')
+    }
+  }
+
+  reset() {
+    console.log('Timer Reset')
+    if(this.refs.countDown) {
+        this.refs.countDown.reset()
+    } else {
+      console.log('CountDown ref not exist while reset()')
+    }
   }
 }
 
@@ -125,6 +136,7 @@ class CountDown extends Component {
     this.state = {
       started: false,
       remainingTime: props.totalDuration,
+      interval: null
     };
     this.start = this.start.bind(this);
     this.stop = this.stop.bind(this);
@@ -147,48 +159,62 @@ class CountDown extends Component {
   }
 
   componentDidMount() {
-    if(this.props.start) {
+    if(this.props.start && !this.state.interval) {
+      console.log('CountDown did mount')
       this.start();
     }
   }
 
   componentWillReceiveProps(newProps) {
-
-    if(newProps.start) {
+    if(!this.props.start && newProps.start) {
+      console.log('CountDown will receive props: start true')
       this.start();
-    } else {
+    } else if (this.props.start && !newProps.start){
+      console.log('CountDown will receive props: start false')
       this.stop();
     }
     if(newProps.reset) {
+      console.log('CountDown will receive props: reset true')
       this.reset();
     }
   }
 
+  componentWillUnmount() {
+    console.log('CountDown unmount')
+  }
+
   start() {
+    console.log('CountDown start')
     const handleFinish = this.props.handleFinish ? this.props.handleFinish : () => alert("Timer Finished");
     const endTime = new Date().getTime() + this.state.remainingTime;
-    this.interval = setInterval(() => {
+    const interval = setInterval(() => {
       const remaining = endTime - new Date();
+      // console.log('remaining ' + remaining)
+      // console.log('interval id: ' + this.state.interval)
       if(remaining <= 1000) {
-        this.setState({remainingTime: 0});
-        this.stop();
         handleFinish();
+        this.stop();
+        // console.log('interval id: ' + this.state.interval)
         return;
       }
       this.setState({remainingTime: remaining});
     }, 1);
+    this.setState({
+      interval: interval
+    })
   }
 
   stop() {
-    clearInterval(this.interval);
+    console.log('CountDown Stop | interval_id: ' + this.state.interval)
+    clearInterval(this.state.interval);
   }
 
   reset() {
+    console.log('CountDown Reset')
     this.setState({remainingTime: this.props.totalDuration});
   }
 
   formatTime() {
-
     let now = this.state.remainingTime;
     let msecs = now % 1000;
 
@@ -221,7 +247,6 @@ class CountDown extends Component {
   }
 
   render() {
-
     const styles = this.props.options ? this.props.options : this.defaultStyles;
 
     return(

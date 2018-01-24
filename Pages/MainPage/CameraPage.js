@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 import {PAGES} from '../../reducers/constants'
-import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import * as ControlFlowActions from '../../actions/controlFlowActions'
+import * as UserActions from '../../actions/userActions'
 import {connect} from 'react-redux'
 
 class CameraPage extends Component {
@@ -17,12 +18,14 @@ class CameraPage extends Component {
     return (
         <View style={styles.container}>
           <Camera
-              ref={(cam) => {
-                this.camera = cam;
-              }}
+              ref={'camera'}
               style={styles.preview}
               aspect={Camera.constants.Aspect.fill}>
-            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+            <Text
+              style={styles.capture}
+              onPress={() => this.takePicture()}>
+              [CAPTURE]
+            </Text>
           </Camera>
         </View>
     );
@@ -31,12 +34,15 @@ class CameraPage extends Component {
   takePicture() {
     const options = {};
     //options.location = ...
-    this.camera.capture({metadata: options})
+    this.props.fetchModal(false, null)
+    this.refs.camera.capture({metadata: options})
         .then((data) => {
-          console.log(data);
+          // data: {mediaUri, path}
+          this.props.fetchMissionImageUrl(data.mediaUri)
           this.props.fetchCurrentPage(PAGES.scan)
         })
-        .catch(err => console.error(err));
+        .catch(err => console.error(err))
+
   }
 }
 
@@ -68,7 +74,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchMissionImageUrl: imageUrl => dispatch(UserActions.fetchMissionImageUrl(imageUrl)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
   }
 }
 

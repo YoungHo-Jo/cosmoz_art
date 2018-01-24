@@ -2,12 +2,13 @@
 
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View,} from 'react-native';
+import {StyleSheet, Text, View, Button} from 'react-native';
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
-import {fetchCurrentPage} from '../../actions/controlFlowActions'
+import * as ControlFlowActions from '../../actions/controlFlowActions'
 import {PAGES} from '../../reducers/constants'
 import {connect} from 'react-redux'
+import CameraPage from './CameraPage'
 
 class CameraButtonPage extends Component {
 
@@ -22,7 +23,8 @@ class CameraButtonPage extends Component {
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.defaultPageBgColor}
                   onPress={() => {
-                      this.props.fetchCurrentPage(PAGES.camera)
+                      // this.props.fetchCurrentPage(PAGES.camera)
+                      this.props.fetchModal(true, <CameraPage/>)
                   }}/>
             </View>
 
@@ -32,11 +34,12 @@ class CameraButtonPage extends Component {
                 사진찍기로 넘어갑니다.
               </Text>
             </View>
-
           </View>
         </View>
     );
   }
+
+
 }
 
 const styles = StyleSheet.create({
@@ -74,7 +77,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
   }
 }
 

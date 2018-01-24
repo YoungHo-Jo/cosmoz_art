@@ -1,7 +1,7 @@
 /* @flow */
 
 
-import {LOGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, SET_IS_MISSION_DOING, SET_MISSION_IMAGE_NAME} from "./constants";
+import * as Constants from "./constants";
 
 const initialState = {
   isLogin: false,
@@ -19,13 +19,14 @@ const initialState = {
   fcmToken: null,
   mission: {
     isDoing: false,
-    imageName: ''
+    imageName: null,
+    imageUrl: null,
   }
 }
 
 export default function userDataReducer(state = initialState, action) {
   switch(action.type) {
-    case LOGIN:
+    case Constants.LOGIN:
       console.log('login in userDataReducer')
       return {
           ...state,
@@ -33,7 +34,7 @@ export default function userDataReducer(state = initialState, action) {
         userPK: null,
         isLogging: true,
       }
-    case LOGIN_SUCCESS:
+    case Constants.LOGIN_SUCCESS:
       console.log('loginSuccess in userDataReducer')
       return {
           ...state,
@@ -43,7 +44,7 @@ export default function userDataReducer(state = initialState, action) {
         isLogin: true,
         fcmToken: action.fcmToken
       }
-    case LOGIN_FAILURE:
+    case Constants.LOGIN_FAILURE:
       console.log('loginFailure in userDataReducer')
       return {
           ...state,
@@ -52,7 +53,7 @@ export default function userDataReducer(state = initialState, action) {
         userPK: null,
         isLogin: false,
       }
-    case LOGOUT:
+    case Constants.LOGOUT:
       return {
           ...state,
         isLogin: false,
@@ -60,7 +61,7 @@ export default function userDataReducer(state = initialState, action) {
         userInfo: initialState.userInfo,
         fcmToken: null,
       }
-    case SET_IS_MISSION_DOING:
+    case Constants.SET_IS_MISSION_DOING:
       return {
         ...state,
         mission: {
@@ -68,12 +69,20 @@ export default function userDataReducer(state = initialState, action) {
           isDoing: action.doing
         }
       }
-    case SET_MISSION_IMAGE_NAME:
+    case Constants.SET_MISSION_IMAGE_NAME:
       return {
         ...state,
         mission: {
           ...state.mission,
           imageName: action.imageName
+        }
+      }
+    case Constants.SET_MISSION_IMAGE_URL:
+      return {
+        ...state,
+        mission: {
+          ...state.mission,
+          imageUrl: action.imageUrl
         }
       }
     default:

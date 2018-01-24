@@ -120,3 +120,15 @@ export function fetchMissionImageName(imageName) {
     dispatch(setMissionImageName(imageName))
   }
 }
+
+/* Set image url */
+export function setMissionImageUrl(imageUrl) {
+  return {
+    type: Constants.SET_MISSION_IMAGE_URL,
+    imageUrl
+  }
+}
+
+export function fetchMissionImageUrl(imageUrl) {
+  return dispatch => dispatch(setMissionImageUrl(imageUrl))
+}

@@ -1,3 +1,5 @@
+/* @flow */
+
 import * as Constants from "../reducers/constants";
 
 
@@ -98,4 +100,18 @@ export function setTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
 
 export function fetchTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
   return dispatch => dispatch(setTitleBarRightBtn(rightBtnShow, rightBtnFunc))
+}
+
+
+/* Set modal content */
+export function setModal(show, content) {
+  return {
+    type: Constants.SET_MODAL,
+    show,
+    content
+  }
+}
+
+export function fetchModal(show, content) {
+  return dispatch => dispatch(setModal(show, content))
 }

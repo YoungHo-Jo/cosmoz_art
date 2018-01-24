@@ -11,7 +11,7 @@ import {MKSwitch, MKColor} from "react-native-material-kit";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect} from 'react-redux';
 import {PAGES} from '../../reducers/constants';
-import {fetchCurrentPage} from '../../actions/controlFlowActions';
+import * as ControlFlowActions from '../../actions/controlFlowActions';
 
 var WINDOW_W = Dimensions.get('window').width;
 var WINDOW_H = Dimensions.get('window').height;
@@ -29,9 +29,22 @@ class TimerPage extends Component {
       <View style={styles.timerContainer}>
         <Timer
           start={this.state.timerStart}
+          ref='timer'
           secs={100} //// implement ////
-          onTimerFinished={() => this._moveToNextPage()}
-          onPressCountDown={() => console.log('show dialog 벌써 다 했나요')}/>
+          onTimerFinished={() => {
+            this.props.fetchCurrentPage(PAGES.cameraButton)
+            this.props.fetchPopupVisibility(false)
+          }}
+          onPressCountDown={() => {
+            this.props.fetchPopupVisibility(true)
+            this.props.fetchPopupContent('벌써 다 했나요?', () => {
+              this.refs.timer.stop()
+              this.props.fetchCurrentPage(PAGES.cameraButton)
+              this.props.fetchPopupVisibility(false)
+            }, () => {
+              this.props.fetchPopupVisibility(false)
+            })
+          }}/>
       </View>
     )
   }
@@ -84,16 +97,6 @@ class TimerPage extends Component {
         {this.renderToggle()}
       </View>
     );
-  }
-
-  _moveToNextPage() {
-    this.setState({
-      timerStart: false
-    })
-
-    //// implement ////
-    console.log('show camera button page')
-    this.props.fetchCurrentPage(PAGES.cameraButton)
   }
 }
 
@@ -149,13 +152,17 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    missionData: state.missionData
+    missionData: state.missionData,
+    controlData: state.controlFlowReducer
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
+    fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
+    fetchPopupVisibility: show => dispatch(ControlFlowActions.fetchPopupVisibility(show)),
+    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) =>
+      dispatch(ControlFlowActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
   }
 }
 

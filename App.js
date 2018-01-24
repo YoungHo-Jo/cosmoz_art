@@ -7,16 +7,18 @@ import MViewPager from './MViewPager';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
 import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {fetchMissionToShow, fetchNotificationMission, fetchTodayMission,} from "./actions/missionActions";
-import { fetchPopupVisibility } from './actions/controlFlowActions';
+import * as MissionActions from "./actions/missionActions";
+import * as ControlFlowActions from './actions/controlFlowActions';
 import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
 import PopUpView from './PopUpView'
 import PopupMsgBox from './Pages/MainPage/PopupMsgBox'
+import Modal from 'react-native-modalbox'
+import CameraPage from './Pages/MainPage/CameraPage'
 
-//console.disableYellowBox = true;
+console.disableYellowBox = true;
 
 class App extends Component {
   render() {
@@ -27,6 +29,7 @@ class App extends Component {
                 initialPage={INITIAL_VIEW_PAGE}/>
           </View>
           {this.renderPopUpView()}
+          {this.renderModal()}
         </View>
     );
   }
@@ -42,6 +45,30 @@ class App extends Component {
             onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
         </PopUpView>
     )
+  }
+
+  renderModal() {
+    return (
+      <Modal
+        style={{position: 'absolute', top: 0, bottom: 0, left: 0, right:0, backgroundColor: '#000000'}}
+        ref='modal'
+        swipeToClose={true}
+        onClosed={() => this.props.fetchModal(false, null)}
+        onOpened={() => console.log('modal onOpen')}
+        onClosingState={() => console.log('modal onClosingState')}>
+          {this.props.controlData.modal.content}
+      </Modal>
+    )
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.controlData.modal.show) {
+      this.refs.modal.open()
+    }
+    if (nextProps.controlData.modal.show == false) {
+      this.refs.modal.close()
+    }
+    return true
   }
 
   componentDidMount() {
@@ -108,10 +135,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchNotificationMission: (notificationData) => dispatch(fetchNotificationMission(notificationData)),
-    fetchTodayMission: () => dispatch(fetchTodayMission()),
-    fetchMissionToShow: (type) => dispatch(fetchMissionToShow(type)),
-    fetchPopupVisibility: (visibility) => dispatch(fetchPopupVisibility(visibility))
+    fetchNotificationMission: (notificationData) => dispatch(MissionActions.fetchNotificationMission(notificationData)),
+    fetchTodayMission: () => dispatch(MissionActions.fetchTodayMission()),
+    fetchMissionToShow: (type) => dispatch(MissionActions.fetchMissionToShow(type)),
+    fetchPopupVisibility: (visibility) => dispatch(ControlFlowActions.fetchPopupVisibility(visibility)),
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

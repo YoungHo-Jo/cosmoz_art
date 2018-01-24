@@ -77,7 +77,6 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentViewPage: pageNum => dispatch(fetchCurrentViewPage(pageNum)),
     fetchCurrentPage: page => dispatch(fetchCurrentPage(page))
-
   }
 }
 

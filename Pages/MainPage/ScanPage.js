@@ -15,6 +15,8 @@ import {
 import {Colors} from "../../DefaultStyles";
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {connect} from 'react-redux'
+import BottomBar from '../BottomBar'
+import * as Utills from '../../Utills'
 
 const IMAGE_SIDE_MARGIN = 30;
 
@@ -23,7 +25,7 @@ class ScanPage extends React.Component {
     return (
       <View style={styles.imageContainer}>
         <Image resizeMode='contain' source={(Platform.OS === 'android') && {
-          uri: this.props.navigation.state.params.data.mediaUri //// Implement ////
+          uri: this.props.userData.mission.imageUrl
         }} style={[eStyles.image]}/>
       </View>
     )
@@ -57,50 +59,46 @@ class ScanPage extends React.Component {
   }
 
   //// Implement ////
-  renderPopUpDialog() {
-    return (
-      <PopupDialog
-        ref={(popupDialog) => this.popupDialog = popupDialog}
-        dialogAnimation={new FadeAnimation({toValue: 0})}
-        height={'30%'}>
-        <PopupMsgBox
-          onLeftButtonClicked={() => {
-            const resetAction = NavigationActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
-              ]
-            });
-            this.props.navigation.dispatch(resetAction)
-          }}
-          onRightButtonClicked={() => {
-            const resetAction = NavigationActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
-              ]
-            });
-            this.props.navigation.dispatch(resetAction)
-
-          }}
-          dialogText={"혼자 보기 아깝잖아요\n마음껏 자랑해주세요"}
-          leftButtonText={"비공개로 저장하기"}
-          rightButtonText={"공유하기"}/>
-      </PopupDialog>)
-  }
+  // renderPopUpDialog() {
+  //   return (
+  //     <PopupDialog
+  //       ref={(popupDialog) => this.popupDialog = popupDialog}
+  //       dialogAnimation={new FadeAnimation({toValue: 0})}
+  //       height={'30%'}>
+  //       <PopupMsgBox
+  //         onLeftButtonClicked={() => {
+  //           const resetAction = NavigationActions.reset({
+  //             index: 0,
+  //             actions: [
+  //               NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+  //             ]
+  //           });
+  //           this.props.navigation.dispatch(resetAction)
+  //         }}
+  //         onRightButtonClicked={() => {
+  //           const resetAction = NavigationActions.reset({
+  //             index: 0,
+  //             actions: [
+  //               NavigationActions.navigate({routeName: 'MainScreen', params: {...this.props.navigation.state.params}})
+  //             ]
+  //           });
+  //           this.props.navigation.dispatch(resetAction)
+  //
+  //         }}
+  //         dialogText={"혼자 보기 아깝잖아요\n마음껏 자랑해주세요"}
+  //         leftButtonText={"비공개로 저장하기"}
+  //         rightButtonText={"공유하기"}/>
+  //     </PopupDialog>)
+  // }
 
   render() {
     return (
       <View style={styles.container}>
-        <UpperLinearGradient/>
         {this.renderImage()}
-        <LowerLinearGradient/>
         <BottomBar style={styles.bottomBar}>
           {this.renderRetakePickBtn()}
           {this.renderCompleteBtn()}
         </BottomBar>
-
-        {this.renderPopUpDialog()}
       </View>
     );
   }
@@ -111,7 +109,7 @@ class ScanPage extends React.Component {
   }
 
   _onCompletePress() {
-    this.popupDialog.show()
+    // this.popupDialog.show()
   }
 
   done() {
@@ -159,6 +157,8 @@ class ScanPage extends React.Component {
   }
 }
 
+const size = Utills.getWindowSize()
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -175,7 +175,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: size.width,
+    height: size.height
   },
   image: {},
   buttonContainer: {
@@ -189,7 +191,11 @@ const styles = StyleSheet.create({
   bottomBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    zIndex: 1,
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: '#999999'
   },
   buttonText: {},
   button: {
@@ -221,9 +227,10 @@ const eStyles = EStyleSheet.create({
 })
 
 function mapStateToProps(state) {
-  return (
-    missionData: state.missionData
-  )
+  return {
+    missionData: state.missionData,
+    userData: state.userData
+  }
 }
 
 function mapDispatchToProps(dispatch) {

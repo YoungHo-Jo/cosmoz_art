@@ -25,6 +25,10 @@ const initialState = {
     leftBtnFunc: null,
     rightBtnShow: false,
     rightBtnFunc: null
+  },
+  modal: {
+    show: false,
+    content: null
   }
 }
 
@@ -82,6 +86,15 @@ function controlFlowReducer(state = initialState, action) {
           ...state.titleBar,
           rightBtnShow: action.rightBtnShow,
           rightBtnFunc: action.rightBtnFunc
+        }
+      }
+    case Constants.SET_MODAL:
+      console.log('Reducer: '+ Constants.SET_MODAL)
+      return {
+        ...state,
+        modal: {
+          show: action.show,
+          content: action.content
         }
       }
     default:

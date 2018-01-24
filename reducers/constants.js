@@ -13,6 +13,7 @@ export const LOGOUT = 'LOGOUT'
 
 export const SET_IS_MISSION_DOING = 'SET_MISSION_DOING'
 export const SET_MISSION_IMAGE_NAME = 'SET_MISSION_IMAGE_NAME'
+export const SET_MISSION_IMAGE_URL = 'SET_MISSION_IMAGE_URL'
 
 /* Art */
 export const UPLOAD_ART = 'UPLOAD_ART'
@@ -51,6 +52,7 @@ export const SET_POPUP_VISIBILITY = 'SET_POPUP_VISIBILITY'
 export const SET_POPUP_CONTENT = 'SET_POPUP_CONTENT'
 export const SET_TITLE_BAR_LEFT_BTN = 'SET_TITLE_BAR_LEFT_BTN'
 export const SET_TITLE_BAR_RIGHT_BTN = 'SET_TITLE_BAR_RIGHT_BTN'
+export const SET_MODAL = 'SET_MODAL'
 
 /* Pages */
 export const PAGES = {
