@@ -55,7 +55,8 @@ class App extends Component {
         swipeToClose={true}
         onClosed={() => this.props.fetchModal(false, null)}
         onOpened={() => console.log('modal onOpen')}
-        onClosingState={() => console.log('modal onClosingState')}>
+        onClosingState={() => console.log('modal onClosingState')}
+        position='top'>
           {this.props.controlData.modal.content}
       </Modal>
     )

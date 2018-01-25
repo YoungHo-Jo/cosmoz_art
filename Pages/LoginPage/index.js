@@ -35,19 +35,19 @@ class Login extends Component {
     return (
             <KeyboardAwareScrollView style={{backgroundColor: Colors.defaultBgColor}}>
               <View style={styles.container}>
-                  {this.renderLogo()}
+                {this.renderLogo()}
                 <View style={styles.info}>
-                    {this.renderIDInput()}
-                    {this.renderPWInput()}
+                  {this.renderIDInput()}
+                  {this.renderPWInput()}
                   <View>
-                      {this.renderLoginButton()}
-                      {this.renderAutoLoginSwitch()}
-                      {this.renderSaveIdSwitch()}
+                    {this.renderLoginButton()}
+                    {this.renderAutoLoginSwitch()}
+                    {this.renderSaveIdSwitch()}
                   </View>
-                    {this.renderSignUpButton()}
+                  {this.renderSignUpButton()}
                 </View>
               </View>
-                {this.renderProgrssIndicator()}
+              {this.renderProgrssIndicator()}
             </KeyboardAwareScrollView>
     )
   }
@@ -177,7 +177,7 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height - 74,
+    height: Dimensions.get('window').height - 75,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
