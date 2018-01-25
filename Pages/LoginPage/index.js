@@ -177,7 +177,7 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height - 75,
+    height: Dimensions.get('window').height,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
