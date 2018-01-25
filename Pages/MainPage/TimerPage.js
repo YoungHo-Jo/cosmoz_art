@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
-import {StyleSheet, View, Dimensions, Text,} from 'react-native';
+import {StyleSheet, View, Dimensions, Text, Switch} from 'react-native';
 
 import Timer from './Timer';
 import {Colors, Sizes} from "../../DefaultStyles";
@@ -12,15 +12,19 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect} from 'react-redux';
 import {PAGES} from '../../reducers/constants';
 import * as ControlFlowActions from '../../actions/controlFlowActions';
+import * as Utills from '../../Utills'
 
 var WINDOW_W = Dimensions.get('window').width;
 var WINDOW_H = Dimensions.get('window').height;
+
+const INITIAL_VIB_ALRAM_CHECK = true
 
 class TimerPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      timerStart: true
+      timerStart: true,
+      vibAlram: INITIAL_VIB_ALRAM_CHECK
     }
   }
 
@@ -30,10 +34,13 @@ class TimerPage extends Component {
         <Timer
           start={this.state.timerStart}
           ref='timer'
-          secs={100} //// implement ////
+          secs={this.props.missionData.todayMission.mission.time}
           onTimerFinished={() => {
             this.props.fetchCurrentPage(PAGES.cameraButton)
             this.props.fetchPopupVisibility(false)
+            if (this.state.vibAlram) {
+              Utills.vibrateForTimeUp()
+            }
           }}
           onPressCountDown={() => {
             this.props.fetchPopupVisibility(true)
@@ -64,18 +71,20 @@ class TimerPage extends Component {
       <View style={styles.toggleFlexContainer}>
         <View style={styles.toggleContainer}>
           <Icon
-              name='bell'
+              name='bell-off'
               size={28}
               color={'#777777'}/>
           <MKSwitch
               style={styles.appleSwitch}
               onColor='rgba(0, 160, 235, 0.3)'
+              checked={this.state.vibAlram}
               thumbOnColor='rgba(0, 160, 235, 1)'
               rippleColor='rgba(0, 160, 235, 0.2)'
-              onPress={() => console.log('vibration switch pressed')}
-              onCheckedChange={(e) => console.log('vibration switch checked', e)}/>
+              onPress={() => setTimeout(() => this.setState({
+                vibAlram: !this.state.vibAlram
+              }), 250)}/>
           <Icon
-              name='bell-off'
+              name='bell'
               size={28}
               color={'#777777'}/>
         </View>

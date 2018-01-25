@@ -24,7 +24,7 @@ export default class Timer extends Component {
       {
         toValue: 100,
         delay: 200,
-        duration: (this.secsToMillis(this.props.secs) || 10000) - 1200,
+        duration: this.secsToMillis(this.props.secs) - 1200,
         easing: Easing.linear,
       }
     ).start();
@@ -48,7 +48,7 @@ export default class Timer extends Component {
               bgColor="#ffffff">
             <CountDown
               ref='countDown'
-               totalDuration={this.secsToMillis(this.props.secs) || 10000}
+               totalDuration={this.secsToMillis(this.props.secs)}
                start={this.props.start}
                options={countDownOptions}
                handleFinish={() => this.props.onTimerFinished()}
@@ -68,7 +68,7 @@ export default class Timer extends Component {
   }
 
   secsToMillis(secs) {
-    return secs * 100
+    return secs * 1000
   }
 
   stop() {

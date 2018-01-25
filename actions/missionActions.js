@@ -6,6 +6,7 @@ import {
   SET_MISSION_TO_SHOW_TYPE
 } from "../reducers/constants";
 import {missionToShowType} from "../reducers/missionDataReducer";
+import * as Utills from '../Utills'
 
 // todayMission
 export function getTodayMission() {
@@ -16,10 +17,12 @@ export function getTodayMission() {
 
 export function getTodayMissionSuccess(mission, fetchDate) {
   console.log('getTodayMissionSuccess')
-  console.log('mission: ')
-  console.log(mission)
-  console.log('fetchDate: ')
-  console.log(fetchDate)
+  console.log('mission: ', mission)
+  console.log('fetchDate: ' + fetchDate)
+  mission = {
+    ...mission,
+    time: Utills.getSecs(mission.time)
+  }
   return {
     type: GET_TODAY_MISSION_SUCCESS,
     mission,

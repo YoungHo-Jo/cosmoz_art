@@ -32,7 +32,7 @@ class MainMissionPage extends Component {
         <MissionInformationBar
             benefitText={this.state.mission.benefit.text || 'NULL'}
             icon={this.state.mission.benefit.type}
-            secs={this.state.mission.time || 100}/>
+            secs={this.state.mission.time}/>
       </View>
     )
   }
