@@ -102,12 +102,11 @@ class Login extends Component {
                 this.props.fetchLogin({
                   id: this.state.id,
                   pw: this.state.pw
+                }).then(() => {
+                  setTimeout(() => this.props.fetchModal(false), 500)
+                }).catch(() => {
+                  console.log('login failed');
                 })
-                setTimeout(() => {
-                  if(this.props.userData.isLogin) {
-                    this.props.navigation.goBack()
-                  }
-                }, 1000)
               }}>
         로그인
       </Button>

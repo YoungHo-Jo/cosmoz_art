@@ -1,3 +1,5 @@
+/* @flow */
+
 import * as Constants from "../reducers/constants";
 import APIConfig from "../APIConfig";
 import {sha256} from "react-native-sha256";
@@ -26,23 +28,22 @@ export function getLoginFailure() {
 
 
 export function fetchLogin(loginInfo) {
-  return (dispatch) => {
+  return dispatch => new Promise((resolve, reject) => {
     console.log('try login...')
     dispatch(login())
     if (!loginInfo) {
       console.log('loginInfo needed in fetchLogin')
-      return;
+      return reject()
     }
     if (loginInfo.id && loginInfo.pw) {
       const id = loginInfo.id
 
       sha256(loginInfo.pw).then((pw) => {
         var fcmToken = null
-        console.log('id: ' + id)
-        console.log('pw: ' + pw)
+        console.log(`id: ${id} pw: ${pw}`)
         firebase.messaging().getToken()
             .then(token => {
-              console.log('Device FCM Token: ', token)
+              console.log(`Device FCM Token:  ${token}`)
               fcmToken = token
               console.log('try login to server...')
               fetch(APIConfig.login, {
@@ -61,9 +62,11 @@ export function fetchLogin(loginInfo) {
                   response.json().then((responseJSON) => {
                     dispatch(getLoginSuccess(responseJSON.id_token, responseJSON.user_pk, fcmToken))
                   })
+                  return resolve()
                 } else {
                   console.log('login failed');
                   dispatch(getLoginFailure())
+                  return reject()
                 }
               })
             }).catch((err) => console.log(err))
@@ -71,8 +74,9 @@ export function fetchLogin(loginInfo) {
     } else {
       console.log('login failed, either id or pw is missing');
       dispatch(getLoginFailure())
+      return reject()
     }
-  }
+  })
 }
 
 

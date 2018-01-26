@@ -104,7 +104,7 @@ export function fetchTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
 
 
 /* Set modal content */
-export function setModal(show, content) {
+export function setModal(show, content?) {
   return {
     type: Constants.SET_MODAL,
     show,
@@ -112,6 +112,6 @@ export function setModal(show, content) {
   }
 }
 
-export function fetchModal(show, content) {
+export function fetchModal(show, content?) {
   return dispatch => dispatch(setModal(show, content))
 }
