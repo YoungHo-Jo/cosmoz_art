@@ -41,7 +41,9 @@ class SharePageListView extends Component {
         keyword={rowData.keyword}
         missionPK={rowData.mission_pk}
         showModal={(show, content) => this.props.showModal(show, content)}
-        onShareImagePressed={() => this.props.onShareImagePressed()}/>
+        onShareImagePressed={(visibility, content, leftBtnFunc, rightBtnFunc) =>
+          this.props.onShareImagePressed(visibility, content, leftBtnFunc, rightBtnFunc)
+        }/>
     )
   }
 

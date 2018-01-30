@@ -14,8 +14,10 @@ import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
+import { PAGES } from './reducers/constants';
 import PopUpView from './PopUpView'
-import PopupMsgBox from './Pages/MainPage/PopupMsgBox'
+import PopupMsgBox from './Pages/MainPage/PopupMsgBox';
+import PopupTextCard from './Pages/SharePage/PopupTextCard';
 import Modal from 'react-native-modalbox'
 import CameraPage from './Pages/MainPage/CameraPage'
 import * as LocalStorage from './LocalStorage'
@@ -41,12 +43,34 @@ class App extends Component {
         this.props.controlData.isPopupShown &&
         <PopUpView
           onPressOverlay={() => this.props.fetchPopupVisibility(false)}>
+          {this.renderPopUpContent()}
+        </PopUpView>
+    )
+  }
+
+  renderPopUpContent() {
+    switch (this.props.controlData.currentPage) {
+      case (PAGES.mainMission):
+        return(
           <PopupMsgBox
             dialogText={this.props.controlData.popupContent.dialogText}
             onLeftButtonClicked={() => this.props.controlData.popupContent.leftBtnFunc()}
             onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
-        </PopUpView>
-    )
+        );
+      case PAGES.timer:
+        return(
+          <PopupMsgBox
+            dialogText={this.props.controlData.popupContent.dialogText}
+            onLeftButtonClicked={() => this.props.controlData.popupContent.leftBtnFunc()}
+            onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
+        );
+      case (PAGES.share):
+        return(
+          <PopupTextCard
+            dialogText={this.props.controlData.popupContent.dialogText}
+            onTextPressed={() => this.props.fetchPopupVisibility(false)}/>
+        );
+    }
   }
 
   renderModal() {

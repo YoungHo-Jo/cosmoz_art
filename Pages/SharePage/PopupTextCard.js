@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.defaultBgColor,
-    borderRadius: 10,
+    alignSelf: 'stretch',
+    borderRadius: 15,
   },
   textContainer: {
     flex: 1,
