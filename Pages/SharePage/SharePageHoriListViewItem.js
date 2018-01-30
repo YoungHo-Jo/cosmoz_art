@@ -15,8 +15,6 @@ import{
 } from 'react-native';
 import {Sizes} from "../../DefaultStyles";
 
-import {Header} from 'react-navigation';
-
 const styles= StyleSheet.create({
   container:{
     flex:1,
@@ -106,13 +104,13 @@ class SharePageHoriListViewItem extends Component{
               onPress={() => this.props.onClickImage()}>
               <Image
                   style={[styles.shareImage, {
-                    width: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (55/100) * (this.state.width/this.state.height),
-                    height: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (55/100)}]}
+                    width: (Dimensions.get('window').height) * (50/100) * (this.state.width/this.state.height),
+                    height: (Dimensions.get('window').height) * (50/100)}]}
                   source={this.state.source}/>
             </TouchableHighlight>
             <View
               style={[styles.likeButtonContainer,
-                {height: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (25/100)},
+                {height: (Dimensions.get('window').height) * (30/100)},
                 this.likeButtonPosition()]}
               onLayout={this.onLayout.bind(this)}>
               <TouchableHighlight

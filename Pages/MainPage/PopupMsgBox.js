@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: Colors.defaultPageBgColor,
     justifyContent: 'center',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    borderRadius: 15,
   },
   textContainer: {
     flex: 1,

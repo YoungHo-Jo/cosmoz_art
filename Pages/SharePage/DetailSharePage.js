@@ -13,14 +13,10 @@ export default class DetailSharePage extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <UpperLinearGradient/>
           <View style={styles.listViewContainer}>
             <SharePageHoriListView
                 navigation={this.props.navigation}/>
           </View>
-          <LowerLinearGradient
-              marginBottom={Sizes.bottomBarHeight}/>
-          <BottomBar/>
         </View>
     );
   }

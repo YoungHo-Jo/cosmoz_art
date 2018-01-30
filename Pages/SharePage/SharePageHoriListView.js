@@ -51,12 +51,13 @@ class SharePageHoriListView extends Component {
               style={styles.quotemarkImage}
               source={require('../../icons/double_quotation_marks_right.png')}/>
           </View>
-
-          <ListView horizontal={true}
-                    styles={styles.list}
-                    dataSource={this.state.dataSource}
-                    renderRow={this._renderRow.bind(this)}
-                    enableEmptySections={true}/>
+          <View style={styles.listViewContainer}>
+            <ListView horizontal={true}
+                      styles={styles.list}
+                      dataSource={this.state.dataSource}
+                      renderRow={this._renderRow.bind(this)}
+                      enableEmptySections={true}/>
+          </View>
         </View>
     );
   }
@@ -69,11 +70,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.defaultPageBgColor,
   },
-  list: {
-    flexDirection: 'row',
-  },
   shareKeywordContainer: {
-    height: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (20/100),
+    flex: 2,
     alignSelf: 'center',
     flexDirection: 'row',
   },
@@ -89,6 +87,12 @@ const styles = StyleSheet.create({
     height: 30,
     resizeMode: 'contain',
     alignSelf: 'center'
+  },
+  listViewContainer: {
+    flex: 8
+  },
+  list: {
+    flexDirection: 'row',
   },
 });
 export default SharePageHoriListView;

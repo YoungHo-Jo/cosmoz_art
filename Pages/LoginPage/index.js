@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
+    paddingBottom: 50,
   },
   image_logo: {
     height: 70,
