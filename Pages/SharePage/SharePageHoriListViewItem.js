@@ -17,36 +17,6 @@ import {Sizes} from "../../DefaultStyles";
 
 import {Header} from 'react-navigation';
 
-const styles= StyleSheet.create({
-  container:{
-    flex:1,
-  },
-  shareItem:{
-    flex:1,
-    flexDirection:'column',
-    marginHorizontal: 15,
-  },
-  shareImage:{
-    resizeMode : 'cover',
-    alignSelf:'center',
-    borderRadius: 15,
-  },
-  likeButtonContainer:{
-    flexDirection : 'column',
-    alignSelf : 'center',
-    justifyContent:'center',
-    paddingBottom: 20,
-  },
-  likeButton: {
-    justifyContent: 'center',
-  },
-  likeButtonImage:{
-    height: 50,
-    width: 50,
-    resizeMode:'contain',
-  }
-});
-
 class SharePageHoriListViewItem extends Component{
   constructor(props) {
     super(props);
@@ -127,5 +97,38 @@ class SharePageHoriListViewItem extends Component{
     );
   }
 }
+
+
+
+const styles= StyleSheet.create({
+  container:{
+    flex:1,
+  },
+  shareItem:{
+    flex:1,
+    flexDirection:'column',
+    marginHorizontal: 15,
+  },
+  shareImage:{
+    resizeMode : 'cover',
+    alignSelf:'center',
+    borderRadius: 15,
+  },
+  likeButtonContainer:{
+    flexDirection : 'column',
+    alignSelf : 'center',
+    justifyContent:'center',
+    paddingBottom: 20,
+  },
+  likeButton: {
+    justifyContent: 'center',
+  },
+  likeButtonImage:{
+    height: 50,
+    width: 50,
+    resizeMode:'contain',
+  }
+});
+
 
 export default SharePageHoriListViewItem;

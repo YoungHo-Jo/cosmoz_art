@@ -4,8 +4,8 @@ import React, {Component,} from 'react';
 import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions} from 'react-native';
 import SharePageHoriListViewItem from './SharePageHoriListViewItem'
 import {Colors, Sizes} from "../../DefaultStyles";
+import ImageViewerPage from '../ImageViewerPage'
 
-import {Header} from 'react-navigation';
 
 const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 
@@ -23,7 +23,7 @@ class SharePageHoriListView extends Component {
 
   _renderRow(rowData) {
     return <SharePageHoriListViewItem
-              onClickImage = {() => this.props.navigation.navigate('ImageViewerPage', {...this.props.navigation.state.params, imageURL: rowData.image_url})}
+              onClickImage = {() => this.props.fetchModal(true, <ImageViewerPage imageURL={rowData.image_url}/>)}
               shareImageURL={rowData.image_url}
               subject={rowData.keyword}
               nickname={rowData.mission_pk/*For test; Change it when attaching server code*/}/>;
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   shareKeywordContainer: {
-    height: (Dimensions.get('window').height-(Header.HEIGHT+45)) * (20/100),
+    height: 30,
     alignSelf: 'center',
     flexDirection: 'row',
   },

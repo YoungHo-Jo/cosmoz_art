@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import * as MissionActions from "./actions/missionActions";
 import * as ControlFlowActions from './actions/controlFlowActions';
+import * as UserActions from './actions/userActions'
 import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
@@ -17,6 +18,7 @@ import PopUpView from './PopUpView'
 import PopupMsgBox from './Pages/MainPage/PopupMsgBox'
 import Modal from 'react-native-modalbox'
 import CameraPage from './Pages/MainPage/CameraPage'
+import * as LocalStorage from './LocalStorage'
 
 console.disableYellowBox = true;
 
@@ -91,6 +93,21 @@ class App extends Component {
 
   componentWillMount() {
     this.props.fetchTodayMission()
+
+    LocalStorage.isAutoLoginEnabled().then(enabled => {
+      if(enabled) {
+        LocalStorage.getId().then((id) => {
+          LocalStorage.getPW().then(pw => {
+            this.props.fetchLogin({
+              id: id,
+              pw: pw
+            }, true).then(() => {
+              console.log('autologin succeed')
+            })
+          })
+        })
+      }
+    })
   }
 
 }
@@ -140,7 +157,8 @@ function mapDispatchToProps(dispatch) {
     fetchTodayMission: () => dispatch(MissionActions.fetchTodayMission()),
     fetchMissionToShow: (type) => dispatch(MissionActions.fetchMissionToShow(type)),
     fetchPopupVisibility: (visibility) => dispatch(ControlFlowActions.fetchPopupVisibility(visibility)),
-    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content)),
+    fetchLogin: (loginInfo, isPwEncrypted) => dispatch(UserActions.fetchLogin(loginInfo, isPwEncrypted))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

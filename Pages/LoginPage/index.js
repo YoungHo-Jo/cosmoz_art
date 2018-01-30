@@ -21,15 +21,41 @@ import {Colors} from "../../DefaultStyles";
 import {MKSwitch, MKColor} from "react-native-material-kit";
 import * as ControlFlowActions from '../../actions/controlFlowActions'
 import SignUpPage from '../SignUpPage'
+import * as LocalStorage from '../../LocalStorage'
 
 class Login extends Component {
-  state = {
-    switchValue: false,
-    id: null,
-    pw: null
+
+  constructor(props){
+    super(props)
+
+    this.state = {
+      id: null,
+      pw: null,
+      autoLogin: false,
+      saveId: false
+    }
   }
-  toggleSwitch1 = (value) => this.setState({switchValue1: value})
-  toggleSwitch2 = (value) => this.setState({switchValue2: value})
+
+  componentWillMount() {
+    LocalStorage.isSaveIdEnabled().then(enabled => {
+      if(enabled) {
+        LocalStorage.getId().then(id => {
+          this.setState({
+            id: id,
+            saveId: true
+          })
+        })
+      }
+    })
+    LocalStorage.isAutoLoginEnabled().then(enabled => {
+      if(enabled) {
+        this.setState({
+          autoLogin: true
+        })
+      }
+    })
+  }
+
 
   render() {
     return (
@@ -72,6 +98,7 @@ class Login extends Component {
             keyboardType='default'
             returnKeyType='next'
             onSubmitEditing={() => this.pw.focus()}
+            defaultValue={this.state.id ? this.state.id : ''}
             onChangeText={(text) => this.setState({id: text})}/>
       </View>
     )
@@ -102,7 +129,25 @@ class Login extends Component {
                 this.props.fetchLogin({
                   id: this.state.id,
                   pw: this.state.pw
-                }).then(() => {
+                }).then((pw) => {
+                  if(this.state.autoLogin) {
+                    console.log('autoLogin enabled');
+                    LocalStorage.setAutoLoginEnabled(true)
+                    LocalStorage.saveId(this.state.id)
+                    LocalStorage.savePW(pw)
+                  }
+                  if(this.state.saveId) {
+                    console.log('saveId enabled');
+                    LocalStorage.setSaveIdEnabled(true)
+                    LocalStorage.saveId(this.state.id)
+                  }
+                  if (!this.state.saveId && !this.state.autoLogin) {
+                    console.log('autoLogin && saveId not enabled')
+                    LocalStorage.deleteId()
+                    LocalStorage.deletePW()
+                    LocalStorage.setSaveIdEnabled(false)
+                    LocalStorage.setAutoLoginEnabled(false)
+                  }
                   setTimeout(() => this.props.fetchModal(false), 500)
                 }).catch(() => {
                   console.log('login failed');
@@ -125,8 +170,12 @@ class Login extends Component {
           trackLength={35}
           thumbRadius={10}
           rippleColor='rgba(0, 160, 235, 0.2)'
-          onPress={() => console.log('auto login switch pressed')}
-          onCheckedChange={(e) => console.log('auto login switch checked', e)}/>
+          checked={this.state.autoLogin}
+          onPress={() => setTimeout(() => {
+            this.setState({
+              autoLogin: !this.state.autoLogin
+            })
+          }, 250)}/>
       </View>
     )
   }
@@ -143,8 +192,12 @@ class Login extends Component {
           trackLength={35}
           thumbRadius={10}
           rippleColor='rgba(0, 160, 235, 0.2)'
-          onPress={() => console.log('id save switch pressed')}
-          onCheckedChange={(e) => console.log('id save switch checked', e)}/>
+          checked={this.state.saveId}
+          onPress={() => setTimeout(() => {
+            this.setState({
+              saveId: !this.state.saveId
+            })
+          }, 250)}/>
       </View>
     )
   }

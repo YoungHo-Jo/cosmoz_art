@@ -7,7 +7,7 @@ export const basicURL = 'http://52.78.33.177:10424'
 
 export default APIConfig = {
   // arts
-  postImage: basicURL + '/arts/private/image', // post
+  postImage: basicURL + '/arts/image', // post
   getImage: basicURL + '/arts/image', // get
   postArt: basicURL + '/arts/newart', // post
   getArtsOfUser: basicURL + '/arts/private/get/', // get

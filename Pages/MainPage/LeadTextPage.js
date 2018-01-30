@@ -26,6 +26,13 @@ const BOTTOM_BAR_WIDTH_MARGIN = 100;
 class LeadTextPage extends Component {
   constructor(props) {
     super(props)
+
+    const {missionData} = props
+
+    this.state = {
+      mission: missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission ?
+        missionData.todayMission.mission : missionData.pushMission.mission
+    }
   }
 
   componentWillMount() {
@@ -33,16 +40,13 @@ class LeadTextPage extends Component {
   }
 
   render() {
-    const {missionData} = this.props
+    const {mission} = this.state
     return (
         <View style={styles.container}>
-
           <View style={styles.blockContainer}>
             <Text
                 style={styles.text}
                 onPress={() => {
-                  let mission = (missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission) ?
-                      missionData.todayMission.mission : missionData.pushMission.mission
                   this.props.fetchCurrentPage(PAGES.mainMission)
                   this.props.fetchIsMissionDoing(true)
                   this.props.fetchTitleBarLeftBtn(true, () => {
@@ -50,12 +54,8 @@ class LeadTextPage extends Component {
                     this.props.fetchTitleBarLeftBtn(false, null)
                     this.props.fetchIsMissionDoing(false)
                   })
-
                 }}>
-              {
-                missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission ?
-                    missionData.todayMission.mission.leadText : missionData.pushMission.mission.leadText
-              }
+              {mission.leadText}
             </Text>
             <View style={styles.lineView}>
             </View>

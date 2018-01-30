@@ -13,7 +13,9 @@ class ImageViewerPage extends Component {
       <View style={styles.container}>
         <Image
           style={styles.imageViewer}
-          source={{uri: this.props.navigation.state.params.imageURL}}
+          source={{
+            uri: this.props.imageURL
+          }}
           />
       </View>
     )
@@ -25,6 +27,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#000000',
+    position: 'absolute',
+    top: 30
   },
   imageViewer: {
     width: Dimensions.get('window').width,

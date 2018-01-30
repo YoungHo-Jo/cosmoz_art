@@ -28,6 +28,7 @@ export const missionToShowType = {
 }
 
 export const missionModel = {
+  missionPK: null,
   leadText: null,
   mission: {
     type: null,

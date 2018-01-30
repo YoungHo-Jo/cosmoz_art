@@ -9,6 +9,7 @@ import MissionInformationBar from "./MissionInformationBar";
 import {connect} from 'react-redux'
 import * as ControlActions from '../../actions/controlFlowActions'
 import * as UserActions from '../../actions/userActions'
+import * as MissionReducers from '../../reducers/missionDataReducer'
 import {PAGES} from '../../reducers/constants'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
@@ -20,9 +21,10 @@ const MISSION_ICON_COLOR = '#111111';
 class MainMissionPage extends Component {
   constructor(props) {
     super(props)
-
+    const {missionData} = this.props
     this.state = {
-      mission: this.props.missionData.todayMission.mission
+      mission: missionData.missionToShow == MissionReducers.missionToShowType.todayMission ?
+        missionData.todayMission.mission : missionData.pushMission.mission
     }
   }
 
@@ -77,7 +79,7 @@ class MainMissionPage extends Component {
       '정말로 시작하시겠어요?',
       () => {
         this.props.fetchCurrentPage(PAGES.timer)
-        this.props.fetchIsMissionDoing(true)
+        this.props.fetchIsMissionDoing(true, this.state.mission.missionID)
         this.props.fetchPopupVisibility(false)
         this.props.fetchTitleBarLeftBtn(false, null)
       },
@@ -136,7 +138,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(ControlActions.fetchCurrentPage(page)),
-    fetchIsMissionDoing: doing => dispatch(UserActions.fetchIsMissionDoing(doing)),
+    fetchIsMissionDoing: (doing, missionPK) => dispatch(UserActions.fetchIsMissionDoing(doing, missionPK)),
     fetchPopupVisibility: visibility => dispatch(ControlActions.fetchPopupVisibility(visibility)),
     fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) => dispatch(ControlActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc)),
     fetchTitleBarLeftBtn: (leftBtnShow, leftBtnFunc) => dispatch(ControlActions.fetchTitleBarLeftBtn(leftBtnShow, leftBtnFunc))

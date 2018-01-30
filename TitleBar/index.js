@@ -9,6 +9,8 @@ import { Colors, Sizes } from '../DefaultStyles';
 import {connect} from 'react-redux'
 import {fetchCurrentPage} from '../actions/controlFlowActions'
 import {PAGES} from '../reducers/constants'
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 class TitleBar extends Component {
   render() {
@@ -23,28 +25,40 @@ class TitleBar extends Component {
 
   renderLeftBtn() {
     return (
-      <TouchableHighlight style={styles.leftBtnContainer}
-            onPress={() => this.props.controlData.titleBar.leftBtnFunc()}>
-            <Text>Back</Text>
-      </TouchableHighlight>
+      <View style={styles.leftBtnContainer}>
+        <Icon.Button
+            name='md-arrow-round-back'
+            color={'#000000'}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={() => this.props.controlData.titleBar.leftBtnFunc()}/>
+      </View>
+
+
     )
   }
 
   renderRightBtn() {
     return (
-      <TouchableHighlight style={styles.rightBtnContainer}
-            onPress={() => this.props.controlData.titleBar.rightBtnFunc()}>
-          {this.getRightBtn(this.props.controlData.currentPage)}
-      </TouchableHighlight>
+      <View style={styles.rightBtnContainer}>
+        {this.getRightBtn(this.props.controlData.currentPage)}
+      </View>
     )
   }
 
   getRightBtn(page) {
     switch(page) {
       case PAGES.my:
-        return <Text>setting</Text>
+        return <Icon.Button
+            name='md-settings'
+            color={'#000000'}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={() => this.props.controlData.titleBar.rightBtnFunc()}/>
       case PAGES.share:
-        return <Text>missionHistory</Text>
+        return <Icon.Button
+            name='md-list-box'
+            color={'#000000'}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={() => this.props.controlData.titleBar.rightBtnFunc()}/>
     }
   }
 }
@@ -61,7 +75,7 @@ const styles = StyleSheet.create({
     width: Sizes.titleBarHeight,
     height: Sizes.titleBarHeight,
     position: 'absolute',
-    left: 10,
+    left: 5,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -69,7 +83,7 @@ const styles = StyleSheet.create({
     width: Sizes.titleBarHeight,
     height: Sizes.titleBarHeight,
     position: 'absolute',
-    right: 10,
+    right: 5,
     alignItems: 'center',
     justifyContent: 'center'
   }

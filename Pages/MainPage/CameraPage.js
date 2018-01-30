@@ -40,6 +40,7 @@ class CameraPage extends Component {
           // data: {mediaUri, path}
           this.props.fetchMissionImageUrl(data.mediaUri)
           this.props.fetchCurrentPage(PAGES.scan)
+          this.props.fetchModal(false)
         })
         .catch(err => console.error(err))
 

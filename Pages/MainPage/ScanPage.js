@@ -21,6 +21,16 @@ import * as Utills from '../../Utills'
 const IMAGE_SIDE_MARGIN = 30;
 
 class ScanPage extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      mission: this.props.missionData.todayMission.mission,
+      public: true,
+    }
+
+  }
+
   renderImage() {
     Image.getSize()
     return (
@@ -93,6 +103,7 @@ class ScanPage extends React.Component {
   // }
 
   render() {
+    console.log(Utills.makeNameRadonmly());
     return (
       <View style={styles.container}>
         {this.renderImage()}
@@ -114,47 +125,32 @@ class ScanPage extends React.Component {
   }
 
   done() {
-    //// Implement ////
-    // go to MainScreen
+    const imageName = Utills.makeNameRadonmly()
+    var formData = new FormData()
+    formData.append('file', this.props.userData.mission.imageUrl)
 
-    console.log('in ScanPage done: ');
-    console.log(params)
-    // if (params.userInfo) {
-    if (true) {
-      //      const imageName = params.userInfo.user_pk + '-' + params.mission.mission_pk
-      const imageName = 6 + '-' + params.mission.missionPK
-      ///// 수정 /////
-
-      var formData = new FormData()
-      formData.append('file', params.data.mediaUri)
-
-      fetch('http://52.78.33.177:10424/arts/image/' + imageName, {
+    fetch(APIConfig.postImage + imageName, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      body: formData
+    }).then((response) => {
+      fetch(APIConfig.postArt, {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          // 'Authorization': 'Bearer ' + params.userInfo.token
         },
-        body: formData
-      }).then((response) => {
-        fetch('http://52.78.33.177:10424/arts/newart', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            // 'Authorization': 'Bearer ' + params.userInfo.token
-          },
-          body: JSON.stringify({
-            user_pk: params.userInfo.user_pk,
-            mission_pk: params.mission_pk,
-            image_url: 'http://52.78.33.177:10424/arts/image/' + imageName,
-            is_public: 1
-          })
-        }).then((response) => console.log(response)).catch((err) => console.log(err))
-      })
-    }
-
-    return () => {
-      this.props.navigation.dispatch(resetAction);
-    }
+        body: JSON.stringify({
+          user_pk: this.props.userData.userPK,
+          mission_pk: this.state.mission.missionPK,
+          image_url: APIConfig.getImage + imageName,
+          is_public: this.state.public ? 1 : 0
+        })
+      }).then((response) => console.log(response)).catch((err) => console.log(err))
+    })
   }
 }
 

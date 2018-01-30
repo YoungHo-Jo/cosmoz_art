@@ -21,6 +21,7 @@ const initialState = {
     isDoing: false,
     imageName: null,
     imageUrl: null,
+    missionPK: null,
   }
 }
 
@@ -66,7 +67,8 @@ export default function userDataReducer(state = initialState, action) {
         ...state,
         mission: {
           ...state.mission,
-          isDoing: action.doing
+          isDoing: action.doing,
+          missionPK: action.missionPK
         }
       }
     case Constants.SET_MISSION_IMAGE_NAME:
