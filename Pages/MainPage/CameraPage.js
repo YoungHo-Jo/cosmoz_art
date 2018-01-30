@@ -12,6 +12,7 @@ import {PAGES} from '../../reducers/constants'
 import * as ControlFlowActions from '../../actions/controlFlowActions'
 import * as UserActions from '../../actions/userActions'
 import {connect} from 'react-redux'
+import ScanPage from './ScanPage'
 
 class CameraPage extends Component {
   render() {
@@ -34,11 +35,10 @@ class CameraPage extends Component {
   takePicture() {
     const options = {};
     //options.location = ...
-    this.props.fetchModal(false, null)
     this.refs.camera.capture({metadata: options})
         .then((data) => {
           // data: {mediaUri, path}
-          this.props.fetchMissionImageUrl(data.mediaUri)
+          this.props.fetchMissionImageURI(data.mediaUri)
           this.props.fetchCurrentPage(PAGES.scan)
           this.props.fetchModal(false)
         })
@@ -76,7 +76,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
-    fetchMissionImageUrl: imageUrl => dispatch(UserActions.fetchMissionImageUrl(imageUrl)),
+    fetchMissionImageURI: imageURI => dispatch(UserActions.fetchMissionImageURI(imageURI)),
     fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
   }
 }

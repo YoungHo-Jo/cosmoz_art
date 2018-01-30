@@ -16,7 +16,7 @@ export function getTodayMission() {
 }
 
 export function getTodayMissionSuccess(mission, fetchDate) {
-  console.log('getTodayMissionSuccess')
+  console.log('Reducer: getTodayMissionSuccess')
   console.log('mission: ', mission)
   console.log('fetchDate: ' + fetchDate)
   mission = {

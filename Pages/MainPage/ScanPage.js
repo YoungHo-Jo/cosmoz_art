@@ -17,6 +17,7 @@ import EStyleSheet from 'react-native-extended-stylesheet'
 import {connect} from 'react-redux'
 import BottomBar from '../BottomBar'
 import * as Utills from '../../Utills'
+import * as DefaultStyles from '../../DefaultStyles'
 
 const IMAGE_SIDE_MARGIN = 30;
 
@@ -36,7 +37,7 @@ class ScanPage extends React.Component {
     return (
       <View style={styles.imageContainer}>
         <Image resizeMode='contain' source={(Platform.OS === 'android') && {
-          uri: this.props.userData.mission.imageUrl
+          uri: this.props.userData.mission.imageURI
         }} style={[eStyles.image]}/>
       </View>
     )
@@ -103,7 +104,6 @@ class ScanPage extends React.Component {
   // }
 
   render() {
-    console.log(Utills.makeNameRadonmly());
     return (
       <View style={styles.container}>
         {this.renderImage()}
@@ -141,7 +141,7 @@ class ScanPage extends React.Component {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          // 'Authorization': 'Bearer ' + params.userInfo.token
+          'Authorization': 'Bearer ' + this.props.userData.token
         },
         body: JSON.stringify({
           user_pk: this.props.userData.userPK,
@@ -192,7 +192,9 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: 'absolute',
     bottom: 0,
-    backgroundColor: '#999999'
+    backgroundColor: '#938301',
+    height: DefaultStyles.Sizes.bottomBarHeight
+    // backgroundColor: '#999999',
   },
   buttonText: {},
   button: {

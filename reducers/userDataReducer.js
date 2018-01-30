@@ -4,13 +4,13 @@
 import * as Constants from "./constants";
 
 const initialState = {
+  isLogging: false,
   isLogin: false,
+  error: false,
   token: '',
   userPK: null,
-  isLogging: false,
-  error: false,
   userInfo: {
-    nickName: '닉네임',
+    nickname: '닉네임',
     accumulationTime: 'Test 300초',
     userText: 'Test 뇌주름 스케일이 반지제왕 급',
     doneMission: null,
@@ -20,7 +20,7 @@ const initialState = {
   mission: {
     isDoing: false,
     imageName: null,
-    imageUrl: null,
+    imageURI: null,
     missionPK: null,
   }
 }
@@ -39,10 +39,16 @@ export default function userDataReducer(state = initialState, action) {
       console.log('loginSuccess in userDataReducer')
       return {
           ...state,
-        token: action.token,
         isLogging: false,
-        userPK: action.userPK,
         isLogin: true,
+        token: action.token,
+        userPK: action.userPK,
+        userInfo: {
+          ...state.userInfo,
+          nickname: action.nickname,
+          userText: action.userText,
+          accumulationTime: action.accumulationTime
+        },
         fcmToken: action.fcmToken
       }
     case Constants.LOGIN_FAILURE:
@@ -79,12 +85,12 @@ export default function userDataReducer(state = initialState, action) {
           imageName: action.imageName
         }
       }
-    case Constants.SET_MISSION_IMAGE_URL:
+    case Constants.SET_MISSION_IMAGE_URI:
       return {
         ...state,
         mission: {
           ...state.mission,
-          imageUrl: action.imageUrl
+          imageURI: action.imageURI
         }
       }
     default:

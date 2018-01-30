@@ -118,6 +118,7 @@ class App extends Component {
   componentWillMount() {
     this.props.fetchTodayMission()
 
+    // Do autologin
     LocalStorage.isAutoLoginEnabled().then(enabled => {
       if(enabled) {
         LocalStorage.getId().then((id) => {

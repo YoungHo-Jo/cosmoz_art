@@ -19,7 +19,6 @@ const BAR_BGCOLOR = '#f7f7f7';
 class MissionInformationBar extends Component {
   static propTypes = {
     benefitText: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
     secs: PropTypes.number
   }
 

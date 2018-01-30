@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   },
   block: {
     flex: 1,
-    backgroundColor: Colors.bottomBarBgColor
+    backgroundColor: '#940201'
+    // backgroundColor: Colors.bottomBarBgColor
   }
 });

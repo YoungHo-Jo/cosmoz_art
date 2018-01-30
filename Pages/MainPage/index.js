@@ -36,7 +36,6 @@ class MainPage extends Component {
   }
 
   renderPage() {
-    console.log("Render in MainPage: " + this.props.controlData.currentPage)
     switch (this.props.controlData.currentPage) {
       case PAGES.leadText:
         return (<LeadTextPage/>);

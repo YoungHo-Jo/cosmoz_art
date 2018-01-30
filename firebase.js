@@ -16,5 +16,21 @@ firebase.messaging().getInitialNotification()
     });
 
 
+export const getRandomMission = (jwtToken) => {
+  return fetch(APIConfig.requestNotification, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + jwtToken
+    }
+  }).then(response => {
+    if (response.status === 201) {
+      console.log('request notification succeed');
+    } else {
+      console.log('request notification failed');
+    }
+  })
+}
+
 
 export default firebase

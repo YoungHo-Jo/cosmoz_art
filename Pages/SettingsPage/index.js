@@ -67,17 +67,11 @@ class SettingsPage extends Component {
                         <SettingsList.Header headerText='계정'
                                              headerStyle={styles.header}/>
                         <SettingsList.Item
-                            title={this.props.userData.isLogin ? this.props.userData.userInfo.nickName : '별명'}
+                            title={this.props.userData.isLogin ? this.props.userData.userInfo.nickname : '별명'}
                             titleInfo={this.props.userData.isLogin ? '로그인 했어요' : '로그인 해주세요'}
                             itemWidth={40}
                             titleStyle={styles.item}
                             onPress={() => {
-                              // if(!this.props.userData.isLogin) {
-                              //   this.props.navigation.navigate('LoginPage', {...this.props.navigation.state.params})
-                              // } else {
-                              //   this.popupDialog.show()
-                              // }
-
                               this.props.fetchModal(true, <LoginPage/>)
                             }}/>
                         <SettingsList.Header headerText='우편함'
@@ -86,24 +80,7 @@ class SettingsPage extends Component {
                                            hasNavArrow={false}
                                            underlayColor={'#FFFFFF'}
                                            itemWidth={40}
-                                           titleStyle={styles.item}
-                        onPress={() => {
-                          if (this.props.userData.isLogin) {
-                            fetch(APIConfig.requestNotification, {
-                              method: 'GET',
-                              headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + this.props.userData.token
-                              }
-                            }).then(response => {
-                              if (response.status === 201) {
-                                console.log('request notification succeed');
-                              } else {
-                                console.log('request notification failed');
-                              }
-                            })
-                          }
-                        }}/>
+                                           titleStyle={styles.item}/>
                         <SettingsList.Item title='보낸편지'
                                            hasNavArrow={false}
                                            itemWidth={40}

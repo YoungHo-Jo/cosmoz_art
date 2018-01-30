@@ -98,7 +98,6 @@ class MyPage extends Component {
   render() {
     return (
         <View style={styles.container}>
-
           {this.props.userData.isLogin ?
               this.renderRealMyPage() : this.renderLoginGuidance()}
 
@@ -137,7 +136,7 @@ class MyPage extends Component {
       <View>
         <View style={[styles.accumulationTextContainer]}>
           <Text style={[styles.accumulationText]}>
-            {this.props.userData.userInfo.accumulationTime}
+            {this.props.userData.userInfo.accumulationTime} 초 했어요!
           </Text>
         </View>
         <View style={styles.benefitTextContainer}>
@@ -272,9 +271,6 @@ class MyPage extends Component {
   renderLoginGuidance() {
     return (
         <View style={styles.loginGuidanceContainer}>
-          {/* <Text style={styles.loginGuidanceText}>
-          예술이네 가족이 되어주세요!
-          </Text> */}
           <TouchableHighlight style={styles.loginButton}
                               onPress={() => {
                                 this.props.fetchModal(true, <LoginPage/>)

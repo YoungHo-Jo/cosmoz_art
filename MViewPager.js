@@ -29,6 +29,7 @@ class MViewPager extends Component {
   }
 
   render() {
+    console.log('isDoing: ' + this.props.userData.mission.isDoing);
     return (
         <View style={styles.container}>
           <TitleBar/>
@@ -77,7 +78,7 @@ class MViewPager extends Component {
 const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
   pageTopContainer: {
     flex: 93
