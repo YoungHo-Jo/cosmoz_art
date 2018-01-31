@@ -23,6 +23,7 @@ class NicknameSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{flex: 3}}/>
         <View style={styles.textInputContainer}>
           <View style={{alignSelf: 'center'}}>
             <Text style={styles.text}>{"어렸을 적, 듣기 좋았던 아니면\n듣고 싶었던 별명을 알려주세요."}</Text>
@@ -57,7 +58,6 @@ class NicknameSubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -77,13 +77,12 @@ const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end',
   },
   textInputContainer: {
+    flex: 5,
     justifyContent: 'center',
     alignSelf: 'center',
-    height: 240,
   },
   text: {
     fontSize: 20,
@@ -100,11 +99,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   buttonContainer: {
+    flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: (Dimensions.get('window').height - 360) / 2,
     width: Dimensions.get('window').width,
-    marginBottom: 20,
   },
   leftButton: {
     height: 35,

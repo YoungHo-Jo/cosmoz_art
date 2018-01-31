@@ -30,7 +30,7 @@ class OftenRelationSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'space-between', height: 360}}>
+        <View style={{flex: 8, justifyContent: 'space-between'}}>
           <View style={styles.selectInputContainer1}>
             <Text style={styles.text}>{"부모님께 자주\n연락드리는 편이세요?"}</Text>
             <View style={styles.standardTextContainer}>
@@ -141,7 +141,6 @@ class OftenRelationSubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -198,7 +197,6 @@ const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end',
   },
   selectInputContainer1: {
@@ -242,13 +240,13 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   buttonContainer: {
+    flex: 3,
     backgroundColor: '#ffffff',
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: (Dimensions.get('window').height - 360) / 2,
     width: Dimensions.get('window').width -0,
-    marginBottom: 20,
   },
   button1: {
     height: 35,

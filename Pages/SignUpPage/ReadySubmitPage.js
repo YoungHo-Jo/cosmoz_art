@@ -30,7 +30,8 @@ class ReadySubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'center', height: 300}}>
+        <View style={{flex: 3}}/>
+        <View style={{flex: 5, justifyContent: 'center', alignItems: 'center'}}>
           <View style={styles.selectInputContainer2}>
             <Text style={styles.text}>{"행복할 준비가 되었습니까?"}</Text>
             <View style={styles.standardTextContainer}>
@@ -100,7 +101,6 @@ class ReadySubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end',
   },
   selectInputContainer1: {
@@ -180,13 +179,13 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   buttonContainer: {
+    flex: 3,
     backgroundColor: '#ffffff',
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: (Dimensions.get('window').height - 360) / 2,
-    width: Dimensions.get('window').width -0,
-    marginBottom: 20,
+    width: Dimensions.get('window').width,
   },
   button1: {
     height: 35,

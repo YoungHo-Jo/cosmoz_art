@@ -14,10 +14,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+
 import Button from 'apsl-react-native-button';
 import {connect} from "react-redux";
 import {fetchLogin} from "../../actions/userActions";
-import {Colors} from "../../DefaultStyles";
+import {Colors, Sizes} from "../../DefaultStyles";
 import {MKSwitch, MKColor} from "react-native-material-kit";
 import * as ControlFlowActions from '../../actions/controlFlowActions'
 import SignUpPage from '../SignUpPage'
@@ -229,11 +230,11 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height,
+    height: Dimensions.get('window').height - 24,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     backgroundColor: '#FFFFFF',
-    paddingBottom: 50,
+    //paddingBottom: Sizes.bottomBarHeight,
   },
   image_logo: {
     height: 70,

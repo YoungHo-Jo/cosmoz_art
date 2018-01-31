@@ -23,6 +23,7 @@ class ParentsAgeSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{flex: 3}}/>
         <View style={styles.textInputContainer}>
           <View>
             <Text style={styles.text}>{"어머니, 아버지 연세는\n혹시 알고 있어요?"}</Text>
@@ -58,7 +59,6 @@ class ParentsAgeSubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -76,16 +76,13 @@ class ParentsAgeSubmitPage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end',
   },
   textInputContainer: {
+    flex: 5,
     justifyContent: 'center',
     alignSelf: 'center',
-    height: 240,
-    marginTop: 170,
   },
   text: {
     fontSize: 20,
@@ -103,12 +100,12 @@ const styles = StyleSheet.create({
 
   },
   buttonContainer: {
+    flex: 3,
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: (Dimensions.get('window').height - 360) / 2,
     width: Dimensions.get('window').width,
-    marginBottom: 20,
   },
   leftButton: {
     height: 35,

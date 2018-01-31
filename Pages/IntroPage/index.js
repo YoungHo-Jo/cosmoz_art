@@ -43,7 +43,6 @@ class IntroPage extends Component {
           <Text style={styles.introProgressText}>
             {(this.state.currentIndex + 1) + ' / 4'}
           </Text>
-          <LowerLinearGradient/>
         </BottomBar>
       </View>
     );
