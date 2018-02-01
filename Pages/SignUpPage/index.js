@@ -8,6 +8,7 @@ import * as Progress from 'react-native-progress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import {Sizes, Colors} from "../../DefaultStyles";
+import LowerLinearGradient from "../LowerLinearGradient";
 import AccountSubmitPage from './AccountSubmitPage';
 import NicknameSubmitPage from './NicknameSubmitPage';
 import AgeSubmitPage from './AgeSubmitPage';
@@ -32,40 +33,43 @@ class SignUpPage extends Component {
 
   render() {
     return(
+      <KeyboardAwareScrollView>
         <View style={styles.container}>
-          <KeyboardAwareScrollView>
-            <Swiper
-              ref={(Swiper) => {this.swiper = Swiper;}}
-              style={styles.wrapper}
-              showsPagination={false}
-              loop={false}
-              onIndexChanged={(index) => this.setState({progress: (index +1) * (1/8)})}
-              scrollEnabled={true}>
-              <AccountSubmitPage
-                onClickNext={() => this.onClickNext()}/>
-              <NicknameSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <AgeSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <LifeSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <ParentsAgeSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <FriendAmountSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <OftenRelationSubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}/>
-              <ReadySubmitPage
-                onClickNext={() => this.onClickNext()}
-                onClickPrev={() => this.onClickPrev()}
-                onDone={() => this.props.fetchModal(false, null)}/>
-            </Swiper>
+            <View style={styles.swiperWrapper}>
+              <Swiper
+                ref={(Swiper) => {this.swiper = Swiper}}
+                style={styles.wrapper}
+                showsPagination={false}
+                loop={false}
+                onIndexChanged={(index) => this.setState({progress: (index +1) * (1/8)})}
+                scrollEnabled={true}>
+                <AccountSubmitPage
+                  onClickNext={() => this.onClickNext()}/>
+                <NicknameSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <AgeSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <LifeSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <ParentsAgeSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <FriendAmountSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <OftenRelationSubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}/>
+                <ReadySubmitPage
+                  onClickNext={() => this.onClickNext()}
+                  onClickPrev={() => this.onClickPrev()}
+                  onDone={() => this.props.fetchModal(false, null)}/>
+              </Swiper>
+            </View>
+            <LowerLinearGradient/>
             <BottomBar style={styles.progressContainer}>
               <Progress.Bar
                 style={styles.progressBar}
@@ -77,8 +81,9 @@ class SignUpPage extends Component {
                 borderWidth={0}
                 progress={this.state.progress}/>
             </BottomBar>
-          </KeyboardAwareScrollView>
         </View>
+      </KeyboardAwareScrollView>
+
     );
   }
 
@@ -94,15 +99,20 @@ class SignUpPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 0,
     flexDirection: 'column',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#efcdab'
   },
   wrapper: {
-    height: Dimensions.get('window').height - 75,
+    flex: 1,
+    backgroundColor: '#ffffff'
+  },
+  swiperWrapper: {
+    height: Dimensions.get('window').height - 24,
+    paddingBottom: Sizes.bottomBarHeight,
   },
   progressContainer: {
     justifyContent: 'center',
+    //backgroundColor: '#ffffff'
   },
   progressBar: {
     alignSelf: 'center',

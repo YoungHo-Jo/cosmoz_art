@@ -30,7 +30,7 @@ class LifeSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{justifyContent: 'space-between', height: 360}}>
+        <View style={{flex: 8, justifyContent: 'space-between'}}>
           <View style={styles.selectInputContainer1}>
             <Text style={styles.text}>{"무엇을 위해서 살아가나요?"}</Text>
             <View style={styles.selectContainer1}>
@@ -133,7 +133,6 @@ class LifeSubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -182,7 +181,6 @@ const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end',
   },
   selectInputContainer1: {
@@ -225,13 +223,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   buttonContainer: {
-    backgroundColor: '#ffffff',
+    flex: 3,
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     height: (Dimensions.get('window').height - 360) / 2,
-    width: Dimensions.get('window').width -0,
-    marginBottom: 20,
+    width: Dimensions.get('window').width,
   },
   button1: {
     height: 35,

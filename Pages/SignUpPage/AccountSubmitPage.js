@@ -30,6 +30,7 @@ class AccountSubmitPage extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{flex: 3}}/>
         <View style={styles.inputContainer}>
           <View style={styles.idInputContainer}>
             <Text style={styles.text}>{"이메일"}</Text>
@@ -101,7 +102,6 @@ class AccountSubmitPage extends Component {
             </View>
           </TouchableHighlight>
         </View>
-        <LowerLinearGradient/>
       </View>
     )
   }
@@ -137,10 +137,10 @@ const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#aaaaaa',
     flex: 1,
-    marginBottom: 45,
     justifyContent: 'flex-end'
   },
   inputContainer: {
+    flex: 5,
     alignSelf: 'center',
   },
   idInputContainer: {
@@ -190,10 +190,9 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
   },
   buttonContainer: {
-    height: (Dimensions.get('window').height - 360) / 2,
+    flex: 3,
     alignSelf: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
   },
   nextButton: {
     height: 35
