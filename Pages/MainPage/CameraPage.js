@@ -13,6 +13,7 @@ import * as ControlFlowActions from '../../actions/controlFlowActions'
 import * as UserActions from '../../actions/userActions'
 import {connect} from 'react-redux'
 import ScanPage from './ScanPage'
+import UploadConfirmPage from './UploadConfirmPage'
 
 class CameraPage extends Component {
   render() {
@@ -39,8 +40,7 @@ class CameraPage extends Component {
         .then((data) => {
           // data: {mediaUri, path}
           this.props.fetchMissionImageURI(data.mediaUri)
-          this.props.fetchCurrentPage(PAGES.scan)
-          this.props.fetchModal(false)
+          this.props.fetchModal(true, <UploadConfirmPage uri={data.mediaUri}/>)
         })
         .catch(err => console.error(err))
 

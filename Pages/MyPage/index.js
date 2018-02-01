@@ -348,7 +348,7 @@ class MyPage extends Component {
       return (
         <MyPageGridViewImageItem
           imageURL={itemData.uri}
-          onClickImage={() => this.props.fetchModal(true, <ImageViewerPage imageURL={itemData.uri}/>)}
+          onClickImage={() => this.props.fetchModal(true, <ImageViewerPage imageURI={itemData.uri}/>)}
 
           //keyword = {itemData.keyword}
         />

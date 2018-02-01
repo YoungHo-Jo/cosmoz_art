@@ -2,10 +2,7 @@
 
 import React from 'react';
 import {StyleSheet, View,} from 'react-native';
-import UpperLinearGradient from "../UpperLinearGradient";
 import SharePageHoriListView from "./SharePageHoriListView";
-import LowerLinearGradient from "../LowerLinearGradient";
-import BottomBar from "../BottomBar"
 import {Colors, Sizes} from "../../DefaultStyles";
 
 export default class DetailSharePage extends React.Component {
@@ -14,8 +11,7 @@ export default class DetailSharePage extends React.Component {
     return (
         <View style={styles.container}>
           <View style={styles.listViewContainer}>
-            <SharePageHoriListView
-                navigation={this.props.navigation}/>
+            <SharePageHoriListView/>
           </View>
         </View>
     );
