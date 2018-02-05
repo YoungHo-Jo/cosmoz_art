@@ -9,7 +9,7 @@ export default class LowerLinearGradient extends React.Component {
 
   render() {
     return(
-      <View style={[styles.container, {marginBottom: this.props.marginBottom}]}>
+      <View style={[styles.container, {bottom: this.props.bottom ? this.props.bottom : Sizes.bottomBarHeight}]}>
         <LinearGradient
           colors={['#ffffff00','#0000002a']}
           style={styles.linearGradient}/>
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     height: Sizes.linearGradientHeight,
     alignSelf: 'stretch',
     position: 'absolute',
-    bottom: Sizes.bottomBarHeight,
     width: width
   },
   linearGradient: {

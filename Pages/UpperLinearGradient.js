@@ -9,7 +9,7 @@ export default class UpperLinearGradient extends React.Component {
 
   render() {
     return(
-      <View style={styles.container}>
+      <View style={[styles.container, {top: this.props.top ? this.props.top : Sizes.titleBarHeight}]}>
         <LinearGradient
           colors={['#00000029', '#ffffff00']}
           style={styles.linearGradient}/>
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     height: Sizes.linearGradientHeight,
     alignSelf: 'stretch',
     position: 'absolute',
-    top: Sizes.titleBarHeight,
     width: width
   },
   linearGradient: {
