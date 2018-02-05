@@ -1,8 +1,9 @@
 /* @flow */
 
 import React, {Component,} from 'react';
-import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions} from 'react-native';
-import SharePageHoriListViewItem from './SharePageHoriListViewItem'
+import {AppRegistry, ListView, Text, StyleSheet, View, Image, Dimensions, FlatList} from 'react-native';
+import SharePageHoriListViewItem from './SharePageHoriListViewItem';
+import UpperLinearGradient from '../UpperLinearGradient'
 import {Colors, Sizes} from "../../DefaultStyles";
 import ImageViewerPage from '../ImageViewerPage'
 
@@ -12,9 +13,9 @@ const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 class SharePageHoriListView extends Component {
   constructor(props) {
     super(props);
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2,});
-    this.state = {dataSource: ds.cloneWithRows([]),
-    }
+    this.state = {
+      data: null,
+    };
   }
 
   componentDidMount() {
@@ -34,7 +35,7 @@ class SharePageHoriListView extends Component {
       .then((response) => response.json())
       .then((responseJSON) => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseJSON),
+          data: responseJSON,
         })
       });
   }
@@ -51,12 +52,12 @@ class SharePageHoriListView extends Component {
               style={styles.quotemarkImage}
               source={require('../../icons/double_quotation_marks_right.png')}/>
           </View>
-          <View style={styles.listViewContainer}>
-            <ListView horizontal={true}
+          <UpperLinearGradient/>
+          <View style={styles.listViewWrapper}>
+            <FlatList horizontal={true}
                       styles={styles.list}
-                      dataSource={this.state.dataSource}
-                      renderRow={this._renderRow.bind(this)}
-                      enableEmptySections={true}/>
+                      data={this.state.data}
+                      renderItem={({item: rowData}) => this._renderRow(rowData)}/>
           </View>
         </View>
     );
@@ -71,12 +72,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.defaultPageBgColor,
   },
   shareKeywordContainer: {
-    flex: 2,
+    height: Sizes.titleBarHeight,
     alignSelf: 'center',
     flexDirection: 'row',
   },
   headingText: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#333333',
     alignSelf: 'center',
@@ -84,12 +85,12 @@ const styles = StyleSheet.create({
   },
   quotemarkImage: {
     flex: 1,
-    height: 30,
+    height: 25,
     resizeMode: 'contain',
     alignSelf: 'center'
   },
-  listViewContainer: {
-    flex: 8
+  listViewWrapper: {
+    flex: 8,
   },
   list: {
     flexDirection: 'row',
