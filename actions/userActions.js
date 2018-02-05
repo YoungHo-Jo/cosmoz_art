@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as Constants from "../reducers/constants";
-import APIConfig from "../APIConfig";
+import APIConfig, {ResponseCode} from "../APIConfig";
 import {sha256} from "react-native-sha256";
 import firebase from "../firebase";
 import JwtDecoder from 'jwt-decode'
@@ -121,7 +121,7 @@ export function fetchUserArts() {
   }
 
   const getUserArtsFailed = () => {
-    return {type: Constants.GET_USER_ARTS_FAILED}
+    return {type: Constants.GET_USER_ARTS_FAILURE}
   }
   return (dispatch, getState) => {
     console.debug('Get user arts')
@@ -138,7 +138,7 @@ export function fetchUserArts() {
     })
 
     return request.then(response => {
-      if (response.status == 201) {
+      if (response.status == ResponseCode.getOk) {
         // Success
         response.json().then(arts => {
           console.debug('Get user arts: Success')
@@ -164,5 +164,5 @@ export function fetchArtsNeedUpdate(artsNeedUpdate) {
       artsNeedUpdate: _artsNeedUpdate
     }
   }
-  return (dispatch) => dispatch(action(artsNeedUpdate)) 
+  return (dispatch) => dispatch(action(artsNeedUpdate))
 }

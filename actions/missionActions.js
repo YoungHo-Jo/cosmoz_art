@@ -1,4 +1,4 @@
-import APIConfig from "../APIConfig";
+import APIConfig, {ResponseCode} from "../APIConfig";
 import * as Constants from "../reducers/constants";
 import {missionToShowType} from "../reducers/missionDataReducer";
 import * as Utills from '../Utills'
@@ -43,7 +43,7 @@ export function fetchTodayMission() {
         'Content-Type': 'application/json'
       }
     }).then( response => {
-      if (response.status === 201) {
+      if (response.status === ResponseCode.getOk) {
         response.json().then( responseJSON => {
           dispatch(getTodayMissionSuccess(responseJSON, new Date()))
         })
@@ -84,7 +84,7 @@ export function fetchNotificationRequest() {
     fetch(APIConfig.requestNotification, {
       method: 'GET'
     }).then( response => {
-      if (response.status === 201) {
+      if (response.status === ResponseCode.getOk) {
         dispatch(requestNotificationSuccess())
       } else {
         dispatch(requestNotificationFailure())

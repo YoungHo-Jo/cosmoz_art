@@ -16,7 +16,7 @@ import {connect} from 'react-redux'
 import ScanPage from './ScanPage'
 import UploadConfirmPage from './UploadConfirmPage'
 import * as Utills from '../../Utills'
-import APIConfig from '../../APIConfig'
+import APIConfig, {ResponseCode} from '../../APIConfig'
 import PopupMsgBox from '../../PopupMsgBox'
 
 
@@ -70,26 +70,34 @@ class CameraPage extends Component {
       },
       body: formData
     }).then((response) => {
-      fetch(APIConfig.postArt, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.props.userData.token
-        },
-        body: JSON.stringify({
-          user_pk: this.props.userData.userPK,
-          mission_pk: this.state.mission.missionPK,
-          image_url: APIConfig.getImage + '/' + imageName,
-          is_public: isPublic ? 1 : 0
-        })
-      }).then(response => {
-        this.props.fetchPopup(false)
-        this.props.fetchModal(false)
-        this.props.fetchCurrentPage(PAGES.leadText)
-        this.props.fetchIsMissionDoing(false)
-        this.props.fetchArtsNeedUpdate(true)
-      }).catch(err => console.log(err))
+      if(response.status === ResponseCode.postOk) {
+        fetch(APIConfig.postArt, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.props.userData.token
+          },
+          body: JSON.stringify({
+            user_pk: this.props.userData.userPK,
+            mission_pk: this.state.mission.missionPK,
+            image_url: APIConfig.getImage + '/' + imageName,
+            is_public: isPublic ? 1 : 0
+          })
+        }).then(response => {
+          if(response.status === ResponseCode.postOk) {
+            this.props.fetchPopup(false)
+            this.props.fetchModal(false)
+            this.props.fetchCurrentPage(PAGES.leadText)
+            this.props.fetchIsMissionDoing(false)
+            this.props.fetchArtsNeedUpdate(true)
+          } else {
+            console.debug('ERROR: Posting new art; ResponseCode: ' + response.status)
+          }
+        }).catch(err => console.log(err))
+      } else {
+        console.debug('ERROR: Posting Image; ReponseCode: ' + response.status)
+      }
 
     })
   }
