@@ -5,24 +5,10 @@ import {StyleSheet, Text, View, Image, Platform, Dimensions} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import {Sizes, Colors} from '../DefaultStyles';
 import {getWindowSize} from "../Utills";
-
-
 var windowSize = getWindowSize()
 
 class Title extends Component {
-  constructor(props) {
-    super(props)
-
-    var isiOS = (Platform.OS === 'ios')
-    var width = Dimensions.get('window').width
-    this.state = {
-      isiOS: isiOS,
-      width: width
-    }
-  }
-
   render() {
-
     const {currentViewPager} = this.props
     return (
       <View style={styles.container}>
@@ -42,7 +28,7 @@ class Title extends Component {
         }
 
       </View>
-    );
+    )
   }
 }
 

@@ -47,33 +47,15 @@ export function fetchCurrentPage(currentPage) {
 
 
 /* Set wheter showing popupdialog or not */
-export function setPopupVisibility(visibility) {
-  return {
-    type: Constants.SET_POPUP_VISIBILITY,
-    visibility
+export function fetchPopup(show, content = null) {
+  const action = (_show, _content) => {
+    return {
+      type: Constants.SET_POPUP,
+      show: _show,
+      content: _content
+    }
   }
-}
-
-export function fetchPopupVisibility(visibility) {
-  return dispatch => {
-    dispatch(setPopupVisibility(visibility))
-  }
-}
-
-/* Set PopupMsgBox Content including dialogText, left Button function and right button fuction */
-export function setPopupContent(dialogText, leftBtnFunc, rightBtnFunc) {
-  return {
-    type: Constants.SET_POPUP_CONTENT,
-    dialogText,
-    leftBtnFunc,
-    rightBtnFunc
-  }
-}
-
-export function fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc) {
-  return dispatch => {
-    dispatch(setPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
-  }
+  return dispatch => dispatch(action(show, content))
 }
 
 /* Set left button visibility and what it does */

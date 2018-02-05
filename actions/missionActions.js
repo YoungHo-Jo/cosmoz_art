@@ -15,10 +15,10 @@ export function getTodayMission() {
   }
 }
 
-export function getTodayMissionSuccess(mission, fetchDate) {
+export function getTodayMissionSuccess(mission, fetchedDate) {
   console.log('Reducer: getTodayMissionSuccess')
   console.log('mission: ', mission)
-  console.log('fetchDate: ' + fetchDate)
+  console.log('fetchDate: ' + fetchedDate)
   mission = {
     ...mission,
     time: Utills.getSecs(mission.time)
@@ -26,7 +26,7 @@ export function getTodayMissionSuccess(mission, fetchDate) {
   return {
     type: GET_TODAY_MISSION_SUCCESS,
     mission,
-    fetchDate
+    fetchedDate
   }
 }
 

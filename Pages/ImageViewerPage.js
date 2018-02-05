@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Dimensions} from 'react-native';
 
 import Image from 'react-native-transformable-image';
-
+import * as Utills from '../Utills'
 
 class ImageViewerPage extends Component {
 
@@ -22,6 +22,9 @@ class ImageViewerPage extends Component {
   }
 }
 
+const sizes = Utills.getWindowSize()
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -30,13 +33,8 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   imageViewer: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
-  closeButton: {
-    alignSelf: 'flex-start',
-    marginTop: 50,
-    marginLeft: 50,
+    width: sizes.width,
+    height: sizes.height
   }
 });
 

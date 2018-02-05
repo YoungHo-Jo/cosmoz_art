@@ -6,11 +6,17 @@ import {StyleSheet, Text, View, Button} from 'react-native';
 import {Colors, Sizes} from "../../DefaultStyles";
 import Icon from 'react-native-vector-icons/Entypo'
 import * as ControlFlowActions from '../../actions/controlFlowActions'
+import * as missionDataReducer from '../../reducers/missionDataReducer'
 import {PAGES} from '../../reducers/constants'
 import {connect} from 'react-redux'
 import CameraPage from './CameraPage'
+import * as Utills from '../../Utills'
+import APIConfig from '../../APIConfig'
 
 class CameraButtonPage extends Component {
+
+
+
 
   render() {
     return (
@@ -23,7 +29,6 @@ class CameraButtonPage extends Component {
                   color={Colors.defaultTextColor}
                   backgroundColor={Colors.defaultPageBgColor}
                   onPress={() => {
-                      // this.props.fetchCurrentPage(PAGES.camera)
                       this.props.fetchModal(true, <CameraPage/>)
                   }}/>
             </View>
@@ -38,6 +43,7 @@ class CameraButtonPage extends Component {
         </View>
     );
   }
+
 
 
 }
@@ -71,7 +77,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-
   }
 }
 

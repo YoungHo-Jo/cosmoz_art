@@ -13,7 +13,7 @@ import {Colors, Sizes} from '../../DefaultStyles';
 import {fetchCurrentPage, fetchCurrentViewPage} from '../../actions/controlFlowActions';
 import { PAGES } from '../../reducers/constants';
 import {connect} from 'react-redux';
-import AnimatedPage from './AnimatedPage';
+import AnimatedPage from './AnimatedPage'
 
 
 class MainPage extends Component {
@@ -49,6 +49,8 @@ class MainPage extends Component {
         return (this.animatedPage(<CameraPage/>));
       case PAGES.scan:
         return (this.animatedPage(<ScanPage/>));
+      default:
+        return (<LeadTextPage/>)
     }
   }
 }

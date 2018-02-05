@@ -100,7 +100,6 @@ class MyPage extends Component {
         <View style={styles.container}>
           {this.props.userData.isLogin ?
               this.renderRealMyPage() : this.renderLoginGuidance()}
-
         </View>
     );
   }
@@ -229,13 +228,15 @@ class MyPage extends Component {
   }
 
   renderList() {
+    const {arts} = this.props.userData.userInfo
+
     return (
       <View>
         <View style={styles.listViewContainer}>
           <View>
             <GridView
               style={{height: '100%'}}
-              items={data}
+              items={arts ? arts : data}
               itemDimension={Dimensions.get('window').width * (40 / 100)}
               renderItem={this.renderItem.bind(this)}
               spacing={20}

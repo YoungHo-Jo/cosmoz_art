@@ -15,6 +15,7 @@ import {
 
 import {Colors, Sizes} from '../../DefaultStyles';
 import DetailSharePage from './DetailSharePage'
+import PopupMsgBox from '../../PopupMsgBox'
 
 
 const styles= StyleSheet.create({
@@ -119,8 +120,13 @@ class SharePageListViewItem extends Component {
       return (
         <TouchableHighlight
           underlayColor={'transparent'}
-          onPress={() =>
-            this.props.onShareImagePressed(true, "오늘 하루 어떻게 지냈나요?\n\n내가 생각하는\n우주 외계인을 그려봐요", () => console.log('yes'), () => console.log('no'))}>
+          onPress={() => {
+            this.props.onShareImagePressed(true,
+              <PopupMsgBox
+                dialogText={"오늘 하루 어떻게 지냈나요?\n\n내가 생각하는\n우주 외계인을 그려봐요"}
+                onLeftButtonClicked={() => console.log('yes')}
+                onRightButtonClicked={() => console.log('no')}/>)
+          }}>
           <Image
             style={[styles.shareImage, {
               width: Dimensions.get('window').width * (85/100),

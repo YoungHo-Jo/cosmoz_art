@@ -49,6 +49,7 @@ class PopUpView extends Component {
 const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',
+    zIndex: 3,
     left: 0,
     right: 0,
     top: 0,

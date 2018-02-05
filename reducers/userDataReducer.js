@@ -15,6 +15,7 @@ const initialState = {
     userText: 'Test 뇌주름 스케일이 반지제왕 급',
     doneMission: null,
     arts: null,
+    artsNeedUpdate: false
   },
   fcmToken: null,
   mission: {
@@ -93,6 +94,37 @@ export default function userDataReducer(state = initialState, action) {
           imageURI: action.imageURI
         }
       }
+    case Constants.GET_USER_ARTS:
+      return {
+        ...state,
+        //// implement of getting state ////
+      }
+    case Constants.GET_USER_ARTS_SUCCESS:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          arts: action.arts
+        }
+      }
+    case Constants.GET_USER_ARTS_FAILURE:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          arts: null
+          //// Implement of failure ////
+        }
+      }
+    case Constants.SET_ARTS_NEED_UPDATE:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          artsNeedUpdate: action.artsNeedUpdate
+        }
+      }
+
     default:
       // console.log('default in userDataReducer')
       return state

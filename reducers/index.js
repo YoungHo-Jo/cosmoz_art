@@ -15,11 +15,9 @@ const initialState = {
   currentViewPage: INITIAL_VIEW_PAGE,
   initialViewPage: INITIAL_VIEW_PAGE,
   currentPage: INITIAL_PAGE,
-  isPopupShown: false,
-  popupContent: {
-    dialogText: '',
-    leftBtnFunc: null,
-    rightBtnFunc: null,
+  popupDialog: {
+    show: false,
+    content: null
   },
   titleBar: {
     leftBtnShow: false,
@@ -53,20 +51,13 @@ function controlFlowReducer(state = initialState, action) {
         ...state,
         currentPage: action.currentPage
       }
-    case Constants.SET_POPUP_VISIBILITY:
-      console.log('Reducer: ' + Constants.SET_POPUP_VISIBILITY + ': ' + action.visibility)
+    case Constants.SET_POPUP:
+      console.log('Reducer: ' + Constants.SET_POPUP + ': ' + action.show)
       return {
         ...state,
-        isPopupShown: action.visibility
-      }
-    case Constants.SET_POPUP_CONTENT:
-      console.log('Reducer: ' + Constants.SET_POPUP_CONTENT)
-      return {
-        ...state,
-        popupContent: {
-          dialogText: action.dialogText,
-          leftBtnFunc: action.leftBtnFunc,
-          rightBtnFunc: action.rightBtnFunc
+        popupDialog: {
+          show: action.show,
+          content: action.content
         }
       }
     case Constants.SET_TITLE_BAR_LEFT_BTN:
@@ -102,7 +93,6 @@ function controlFlowReducer(state = initialState, action) {
       return state
   }
 }
-
 
 
 const rootReducer = combineReducers({

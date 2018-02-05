@@ -29,7 +29,6 @@ class MViewPager extends Component {
   }
 
   render() {
-    console.log('isDoing: ' + this.props.userData.mission.isDoing);
     return (
         <View style={styles.container}>
           <TitleBar/>

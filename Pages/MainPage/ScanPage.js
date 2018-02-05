@@ -124,34 +124,7 @@ class ScanPage extends React.Component {
     // this.popupDialog.show()
   }
 
-  done() {
-    const imageName = Utills.makeNameRadonmly()
-    var formData = new FormData()
-    formData.append('file', this.props.userData.mission.imageUrl)
 
-    fetch(APIConfig.postImage + imageName, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      },
-      body: formData
-    }).then((response) => {
-      fetch(APIConfig.postArt, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + this.props.userData.token
-        },
-        body: JSON.stringify({
-          user_pk: this.props.userData.userPK,
-          mission_pk: this.state.mission.missionPK,
-          image_url: APIConfig.getImage + imageName,
-          is_public: this.state.public ? 1 : 0
-        })
-      }).then((response) => console.log(response)).catch((err) => console.log(err))
-    })
-  }
 }
 
 const size = Utills.getWindowSize()

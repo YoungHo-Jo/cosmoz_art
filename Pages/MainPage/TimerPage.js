@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import {PAGES} from '../../reducers/constants';
 import * as ControlFlowActions from '../../actions/controlFlowActions';
 import * as Utills from '../../Utills'
+import PopupMsgBox from '../../PopupMsgBox'
 
 var WINDOW_W = Dimensions.get('window').width;
 var WINDOW_H = Dimensions.get('window').height;
@@ -37,20 +38,23 @@ class TimerPage extends Component {
           secs={this.props.missionData.todayMission.mission.time}
           onTimerFinished={() => {
             this.props.fetchCurrentPage(PAGES.cameraButton)
-            this.props.fetchPopupVisibility(false)
+            this.props.fetchPopup(false)
             if (this.state.vibAlram) {
               Utills.vibrateForTimeUp()
             }
           }}
           onPressCountDown={() => {
-            this.props.fetchPopupVisibility(true)
-            this.props.fetchPopupContent('벌써 다 했나요?', () => {
-              this.refs.timer.stop()
-              this.props.fetchCurrentPage(PAGES.cameraButton)
-              this.props.fetchPopupVisibility(false)
-            }, () => {
-              this.props.fetchPopupVisibility(false)
-            })
+            this.props.fetchPopup(true,
+              <PopupMsgBox
+                dialogText='벌써 다 했나요?'
+                onLeftButtonClicked={() => {
+                  this.refs.timer.stop()
+                  this.props.fetchCurrentPage(PAGES.cameraButton)
+                  this.props.fetchPopup(false)
+                }}
+                onRightButtonClicked={() => {
+                  this.props.fetchPopup(false)
+                }}/>)
           }}/>
       </View>
     )
@@ -169,9 +173,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
-    fetchPopupVisibility: show => dispatch(ControlFlowActions.fetchPopupVisibility(show)),
-    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) =>
-      dispatch(ControlFlowActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc))
+    fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content))
   }
 }
 

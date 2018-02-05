@@ -11,6 +11,7 @@ import * as ControlActions from '../../actions/controlFlowActions'
 import * as UserActions from '../../actions/userActions'
 import * as MissionReducers from '../../reducers/missionDataReducer'
 import {PAGES} from '../../reducers/constants'
+import PopupMsgBox from '../../PopupMsgBox'
 
 const MAIN_MISSION_PAGE_BG_COLOR = Colors.defaultPageBgColor;
 const MISSION_ICON_SIZE = 30;
@@ -74,16 +75,15 @@ class MainMissionPage extends Component {
   }
 
   _onMissionPress() {
-    this.props.fetchPopupVisibility(true)
-    this.props.fetchPopupContent(
-      '정말로 시작하시겠어요?',
-      () => {
+    this.props.fetchPopup(true, <PopupMsgBox
+      dialogText='정말로 시작하시겠어요?'
+      onLeftButtonClicked={() => {
         this.props.fetchCurrentPage(PAGES.timer)
         this.props.fetchIsMissionDoing(true, this.state.mission.missionID)
-        this.props.fetchPopupVisibility(false)
+        this.props.fetchPopup(false)
         this.props.fetchTitleBarLeftBtn(false, null)
-      },
-      () => this.props.fetchPopupVisibility(false))
+      }}
+      onRightButtonClicked={() => this.props.fetchPopup(false)}/>)
   }
 }
 
@@ -139,8 +139,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(ControlActions.fetchCurrentPage(page)),
     fetchIsMissionDoing: (doing, missionPK) => dispatch(UserActions.fetchIsMissionDoing(doing, missionPK)),
-    fetchPopupVisibility: visibility => dispatch(ControlActions.fetchPopupVisibility(visibility)),
-    fetchPopupContent: (dialogText, leftBtnFunc, rightBtnFunc) => dispatch(ControlActions.fetchPopupContent(dialogText, leftBtnFunc, rightBtnFunc)),
+    fetchPopup: (show, content?) => dispatch(ControlActions.fetchPopup(show, content)),
     fetchTitleBarLeftBtn: (leftBtnShow, leftBtnFunc) => dispatch(ControlActions.fetchTitleBarLeftBtn(leftBtnShow, leftBtnFunc))
   }
 }

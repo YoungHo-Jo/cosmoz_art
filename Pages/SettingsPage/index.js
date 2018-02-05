@@ -18,6 +18,7 @@ import APIConfig from "../../APIConfig";
 import * as ControlFlowActions from '../../actions/controlFlowActions'
 import LoginPage from '../LoginPage'
 import IntroPage from '../IntroPage'
+import PopupMsgBox from '../../PopupMsgBox'
 
 const styles = StyleSheet.create({
     header : {
@@ -42,23 +43,6 @@ class SettingsPage extends Component {
         this.state = {switchValue: false};
     }
 
-    // renderPopUpDialog() {
-    //   return (
-    //     <PopupDialog
-    //         ref={(popupDialog) => this.popupDialog = popupDialog}
-    //         dialogAnimation={new ScaleAnimation()}
-    //         height={'30%'}>
-    //       <PopupMsgBox
-    //           onLeftButtonClicked={() => {
-    //             this.props.fetchLogout()
-    //             this.popupDialog.dismiss()
-    //           }}
-    //           onRightButtonClicked={() => this.popupDialog.dismiss()}
-    //           dialogText="로그아웃 하시겠어요?"/>
-    //     </PopupDialog>
-    //   )
-    // }
-
     render() {
         return (
             <View style={{backgroundColor: '#f1f1f1', flex: 1}}>
@@ -72,7 +56,20 @@ class SettingsPage extends Component {
                             itemWidth={40}
                             titleStyle={styles.item}
                             onPress={() => {
-                              this.props.fetchModal(true, <LoginPage/>)
+                              if(this.props.userData.isLogin) {
+                                this.props.fetchPopup(true,
+                                  <PopupMsgBox
+                                    dialogText={'로그아웃 하시겠어요?'}
+                                    onLeftButtonClicked={() => {
+                                      this.props.fetchLogout()
+                                      this.props.fetchPopup(false)
+                                    }}
+                                    onRightButtonClicked={() => this.props.fetchPopup(false)}/>
+                                )
+                              } else {
+                                this.props.fetchModal(true, <LoginPage/>)
+                              }
+
                             }}/>
                         <SettingsList.Header headerText='우편함'
                                              headerStyle={styles.header}/>
@@ -126,7 +123,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchLogin: (userInfo) => dispatch(UserActions.fetchLogin(userInfo)),
     fetchLogout: () => dispatch(UserActions.fetchLogout()),
-    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content))
+    fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content)),
+    fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content))
   }
 }
 

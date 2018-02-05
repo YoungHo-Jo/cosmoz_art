@@ -9,7 +9,7 @@ export default APIConfig = {
   // arts
   postImage: basicURL + '/arts/image', // post
   getImage: basicURL + '/arts/image', // get
-  postArt: basicURL + '/arts/newart', // post
+  postArt: basicURL + '/arts/private/newart', // post
   getArtsOfUser: basicURL + '/arts/private/get/', // get
   postLikeArt: basicURL + '/arts/private/like-art', // post
   deleteLikeArt: basicURL + '/arts/private/dislike-art', // delete

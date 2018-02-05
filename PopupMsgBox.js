@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import React from 'react';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
-import {Colors, Sizes} from "../../DefaultStyles";
+import {Colors, Sizes} from "./DefaultStyles";
 
 
 const IMAGE_SIDE_MARGIN = 30;

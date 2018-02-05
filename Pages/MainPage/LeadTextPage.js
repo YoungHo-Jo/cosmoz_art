@@ -39,6 +39,14 @@ class LeadTextPage extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {missionData} = nextProps
+    this.setState({
+      mission: missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission ?
+        missionData.todayMission.mission : missionData.pushMission.mission
+    })
+  }
+
   render() {
     const {mission} = this.state
     return (

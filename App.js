@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button, Platform} from 'react-native';
+import {StyleSheet, Text, View, Button, Platform, BackHandler} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import MViewPager from './MViewPager';
 import DefaultStyles, {Sizes, Colors} from './DefaultStyles';
@@ -16,7 +16,6 @@ import {missionToShowType} from "./reducers/missionDataReducer";
 import {INITIAL_VIEW_PAGE} from "./reducers/index";
 import { PAGES } from './reducers/constants';
 import PopUpView from './PopUpView'
-import PopupMsgBox from './Pages/MainPage/PopupMsgBox';
 import PopupTextCard from './Pages/SharePage/PopupTextCard';
 import Modal from 'react-native-modalbox'
 import CameraPage from './Pages/MainPage/CameraPage'
@@ -40,37 +39,12 @@ class App extends Component {
 
   renderPopUpView() {
     return (
-        this.props.controlData.isPopupShown &&
+        this.props.controlData.popupDialog.show &&
         <PopUpView
-          onPressOverlay={() => this.props.fetchPopupVisibility(false)}>
-          {this.renderPopUpContent()}
+          onPressOverlay={() => this.props.fetchPopup(false)}>
+          {this.props.controlData.popupDialog.content}
         </PopUpView>
     )
-  }
-
-  renderPopUpContent() {
-    switch (this.props.controlData.currentPage) {
-      case (PAGES.mainMission):
-        return(
-          <PopupMsgBox
-            dialogText={this.props.controlData.popupContent.dialogText}
-            onLeftButtonClicked={() => this.props.controlData.popupContent.leftBtnFunc()}
-            onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
-        );
-      case PAGES.timer:
-        return(
-          <PopupMsgBox
-            dialogText={this.props.controlData.popupContent.dialogText}
-            onLeftButtonClicked={() => this.props.controlData.popupContent.leftBtnFunc()}
-            onRightButtonClicked={() => this.props.controlData.popupContent.rightBtnFunc()}/>
-        );
-      case (PAGES.share):
-        return(
-          <PopupTextCard
-            dialogText={this.props.controlData.popupContent.dialogText}
-            onTextPressed={() => this.props.fetchPopupVisibility(false)}/>
-        );
-    }
   }
 
   renderModal() {
@@ -109,10 +83,18 @@ class App extends Component {
       console.log('message: ')
       console.log(message)
       this.props.fetchNotificationMission(message)
-
-      //// implement ////
-      // shwo someting to display notification
     });
+
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      if (this.props.controlData.popupDialog.show) {
+        this.props.fetchPopup(false)
+        return true
+      } else if(this.props.controlData.modal.show) {
+        this.props.fetchModal(false)
+        return true
+      }
+      return false
+    })
   }
 
   componentWillMount() {
@@ -134,6 +116,18 @@ class App extends Component {
       }
     })
   }
+
+
+
+  componentWillReceiveProps(nextProps) {
+    const prevUserData = this.props.userData
+    const nextUserData = nextProps.userData
+    if((!prevUserData.isLogin && nextUserData.isLogin) ||
+      (!prevUserData.userInfo.artsNeedUpdate && nextUserData.userInfo.artsNeedUpdate)) {
+      this.props.fetchUserArts()
+    }
+  }
+
 
 }
 
@@ -173,6 +167,7 @@ function mapStateToProps(state) {
   return {
     missionData: state.missionData,
     controlData: state.controlFlowReducer,
+    userData: state.userData
   }
 }
 
@@ -181,9 +176,10 @@ function mapDispatchToProps(dispatch) {
     fetchNotificationMission: (notificationData) => dispatch(MissionActions.fetchNotificationMission(notificationData)),
     fetchTodayMission: () => dispatch(MissionActions.fetchTodayMission()),
     fetchMissionToShow: (type) => dispatch(MissionActions.fetchMissionToShow(type)),
-    fetchPopupVisibility: (visibility) => dispatch(ControlFlowActions.fetchPopupVisibility(visibility)),
+    fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content)),
     fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content)),
-    fetchLogin: (loginInfo, isPwEncrypted) => dispatch(UserActions.fetchLogin(loginInfo, isPwEncrypted))
+    fetchLogin: (loginInfo, isPwEncrypted) => dispatch(UserActions.fetchLogin(loginInfo, isPwEncrypted)),
+    fetchUserArts: () => dispatch(UserActions.fetchUserArts())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
