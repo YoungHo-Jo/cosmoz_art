@@ -1,44 +1,40 @@
 import APIConfig from "../APIConfig";
-import {
-  GET_NOTIFICATION_MISSION, GET_NOTIFICATION_MISSION_FAILURE, GET_NOTIFICATION_MISSION_SUCCESS, GET_TODAY_MISSION,
-  GET_TODAY_MISSION_FAILURE,
-  GET_TODAY_MISSION_SUCCESS, REQUEST_NOTIFICATION, REQUEST_NOTIFICATION_FAILURE, REQUEST_NOTIFICATION_SUCCESS,
-  SET_MISSION_TO_SHOW_TYPE
-} from "../reducers/constants";
+import * as Constants from "../reducers/constants";
 import {missionToShowType} from "../reducers/missionDataReducer";
 import * as Utills from '../Utills'
 
-// todayMission
-export function getTodayMission() {
-  return {
-    type: GET_TODAY_MISSION
-  }
-}
+const EXPIRE_TIME = 20000
 
-export function getTodayMissionSuccess(mission, fetchedDate) {
-  console.log('Reducer: getTodayMissionSuccess')
-  console.log('mission: ', mission)
-  console.log('fetchDate: ' + fetchedDate)
-  mission = {
-    ...mission,
-    time: Utills.getSecs(mission.time)
-  }
-  return {
-    type: GET_TODAY_MISSION_SUCCESS,
-    mission,
-    fetchedDate
-  }
-}
-
-export function getTodayMissionFailure() {
-  return {
-    type: GET_TODAY_MISSION_FAILURE
-  }
-}
-
+/* Get Today mission */
 export function fetchTodayMission() {
+  const getTodayMission = () => {
+    return {
+      type: Constants.GET_TODAY_MISSION
+    }
+  }
+
+  const getTodayMissionSuccess = (_mission, _fetchedDate) => {
+    console.log('Reducer: getTodayMissionSuccess')
+    console.log('mission: ', _mission)
+    console.log('fetchDate: ' + _fetchedDate)
+    _mission = {
+      ..._mission,
+      time: Utills.getSecs(_mission.time)
+    }
+    return {
+      type: Constants.GET_TODAY_MISSION_SUCCESS,
+      mission: _mission,
+      fetchedDate: _fetchedDate
+    }
+  }
+
+  const getTodayMissionFailure = () => {
+    return {
+      type: Constants.GET_TODAY_MISSION_FAILURE
+    }
+  }
+
   return dispatch => {
-    // console.log('fetchTodayMission...')
     dispatch(getTodayMission())
 
     fetch(APIConfig.getTodayMission, {
@@ -61,31 +57,28 @@ export function fetchTodayMission() {
   }
 }
 
-//////////////////////////////////////////////////////////////////////////////
-
-// push mission
-
-export function requestNotification() {
-  return {
-    type: REQUEST_NOTIFICATION
-  }
-}
-
-export function requestNotificationSuccess() {
-  return {
-    type: REQUEST_NOTIFICATION_SUCCESS
-  }
-}
-
-export function requestNotificationFailure() {
-  return {
-    type: REQUEST_NOTIFICATION_FAILURE
-  }
-}
-
+/* Request Push Mission */
 export function fetchNotificationRequest() {
+  const requestNotification = () => {
+    return {
+      type: Constants.REQUEST_NOTIFICATION
+    }
+  }
+
+  const requestNotificationSuccess = () => {
+    return {
+      type: Constants.REQUEST_NOTIFICATION_SUCCESS
+    }
+  }
+
+  const requestNotificationFailure = () => {
+    return {
+      type: Constants.REQUEST_NOTIFICATION_FAILURE
+    }
+  }
+
   return dispatch => {
-    console.log('fetchNotificationRequest...')
+    console.debug('Fetch Notification Request')
     dispatch(requestNotification())
 
     fetch(APIConfig.requestNotification, {
@@ -100,31 +93,32 @@ export function fetchNotificationRequest() {
   }
 }
 
-export function getNotificationMission() {
-  return {
-    type: GET_NOTIFICATION_MISSION
-  }
-}
-
-export function getNotificationMissionSuccess(mission, pushedDate, expireTime) {
-  console.log('getNotificationMissionSuccess')
-  console.log('mission: ', mission)
-
-  return {
-    type: GET_NOTIFICATION_MISSION_SUCCESS,
-    mission,
-    pushedDate,
-    expireTime
-  }
-}
-
-export function getNotificationMissionFailure() {
-  return {
-    type: GET_NOTIFICATION_MISSION_FAILURE
-  }
-}
-
+/* Get Push mission */
 export function fetchNotificationMission(notificationData) {
+  const getNotificationMission = () => {
+    return {
+      type: Constants.GET_NOTIFICATION_MISSION
+    }
+  }
+
+  const getNotificationMissionSuccess = (_mission, _pushedDate, _expireTime) => {
+    console.log('getNotificationMissionSuccess')
+    console.log('mission: ', mission)
+
+    return {
+      type: Constants.GET_NOTIFICATION_MISSION_SUCCESS,
+      mission: _mission,
+      pushedDate: _pushedDate,
+      expireTime: _expireTime
+    }
+  }
+
+  const getNotificationMissionFailure = () => {
+    return {
+      type: Constants.GET_NOTIFICATION_MISSION_FAILURE
+    }
+  }
+
   return dispatch => {
     console.log('fetchNotificationMission...')
     dispatch(getNotificationMission())
@@ -134,6 +128,7 @@ export function fetchNotificationMission(notificationData) {
       dispatch(getNotificationMissionFailure())
       return;
     }
+
     let mission = {
       leadText: notificationData.leadText,
       mission: {
@@ -147,26 +142,22 @@ export function fetchNotificationMission(notificationData) {
       time: notificationData.time,
     }
 
-    dispatch(getNotificationMissionSuccess(mission, notificationData.pushDate, 20000))
+    dispatch(getNotificationMissionSuccess(mission, notificationData.pushDate, EXPIRE_TIME))
   }
 }
 
-//////////////////////////////////////////////////////////////////////////////
-
-export function setMissionToShow(missionToShowType) {
-  return {
-    type: SET_MISSION_TO_SHOW_TYPE,
-    missionToShowType
-  }
-}
-
-// set mission to show
+/* Set mission to show */
 export function fetchMissionToShow(type) {
 
+  const setMissionToShow = (_missionToShowType) => {
+    return {
+      type: Constants.SET_MISSION_TO_SHOW_TYPE,
+      missionToShowType: _missionToShowType
+    }
+  }
+
   return dispatch => {
-    console.log('fetchMissionToShow')
-    console.log('type: ')
-    console.log(type)
+    console.log(`Fetch mission to show: ${type}`)
 
     if (type !== missionToShowType.todayMission && type !== missionToShowType.pushMission) {
       console.log('ERROR: fetchMissionToShow type is wrong')

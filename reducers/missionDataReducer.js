@@ -1,11 +1,6 @@
 /* @flow */
 
-import {
-  GET_NOTIFICATION_MISSION, GET_NOTIFICATION_MISSION_FAILURE, GET_NOTIFICATION_MISSION_SUCCESS, GET_TODAY_MISSION,
-  GET_TODAY_MISSION_FAILURE,
-  GET_TODAY_MISSION_SUCCESS, REQUEST_NOTIFICATION, REQUEST_NOTIFICATION_FAILURE, REQUEST_NOTIFICATION_SUCCESS,
-  SET_MISSION_TO_SHOW_TYPE
-} from "./constants";
+import * as Constants from "./constants";
 
 export const missionType = {
   drawing: 'DRAWING',
@@ -68,7 +63,7 @@ const initialState = {
 
 export default function missionDataReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_TODAY_MISSION:
+    case Constants.GET_TODAY_MISSION:
       return {
         ...state,
         todayMission: {
@@ -77,7 +72,7 @@ export default function missionDataReducer(state = initialState, action) {
           fetchError: false,
         }
       }
-    case GET_TODAY_MISSION_SUCCESS:
+    case Constants.GET_TODAY_MISSION_SUCCESS:
       return {
         ...state,
         todayMission: {
@@ -88,7 +83,7 @@ export default function missionDataReducer(state = initialState, action) {
           fetchedDate: action.fetchedDate
         }
       }
-    case GET_TODAY_MISSION_FAILURE:
+    case Constants.GET_TODAY_MISSION_FAILURE:
       return {
         ...state,
         todayMission: {
@@ -98,7 +93,7 @@ export default function missionDataReducer(state = initialState, action) {
           fetchError: true,
         }
       }
-    case GET_NOTIFICATION_MISSION:
+    case Constants.GET_NOTIFICATION_MISSION:
       return {
         ...state,
         pushMission: {
@@ -108,7 +103,7 @@ export default function missionDataReducer(state = initialState, action) {
           isFetched: false,
         }
       }
-    case GET_NOTIFICATION_MISSION_SUCCESS:
+    case Constants.GET_NOTIFICATION_MISSION_SUCCESS:
       return {
         ...state,
         pushMission: {
@@ -120,7 +115,7 @@ export default function missionDataReducer(state = initialState, action) {
           mission: action.mission
         }
       }
-    case GET_NOTIFICATION_MISSION_FAILURE:
+    case Constants.GET_NOTIFICATION_MISSION_FAILURE:
       return {
         ...state,
         pushMission: {
@@ -129,25 +124,25 @@ export default function missionDataReducer(state = initialState, action) {
           fetchError: true,
         }
       }
-    case REQUEST_NOTIFICATION:
+    case Constants.REQUEST_NOTIFICATION:
       return {
         ...state,
         isPushMissionRequested: false,
         isPushMissionRequestedError: false,
       }
-    case REQUEST_NOTIFICATION_SUCCESS:
+    case Constants.REQUEST_NOTIFICATION_SUCCESS:
       return {
         ...state,
         isPushMissionRequested: true,
         isPushMissionRequestedError: false,
       }
-    case REQUEST_NOTIFICATION_FAILURE:
+    case Constants.REQUEST_NOTIFICATION_FAILURE:
       return {
         ...state,
         isPushMissionRequested: false,
         isPushMissionRequestedError: true
       }
-    case SET_MISSION_TO_SHOW_TYPE:
+    case Constants.SET_MISSION_TO_SHOW_TYPE:
       return {
           ...state,
         missionToShow: action.missionToShowType

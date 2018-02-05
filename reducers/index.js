@@ -86,7 +86,7 @@ function controlFlowReducer(state = initialState, action) {
         ...state,
         modal: {
           show: action.show,
-          content: action.content
+          content: action.content ? action.content : state.modal.content
         }
       }
     default:

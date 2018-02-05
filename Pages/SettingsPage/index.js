@@ -38,9 +38,9 @@ const styles = StyleSheet.create({
 
 class SettingsPage extends Component {
     constructor() {
-        super();
-        this.onValueChange = this.onValueChange.bind(this);
-        this.state = {switchValue: false};
+      super();
+      this.onValueChange = this.onValueChange.bind(this);
+      this.state = {switchValue: false};
     }
 
     render() {
