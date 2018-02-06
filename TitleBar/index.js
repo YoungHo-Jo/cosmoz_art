@@ -14,23 +14,38 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 class TitleBar extends Component {
   render() {
-    return (
-      <View style={styles.titleBarContainer}>
-        {this.props.controlData.titleBar.leftBtnShow && this.renderLeftBtn()}
-        <Title currentViewPager={this.props.controlData.currentViewPage}/>
-        {this.props.controlData.titleBar.rightBtnShow && this.renderRightBtn()}
-      </View>
-    );
+    if(this.props.titleText) {
+      return (
+        <View style={styles.titleBarContainer}>
+          {this.props.onLeftBtnPress && this.renderLeftBtn(this.props.onLeftBtnPress)}
+          <Title titleText={this.props.titleText}/>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.titleBarContainer}>
+          {this.props.controlData.titleBar.leftBtnShow && this.renderLeftBtn()}
+          <Title currentViewPager={this.props.controlData.currentViewPage}/>
+          {this.props.controlData.titleBar.rightBtnShow && this.renderRightBtn()}
+        </View>
+      );
+    }
   }
 
-  renderLeftBtn() {
+  renderLeftBtn(func) {
     return (
       <View style={styles.leftBtnContainer}>
         <Icon.Button
             name='md-arrow-round-back'
             color={'#000000'}
             backgroundColor={Colors.defaultPageBgColor}
-            onPress={() => this.props.controlData.titleBar.leftBtnFunc()}/>
+            onPress={() => {
+              if(func) {
+                func()
+              } else {
+                this.props.controlData.titleBar.leftBtnFunc()
+              }
+            }}/>
       </View>
 
 

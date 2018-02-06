@@ -98,6 +98,11 @@ class App extends Component {
   }
 
   componentWillMount() {
+    // Get types
+    this.props.fetchMissionTypes()
+    this.props.fetchBenefitTypes()
+
+    // Get today mission
     this.props.fetchTodayMission()
 
     // Do autologin
@@ -125,6 +130,7 @@ class App extends Component {
     if((!prevUserData.isLogin && nextUserData.isLogin) ||
       (!prevUserData.userInfo.artsNeedUpdate && nextUserData.userInfo.artsNeedUpdate)) {
       this.props.fetchUserArts()
+      this.props.fetchUserDoneMissions()
     }
   }
 
@@ -179,7 +185,10 @@ function mapDispatchToProps(dispatch) {
     fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content)),
     fetchModal: (show, content) => dispatch(ControlFlowActions.fetchModal(show, content)),
     fetchLogin: (loginInfo, isPwEncrypted) => dispatch(UserActions.fetchLogin(loginInfo, isPwEncrypted)),
-    fetchUserArts: () => dispatch(UserActions.fetchUserArts())
+    fetchUserArts: () => dispatch(UserActions.fetchUserArts()),
+    fetchMissionTypes: () => dispatch(MissionActions.fetchMissionTypes()),
+    fetchBenefitTypes: () => dispatch(MissionActions.fetchBenefitTypes()),
+    fetchUserDoneMissions: () => dispatch(UserActions.fetchUserDoneMissions())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

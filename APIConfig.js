@@ -20,11 +20,13 @@ export default APIConfig = {
   putLikeMissionOfUser: basicURL + '/missions/private/mission/like', // put
   putDislikeMissionOfUser: basicURL + '/missions/private/mission/dislike', // put
   postDoneMission: basicURL + '/missions/private/done', // post
-  gotDoneMissions: basicURL + '/missions/private/done/', // get
+  getDoneMissions: basicURL + '/missions/private/done/', // get
   putUserAccumTime: basicURL + '/missions/private/user/time', // post
   getMissionRandomly: basicURL + '/missions/random', // get
   getTodayMission: basicURL + '/missions/mission/today', // get
   requestNotification: basicURL + '/missions/private/notification/random-mission', // get
+  getMissionTypes: basicURL + '/missions/types', // get
+  getBenefitTypes: basicURL + '/missions/benefit/types', // get
 
   // users
   login: basicURL + '/users/user/login', // post
@@ -48,5 +50,5 @@ export const ResponseCode = {
   forbidden: 403, // The request has been refuese. See the accompanying message for the specific reason (most likely for exceeding rate limit)
   notFound: 404, // The uri requested is invalid or the resource requested does not exists
   notAcceptable: 406, // The request specified an invalid format.
-  internalServerError: 500, // Something is horribly wrong 
+  internalServerError: 500, // Something is horribly wrong
 }

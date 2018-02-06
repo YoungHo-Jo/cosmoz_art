@@ -58,7 +58,21 @@ class MyPage extends Component {
       touchableHighlightWidth: Dimensions.get('window').width / 3,
       filterMethod: filterMethod.myArts.byTime,
       isScrolledFar: false,
+      data: []
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.userData.userInfo.arts) {
+      var data = []
+      nextProps.userData.userInfo.arts.forEach(art => {
+        data.push({uri: art.image_url})
+      })
+
+      this.setState({
+        data: data
+      })
+    }
   }
 
   findTouchableHighlightDimensions(layout) {
@@ -228,7 +242,6 @@ class MyPage extends Component {
   }
 
   renderList() {
-    const {arts} = this.props.userData.userInfo
 
     return (
       <View>
@@ -236,7 +249,7 @@ class MyPage extends Component {
           <View>
             <GridView
               style={{height: '100%'}}
-              items={arts ? arts : data}
+              items={this.state.data}
               itemDimension={Dimensions.get('window').width * (40 / 100)}
               renderItem={this.renderItem.bind(this)}
               spacing={20}

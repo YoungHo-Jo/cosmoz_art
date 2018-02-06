@@ -19,6 +19,8 @@ import TitleBar from './TitleBar'
 import SettingsPage from './Pages/SettingsPage'
 import UpperLinearGradient from './Pages/UpperLinearGradient'
 import LowerLinearGradient from './Pages/LowerLinearGradient'
+import DoneMissionPage from './Pages/SharePage/DoneMissionPage'
+import ModalContainer from './Pages/ModalContainer'
 
 var width = Dimensions.get('window').width
 var height = Dimensions.get('window').height
@@ -67,7 +69,13 @@ class MViewPager extends Component {
       case 2:
         this.props.fetchCurrentPage(PAGES.share)
         this.props.fetchTitleBarRightBtn(true, () => {
-          this.props.fetchModal(true, )
+          this.props.fetchModal(true, (
+            <ModalContainer
+              titleText={'내가 한 미션들'}
+              onLeftBtnPress={() => this.props.fetchModal(false)}>
+              <DoneMissionPage/>
+            </ModalContainer>
+            ))
         })
         return this.props.fetchCurrentViewPage(2)
     }

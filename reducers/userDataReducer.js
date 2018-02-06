@@ -13,7 +13,7 @@ const initialState = {
     nickname: '닉네임',
     accumulationTime: 'Test 300초',
     userText: 'Test 뇌주름 스케일이 반지제왕 급',
-    doneMission: null,
+    doneMissions: null,
     arts: null,
     artsNeedUpdate: false
   },
@@ -124,7 +124,24 @@ export default function userDataReducer(state = initialState, action) {
           artsNeedUpdate: action.artsNeedUpdate
         }
       }
-
+    case Constants.GET_USER_DONE_MISSIONS:
+      return {
+        ...state,
+        //// Implement of fetching state ////
+      }
+    case Constants.GET_USER_DONE_MISSIONS_SUCCESS:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          doneMissions: action.doneMissions
+        }
+      }
+    case Constants.GET_USER_DONE_MISSIONS_FAILURE:
+      return {
+        ...state,
+        //// Implement of failure ////
+      }
     default:
       // console.log('default in userDataReducer')
       return state

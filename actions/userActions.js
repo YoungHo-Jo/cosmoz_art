@@ -6,32 +6,36 @@ import {sha256} from "react-native-sha256";
 import firebase from "../firebase";
 import JwtDecoder from 'jwt-decode'
 
-export function login() {
-  return {type: Constants.LOGIN}
-}
-
-export function getLoginSuccess(token, userPK, nickname, accumulationTime, userText, fcmToken) {
-  return {
-    type: Constants.LOGIN_SUCCESS,
-    token,
-    userPK,
-    fcmToken,
-    nickname,
-    accumulationTime,
-    userText
-  }
-}
-
-export function getLoginFailure() {
-  return {type: Constants.LOGIN_FAILURE}
-}
-
 export function fetchLogin(loginInfo, isPwEncrypted = false) {
+  const login = () => {
+    return {
+      type: Constants.LOGIN
+    }
+  }
+
+  const loginSuccess = (_token, _userPK, _nickname, _accumulationTime, _userText, _fcmToken) => {
+    return {
+      type: Constants.LOGIN_SUCCESS,
+      token: _token,
+      userPK: _userPK,
+      fcmToken: _fcmToken,
+      nickname: _nickname,
+      accumulationTime: _accumulationTime,
+      userText: _userText
+    }
+  }
+
+  const loginFailure = () => {
+    return {
+      type: Constants.LOGIN_FAILURE
+    }
+  }
+
   return dispatch => new Promise((resolve, reject) => {
-    console.log('try login...')
+    const TAG = '[LOGIN]'
     dispatch(login())
     if (!loginInfo) {
-      console.log('loginInfo needed in fetchLogin')
+      console.debug(`${TAG} loginIno invalid; ${loginInfo}`)
       return reject()
     }
     if (loginInfo.id && loginInfo.pw) {
@@ -42,10 +46,10 @@ export function fetchLogin(loginInfo, isPwEncrypted = false) {
           pw = loginInfo.pw
         }
         var fcmToken = null
-        console.log(`id: ${id} pw: ${pw}`)
+        console.debug(`${TAG} id: ${id} pw: ${pw}`)
         firebase.messaging().getToken().then(token => {
           fcmToken = token
-          console.log('login... | FCM TOKEN: ' + token)
+          console.debug(`${TAG} Login to server | FCM token: ${token}`)
           fetch(APIConfig.login, {
             method: 'POST',
             headers: {
@@ -53,34 +57,44 @@ export function fetchLogin(loginInfo, isPwEncrypted = false) {
             },
             body: JSON.stringify({id: id, pw: pw, deviceToken: fcmToken})
           }).then(response => {
-            if (response.status === 201) {
-              console.log('login succeed');
+            if (response.status === ResponseCode.postOk) {
+              console.debug(`${TAG} Success`)
               response.json().then((responseJSON) => {
                 // Decode jwtToken
                 const userData = JwtDecoder(responseJSON.token)
                 // Login Succeed
-                dispatch(getLoginSuccess(responseJSON.token, userData.pk, userData.nickname, userData.accumulation_time, userData.user_text, userData.fcm_token))
+                dispatch(loginSuccess(responseJSON.token, userData.pk, userData.nickname, userData.accumulation_time, userData.user_text, userData.fcm_token))
+              }).catch(err => {
+                console.debug(`${TAG} Error; json parsing`)
+                console.debug(err)
+                dispatch(loginFailure())
               })
               return resolve(pw)
             } else {
-              console.log('login failed');
-              dispatch(getLoginFailure())
+              console.debug(`${TAG} Failure; response code; ${response.status}`)
+              dispatch(loginFailure())
               return reject()
             }
           })
-        }).catch((err) => console.log(err))
+        }).catch(err => {
+          console.debug(`${TAG} Error; fetch`)
+          dispatch(loginFailure())
+        })
       })
     } else {
-      console.log('login failed, either id or pw is missing');
-      dispatch(getLoginFailure())
+      console.debug(`${TAG} Failure; id or pw missing`)
+      dispatch(loginFailure())
       return reject()
     }
   })
 }
 
+/* Logout */
 export function fetchLogout() {
   return dispatch => dispatch(() => {
-    return {type: Constants.LOGOUT}
+    return {
+      type: Constants.LOGOUT
+    }
   })
 }
 
@@ -124,7 +138,8 @@ export function fetchUserArts() {
     return {type: Constants.GET_USER_ARTS_FAILURE}
   }
   return (dispatch, getState) => {
-    console.debug('Get user arts')
+    const TAG = '[GET_USER_ARTS]'
+    console.debug(`${TAG} Fetching start`)
     dispatch(getUserArts())
     const {userData} = getState()
 
@@ -140,17 +155,22 @@ export function fetchUserArts() {
     return request.then(response => {
       if (response.status == ResponseCode.getOk) {
         // Success
+        console.debug(`${TAG} Success`)
         response.json().then(arts => {
-          console.debug('Get user arts: Success')
           console.debug(arts)
           dispatch(getUserArtsSuccess(arts))
+        }).catch(err => {
+          console.debug(`${TAG} Error; json parsing`)
+          dispatch(getUserArtsFailed())
         })
       } else {
         // Fail
-        console.debug('Get user arts: Fail')
+
+        console.debug(`${TAG} Failure; response code; ${response.status}`)
         dispatch(getUserArtsFailed())
       }
     }).catch((err) => {
+      console.debug(`${TAG} Failure; fetch`)
       console.debug(err)
     })
   }
@@ -165,4 +185,61 @@ export function fetchArtsNeedUpdate(artsNeedUpdate) {
     }
   }
   return (dispatch) => dispatch(action(artsNeedUpdate))
+}
+
+
+/* Get a user's doen mission */
+export function fetchUserDoneMissions() {
+  const fetching = () => {
+    return {
+      type: Constants.GET_USER_DONE_MISSIONS
+    }
+  }
+
+  const success = (_doneMissions) => {
+    return {
+      type: Constants.GET_USER_DONE_MISSIONS_SUCCESS,
+      doneMissions: _doneMissions
+    }
+  }
+
+  const failure = () => {
+    return {
+      type: Constants.GET_USER_DONE_MISSIONS_FAILURE
+    }
+  }
+
+  return (dispatch, getState) => {
+    const TAG = '[GET_USER_DONE_MISSIONS]'
+    console.debug(`${TAG} Fetching start`)
+    dispatch(fetching())
+
+    const {userData} = getState()
+
+    if(userData.userPK && userData.token) {
+      fetch(`${APIConfig.getDoneMissions}${userData.userPK}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + userData.token
+        }
+      }).then(response => {
+        if(response.status === ResponseCode.getOk) {
+          response.json().then(json => {
+            console.debug(`${TAG} Success`)
+            console.debug(json)
+            dispatch(success(json))
+          }).catch(err => {
+            console.debug(`${TAG} Failure; json parsing`)
+            dispatch(failure())
+          })
+        } else {
+          console.debug(`${TAG} Failure; response code; ${response.status}`)
+          dispatch(failure())
+        }
+      })
+    } else {
+      console.debug(`${TAG} Error; no userPK`)
+      dispatch(failure())
+    }
+  }
 }

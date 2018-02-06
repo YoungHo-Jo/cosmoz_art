@@ -14,13 +14,6 @@ export function fetchTodayMission() {
   }
 
   const getTodayMissionSuccess = (_mission, _fetchedDate) => {
-    console.log('Reducer: getTodayMissionSuccess')
-    console.log('mission: ', _mission)
-    console.log('fetchDate: ' + _fetchedDate)
-    _mission = {
-      ..._mission,
-      time: Utills.getSecs(_mission.time)
-    }
     return {
       type: Constants.GET_TODAY_MISSION_SUCCESS,
       mission: _mission,
@@ -35,6 +28,8 @@ export function fetchTodayMission() {
   }
 
   return dispatch => {
+    const TAG = '[GET_TODAY_MISSION]'
+    console.debug(`${TAG} Fetching start`)
     dispatch(getTodayMission())
 
     fetch(APIConfig.getTodayMission, {
@@ -44,14 +39,31 @@ export function fetchTodayMission() {
       }
     }).then( response => {
       if (response.status === ResponseCode.getOk) {
-        response.json().then( responseJSON => {
-          dispatch(getTodayMissionSuccess(responseJSON, new Date()))
+        response.json().then( json => {
+          console.debug(`${TAG} Success`)
+          const mission = {
+            missionPK: json.pk,
+            leadText: json.lead_text,
+            mission: {
+              type: json.type,
+              text: json.mission_text
+            },
+            benefit: {
+              type: null,
+              text: null
+            },
+            time: Utills.getSecs(json.time)
+          }
+          console.debug(mission)
+          dispatch(getTodayMissionSuccess(mission, new Date()))
         })
       } else {
+        console.debug(`${TAG} Failure; response code; ${response.code}`)
         dispatch(getTodayMissionFailure())
       }
     }).catch( err => {
-      console.log(err)
+      console.debug(`${TAG} Error; fetch`)
+      console.debug(err)
       dispatch(getTodayMissionFailure())
     })
   }
@@ -164,5 +176,106 @@ export function fetchMissionToShow(type) {
       return
     }
     dispatch(setMissionToShow(type))
+  }
+}
+
+/* Get mission types */
+export function fetchMissionTypes() {
+  const fetching = () => {
+    return {
+        type: Constants.GET_MISSION_TYPES
+    }
+  }
+
+  const success = (_missionTypes) => {
+    return {
+      type: Constants.GET_MISSION_TYPES_SUCCESS,
+      missionTypes: _missionTypes
+    }
+  }
+
+  const failure = () => {
+    return {
+        type: Constants.GET_MISSION_TYPES_FAILURE
+    }
+  }
+
+  return dispatch => {
+    const TAG = '[GET_MISSION_TYPES]'
+    console.debug(`${TAG} Fetching start`)
+    dispatch(fetching())
+
+    fetch(APIConfig.getMissionTypes, {
+      method: 'GET'
+    }).then(response => {
+      if(response.status === ResponseCode.getOk) {
+        response.json().then(json => {
+          console.debug(`${TAG} Success`)
+          console.debug(json)
+          dispatch(success(json))
+        }).catch(() => {
+          console.debug(`${TAG} Failure; json`)
+          dispatch(failure())
+        })
+      } else {
+        console.debug(`${TAG} Failure; response code; ${response.status}`)
+        dispatch(failure())
+      }
+    }).catch(err => {
+      console.debug(`${TAG} Failure; fetching error`)
+      console.debug(err)
+      dispatch(failure())
+    })
+  }
+}
+
+/* Get benefit types */
+export function fetchBenefitTypes() {
+  const fetching = () => {
+    return {
+      type: Constants.GET_BENEFIT_TYPES
+    }
+  }
+
+  const success = (_benefitTypes) => {
+    return {
+      type: Constants.GET_BENEFIT_TYPES_SUCCESS,
+      benefitTypes: _benefitTypes
+    }
+  }
+
+  const failure = () => {
+    return {
+      type: Constants.GET_BENEFIT_TYPES_FAILURE
+    }
+  }
+
+  return dispatch => {
+    const TAG = '[GET_BENEFIT_TYPES]'
+    console.debug(`${TAG} Fetching start`)
+    dispatch(fetching())
+
+    fetch(APIConfig.getBenefitTypes, {
+      method: 'GET'
+    }).then(response => {
+      if(response.status === ResponseCode.getOk) {
+        response.json().then(json => {
+          console.debug(`${TAG} Success`)
+          console.debug(json)
+          dispatch(success(json))
+        }).catch(err => {
+          console.debug(`${TAG} Failure; json`)
+          console.debug(err)
+          dispatch(failure())
+        })
+      } else {
+        console.debug(`${TAG} Failure; response code; ${response.status}`)
+        dispatch(failure())
+      }
+    }).catch(err => {
+      console.debug(`${TAG} Failure; fetching error`)
+      console.debug(err)
+      dispatch(failure())
+    })
   }
 }

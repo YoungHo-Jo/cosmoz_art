@@ -2,19 +2,19 @@
 
 import * as Constants from "./constants";
 
-export const missionType = {
-  drawing: 'DRAWING',
-  capturing: 'CAPTURING',
-  writing: 'WRITING'
+export const missionTypes = {
+  drawing: 'drawing',
+  capturing: 'capturing',
+  writing: 'writing'
 }
 
-export const benefitType = {
-  imagination: 'IMAGINATION',
-  breakingRule: 'BREAKING_RULE',
-  concentrating: 'CONCENTRATING',
-  curiosity: 'CURIOSITY',
-  observation: 'OBSERVATION',
-  feeling: 'FEELING',
+export const benefitTypes = {
+  breakingRule: 'breaking_rule',
+  imagination: 'imagination',
+  concentrating: 'concentrating',
+  curiosity: 'curiosity',
+  observation: 'observation',
+  feeling: 'feeling'
 }
 
 export const missionToShowType = {
@@ -37,6 +37,18 @@ export const missionModel = {
 }
 
 const initialState = {
+  missionTypes: {
+    fetching: false,
+    fetched: false,
+    error: false,
+    types: null
+  },
+  benefitTypes: {
+    fetching: false,
+    fetched: false,
+    error: false,
+    types: null
+  },
   todayMission: {
     fetching: false,
     isFetched: false,
@@ -57,7 +69,6 @@ const initialState = {
     mission: missionModel,
   },
   missionToShow: missionToShowType.todayMission
-
 }
 
 
@@ -146,6 +157,70 @@ export default function missionDataReducer(state = initialState, action) {
       return {
           ...state,
         missionToShow: action.missionToShowType
+      }
+    case Constants.GET_BENEFIT_TYPES:
+      return {
+        ...state,
+        missionType: {
+          ...state.missionTypes,
+          fetching: true,
+          fetched: false,
+          error: false
+        }
+      }
+    case Constants.GET_MISSION_TYPES_SUCCESS:
+      return {
+        ...state,
+        missionTypes: {
+          ...state.missionTypes,
+          error: false,
+          fetching: false,
+          fetched: true,
+          types: action.missionTypes
+        }
+      }
+    case Constants.GET_MISSION_TYPES_FAILURE:
+      return {
+        ...state,
+        missionTypes: {
+          ...state.missionTypes,
+          error: true,
+          fetching: false,
+          fetched: false,
+          types: null,
+        }
+      }
+    case Constants.GET_BENEFIT_TYPES:
+      return {
+          ...state,
+          benefitTypes: {
+            ...state.benefitTypes,
+            fetching: true,
+            fetched: false,
+            error: false
+          }
+      }
+    case Constants.GET_BENEFIT_TYPES_SUCCESS:
+      return {
+        ...state,
+        benefitTypes: {
+          ...state.benefitTypes,
+          fetching: false,
+          fetched: true,
+          error: false,
+          types: action.benefitTypes
+        }
+      }
+    case Constants.GET_BENEFIT_TYPES_FAILURE:
+      return {
+        ...state,
+        benefitTypes: {
+          ...state.benefitTypes,
+          fetching: false,
+          fetched: false,
+          error: true,
+          types: null
+        }
       }
     default:
       return state

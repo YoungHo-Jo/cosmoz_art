@@ -14,26 +14,9 @@ import {
 import SettingsList from 'react-native-settings-list';
 
 
-
-const styles = StyleSheet.create({
-    header : {
-        color: '#000000',
-        backgroundColor:'#f1f1f1',
-        height:30,
-        fontSize:15,
-        alignSelf:'center',
-        textAlignVertical:'center'
-    },
-    item:{
-        fontSize:14,
-        paddingLeft:8,
-    },
-
-});
-
 class Sharepage_mission extends Component {
     constructor() {
-        super();
+      super();
     }
 
     render() {
@@ -62,7 +45,24 @@ class Sharepage_mission extends Component {
             </View>
         );
     }
-
-
 }
+
+
+
+const styles = StyleSheet.create({
+    header : {
+        color: '#000000',
+        backgroundColor:'#f1f1f1',
+        height:30,
+        fontSize:15,
+        alignSelf:'center',
+        textAlignVertical:'center'
+    },
+    item:{
+        fontSize:14,
+        paddingLeft:8,
+    },
+
+});
+
 export default Sharepage_mission;

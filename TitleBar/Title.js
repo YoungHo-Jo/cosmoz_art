@@ -8,27 +8,37 @@ import {getWindowSize} from "../Utills";
 var windowSize = getWindowSize()
 
 class Title extends Component {
+
   render() {
     const {currentViewPager} = this.props
-    return (
-      <View style={styles.container}>
-        {
-          currentViewPager == 0 &&
-          <Text style={styles.titleText}>나의 방</Text>
-        }
-        {
-          currentViewPager == 1 &&
-          <Image
-            style={styles.logo}
-            source={require('../icons/logo_mini.png')}/>
-        }
-        {
-          currentViewPager == 2 &&
-          <Text style={styles.titleText}>공유 방</Text>
-        }
 
-      </View>
-    )
+    if(!this.props.titleText) {
+      return (
+        <View style={styles.titleContainer}>
+          {
+            currentViewPager == 0 &&
+            <Text style={styles.titleText}>나의 방</Text>
+          }
+          {
+            currentViewPager == 1 &&
+            <Image
+              style={styles.logo}
+              source={require('../icons/logo_mini.png')}/>
+          }
+          {
+            currentViewPager == 2 &&
+            <Text style={styles.titleText}>공유 방</Text>
+          }
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>{this.props.titleText}</Text>
+        </View>
+      )
+    }
+
   }
 }
 
