@@ -44,7 +44,7 @@ class SharePageListView extends Component {
   }
 
   _refreshData() {
-    fetch(ENDPOINT + '/mission/1')
+    fetch(ENDPOINT + '/mission/33')
       .then((response) => response.json())
       .then((responseJSON) => {
         this.setState({

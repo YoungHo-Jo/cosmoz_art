@@ -19,28 +19,19 @@ class SharePageHoriListViewItem extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      source: {uri: this.props.shareImageURL},
-      isLiked: false,
-      likeButtonLocationX: null,
-      likeButtonLocationY: null};
+      source: {uri: props.shareImageURI},
+      isLiked: props.isUserLike,
+    };
   }
 
   propTypes:{
     onClickImage: React.PropTypes.func.isRequired,
-    shareImageURL: React.PropTypes.string.isRequired,
-    subject:React.PropTypes.string.isRequired,
-    nickname:React.PropTypes.string.isRequired,
+    shareImageURI: React.PropTypes.string.isRequired,
   }
 
-  onLayout(e) {
-    this.setState({
-      likeButtonLocationX: e.nativeEvent.layout.x,
-      likeButtonLocationY: e.nativeEvent.layout.y
-    })
-  }
 
   componentWillMount() {
-    Image.getSize(this.props.shareImageURL, (width, height) => {
+    Image.getSize(this.props.shareImageURI, (width, height) => {
       if (this.props.width && !this.props.height) {
         this.setState({width: this.props.width, height: height * (this.props.width / width)});
       } else if (!this.props.width && this.props.height) {
@@ -53,18 +44,14 @@ class SharePageHoriListViewItem extends Component{
 
 
 
-  likeButtonPosition() {
-    if (this.state.likeButtonLocationX=0) {
-      return {
-        position: 'absolute',
-        top: this.state.likeButtonLocationY,
-        right:0}
-    }
+  _onLikeBtnClicked(isLiked) {
+    this.setState({isLiked: !this.state.isLiked});
+    this.props.onLikeBtnClicked(!isLiked)
   }
 
   render(){
     console.log(this.props.subject);
-    console.log(this.props.shareImageURL);
+    console.log(this.props.shareImageURI);
     console.log(this.props.nickname);
     return(
         <View style={styles.container}>
@@ -81,14 +68,14 @@ class SharePageHoriListViewItem extends Component{
             </TouchableHighlight>
           </View>
           <View
-            style={[styles.likeButtonContainer,
-              {height: (Dimensions.get('window').height - Sizes.titleBarHeight) * (30/100)},
-              this.likeButtonPosition()]}
-            onLayout={this.onLayout.bind(this)}>
+            style={[
+              styles.likeButtonContainer,
+              {height: (Dimensions.get('window').height - Sizes.titleBarHeight) * (30/100)}
+            ]}>
             <TouchableHighlight
               style={styles.likebuttonWrapper}
               underlayColor={'#ffffff'}
-              onPress={() => this.setState({isLiked: !this.state.isLiked})}>
+              onPress={() => this._onLikeBtnClicked(this.state.isLiked)}>
               <Image style={styles.likeButton} source={this.state.isLiked ? require('../../icons/logo.png') : require('../../icons/logo_uncolor.png')}/>
             </TouchableHighlight>
           </View>

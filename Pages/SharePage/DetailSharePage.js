@@ -11,7 +11,8 @@ export default class DetailSharePage extends React.Component {
     return (
         <View style={styles.container}>
           <View style={styles.listViewContainer}>
-            <SharePageHoriListView/>
+            <SharePageHoriListView
+              />
           </View>
         </View>
     );
