@@ -2,6 +2,7 @@
 
 import userData from './userDataReducer'
 import missionData from "./missionDataReducer";
+import artData from './artDataReducer'
 
 import {combineReducers, applyMiddleware} from "redux";
 import ReduxThunk from 'redux-thunk'
@@ -98,7 +99,8 @@ function controlFlowReducer(state = initialState, action) {
 const rootReducer = combineReducers({
   userData,
   controlFlowReducer,
-  missionData
+  missionData,
+  artData
 })
 
 export default rootReducer

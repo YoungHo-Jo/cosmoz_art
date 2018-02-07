@@ -15,6 +15,7 @@ export default APIConfig = {
   deleteLikeArt: basicURL + '/arts/private/dislike-art', // delete
   getLikeArtsOfUser: basicURL + '/arts/private/like-art/', // get
   getArtsOfMission: basicURL + '/arts/mission/', // get
+  getTodayArts: basicURL + '/arts/today', // get
 
   // missions
   putLikeMissionOfUser: basicURL + '/missions/private/mission/like', // put

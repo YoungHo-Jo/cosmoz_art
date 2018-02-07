@@ -12,24 +12,15 @@ import {
 import SharePageListViewItem from './SharePageListViewItem';
 import {Sizes} from "../../DefaultStyles";
 
-const ENDPOINT = `http://52.78.33.177:10424/arts/`;
-
 class SharePageListView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-    }
-  }
-
-  propTypes: {
-    onShareImagePressed: React.PropTypes.func.isRequired,
-    showModal: React.PropTypes.func
-  };
-
-
-  componentDidMount() {
-    this._refreshData();
+  render() {
+    return (
+      <FlatList
+        style={styles.list}
+        data={this.props.data}
+        renderItem={({item: rowData}) => this._renderRow(rowData)}
+      />
+    )
   }
 
   _renderRow(rowData) {
@@ -43,25 +34,6 @@ class SharePageListView extends Component {
     )
   }
 
-  _refreshData() {
-    fetch(ENDPOINT + '/mission/1')
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        this.setState({
-          data: responseJSON,
-        })
-      });
-  }
-
-  render() {
-    return (
-      <FlatList
-        style={styles.list}
-        data={this.state.data}
-        renderItem={({item: rowData}) => this._renderRow(rowData)}
-      />
-    );
-  }
 
 }
 

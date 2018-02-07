@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import * as MissionActions from "./actions/missionActions";
 import * as ControlFlowActions from './actions/controlFlowActions';
 import * as UserActions from './actions/userActions'
+import * as ArtActions from './actions/artActions'
 import {connect} from "react-redux";
 import firebase from './firebase'
 import {missionToShowType} from "./reducers/missionDataReducer";
@@ -105,6 +106,9 @@ class App extends Component {
     // Get today mission
     this.props.fetchTodayMission()
 
+    // Get today arts
+    this.props.fetchTodayArts()
+
     // Do autologin
     LocalStorage.isAutoLoginEnabled().then(enabled => {
       if(enabled) {
@@ -188,7 +192,8 @@ function mapDispatchToProps(dispatch) {
     fetchUserArts: () => dispatch(UserActions.fetchUserArts()),
     fetchMissionTypes: () => dispatch(MissionActions.fetchMissionTypes()),
     fetchBenefitTypes: () => dispatch(MissionActions.fetchBenefitTypes()),
-    fetchUserDoneMissions: () => dispatch(UserActions.fetchUserDoneMissions())
+    fetchUserDoneMissions: () => dispatch(UserActions.fetchUserDoneMissions()),
+    fetchTodayArts: () => dispatch(ArtActions.fetchTodayArts())
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
