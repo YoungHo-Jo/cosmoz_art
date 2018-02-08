@@ -10,9 +10,15 @@ import {connect} from 'react-redux'
 import {fetchCurrentPage} from '../actions/controlFlowActions'
 import {PAGES} from '../reducers/constants'
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types'
 
 
 class TitleBar extends Component {
+  static propTypes = {
+    titleText: PropTypes.string,
+    onLeftBtnPress: PropTypes.func
+  }
+
   render() {
     if(this.props.titleText) {
       return (

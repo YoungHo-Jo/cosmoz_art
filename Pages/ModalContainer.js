@@ -5,16 +5,22 @@ import {View, StyleSheet, Platform} from 'react-native'
 import * as DefaultStyles from '../DefaultStyles'
 import TitleBar from '../TitleBar'
 import UpperLinearGradient from './UpperLinearGradient'
+import PropTypes from 'prop-types'
 
 export default class ModalContainer extends React.Component {
+
+  static propTypes = {
+    titleText: PropTypes.string,
+    onLeftBtnPress: PropTypes.func
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <UpperLinearGradient/>
         <TitleBar
           titleText={this.props.titleText}
           onLeftBtnPress={() => this.props.onLeftBtnPress()}/>
+        <UpperLinearGradient/>
         {this.props.children}
       </View>
     )

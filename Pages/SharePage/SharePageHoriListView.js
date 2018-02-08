@@ -13,50 +13,36 @@ const ENDPOINT = `http://52.78.33.177:10424/arts/`;
 class SharePageHoriListView extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      data: null,
-    };
   }
 
-  componentDidMount() {
-    this._refreshData();
+  static defaultProps = {
+    missionPK: 1,
+    arts: [
+      {pk: 1, uri: "http://52.78.33.177:10424/arts/image/helloworld1", isUserLike: true},
+      {pk: 9, uri: "http://52.78.33.177:10424/arts/image/test2", isUserLike: false},
+      {pk: 10, uri: "http://52.78.33.177:10424/arts/image/test3", isUserLike: false}
+    ]
   }
+
 
   _renderRow(rowData) {
-    return <SharePageHoriListViewItem
-              onClickImage = {() => this.props.fetchModal(true, <ImageViewerPage imageURL={rowData.image_url}/>)}
-              shareImageURL={rowData.image_url}
-              subject={rowData.keyword}
-              nickname={rowData.mission_pk/*For test; Change it when attaching server code*/}/>;
+    return (
+      <SharePageHoriListViewItem
+        onClickImage = {() => this.props.onImagePress(rowData.uri)}
+        shareImageURI={rowData.uri}
+        isUserLike={rowData.isUserLike}
+        onLikeBtnClicked={(isLiked) => this.props.onLikeBtnPress(rowData.pk, isLiked)}/>
+    );
   }
 
-  _refreshData() {
-    fetch(ENDPOINT + '/mission/1')
-      .then((response) => response.json())
-      .then((responseJSON) => {
-        this.setState({
-          data: responseJSON,
-        })
-      });
-  }
 
   render() {
     return (
         <View style={styles.container}>
-          <View style={styles.shareKeywordContainer}>
-            <Image
-              style={styles.quotemarkImage}
-              source={require('../../icons/double_quotation_marks_left.png')}/>
-            <Text style={styles.headingText}>나의 우주외계인</Text>
-            <Image
-              style={styles.quotemarkImage}
-              source={require('../../icons/double_quotation_marks_right.png')}/>
-          </View>
-          <UpperLinearGradient/>
           <View style={styles.listViewWrapper}>
             <FlatList horizontal={true}
                       styles={styles.list}
-                      data={this.state.data}
+                      data={this.props.arts}
                       renderItem={({item: rowData}) => this._renderRow(rowData)}/>
           </View>
         </View>
@@ -77,7 +63,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headingText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#333333',
     alignSelf: 'center',

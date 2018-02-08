@@ -12,6 +12,8 @@ import {
 import SharePageListViewItem from './SharePageListViewItem';
 import {Sizes} from "../../DefaultStyles";
 import PropTypes from 'prop-types'
+import DetailSharePage from './DetailSharePage'
+import ModalContainer from '../ModalContainer'
 
 class SharePageListView extends Component {
   static propTypes = {
@@ -32,19 +34,38 @@ class SharePageListView extends Component {
     if(rowData.arts.length !== 0) {
       return (
         <SharePageListViewItem
-          arts={rowData.arts}
-          keywords={rowData.keywords}
+          representativeArt={rowData.arts[0]}
+          keyword={this.getRealKeyword(rowData.keywords)}
           missionPK={rowData.missionPK}
           missionText={rowData.missionText}
-          showModal={(show, content) => this.props.showModal(show, content)}
+          onOtherArtsPress={() => this.props.showModal(true, (
+            <ModalContainer
+                titleText={this.getRealKeyword(rowData.keywords)}
+                onLeftBtnPress={() => this.props.showModal(false)} >
+              <DetailSharePage
+                missionPK={rowData.missionPK}
+                keyword={this.getRealKeyword(rowData.keywords)}
+                firstArt={rowData.arts[0]}/>
+            </ModalContainer>
+          ))}
           onShareImagePressed={(show, content) => this.props.onShareImagePressed(show, content)}/>
       )
     } else {
       return
     }
-
   }
 
+  getRealKeyword(keywords) {
+    var keyword = ''
+    keywords.forEach(item => {
+      if(keyword === '') {
+        keyword += item.keyword
+      } else {
+        keyword += ` • ${item.keyword}`
+      }
+    })
+    return keyword
+  }
 
 }
 

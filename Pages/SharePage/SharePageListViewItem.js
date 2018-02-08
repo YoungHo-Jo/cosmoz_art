@@ -22,11 +22,11 @@ const CONAINTER_SIDE_MARGIN = 20;
 class SharePageListViewItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {source: {uri: props.arts[0].uri}};
+    this.state = {source: {uri: props.representativeArt.uri}};
   }
   propTypes: {
-    arts: React.PropTypes.array.isRequired,
-    keywords: React.PropTypes.string.isRequired,
+    representativeArt: React.PropTypes.array.isRequired,
+    keyword: React.PropTypes.string.isRequired,
     missionPK:React.PropTypes.string.isRequired,
     missionText: React.PropTypes.string.isRequired,
     onShareImagePressed: React.PropTypes.func,
@@ -52,7 +52,7 @@ class SharePageListViewItem extends Component {
           style={styles.quotemark}
           source={require('../../icons/double_quotation_marks_left.png')}/>
         <Text style={styles.shareKeyword}>
-          {this.props.keywords[0].keyword}
+          {this.props.keyword}
         </Text>
         <Image
           style={styles.quotemark}
@@ -84,12 +84,7 @@ class SharePageListViewItem extends Component {
     return (
       <TouchableHighlight
         underlayColor={'#ffffff'}
-        onPress={() => this.props.showModal(true, (
-          <DetailSharePage
-            missionPK={this.props.missionPK}
-            keywords={this.props.keywords}
-            arts={this.props.arts}/>
-          ))}>
+        onPress={() => this.props.onOtherArtsPress()}>
            <Image
                style={styles.button_showother}
                source={require('../../icons/share_anotheritem.png')}/>
