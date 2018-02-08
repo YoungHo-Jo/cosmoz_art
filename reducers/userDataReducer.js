@@ -23,13 +23,13 @@ const initialState = {
     imageName: null,
     imageURI: null,
     missionPK: null,
+    time: null
   }
 }
 
 export default function userDataReducer(state = initialState, action) {
   switch(action.type) {
     case Constants.LOGIN:
-      console.log('login in userDataReducer')
       return {
           ...state,
         token: '',
@@ -37,7 +37,6 @@ export default function userDataReducer(state = initialState, action) {
         isLogging: true,
       }
     case Constants.LOGIN_SUCCESS:
-      console.log('loginSuccess in userDataReducer')
       return {
           ...state,
         isLogging: false,
@@ -46,14 +45,11 @@ export default function userDataReducer(state = initialState, action) {
         userPK: action.userPK,
         userInfo: {
           ...state.userInfo,
-          nickname: action.nickname,
-          userText: action.userText,
-          accumulationTime: action.accumulationTime
+          nickname: action.nickname
         },
         fcmToken: action.fcmToken
       }
     case Constants.LOGIN_FAILURE:
-      console.log('loginFailure in userDataReducer')
       return {
           ...state,
         token: '',
@@ -68,6 +64,28 @@ export default function userDataReducer(state = initialState, action) {
         userPK: null,
         userInfo: initialState.userInfo,
         fcmToken: null,
+      }
+    case Constants.GET_USER_TIME_TEXT:
+      return {
+        ...state,
+        /// fetching... ////
+      }
+    case Constants.GET_USER_TIME_TEXT_SUCCESS:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          accumulationTime: action.time,
+          userText: action.text
+        }
+      }
+    case Constants.GET_USER_TIME_TEXT_FAILURE:
+      return {
+        ...state,
+        userInfo: {
+          ...state.userInfo,
+          /// Failure ////
+        }
       }
     case Constants.SET_IS_MISSION_DOING:
       return {
@@ -142,8 +160,15 @@ export default function userDataReducer(state = initialState, action) {
         ...state,
         //// Implement of failure ////
       }
+    case Constants.SET_DONE_MISSION_TIME:
+      return {
+        ...state,
+        mission: {
+          ...state.mission,
+          time: action.time
+        }
+      }
     default:
-      // console.log('default in userDataReducer')
       return state
   }
 }

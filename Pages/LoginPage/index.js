@@ -132,18 +132,15 @@ class Login extends Component {
                   pw: this.state.pw
                 }).then((pw) => {
                   if(this.state.autoLogin) {
-                    console.log('autoLogin enabled');
                     LocalStorage.setAutoLoginEnabled(true)
                     LocalStorage.saveId(this.state.id)
                     LocalStorage.savePW(pw)
                   }
                   if(this.state.saveId) {
-                    console.log('saveId enabled');
                     LocalStorage.setSaveIdEnabled(true)
                     LocalStorage.saveId(this.state.id)
                   }
                   if (!this.state.saveId && !this.state.autoLogin) {
-                    console.log('autoLogin && saveId not enabled')
                     LocalStorage.deleteId()
                     LocalStorage.deletePW()
                     LocalStorage.setSaveIdEnabled(false)
@@ -151,7 +148,7 @@ class Login extends Component {
                   }
                   setTimeout(() => this.props.fetchModal(false), 500)
                 }).catch(() => {
-                  console.log('login failed');
+                  
                 })
               }}>
         로그인

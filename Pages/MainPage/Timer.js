@@ -38,7 +38,7 @@ export default class Timer extends Component {
 
   renderTimerAnimation() {
     return (
-      <View style={styles.timerContainer}>
+      <View>
         <CircleTimer
               percent={this.state.timePercent}
               radius={parseInt(WINDOW_W*(22/100))}
@@ -47,12 +47,12 @@ export default class Timer extends Component {
               shadowColor="#3399FF"
               bgColor="#ffffff">
             <CountDown
-              ref='countDown'
-               totalDuration={this.secsToMillis(this.props.secs)}
-               start={this.props.start}
-               options={countDownOptions}
-               handleFinish={() => this.props.onTimerFinished()}
-               onPress={() => this.props.onPressCountDown()}/>
+              ref={ref => this.countDown = ref}
+              totalDuration={this.secsToMillis(this.props.secs)}
+              start={this.props.start}
+              options={countDownOptions}
+              handleFinish={() => this.props.onTimerFinished()}
+              onPress={() => this.props.onPressCountDown()}/>
           </CircleTimer>
       </View>
     )
@@ -72,21 +72,22 @@ export default class Timer extends Component {
   }
 
   stop() {
-    console.log('Timer Stop')
-    if(this.refs.countDown) {
-        this.refs.countDown.stop()
-    } else {
-      console.log('CountDown ref not exist while stop()')
+    if(this.countDown) {
+        this.countDown.stop()
     }
   }
 
   reset() {
-    console.log('Timer Reset')
-    if(this.refs.countDown) {
-        this.refs.countDown.reset()
-    } else {
-      console.log('CountDown ref not exist while reset()')
+    if(this.countDown) {
+        this.countDown.reset()
     }
+  }
+
+  getDuration() {
+    const remaining = this.countDown.state.remainingTime / 1000
+    const duration = parseInt(this.props.secs - remaining)
+
+    return duration
   }
 }
 
@@ -160,41 +161,30 @@ class CountDown extends Component {
 
   componentDidMount() {
     if(this.props.start && !this.state.interval) {
-      console.log('CountDown did mount')
       this.start();
     }
   }
 
   componentWillReceiveProps(newProps) {
     if(!this.props.start && newProps.start) {
-      console.log('CountDown will receive props: start true')
       this.start();
     } else if (this.props.start && !newProps.start){
-      console.log('CountDown will receive props: start false')
       this.stop();
     }
     if(newProps.reset) {
-      console.log('CountDown will receive props: reset true')
       this.reset();
     }
   }
 
-  componentWillUnmount() {
-    console.log('CountDown unmount')
-  }
-
   start() {
-    console.log('CountDown start')
+    console.debug('[COUNTDOWN] Start')
     const handleFinish = this.props.handleFinish ? this.props.handleFinish : () => alert("Timer Finished");
     const endTime = new Date().getTime() + this.state.remainingTime;
     const interval = setInterval(() => {
       const remaining = endTime - new Date();
-      // console.log('remaining ' + remaining)
-      // console.log('interval id: ' + this.state.interval)
       if(remaining <= 1000) {
         handleFinish();
         this.stop();
-        // console.log('interval id: ' + this.state.interval)
         return;
       }
       this.setState({remainingTime: remaining});
@@ -205,12 +195,12 @@ class CountDown extends Component {
   }
 
   stop() {
-    console.log('CountDown Stop | interval_id: ' + this.state.interval)
+    console.debug('[COUNTDOWN] Stop')
     clearInterval(this.state.interval);
   }
 
   reset() {
-    console.log('CountDown Reset')
+    console.debug('[COUNTDOWN] Reset')
     this.setState({remainingTime: this.props.totalDuration});
   }
 

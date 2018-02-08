@@ -14,12 +14,14 @@ const initialValue = {
   saveId: F
 }
 
+const TAG = 'LOCAL_STORAGE'
+
 export const isAutoLoginEnabled = () => AsyncStorage.getItem(AUTO_LOGIN).then(value => {
     if(value == null) {
       AsyncStorage.setItem(AUTO_LOGIN, initialValue.autoLogin)
       value = F
     }
-    console.log('isAutoLoginEnabled: ' + value);
+    console.debug(`${TAG} isAutoLoginEnabled: ${value}`)
     return value === T ? true : false
 })
 
@@ -28,14 +30,18 @@ export const isSaveIdEnabled = () => AsyncStorage.getItem(SAVE_ID).then(value =>
       AsyncStorage.setItem(SAVE_ID, initialValue.autoLogin)
       value = F
     }
-    console.log('isSaveIdEnabled: ' + value);
+    console.debug(`${TAG} isSaveIdEnabled: ${value}`)
     return value === T ? true : false
 })
 
-export const setAutoLoginEnabled = (enabled) => AsyncStorage.setItem(AUTO_LOGIN, enabled ? T : F)
+export const setAutoLoginEnabled = (enabled) => {
+  console.debug(`${TAG} Set auto login; ${enabled}`)
+  return AsyncStorage.setItem(AUTO_LOGIN, enabled ? T : F)
+}
 
 export const setSaveIdEnabled = (enabled) => {
-  AsyncStorage.setItem(SAVE_ID, enabled ? T : F)
+  console.debug(`${TAG} Set save id; ${enabled}`)
+  return AsyncStorage.setItem(SAVE_ID, enabled ? T : F)
 }
 
 export const saveId = (id) => {
@@ -55,10 +61,10 @@ export const deletePW = () => {
 }
 
 export const getId = () => AsyncStorage.getItem(ID).then(value => {
-  console.log('from LocalStorage: id: ' + value);
+  console.debug(`${TAG} id: ${value}`)
   return value
 })
 export const getPW = () => AsyncStorage.getItem(PW).then(value => {
-  console.log('from LocalStorage: pw: ' + value);
+  console.debug(`${TAG} pw: ${value}`)
   return value
 })

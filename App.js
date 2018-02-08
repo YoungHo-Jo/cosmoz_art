@@ -109,6 +109,7 @@ class App extends Component {
     // Get today arts
     this.props.fetchTodayArts()
 
+
     // Do autologin
     LocalStorage.isAutoLoginEnabled().then(enabled => {
       if(enabled) {
@@ -118,7 +119,9 @@ class App extends Component {
               id: id,
               pw: pw
             }, true).then(() => {
-              console.log('autologin succeed')
+              console.debug('[AUTOLOGIN] Success')
+            }).catch(() => {
+              console.debug('[AUTOLOGIN] Failure')
             })
           })
         })
@@ -135,6 +138,8 @@ class App extends Component {
       (!prevUserData.userInfo.artsNeedUpdate && nextUserData.userInfo.artsNeedUpdate)) {
       this.props.fetchUserArts()
       this.props.fetchUserDoneMissions()
+      this.props.fetchUserTimeText()
+      this.props.fetchArtsNeedUpdate(false)
     }
   }
 
@@ -193,7 +198,9 @@ function mapDispatchToProps(dispatch) {
     fetchMissionTypes: () => dispatch(MissionActions.fetchMissionTypes()),
     fetchBenefitTypes: () => dispatch(MissionActions.fetchBenefitTypes()),
     fetchUserDoneMissions: () => dispatch(UserActions.fetchUserDoneMissions()),
-    fetchTodayArts: () => dispatch(ArtActions.fetchTodayArts())
+    fetchTodayArts: () => dispatch(ArtActions.fetchTodayArts()),
+    fetchUserTimeText: () => dispatch(UserActions.fetchUserTimeText()),
+    fetchArtsNeedUpdate: (update) => dispatch(UserActions.fetchArtsNeedUpdate(update))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

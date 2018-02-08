@@ -44,9 +44,7 @@ class CameraPage extends Component {
   }
 
   componentWillMount() {
-
     const {missionData} = this.props
-    console.log(missionData)
     this.setState({
       mission: missionData.missionToShow === MissionDataReducer.missionToShowType.todayMission ?
         missionData.todayMission.mission : missionData.pushMission.mission
@@ -55,6 +53,7 @@ class CameraPage extends Component {
 
 
   upload(isPublic) {
+    const TAG = 'POST_IMAGE'
     const imageName = Utills.makeNameRadonmly()
     var formData = new FormData()
     formData.append('file', {
@@ -63,6 +62,7 @@ class CameraPage extends Component {
       type: 'image/jpeg'
     })
 
+    console.debug(`${TAG} Fetching start`)
     fetch(`${APIConfig.postImage}/${imageName}`, {
       method: 'POST',
       headers: {
@@ -71,6 +71,10 @@ class CameraPage extends Component {
       body: formData
     }).then((response) => {
       if(response.status === ResponseCode.postOk) {
+        console.debug(`${TAG} Success`)
+
+        const TAG_ART = '[POST_NEW_ART]'
+        console.debug(`${TAG_ART} Fetching start`)
         fetch(APIConfig.postArt, {
           method: 'POST',
           headers: {
@@ -82,23 +86,28 @@ class CameraPage extends Component {
             user_pk: this.props.userData.userPK,
             mission_pk: this.state.mission.missionPK,
             image_url: APIConfig.getImage + '/' + imageName,
-            is_public: isPublic ? 1 : 0
+            is_public: isPublic ? 1 : 0,
+            time: this.props.userData.mission.time
           })
         }).then(response => {
           if(response.status === ResponseCode.postOk) {
+            console.debug(`${TAG_ART} Success`)
             this.props.fetchPopup(false)
             this.props.fetchModal(false)
             this.props.fetchCurrentPage(PAGES.leadText)
             this.props.fetchIsMissionDoing(false)
             this.props.fetchArtsNeedUpdate(true)
           } else {
-            console.debug('ERROR: Posting new art; ResponseCode: ' + response.status)
+            console.debug(`${TAG_ART} Failure; response code; ${response.status}`)
           }
-        }).catch(err => console.log(err))
+        }).catch(err => {
+          console.debug(`${TAG_ART} Failure; ${err}`)
+        })
       } else {
-        console.debug('ERROR: Posting Image; ReponseCode: ' + response.status)
+        console.debug(`${TAG} Failure; response code; ${response.status}`)
       }
-
+    }).catch(err => {
+      console.debug(`${TAG} Failure; fetching; ${err}`)
     })
   }
 

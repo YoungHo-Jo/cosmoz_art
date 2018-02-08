@@ -8,85 +8,57 @@ import {
     StyleSheet,
     View,
     Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
 class DoneMissionPage extends Component {
-    constructor() {
-      super();
-    }
-
     static propTypes = {
-      data: PropTypes.array
-    }
-
-    static defaultProps = {
-      data: [
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-        {type: 1, leadText: '삐리삐리.삐리리.'},
-        {type: 2, leadText: '창문 밖에 뭐가 있는 거 같은데,'},
-        {type: 3, leadText: '움켜진 손과는 악수할 수 없는 법'},
-      ]
+      data: PropTypes.array,
+      onRowPress: PropTypes.func
     }
 
     _renderTypeIcon(type) {
       switch (type) {
-        case 1: return (
+        case 'drawing': return (
           <Icon
             name='md-color-palette'
             size={20}
             style={styles.typeIcon}/>
-          );
-          break;
-        case 2: return (
+          )
+        case 'capturing': return (
           <Icon
             name='md-photos'
             size={20}
             style={styles.typeIcon}/>
           );
-          break;
-        case 3: return (
+        case 'writing': return (
           <Icon
             name='md-create'
             size={20}
             style={styles.typeIcon}/>
           );
-          break;
-
       }
     }
 
     _renderRow(rowData) {
       return (
-        <View style={styles.item}>
-          {this._renderTypeIcon(rowData.type)}
-          <View style={styles.leadTextWrapper}>
-            <Text style={styles.leadText}>{rowData.leadText}</Text>
+        <TouchableOpacity
+            onPress={() => this.props.onRowPress(rowData.missionPK)}>
+          <View style={styles.item}>
+            {this._renderTypeIcon(rowData.type)}
+            <View style={styles.leadTextWrapper}>
+              <Text style={styles.leadText}>{rowData.leadText}</Text>
+            </View>
+            <Icon
+              name='ios-arrow-forward'
+              size={25}
+              style={{color: '#777777'}}
+              />
           </View>
-          <Icon
-            name='ios-arrow-forward'
-            size={25}
-            style={{color: '#777777'}}
-            />
-        </View>
+        </TouchableOpacity>
+
       )
     }
 
@@ -108,8 +80,6 @@ class DoneMissionPage extends Component {
       );
     }
 
-
-
     render() {
         return (
             <View style={{backgroundColor: '#f1f1f1', flex: 1}}>
@@ -117,8 +87,7 @@ class DoneMissionPage extends Component {
                 style={styles.list}
                 data={this.props.data}
                 renderItem={({item: rowData}) => this._renderRow(rowData)}
-                ItemSeparatorComponent={this._renderSeparator}
-              />
+                ItemSeparatorComponent={this._renderSeparator}/>
             </View>
         );
     }

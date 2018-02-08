@@ -73,7 +73,11 @@ class MViewPager extends Component {
             <ModalContainer
               titleText={'내가 한 미션들'}
               onLeftBtnPress={() => this.props.fetchModal(false)}>
-              <DoneMissionPage/>
+              <DoneMissionPage
+                data={this.props.userData.userInfo.doneMissions}
+                onRowPress={() => {
+                    this.props.fetchModal(false)
+                }}/>
             </ModalContainer>
             ))
         })

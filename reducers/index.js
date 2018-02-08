@@ -35,25 +35,21 @@ const initialState = {
 function controlFlowReducer(state = initialState, action) {
   switch(action.type) {
     case Constants.SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE:
-      console.log('reducer: ' + Constants.SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE + ': ' + action.isShown)
       return {
           ...state,
         isMyPageDropDownListShow: action.isShown
       }
     case Constants.SET_CURRENT_VIEWPAGE:
-      console.log('reducer: ' + Constants.SET_CURRENT_VIEWPAGE + ': ' + action.currentViewPage)
       return {
           ...state,
         currentViewPage: action.currentViewPage
       }
     case Constants.SET_CURRENT_PAGE:
-      console.log('Reducer: ' + Constants.SET_CURRENT_PAGE + ': ' + action.currentPage)
       return {
         ...state,
         currentPage: action.currentPage
       }
     case Constants.SET_POPUP:
-      console.log('Reducer: ' + Constants.SET_POPUP + ': ' + action.show)
       return {
         ...state,
         popupDialog: {
@@ -62,7 +58,6 @@ function controlFlowReducer(state = initialState, action) {
         }
       }
     case Constants.SET_TITLE_BAR_LEFT_BTN:
-      console.log('Reducer: ' + Constants.SET_TITLE_BAR_LEFT_BTN)
       return {
         ...state,
         titleBar: {
@@ -72,7 +67,6 @@ function controlFlowReducer(state = initialState, action) {
         }
       }
     case Constants.SET_TITLE_BAR_RIGHT_BTN:
-      console.log('Reducer: ' + Constants.SET_TITLE_BAR_RIGHT_BTN)
       return {
         ...state,
         titleBar: {
@@ -82,7 +76,6 @@ function controlFlowReducer(state = initialState, action) {
         }
       }
     case Constants.SET_MODAL:
-      console.log('Reducer: '+ Constants.SET_MODAL)
       return {
         ...state,
         modal: {

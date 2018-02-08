@@ -90,17 +90,23 @@ export function fetchNotificationRequest() {
   }
 
   return dispatch => {
-    console.debug('Fetch Notification Request')
+    const TAG = '[REQUEST_NOTIFICATION]'
+    console.debug(`${TAG} Fetching start`)
     dispatch(requestNotification())
 
     fetch(APIConfig.requestNotification, {
       method: 'GET'
     }).then( response => {
       if (response.status === ResponseCode.getOk) {
+        console.debug(`${TAG} Success`)
         dispatch(requestNotificationSuccess())
       } else {
+        console.debug(`${TAG} Failure; response code not matched`)
         dispatch(requestNotificationFailure())
       }
+    }).catch(err => {
+      console.debug(`${TAG} Failure; fetching`)
+      dispatch(requestNotificationFailure())
     })
   }
 }
@@ -114,9 +120,6 @@ export function fetchNotificationMission(notificationData) {
   }
 
   const getNotificationMissionSuccess = (_mission, _pushedDate, _expireTime) => {
-    console.log('getNotificationMissionSuccess')
-    console.log('mission: ', mission)
-
     return {
       type: Constants.GET_NOTIFICATION_MISSION_SUCCESS,
       mission: _mission,
@@ -132,11 +135,12 @@ export function fetchNotificationMission(notificationData) {
   }
 
   return dispatch => {
-    console.log('fetchNotificationMission...')
+    const TAG = '[GET_NOTIFICATION_MISSION]'
+    console.debug(`${TAG} Fetching start`)
     dispatch(getNotificationMission())
 
     if (!notificationData) {
-      console.log('ERROR: notificationData is missing')
+      console.debug(`${TAG} Failure; no data`)
       dispatch(getNotificationMissionFailure())
       return;
     }
@@ -152,15 +156,17 @@ export function fetchNotificationMission(notificationData) {
         text: notificationData.benefitText
       },
       time: notificationData.time,
+      expireTime: notificationData.expireTime
     }
 
-    dispatch(getNotificationMissionSuccess(mission, notificationData.pushDate, EXPIRE_TIME))
+    console.debug(`${TAG} Success`)
+    console.debug(notificationData)
+    dispatch(getNotificationMissionSuccess(mission, notificationData.pushDate, mission.expireTime ? mission.expireTime : EXPIRE_TIME))
   }
 }
 
 /* Set mission to show */
 export function fetchMissionToShow(type) {
-
   const setMissionToShow = (_missionToShowType) => {
     return {
       type: Constants.SET_MISSION_TO_SHOW_TYPE,
@@ -169,12 +175,13 @@ export function fetchMissionToShow(type) {
   }
 
   return dispatch => {
-    console.log(`Fetch mission to show: ${type}`)
+    const TAG = '[SET_MISSION_TO_SHOW_TYPE]'
 
     if (type !== missionToShowType.todayMission && type !== missionToShowType.pushMission) {
-      console.log('ERROR: fetchMissionToShow type is wrong')
+      console.debug(`${TAG} Error; mission to show type is invalid; ${type}`)
       return
     }
+    console.debug(`${TAG} type: ${type}`)
     dispatch(setMissionToShow(type))
   }
 }

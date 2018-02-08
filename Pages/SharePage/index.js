@@ -10,9 +10,18 @@ import * as ControlFlowActions from '../../actions/controlFlowActions'
 
 class SharePage extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      arts: []
+    }
+  }
+
   renderListView() {
     return (
       <SharePageListView
+        arts={this.state.arts}
         showModal={(show, content) => this.props.fetchModal(show, content)}
         onShareImagePressed={(show, content) => {
             this.props.fetchPopup(show, content)
@@ -28,6 +37,28 @@ class SharePage extends Component {
         </View>
       </View>
     );
+  }
+
+
+
+  componentWillReceiveProps(nextProps) {
+    this.updateArtData(nextProps)
+  }
+
+  updateArtData(props) {
+    const todayArt = props.artData.today
+    const todayMission = props.missionData.todayMission.mission
+
+    const data = []
+    data.push({
+      missionPK: todayArt.missionPK,
+      arts: todayArt.arts,
+      keywords: todayArt.keywords,
+      missionText: todayMission.mission.text
+    })
+    this.setState({
+      arts: data
+    })
   }
 }
 
@@ -45,7 +76,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-
+    artData: state.artData,
+    missionData: state.missionData
   }
 }
 

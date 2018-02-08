@@ -9,7 +9,10 @@ export function fetchDropDownListState(isShown) {
       isShown: _isShown
     }
   }
-  return dispatch => dispatch(action(isShown))
+  return dispatch => {
+    console.debug(`[${Constants.SET_MY_PAGE_DROP_DOWN_LIST_SHOW_STATE}] show: ${isShown}`)
+    dispatch(action(isShown))
+  }
 }
 
 /* Set current view page num */
@@ -20,7 +23,10 @@ export function fetchCurrentViewPage(currentViewPage) {
       currentViewPage: _currentViewPage
     }
   }
-  return dispatch => dispatch(action(currentViewPage))
+  return dispatch => {
+    console.debug(`[${Constants.SET_CURRENT_VIEWPAGE}] currentViewPage: ${currentViewPage}`)
+    dispatch(action(currentViewPage))
+  }
 }
 
 /* Set current view page */
@@ -31,9 +37,11 @@ export function fetchCurrentPage(currentPage) {
       currentPage: _currentPage
     }
   }
-  return dispatch => dispatch(action(currentPage))
+  return dispatch => {
+    console.debug(`[${Constants.SET_CURRENT_PAGE}] currentPage: ${currentPage}`)
+    dispatch(action(currentPage))
+  }
 }
-
 
 /* Set wheter showing popupdialog or not */
 export function fetchPopup(show, content = null) {
@@ -44,7 +52,10 @@ export function fetchPopup(show, content = null) {
       content: _content
     }
   }
-  return dispatch => dispatch(action(show, content))
+  return dispatch => {
+    console.debug(`[${Constants.SET_POPUP}] show: ${show} content: ${content ? 'not null' : 'null'}`)
+    dispatch(action(show, content))
+  }
 }
 
 /* Set left button visibility and what it does */
@@ -57,7 +68,10 @@ export function fetchTitleBarLeftBtn(leftBtnShow, leftBtnFunc) {
       leftBtnFunc: _leftBtnFunc
     }
   }
-  return dispatch => dispatch(action(leftBtnShow, leftBtnFunc))
+  return dispatch => {
+    console.debug(`[${Constants.SET_TITLE_BAR_LEFT_BTN}] show: ${leftBtnShow}`)
+    dispatch(action(leftBtnShow, leftBtnFunc))
+  }
 }
 
 /* Set right button visibility and whit it does */
@@ -69,7 +83,10 @@ export function fetchTitleBarRightBtn(rightBtnShow, rightBtnFunc) {
       rightBtnFunc: _rightBtnFunc
     }
   }
-  return dispatch => dispatch(action(rightBtnShow, rightBtnFunc))
+  return dispatch => {
+    console.debug(`[${Constants.SET_TITLE_BAR_RIGHT_BTN}] show: ${rightBtnShow}`)
+    dispatch(action(rightBtnShow, rightBtnFunc))
+  }
 }
 
 
@@ -82,5 +99,8 @@ export function fetchModal(show, content?) {
       content: _content
     }
   }
-  return dispatch => dispatch(action(show, content))
+  return dispatch => {
+    console.debug(`[${Constants.SET_MODAL}] show: ${show} content: ${content ? 'not null' : 'null'}`)
+    dispatch(action(show, content))
+  }
 }

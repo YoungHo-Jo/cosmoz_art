@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {connect} from 'react-redux';
 import {PAGES} from '../../reducers/constants';
 import * as ControlFlowActions from '../../actions/controlFlowActions';
+import * as UserActions from '../../actions/userActions'
 import * as Utills from '../../Utills'
 import PopupMsgBox from '../../PopupMsgBox'
 
@@ -34,10 +35,11 @@ class TimerPage extends Component {
       <View style={styles.timerContainer}>
         <Timer
           start={this.state.timerStart}
-          ref='timer'
+          ref={ref => this.timer = ref}
           secs={this.props.missionData.todayMission.mission.time}
           onTimerFinished={() => {
             this.props.fetchCurrentPage(PAGES.cameraButton)
+            this.props.fetchDoneMissionTime(this.timer.getDuration())
             this.props.fetchPopup(false)
             if (this.state.vibAlram) {
               Utills.vibrateForTimeUp()
@@ -48,8 +50,9 @@ class TimerPage extends Component {
               <PopupMsgBox
                 dialogText='벌써 다 했나요?'
                 onLeftButtonClicked={() => {
-                  this.refs.timer.stop()
+                  this.timer.stop()
                   this.props.fetchCurrentPage(PAGES.cameraButton)
+                  this.props.fetchDoneMissionTime(this.timer.getDuration())
                   this.props.fetchPopup(false)
                 }}
                 onRightButtonClicked={() => {
@@ -173,7 +176,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCurrentPage: page => dispatch(ControlFlowActions.fetchCurrentPage(page)),
-    fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content))
+    fetchPopup: (show, content?) => dispatch(ControlFlowActions.fetchPopup(show, content)),
+    fetchDoneMissionTime: (time) => dispatch(UserActions.fetchDonMissionTime(time))
   }
 }
 

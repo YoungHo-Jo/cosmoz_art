@@ -33,7 +33,7 @@ export default APIConfig = {
   login: basicURL + '/users/user/login', // post
   signIn: basicURL + 'users/user/create', // post
   checkID: basicURL + '/users/user/check/', // get
-
+  getTimeText: basicURL + '/users/user/time-text/', // get
 
 }
 
