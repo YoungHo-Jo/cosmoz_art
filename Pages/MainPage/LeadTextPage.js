@@ -5,7 +5,8 @@ import {
   StyleSheet,
   View,
   Text,
-  Button
+  Button,
+  Dimensions
 } from 'react-native';
 
 import {Colors, Sizes} from '../../DefaultStyles';
@@ -65,8 +66,7 @@ class LeadTextPage extends Component {
                 }}>
               {mission.leadText}
             </Text>
-            <View style={styles.lineView}>
-            </View>
+            <View style={styles.lineView}/>
           </View>
         </View>
     );
@@ -93,11 +93,10 @@ const styles = StyleSheet.create({
   },
   lineView: {
     height: BOTTOM_BAR_HEIGHT,
-    alignSelf: 'stretch',
+    width: Dimensions.get('window').width * (15/100),
+    alignSelf: 'center',
     borderBottomColor: BOTTOM_BAR_COLOR,
     borderBottomWidth: BOTTOM_BAR_HEIGHT,
-    marginLeft: BOTTOM_BAR_WIDTH_MARGIN,
-    marginRight: BOTTOM_BAR_WIDTH_MARGIN,
   },
   text: {
     color: LEAD_TEXT_COLOR,
@@ -105,8 +104,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 20,
     textAlign: 'center',
-  }
-
+  },
 });
 
 

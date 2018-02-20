@@ -33,11 +33,40 @@ class MainMissionPage extends Component {
     return (
       <View style={styles.missionInfoBarContainer}>
         <MissionInformationBar
-            benefitText={this.state.mission.benefit.text || 'NULL'}
-            icon={this.state.mission.benefit.type}
-            secs={this.state.mission.time}/>
+          //benefitText={this.state.mission.benefit.text || 'NULL'}
+          //icon={this.state.mission.benefit.type}
+          secs={this.state.mission.time}/>
       </View>
-    )
+    );
+  }
+
+  renderStartIcon(type) {
+    switch (type) {
+      case 'drawing': return (
+        <Icon.Button
+            name='md-color-palette'
+            size={MISSION_ICON_SIZE}
+            color={MISSION_ICON_COLOR}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={this._onMissionPress.bind(this)}/>
+        );
+      case 'capturing': return (
+        <Icon.Button
+            name='md-photos'
+            size={MISSION_ICON_SIZE}
+            color={MISSION_ICON_COLOR}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={this._onMissionPress.bind(this)}/>
+        );
+      case 'writing': return (
+        <Icon.Button
+            name='md-create'
+            size={MISSION_ICON_SIZE}
+            color={MISSION_ICON_COLOR}
+            backgroundColor={Colors.defaultPageBgColor}
+            onPress={this._onMissionPress.bind(this)}/>
+        );
+    }
   }
 
   renderMission() {
@@ -53,12 +82,7 @@ class MainMissionPage extends Component {
           </View>
           {/* mission image */}
           <View style={styles.missionIconContainer}>
-            <Icon.Button
-                name='md-create'
-                size={MISSION_ICON_SIZE}
-                color={MISSION_ICON_COLOR}
-                backgroundColor={Colors.defaultPageBgColor}
-                onPress={this._onMissionPress.bind(this)}/>
+            {this.renderStartIcon(this.state.mission.mission.type)}
           </View>
         </View>
       </View>

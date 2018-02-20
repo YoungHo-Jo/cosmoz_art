@@ -19,8 +19,50 @@ const BAR_BGCOLOR = '#f7f7f7';
 class MissionInformationBar extends Component {
   static propTypes = {
     benefitText: PropTypes.string.isRequired,
+    icon: PropTypes.string,
     secs: PropTypes.number
   }
+
+  static defaultProps = {
+    benefitText: '오늘 두 눈이 떠져요',
+    icon: 'focus',
+  }
+
+  renderIcon(benefitType) {
+    switch (benefitType) {
+      case 'curious': return (
+        <Image
+          source = {require('../../icons/curious.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+      case 'focus': return (
+        <Image
+          source = {require('../../icons/focus.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+      case 'keen': return (
+        <Image
+          source = {require('../../icons/keen.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+      case 'imagine': return (
+        <Image
+          source = {require('../../icons/imagine.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+      case 'oneofakind': return (
+        <Image
+          source = {require('../../icons/oneofakind.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+      case 'sensibility': return (
+        <Image
+          source = {require('../../icons/sensibility.png')}
+          style={{height: ICON_SIZE, resizeMode: 'contain'}}/>
+        );
+    }
+  }
+
 
   render() {
     return (
@@ -29,7 +71,7 @@ class MissionInformationBar extends Component {
         <View style={styles.leftContainer}>
           {/* mission icon */}
           <View style={styles.missionIconContainer}>
-            <Icon name='md-bulb' size={ICON_SIZE} color={ICON_COLOR}/>
+            {this.renderIcon(this.props.icon)}
           </View>
           {/* benefit text */}
           <View style={styles.benefitTextContainer}>
