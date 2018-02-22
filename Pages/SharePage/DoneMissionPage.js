@@ -10,13 +10,16 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native';
+import ModalContainer from '../ModalContainer';
+import DetailSharePage from './DetailSharePage';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
 class DoneMissionPage extends Component {
     static propTypes = {
       data: PropTypes.array,
-      onRowPress: PropTypes.func
+      showModal: PropTypes.func
     }
 
     _renderTypeIcon(type) {
@@ -42,10 +45,34 @@ class DoneMissionPage extends Component {
       }
     }
 
+    getRealKeyword(keywords) {
+      var keyword = ''
+      keywords.forEach(item => {
+        if(keyword === '') {
+          keyword += item.keyword
+        } else {
+          keyword += ` • ${item.keyword}`
+        }
+      })
+      return keyword
+    }
+
     _renderRow(rowData) {
       return (
         <TouchableOpacity
-            onPress={() => this.props.onRowPress(rowData.missionPK)}>
+            onPress={() => {
+              this.props.showModal(false)
+              setTimeout(() => {
+                this.props.showModal(true, (
+                  <ModalContainer
+                      titleText={'임시 텍스트'}
+                      onLeftBtnPress={() => this.props.showModal(false)} >
+                    <DetailSharePage
+                      missionPK={rowData.missionPK}/>
+                  </ModalContainer>
+                ))
+              }, 450)
+            }}>
           <View style={styles.item}>
             {this._renderTypeIcon(rowData.type)}
             <View style={styles.leadTextWrapper}>
@@ -87,7 +114,9 @@ class DoneMissionPage extends Component {
                 style={styles.list}
                 data={this.props.data}
                 renderItem={({item: rowData}) => this._renderRow(rowData)}
-                ItemSeparatorComponent={this._renderSeparator}/>
+                ItemSeparatorComponent={this._renderSeparator}
+                keyExtractor = {(item, index) => index}
+              />
             </View>
         );
     }

@@ -43,7 +43,9 @@ class SharePageHoriListView extends Component {
             <FlatList horizontal={true}
                       styles={styles.list}
                       data={this.props.arts}
-                      renderItem={({item: rowData}) => this._renderRow(rowData)}/>
+                      renderItem={({item: rowData}) => this._renderRow(rowData)}
+                      keyExtractor = {(item, index) => index}
+            />
           </View>
         </View>
     );

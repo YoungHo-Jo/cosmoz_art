@@ -26,6 +26,7 @@ class SharePageListView extends Component {
         style={styles.list}
         data={this.props.arts}
         renderItem={({item: rowData}) => this._renderRow(rowData)}
+        keyExtractor = {(item, index) => index}
       />
     )
   }

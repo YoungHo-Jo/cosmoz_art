@@ -75,8 +75,8 @@ class MViewPager extends Component {
               onLeftBtnPress={() => this.props.fetchModal(false)}>
               <DoneMissionPage
                 data={this.props.userData.userInfo.doneMissions}
-                onRowPress={() => {
-                    this.props.fetchModal(false)
+                showModal={(show, content) => {
+                    this.props.fetchModal(show, content)
                 }}/>
             </ModalContainer>
             ))
