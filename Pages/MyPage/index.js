@@ -66,7 +66,10 @@ class MyPage extends Component {
     if(nextProps.userData.userInfo.arts) {
       var data = []
       nextProps.userData.userInfo.arts.forEach(art => {
-        data.push({uri: art.image_url})
+        data.push({
+          uri: art.image_url,
+          isPublic: art.is_public
+        })
       })
 
       this.setState({
@@ -363,7 +366,7 @@ class MyPage extends Component {
         <MyPageGridViewImageItem
           imageURL={itemData.uri}
           onClickImage={() => this.props.fetchModal(true, <ImageViewerPage imageURI={itemData.uri}/>)}
-
+          isPublic={itemData.isPublic}
           //keyword = {itemData.keyword}
         />
       );

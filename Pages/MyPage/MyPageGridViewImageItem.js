@@ -9,6 +9,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class MyPageGridViewImageItem extends Component {
   propTypes: {
@@ -16,14 +17,35 @@ class MyPageGridViewImageItem extends Component {
     onClickImage: PropTypes.func.isRequired,
   }
 
+  renderPublicIcon() {
+    if (this.props.isPublic) {
+      return (
+        <Icon
+          name = 'md-eye'
+          size = {24}
+          style = {{position: 'absolute', bottom: 6, right: 10, color: '#999999'}}/>
+      );
+    } else {
+      return (
+        <Icon
+          name = 'md-eye-off'
+          size = {24}
+          style = {{position: 'absolute', bottom: 6, right: 10, color: '#999999'}}/>
+      )
+    }
+  }
+
   render(){
     return(
       <TouchableHighlight
         underlayColor={'#ffffff'}
         onPress={() => this.props.onClickImage()}>
-        <Image
-          style={styles.myImage}
-          source={{uri: this.props.imageURL}}/>
+        <View>
+          <Image
+            style={styles.myImage}
+            source={{uri: this.props.imageURL}}/>
+          {this.renderPublicIcon()}
+        </View>
       </TouchableHighlight>
     );
   }
