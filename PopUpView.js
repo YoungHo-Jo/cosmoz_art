@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import {View, TouchableHighlight, StyleSheet, Dimensions, Animated, Easing} from 'react-native';
-
 const WINDOW_W  = Dimensions.get('window').width;
 const WINDOW_H  = Dimensions.get('window').height;
 
-var AnimtedTouchableHighlight = Animated.createAnimatedComponent(TouchableHighlight);
+var AnimatedTouchableHighlight = Animated.createAnimatedComponent(TouchableHighlight);
 
 class PopUpView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
+  }
   componentWillMount() {
-    this._boxFadeAnim = new Animated.Value(0);
     this._overlayFadeAnim = new Animated.Value(0);
+    this._boxFadeAnim = new Animated.Value(0);
   }
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.show) {this.setState({visible: true})}
+    nextProps.show ? this.animateOpen() : this.animateClose();
+  }
+
+  /*shouldComponentUpdate(nextProps, nextState) {
+    return(nextProps.show != this.props.show)
+  }*/
+
+  animateOpen() {
+    this.setState({visible: true})
     Animated.parallel([
       Animated.timing(this._overlayFadeAnim,
         {
@@ -28,21 +43,51 @@ class PopUpView extends Component {
           easing: Easing.quad
         }),
     ])
-    .start();
+    .start(() => {
+      this._overlayFadeAnim.setValue(1);
+      this._boxFadeAnim.setValue(1);
+    });
+  }
+
+  animateClose() {
+    Animated.parallel([
+      Animated.timing(this._overlayFadeAnim,
+        {
+          toValue: 0,
+          duration: 200,
+          easing: Easing.out(Easing.quad)
+        }),
+      Animated.timing(this._boxFadeAnim,
+        {
+          toValue: 0,
+          delay: 200,
+          duration: 200,
+          easing: Easing.quad
+        }),
+    ])
+    .start(() => {
+      this._overlayFadeAnim.setValue(0);
+      this._boxFadeAnim.setValue(0);
+      this.setState({visible: false})
+    });
   }
 
   render() {
-    return(
-      <AnimtedTouchableHighlight
-        style={[styles.overlay, {opacity: this._overlayFadeAnim}]}
-        underlayColor = {'#33333333'}
-        onPress={() => this.props.onPressOverlay()}>
-        <Animated.View
-          style={[styles.popUpView, {opacity: this._boxFadeAnim}]}>
-          {this.props.children}
-        </Animated.View>
-      </AnimtedTouchableHighlight>
-    )
+    if (this.state.visible) {
+      return (
+        <AnimatedTouchableHighlight
+          style={[styles.overlay, {opacity: this._overlayFadeAnim}]}
+          underlayColor = {'#33333333'}
+          onPress={() => this.props.onPressOverlay()}>
+          <Animated.View
+            style={[styles.popUpView, {opacity: this._boxFadeAnim}]}>
+            {this.props.children}
+          </Animated.View>
+        </AnimatedTouchableHighlight>
+      )
+    } else {
+      return <View/>;
+    }
   }
 }
 

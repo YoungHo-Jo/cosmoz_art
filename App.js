@@ -40,8 +40,8 @@ class App extends Component {
 
   renderPopUpView() {
     return (
-        this.props.controlData.popupDialog.show &&
         <PopUpView
+          show={this.props.controlData.popupDialog.show}
           onPressOverlay={() => this.props.fetchPopup(false)}>
           {this.props.controlData.popupDialog.content}
         </PopUpView>
@@ -52,9 +52,9 @@ class App extends Component {
     return (
       <Modal
         style={{position: 'absolute', top: 0, bottom: 0, left: 0, right:0, backgroundColor: '#000000'}}
-        ref='modal'
+        ref={(ref) => this.modal = ref}
         swipeToClose={true}
-        onClosed={() => this.props.fetchModal(false, null)}
+        onClosed={() => console.log('modal onClose')}
         onOpened={() => console.log('modal onOpen')}
         onClosingState={() => console.log('modal onClosingState')}
         position='top'>
@@ -65,10 +65,10 @@ class App extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     if (nextProps.controlData.modal.show) {
-      this.refs.modal.open()
+      this.modal.open()
     }
     if (nextProps.controlData.modal.show == false) {
-      this.refs.modal.close()
+      this.modal.close()
     }
     return true
   }
